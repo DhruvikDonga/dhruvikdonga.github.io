@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Dhruvik Donga</title>
-    <link>https://dhruvikdonga.github.io/</link>
-    <description>Recent content on Dhruvik Donga</description>
+    <title>Data Structures on Dhruvik Donga</title>
+    <link>https://dhruvikdonga.github.io/tags/data-structures/</link>
+    <description>Recent content in Data Structures on Dhruvik Donga</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 07 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://dhruvikdonga.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 07 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://dhruvikdonga.github.io/tags/data-structures/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Solving Depth first search problem with Golang</title>
       <link>https://dhruvikdonga.github.io/posts/dfs-with-golang/</link>
@@ -16,15 +16,6 @@
       <description>So we will be solving a hackerrank problem on Graph Data structures to understand how to implement this kind of problems in golang by this blog we will understand** maps, slices, recursion, global variables, for loops **in golang. Also we will understand what is connected component in graph and how to use the logic to ace in these type of problems .
 Let&amp;rsquo;s begin ✏
 Hope you have read the question so breaking it down we will build a logic that we will implement in golang .</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>https://dhruvikdonga.github.io/about/</link>
-      <pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://dhruvikdonga.github.io/about/</guid>
-      <description>I am a passionate process driven web/backend developer 🚀 and also do competitive programming sometimes trying to solve problems using logic helps to keep brain cells active and alert 👨‍💻 .I am currently working as Associate software engineer at Jeavio . I am adaptive to new technology stacks and fast learner . I love to read books and blogs 📘 during my free time and it ranges from tech 💻 to spirtuality 🕉.</description>
     </item>
     
   </channel>
