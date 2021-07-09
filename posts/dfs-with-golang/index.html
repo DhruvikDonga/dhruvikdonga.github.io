@@ -126,6 +126,7 @@
               Solving Depth first search problem with Golang
             </a>
           </h1>
+
         </div>
         <div class="post-meta">
           <div class="date">
@@ -140,6 +141,8 @@
               4-minute read
             </span>
           </div>
+         
+
           
           
           <div class="tags">
@@ -157,8 +160,23 @@
 
       <div>
         
-        <p>So we will be solving a <a href="https://www.hackerrank.com/challenges/journey-to-the-moon/problem" title="hackerrank problem">hackerrank problem</a> on Graph Data structures to understand how to implement this kind of problems in golang by this blog we will understand <strong>maps, slices, recursion, global variables, for loops</strong> in golang. Also we will understand what is <a href="https://www.geeksforgeeks.org/connected-components-in-an-undirected-graph/" title="connected component in graph">connected component in graph</a> and how to use the logic to ace in these type of problems .</p>
-<p><strong>Let&rsquo;s begin ✏</strong></p>
+        <div>
+    <h2>Table Of Contents</h2>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#lets-begin-">Let&rsquo;s begin ✏</a></li>
+    <li><a href="#golang-solution-">Golang solution 👨🏻‍💻</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+</div>
+<p>So we will be solving a <a href="https://www.hackerrank.com/challenges/journey-to-the-moon/problem" title="hackerrank problem">hackerrank problem</a> on Graph Data structures to understand how to implement this kind of problems in golang by this blog we will understand <strong>maps, slices, recursion, global variables, for loops</strong> in golang. Also we will understand what is <a href="https://www.geeksforgeeks.org/connected-components-in-an-undirected-graph/" title="connected component in graph">connected component in graph</a> and how to use the logic to ace in these type of problems .</p>
+<h2 id="lets-begin-">
+  Let&rsquo;s begin ✏
+  <a class="heading-link" href="#lets-begin-">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <p>Hope you have read the question so breaking it down we will build a logic that we will implement in golang . So the question basically states that they have astronauts from different countries and now you have to return total no of pairs of astronauts are possible which <strong>have to belong to different countries</strong>  so this is a condition.</p>
 <p>Analyzing the inputs we understand it is a graph question as the edges are given in it .  Now with a example we will visualize what exactly we need to do:-</p>
 <p><strong>Input:-</strong><br>
@@ -171,11 +189,16 @@
 3 5<br>
 6 9</p>
 <p>So the astronauts are 10 (0 to 9) and 7 edges are given let&rsquo;s build a graph out of it 🖊
-[<img src="https://drive.google.com/uc?export=view&amp;id=1osollFkEwRmr0qFtBmtukCnd_iYizzD3" alt="graph image" title="graph image">]</p>
-<p>This graphs contains components which are not connected there are 7 nodes connected one another , 2 components and 1 component t no one . 
+<img src="https://drive.google.com/uc?export=view&amp;id=1osollFkEwRmr0qFtBmtukCnd_iYizzD3" alt="graph image" title="graph image"></p>
+<p>This graphs contains components which are not connected there are 7 nodes connected one another , 2 nodes to 1 component and 1 node to no one . 
 So there are <strong>3 countries one with 7 astronauts others with 2 and 1</strong>  . Forming the pairs we get <strong>7X2 + 7X1 + 2X1 :- 23 pairs</strong></p>
 <p>We will be using the depth first search to travel through this graph and calculating the connected components slice array which are countries and no of astronauts in it.</p>
-<p><strong>Here is the golang code:-</strong></p>
+<h2 id="golang-solution-">
+  Golang solution 👨🏻‍💻
+  <a class="heading-link" href="#golang-solution-">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span>(
@@ -256,7 +279,13 @@ So there are <strong>3 countries one with 7 astronauts others with 2 and 1</stro
     
 }
 
-</code></pre></div><p>So in this code we have declared a graph which is map of slices and the slices stores the nodes which are connected to it . 
+</code></pre></div><h2 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa fa-link" aria-hidden="true"></i>
+  </a>
+</h2>
+<p>So in this code we have declared a graph which is map of slices and the slices stores the nodes which are connected to it . 
 DFS function will traverse through the input node and to it&rsquo;s connected ones . So <strong>Depth first search goes to depth of the node to it&rsquo;s end and it uses stack datastructure but since Recursion process in functions is also stack so we are good with this</strong></p>
 <p>The country slice is dynammic array which holds no of astronauts count in each connected component.</p>
 <p><strong>Comments in code will give more brief of what each code does.</strong>
