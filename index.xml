@@ -6,7 +6,17 @@
     <description>Recent content on Dhruvik.Donga</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 07 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://dhruvikdonga.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 05 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://dhruvikdonga.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Competitive programming with python</title>
+      <link>https://dhruvikdonga.github.io/posts/cp-with-python/</link>
+      <pubDate>Sun, 05 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://dhruvikdonga.github.io/posts/cp-with-python/</guid>
+      <description>Table Of Contents Why python for competitive programming? Resources for CP with python:-  Why python for competitive programming?There are many programming languages with which one can approach to solve CP problems but in this blog we will focus on python and also some reasons why python can be a good choice for programming .
+ During technical interviews recruiters have many questions focusing on core coding concepts such as OOPs, SOLID principles , and also problem solving problems .</description>
+    </item>
+    
     <item>
       <title>Solving Depth first search problem with Golang</title>
       <link>https://dhruvikdonga.github.io/posts/dfs-with-golang/</link>
