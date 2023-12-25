@@ -1,0 +1,79 @@
+baseURL = 'https://dhruvikdonga.github.io/'
+languageCode = 'en-us'
+title = 'Dhruvik Donga'
+theme = 'hugo-coder'
+paginate = 10
+enableEmoji = true
+
+[markup.highlight]
+style = "github-dark"
+
+[params]
+  author = "Dhruvik Donga"
+  info = "Software Engineer"
+  description = "Dhruvik's personal website"
+  keywords = "blog,developer,personal"
+  avatarurl = "images/avatar.jpg"
+  #gravatar = "john.doe@example.com"
+
+  faviconSVG = "/img/favicon.svg"
+  favicon_32 = "/img/favicon-32x32.png"
+  favicon_16 = "/img/favicon-16x16.png"
+
+  since = 2019
+
+  enableTwemoji = true
+
+  colorScheme = "auto"
+  hidecolorschemetoggle = false
+
+  # customCSS = ["css/custom.css"]
+  # customSCSS = ["scss/custom.scss"]
+  # customJS = ["js/custom.js"]
+
+[taxonomies]
+  category = "categories"
+  series = "series"
+  tag = "tags"
+  author = "authors"
+
+# Social links
+[[params.social]]
+  name = "Github"
+  icon = "fa fa-github fa-2x"
+  weight = 1
+  url = "https://github.com/DhruvikDonga/"
+[[params.social]]
+  name = "Linkedin"
+  icon = "fa fa-linkedin fa-2x"
+  weight = 3
+  url = "https://www.linkedin.com/in/dhruvik-donga-9363a0172/"
+[[params.social]]
+  name = "Reddit"
+  icon = "fa fa-reddit fa-2x"
+  weight = 3
+  url = "https://www.reddit.com/user/dhruvik_d"
+[[params.social]]
+  name = "Instagram"
+  icon = "fa fa-instagram fa-2x"
+  weight = 3
+  url = "https://www.instagram.com/dongadhruvik/"
+
+# Menu links
+[[menu.main]]
+  name = "About"
+  weight = 1
+  url = "about/"
+[[menu.main]]
+  name = "Open Source"
+  weight = 2
+  url  = "projects/"
+[[menu.main]]
+  name = "Posts"
+  weight = 2
+  url  = "posts/"
+[[menu.main]]
+  name = "Get My Resume"
+  weight = 3
+  url  = "pdf/Dhruvik_Resume.pdf"
+
