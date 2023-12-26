@@ -17,9 +17,9 @@ style = "github-dark"
   avatarurl = "images/avatar.jpg"
   #gravatar = "john.doe@example.com"
 
-  faviconSVG = "/img/favicon.svg"
-  favicon_32 = "/img/favicon-32x32.png"
-  favicon_16 = "/img/favicon-16x16.png"
+  faviconSVG = "images/favicon.svg"
+  favicon_32 = "images/favicon-32x32.png"
+  favicon_16 = "images/favicon-16x16.png"
 
   since = 2019
 
