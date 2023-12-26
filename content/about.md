@@ -15,7 +15,7 @@ Dedicated and process-oriented professional with a fervent enthusiasm for unders
 - 👯‍♂️ Looking to collaborate on: Open-source projects, particularly those involving Golang around real time systems , cloud native projects
 - 💬 Ask me about: Anything related to Golang, real-time systems, python or Websockets
 
-## 🛠️ Tech Stack 
+## 🛠️ Skills 
 
 - Golang
 - Python
@@ -23,5 +23,10 @@ Dedicated and process-oriented professional with a fervent enthusiasm for unders
 - Docker
 - AWS
 - MySQL
+- Linux
 
 Feel free to explore my repositories, and don't hesitate to reach out for collaboration or just a friendly chat! 🌟
+
+![Your GitHub Stats](https://github-readme-stats.vercel.app/api?username=DhruvikDonga&theme=transparent&show_icons=true&hide=prs,issues,contribs)
+
+
