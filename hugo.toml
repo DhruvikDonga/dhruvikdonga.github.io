@@ -11,6 +11,7 @@ style = "github-dark"
 [params]
   author = "Dhruvik Donga"
   info = "Software Engineer"
+  changingTextArray = ["👩‍💻", "💻", "🚀", "🔧", "🌐", "🖥️", "📱", "💡", "💾", "👨‍💻", "🔍", "📊", "📝", "💼", "💬", "🛠️", "📬", "👾", "🛢️", "🔐", "💻", "🌟"]
   description = "Dhruvik's personal website"
   keywords = "blog,developer,personal"
   avatarurl = "images/avatar.jpg"
