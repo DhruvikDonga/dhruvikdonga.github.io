@@ -1,0 +1,70 @@
+<style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: auto;
+      padding: 20px;
+    }
+
+    .share-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .share-section h2 {
+      margin-bottom: 10px;
+    }
+
+    .social-icons a,#copy-url {
+      margin: 0 10px;
+      color: #333;
+      text-decoration: none;
+      font-size: 0.7em; /* Adjust the font-size to make the icons smaller */
+    }
+
+    .social-icons a:hover , #copy-url:hover {
+      color: #007bff; /* Change to the desired hover color */
+    }
+
+    #copy-url {
+      display: inline-block;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  </style>
+ <div class="share-section">
+    Share it:
+        <div class="social-icons">
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink}}" target="_blank"><i class="fa fa-facebook fa-2x"></i></a>
+            <a href="https://twitter.com/intent/tweet?url={{ .Permalink}}&text={{ .Title }}" target="_blank"><i class="fa fa-twitter fa-2x"></i></a>
+            <a href="https://www.linkedin.com/shareArticle?url={{ .Permalink }}&title={{ .Title }}" target="_blank"><i class="fa fa-linkedin fa-2x"></i></a>
+            <a href="https://www.reddit.com/submit?url={{ .Permalink }}&title={{ .Title }}" target="_blank"><i class="fa fa-reddit fa-2x"></i></a>
+            <a href="https://wa.me/?text={{ .Title }}%20{{ .Permalink }}" target="_blank"><i class="fa fa-whatsapp fa-2x"></i></a>
+            <a href="https://t.me/share/url?url={{ .Permalink }}&text={{ .Title }}" target="_blank"><i class="fa fa-telegram fa-2x"></i></a>
+            <a href="" target="_blank" onclick="copyToClipboard()"><i class="fa fa-copy fa-2x"></i></a>
+
+            
+            <!-- Add more social media icons as needed -->
+        </div>
+</div>
+
+
+<script>
+    function copyToClipboard() {
+      var dummy = document.createElement("input");
+      document.body.appendChild(dummy);
+      dummy.setAttribute("value", "{{ .Permalink }}");
+      dummy.select();
+      document.execCommand("copy");
+      document.body.removeChild(dummy);
+      alert("Blog URL copied to clipboard!");
+    }
+</script>
