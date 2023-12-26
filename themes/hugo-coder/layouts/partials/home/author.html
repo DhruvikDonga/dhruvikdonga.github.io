@@ -1,6 +1,28 @@
-<h1>{{ .Site.Params.author }}</h1>
+<h1 style="margin-bottom: 0; padding-bottom: 0;">{{ .Site.Params.author }}</h1>
 {{ if reflect.IsSlice .Site.Params.info }}
 <h2>{{ range .Site.Params.info }}{{ . | markdownify }}<br>{{ end}}</h2>
 {{ else }}
-<h2>{{ .Site.Params.info | markdownify }} </h2>
+<h2><div id="changing-text"></div></h2>
+
 {{ end }}
+<style>
+    #changing-text {
+        margin-top: 0;
+        padding-top: 0;
+    }
+</style>
+<script>
+    // JavaScript code for text-changing animation
+    document.addEventListener('DOMContentLoaded', function () {
+      const changingText = document.getElementById('changing-text');
+      const textArray = {{ .Site.Params.changingTextArray }};
+      let currentIndex = 0;
+
+      function changeText() {
+        changingText.textContent = {{ .Site.Params.info | markdownify }}+"  "+textArray[currentIndex];
+        currentIndex = (currentIndex + 1) % textArray.length;
+      }
+
+      setInterval(changeText, 100); // Change text every 2 seconds
+    });
+</script>
