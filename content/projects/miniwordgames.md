@@ -4,6 +4,8 @@ title = "Mini Word Games"
 date = "2023-10-23"
 description = "About mini word games"
 featuredImage = "images/mwgames3.png"
+projectLink = "https://github.com/DhruvikDonga/wordsbattle"
+projectName = "wordsbattle"
 +++
 
 
@@ -19,5 +21,3 @@ MiniWordGames is an engaging multiplayer word game that combines the thrill of r
 - **Golang Backend:** Utilizes the power of Golang to handle server-side logic efficiently.
 - **Vue.js Frontend:** A dynamic and interactive user interface designed with Vue.js for a smooth gaming experience.
 - **Dockerized Multistaged Deployment:** Easily deploy and manage the application using Docker containers which are small and lightweight.
-
-Repo Link :- https://github.com/DhruvikDonga/wordsbattle

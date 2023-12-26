@@ -58,6 +58,16 @@ style = "github-dark"
   icon = "fa fa-instagram fa-2x"
   weight = 3
   url = "https://www.instagram.com/dongadhruvik/"
+[[params.social]]
+  name = "personal website"
+  icon = "fa fa-globe fa-2x"
+  weight = 4
+  url = "https://dhruvikdonga.github.io/"
+[[params.social]]
+  name = "Email me"
+  icon = "fa fa-envelope fa-2x"
+  weight = 4
+  url = "mailto:dongadhruvik@gmail.com"
 
 # Menu links
 [[menu.main]]
