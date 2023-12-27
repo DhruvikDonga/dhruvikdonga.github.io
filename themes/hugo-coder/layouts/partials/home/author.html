@@ -1,4 +1,4 @@
-<h1 style="margin-bottom: 0; padding-bottom: 0;">{{ .Site.Params.author }}</h1>
+<h1 style="margin-bottom: 0; padding-bottom: 0;"><text class="arrow-text"></text></h1>
 {{ if reflect.IsSlice .Site.Params.info }}
 <h2>{{ range .Site.Params.info }}{{ . | markdownify }}<br>{{ end}}</h2>
 {{ else }}
@@ -10,19 +10,51 @@
         margin-top: 0;
         padding-top: 0;
     }
+    
 </style>
 <script>
     // JavaScript code for text-changing animation
-    document.addEventListener('DOMContentLoaded', function () {
       const changingText = document.getElementById('changing-text');
-      const textArray = {{ .Site.Params.changingTextArray }};
-      let currentIndex = 0;
+      const infoLS = {{ .Site.Params.info }}
 
-      function changeText() {
-        changingText.textContent = {{ .Site.Params.info | markdownify }}+"  "+textArray[currentIndex];
-        currentIndex = (currentIndex + 1) % textArray.length;
+      function processItemsinfo(index) {
+        if (index <= infoLS.length) {
+          changingText.textContent = infoLS.substring(0,index) + "|";
+
+          setTimeout(function () {
+            processItemsinfo(index + 1);
+          }, 200); // 1000 milliseconds = 1 second
+          if (index == infoLS.length) {
+            changingText.textContent = infoLS.substring(0,index) ;
+              setTimeout(function () {
+                processItemsinfo(index);
+              }, 200); // 1000 milliseconds = 1 second
+          }
+        } 
       }
 
-      setInterval(changeText, 100); // Change text every 2 seconds
-    });
+  const arrowContainer = document.querySelector('.arrow-container');
+const arrowText = document.querySelector('.arrow-text');
+const itemLs = {{ .Site.Params.author }}
+function processItems(index) {
+  if (index <= itemLs.length) {
+    arrowText.textContent = itemLs.substring(0,index) + "|";
+
+    setTimeout(function () {
+      processItems(index + 1);
+    }, 200); // 1000 milliseconds = 1 second
+  } 
+  if (index == itemLs.length) {
+      arrowText.textContent = itemLs.substring(0,index) ;
+        setTimeout(function () {
+          processItems(index);
+        }, 200); // 1000 milliseconds = 1 second
+        processItemsinfo(0);
+        index=index+1
+    }
+}
+
+// Start processing items from the beginning
+processItems(0);
+
 </script>

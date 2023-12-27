@@ -1,7 +1,27 @@
+<style>
+  .arrow-text {
+  display: inline-block;
+  position: relative;
+  animation: arrowAnimation 4s infinite; /* Animation duration is 2 seconds for appearing and 2 seconds for disappearing */
+}
+/* 
+@keyframes arrowAnimation {
+  0%,
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  25%,
+  75% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+} */
+</style>
 <nav class="navigation">
   <section class="container">
     <a class="navigation-title" href="{{ .Site.BaseURL | relLangURL }}">
-      {{ .Site.Title }}
+      Dhruvik D.
     </a>
     {{ if or .Site.Menus.main .Site.IsMultiLingual }}
       <input type="checkbox" id="menu-toggle" />
