@@ -1,3 +1,35 @@
+<style>
+     a {
+    text-decoration: none; /* Remove underline */
+    transition: color 0.5s; /* Add a smooth transition effect for color */
+  }
+  .fa-linkedin:hover {
+    color: #0077b5; /* Set the color on hover for LinkedIn */
+  }
+
+  .fa-reddit:hover {
+    color: #ff5700; /* Set the color on hover for Reddit */
+  }
+
+  .fa-envelope:hover {
+    color: #d14836; /* Set the color on hover for Email */
+  }
+
+  .fa-globe:hover {
+    color: #4caf50; /* Set the color on hover for Web */
+  }
+
+  .fa-github:hover {
+    color: #4078c0; /* Set the color on hover for GitHub */
+  }
+
+  .fa-instagram:hover {
+    background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d, #f56040, #f77737, #fcaf45, #ffdc80); /* Rainbow gradient */
+    -webkit-background-clip: text; /* Clip the text to the gradient */
+    color: transparent; /* Make the text transparent */
+  }
+
+</style>
 {{ with .Site.Params.social }}
 <ul>
   {{ range sort . "weight" }}
