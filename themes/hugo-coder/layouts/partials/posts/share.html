@@ -39,6 +39,16 @@
       text-decoration: underline;
       cursor: pointer;
     }
+   .like-button-container {
+      display: inline-block;
+      background: none;
+   }
+
+   .fb-like {
+      background: none !important;
+      border: none !important;
+      overflow: hidden;
+   }
   </style>
  <div class="share-section">
     Share it:
@@ -53,6 +63,22 @@
 
             
             <!-- Add more social media icons as needed -->
+        </div>
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v18.0" nonce="lCrOAJkb"></script>
+
+      
+        <!-- Your like button code -->
+        <div class="like-button-container">
+
+        <div class="fb-like" 
+             data-href="{{ .Permalink}}" 
+             data-width=""
+             data-layout="button_count" 
+             data-action="like" 
+             data-size="large"  
+             data-share="false">
+        </div>
         </div>
 </div>
 
