@@ -1,9 +1,9 @@
 +++  
 authors = ["Dhruvik Donga"]
-title = "GoMeshStream"
+title = "SimplySocket"
 date = "2023-12-25"
-description = "About gomeshstream package"
-projectLink = "https://github.com/DhruvikDonga/gomeshstream"
+description = "About simplysocket package"
+projectLink = "https://github.com/DhruvikDonga/simplysocket"
 
 +++  
 
