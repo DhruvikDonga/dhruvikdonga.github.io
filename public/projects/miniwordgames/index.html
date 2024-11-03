@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>
+  Mini Word Games · Dhruvik Donga
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Dhruvik Donga">
+<meta name="description" content="About mini word games">
+<meta name="keywords" content="blog,developer,personal">
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Mini Word Games"/>
+<meta name="twitter:description" content="About mini word games"/>
+
+<meta property="og:title" content="Mini Word Games" />
+<meta property="og:description" content="About mini word games" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dhruvikdonga.github.io/projects/miniwordgames/" /><meta property="article:section" content="projects" />
+<meta property="article:published_time" content="2023-10-23T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-10-23T00:00:00+00:00" />
+
+
+
+<link rel="stylesheet" href="/css/custom.css">
+
+
+<link rel="canonical" href="https://dhruvikdonga.github.io/projects/miniwordgames/">
+
+
+<link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.min.e1bdf152d93b060b06ba5d496486ed9c201a8b95d335e035beb5faebe3b61cad.css" integrity="sha256-4b3xUtk7BgsGul1JZIbtnCAai5XTNeA1vrX66&#43;O2HK0=" crossorigin="anonymous" media="screen" />
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css" integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin="anonymous" media="screen" />
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <style>
+  .arrow-text {
+  display: inline-block;
+  position: relative;
+  animation: arrowAnimation 4s infinite;  
+}
+ 
+</style>
+<nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Dhruvik D.
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/projects/">Open Source</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">Posts</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/pdf/Dhruvik_Resume.pdf">Get My Resume</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container project">
+    <article>
+      <header>
+        <div class="project-title">
+          <h1 class="title">
+            <a class="title-link" href="https://dhruvikdonga.github.io/projects/miniwordgames/">
+              Mini Word Games
+            </a>
+          </h1>
+        </div>
+        <div class="project-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <time datetime="2023-10-23T00:00:00Z">
+                October 23, 2023
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              One-minute read
+            </span>
+          </div>
+          <div class="project-meta">
+            <div class="date">
+              <span class="posted-on">
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <a href="https://github.com/DhruvikDonga/wordsbattle">wordsbattle</a>
+              </span>
+            </div>
+          </div>
+          
+          <div class="authors">
+  <i class="fa fa-user" aria-hidden="true"></i>
+    <a href="/authors/dhruvik-donga/">Dhruvik Donga</a></div>
+
+          
+          
+          
+        </div>
+      </header>
+
+      <div class="project-content">
+        
+          <img src="/images/mwgames3.png" alt="Featured image"/>
+        
+        <p>MiniWordGames is an engaging multiplayer word game that combines the thrill of real-time battles with the challenge of word creation. This project utilizes Golang for the backend server, Vue.js for the frontend application, WebSocket for real-time communication, and Docker for easy deployment. The game is hosted under the domain <a href="http://miniwordgames.com"  class="external-link" target="_blank" rel="noopener">miniwordgames.com</a>.</p>
+<h2 id="tech-stack">
+  Tech Stack
+  <a class="heading-link" href="#tech-stack">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p><img src="https://img.shields.io/badge/go-%2300ADD8.svg?style=for-the-badge&amp;logo=go&amp;logoColor=white" alt="Go"> <img src="https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&amp;logo=vuedotjs&amp;logoColor=%234FC08D" alt="Vue.js"> <img src="https://img.shields.io/badge/Vuetify-1867C0?style=for-the-badge&amp;logo=vuetify&amp;logoColor=AEDDFF" alt="Vuetify"> <img src="https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&amp;logo=docker&amp;logoColor=white" alt="Docker"> 	<img src="https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&amp;logo=amazon-aws&amp;logoColor=white" alt="AWS"></p>
+<h2 id="features">
+  Features
+  <a class="heading-link" href="#features">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li><strong>Real-time Battles:</strong> Challenge your friends or random opponents to fast-paced word battles.</li>
+<li><strong>WebSocket Integration:</strong> Enjoy seamless and instant communication between players for a responsive gaming experience.</li>
+<li><strong>Golang Backend:</strong> Utilizes the power of Golang to handle server-side logic efficiently.</li>
+<li><strong>Vue.js Frontend:</strong> A dynamic and interactive user interface designed with Vue.js for a smooth gaming experience.</li>
+<li><strong>Dockerized Multistaged Deployment:</strong> Easily deploy and manage the application using Docker containers which are small and lightweight.</li>
+</ul>
+
+        
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+        
+        
+        <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: auto;
+      padding: 20px;
+    }
+
+    .share-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .share-section h2 {
+      margin-bottom: 10px;
+    }
+
+    .social-icons a,#copy-url {
+      margin: 0 10px;
+      color: #333;
+      text-decoration: none;
+      font-size: 0.7em;  
+    }
+
+    .social-icons a:hover , #copy-url:hover {
+      color: #007bff;  
+    }
+
+    #copy-url {
+      display: inline-block;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+   .like-button-container {
+      display: inline-block;
+      background: none;
+   }
+
+   .fb-like {
+      background: none !important;
+      border: none !important;
+      overflow: hidden;
+   }
+  </style>
+ <div class="share-section">
+    Share it:
+        <div class="social-icons">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fdhruvikdonga.github.io%2fprojects%2fminiwordgames%2f" target="_blank"><i class="fa fa-facebook fa-2x"></i></a>
+            <a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fdhruvikdonga.github.io%2fprojects%2fminiwordgames%2f&text=Mini%20Word%20Games" target="_blank"><i class="fa fa-twitter fa-2x"></i></a>
+            <a href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fdhruvikdonga.github.io%2fprojects%2fminiwordgames%2f&title=Mini%20Word%20Games" target="_blank"><i class="fa fa-linkedin fa-2x"></i></a>
+            <a href="https://www.reddit.com/submit?url=https%3a%2f%2fdhruvikdonga.github.io%2fprojects%2fminiwordgames%2f&title=Mini%20Word%20Games" target="_blank"><i class="fa fa-reddit fa-2x"></i></a>
+            <a href="https://wa.me/?text=Mini%20Word%20Games%20https%3a%2f%2fdhruvikdonga.github.io%2fprojects%2fminiwordgames%2f" target="_blank"><i class="fa fa-whatsapp fa-2x"></i></a>
+            <a href="https://t.me/share/url?url=https%3a%2f%2fdhruvikdonga.github.io%2fprojects%2fminiwordgames%2f&text=Mini%20Word%20Games" target="_blank"><i class="fa fa-telegram fa-2x"></i></a>
+            <a href="" target="_blank" onclick="copyToClipboard()"><i class="fa fa-copy fa-2x"></i></a>
+
+            
+            
+        </div>
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v18.0" nonce="lCrOAJkb"></script>
+
+      
+        
+        <div class="like-button-container">
+
+        <div class="fb-like" 
+             data-href="https://dhruvikdonga.github.io/projects/miniwordgames/" 
+             data-width=""
+             data-layout="button_count" 
+             data-action="like" 
+             data-size="large"  
+             data-share="false">
+        </div>
+        </div>
+</div>
+
+
+<script>
+    function copyToClipboard() {
+      var dummy = document.createElement("input");
+      document.body.appendChild(dummy);
+      dummy.setAttribute("value", "https:\/\/dhruvikdonga.github.io\/projects\/miniwordgames\/");
+      dummy.select();
+      document.execCommand("copy");
+      document.body.removeChild(dummy);
+      alert("Blog URL copied to clipboard!");
+    }
+</script>
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2019 -
+    
+    2024
+     Dhruvik Donga 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+
+</html>

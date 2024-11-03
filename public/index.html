@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Dhruvik Donga</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Dhruvik Donga">
+<meta name="description" content="Dhruvik&#39;s personal website">
+<meta name="keywords" content="blog,developer,personal">
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Dhruvik Donga"/>
+<meta name="twitter:description" content="Dhruvik&#39;s personal website"/>
+
+<meta property="og:title" content="Dhruvik Donga" />
+<meta property="og:description" content="Dhruvik&#39;s personal website" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://dhruvikdonga.github.io/" />
+
+
+
+<link rel="stylesheet" href="/css/custom.css">
+
+
+<link rel="canonical" href="https://dhruvikdonga.github.io/">
+
+
+<link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.min.e1bdf152d93b060b06ba5d496486ed9c201a8b95d335e035beb5faebe3b61cad.css" integrity="sha256-4b3xUtk7BgsGul1JZIbtnCAai5XTNeA1vrX66&#43;O2HK0=" crossorigin="anonymous" media="screen" />
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css" integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin="anonymous" media="screen" />
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link rel="alternate" type="application/rss+xml" href="/index.xml" title="Dhruvik Donga" />
+
+
+<meta name="generator" content="Hugo 0.121.1">
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <style>
+  .arrow-text {
+  display: inline-block;
+  position: relative;
+  animation: arrowAnimation 4s infinite;  
+}
+ 
+</style>
+<nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Dhruvik D.
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/projects/">Open Source</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/posts/">Posts</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/pdf/Dhruvik_Resume.pdf">Get My Resume</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container centered">
+  <div class="about">
+    
+  
+    <div class="avatar"><img src="/images/avatar.jpg" alt="avatar"></div>
+  
+
+
+
+
+    <h1 style="margin-bottom: 0; padding-bottom: 0;">Dhruvik Donga</h1>
+
+<h2><div id="changing-text"></div></h2>
+
+
+<span>    
+  
+    <div class="description-box">
+      Checkout the documentation of simplysocket wrapper
+      
+      <a href="simplysocket/" class="arrow-button" target="_blank">
+        &#8594; 
+      </a>
+    </div>
+  
+</span>
+
+
+<style>
+    #changing-text {
+        margin-top: 0;
+        padding-top: 0;
+    }
+
+     
+    .description-box {
+        padding: 10px;               
+        margin-top: 10px;            
+        display: inline-block;        
+        font-size: 0.8em;            
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  
+        border-radius: 5px;          
+        background-color: #fff;      
+    }
+
+     
+    .arrow-button {
+        display: inline-block;        
+        margin-left: 10px;           
+        text-decoration: none;        
+        color: #007bff;              
+        font-size: 1.2em;            
+        transition: color 0.3s;      
+    }
+
+    .arrow-button:hover {
+        color: #0056b3;              
+    }
+</style>
+
+<script>
+    
+    const changingText = document.getElementById('changing-text');
+    const infoLS = "Software Engineer";
+
+    function processItemsinfo(index) {
+        if (index <= infoLS.length) {
+            changingText.textContent = infoLS.substring(0, index) + "|";
+
+            setTimeout(function () {
+                processItemsinfo(index + 1);
+            }, 200); 
+            if (index == infoLS.length) {
+                changingText.textContent = infoLS.substring(0, index);
+                setTimeout(function () {
+                    processItemsinfo(index);
+                }, 200); 
+            }
+        }
+    }
+
+    processItemsinfo(0); 
+</script>
+
+
+    <style>
+     a {
+    text-decoration: none;  
+    transition: color 0.5s;  
+  }
+  .fa-linkedin:hover {
+    color: #0077b5;  
+  }
+
+  .fa-reddit:hover {
+    color: #ff5700;  
+  }
+
+  .fa-envelope:hover {
+    color: #d14836;  
+  }
+
+  .fa-globe:hover {
+    color: #4caf50;  
+  }
+
+  .fa-github:hover {
+    color: #4078c0;  
+  }
+
+  .fa-instagram:hover {
+    background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d, #f56040, #f77737, #fcaf45, #ffdc80);  
+    -webkit-background-clip: text;  
+    color: transparent;  
+  }
+
+</style>
+
+<ul>
+  
+    
+      <li>
+        <a href="https://github.com/DhruvikDonga/" aria-label="Github"   >
+          <i class="fa fa-github fa-2x" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="https://www.linkedin.com/in/dhruvik-donga-9363a0172/" aria-label="Linkedin"   >
+          <i class="fa fa-linkedin fa-2x" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="https://www.reddit.com/user/dhruvik_d" aria-label="Reddit"   >
+          <i class="fa fa-reddit fa-2x" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="https://www.instagram.com/dongadhruvik/" aria-label="Instagram"   >
+          <i class="fa fa-instagram fa-2x" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="https://dhruvikdonga.github.io/" aria-label="personal website"   >
+          <i class="fa fa-globe fa-2x" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+    
+      <li>
+        <a href="mailto:dongadhruvik@gmail.com" aria-label="Email me"   >
+          <i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+</ul>
+
+  </div>
+
+  
+
+</section>
+
+  <svg viewBox="0 0 1920 150" preserveAspectRatio="none" style="width: 100%; height: auto; position: absolute; bottom: 0; left: 0; z-index: -1;">
+    <path d="M0,75 C150,0 250,75 500,75 S750,0 1000,75 S1250,150 1500,75 S1750,0 1920,75 L1920,150 L0,150 Z" style="stroke: none; fill:#007bff;"></path>
+    <path d="M0,75 C150,150 350,0 500,75 S850,150 1000,75 S1350,0 1500,75 S1750,150 1920,75 L1920,150 L0,150 Z" style="stroke: none; fill:#0a509b;"></path>
+    
+  </svg>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2019 -
+    
+    2024
+     Dhruvik Donga 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+
+</html>

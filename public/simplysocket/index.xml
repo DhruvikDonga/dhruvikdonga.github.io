@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Simply Socket on Dhruvik Donga</title>
+    <link>https://dhruvikdonga.github.io/simplysocket/</link>
+    <description>Recent content in Simply Socket on Dhruvik Donga</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 07 Sep 2023 16:06:50 +0200</lastBuildDate>
+    <atom:link href="https://dhruvikdonga.github.io/simplysocket/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

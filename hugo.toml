@@ -28,7 +28,7 @@ style = "github-dark"
   colorScheme = "auto"
   hidecolorschemetoggle = false
 
-  # customCSS = ["css/custom.css"]
+  customCSS = ["css/custom.css"]
   # customSCSS = ["scss/custom.scss"]
   # customJS = ["js/custom.js"]
 
@@ -37,6 +37,11 @@ style = "github-dark"
   series = "series"
   tag = "tags"
   author = "authors"
+
+[markup]
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 6
 
 # Social links
 [[params.social]]
@@ -69,6 +74,12 @@ style = "github-dark"
   icon = "fa fa-envelope fa-2x"
   weight = 4
   url = "mailto:dongadhruvik@gmail.com"
+
+# Extra box
+[[params.featured]]
+  title = "SimplySocket"
+  description = "Checkout the documentation of simplysocket wrapper"
+  link = "simplysocket/"
 
 # Menu links
 [[menu.main]]

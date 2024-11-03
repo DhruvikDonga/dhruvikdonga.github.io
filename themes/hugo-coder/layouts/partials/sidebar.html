@@ -1,0 +1,9 @@
+<nav>
+    <h2>Table of Contents</h2>
+    <ul>
+      {{ range .Sections }}
+        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+      {{ end }}
+    </ul>
+  </nav>
+  

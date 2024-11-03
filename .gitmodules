@@ -1,3 +1,6 @@
 [submodule "dhruvikd/themes/hugo-coder"]
 	path = dhruvikd/themes/hugo-coder
 	url = https://github.com/luizdepra/hugo-coder.git
+[submodule "themes/doks"]
+	path = themes/doks
+	url = https://github.com/thuliteio/doks
