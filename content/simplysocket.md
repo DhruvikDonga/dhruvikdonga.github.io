@@ -178,6 +178,7 @@ Above one is a snippet from SimplySocket Message which is passed through client 
  - **Target** :- Target is a room or a client where client wants to push the message.
  - **Sender** :- The client slug /id who has initiated the message if its from the server then it will have its name or a client slug .
 
+---
 
 ## Contributing
 
