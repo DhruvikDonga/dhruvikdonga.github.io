@@ -79,7 +79,7 @@ style = "github-dark"
 [[params.featured]]
   title = "SimplySocket"
   description = "Checkout the documentation of simplysocket wrapper"
-  link = "simplysocket/"
+  link = "simplysocket/#introduction"
 
 # Menu links
 [[menu.main]]
