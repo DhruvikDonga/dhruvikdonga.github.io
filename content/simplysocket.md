@@ -18,97 +18,6 @@ SimplySocket is built for real-time communication with clients, efficiently mana
 
 ---
 
-### Project Architecture
-
-```mermaid
-graph LR
-    node1(Message Processor)
-    node4(Observer Lobby Server)
-    node5(wsclient1)
-    node2(Message Reciever 1)
-    node3(Message Sender 1)
-    node6(Algorithm and room state watcher)
-    node7(wsclient2)
-    node8(Message Reciever 2)
-    node9(Message Sender 2)
-    node10(wsclient3)
-    node11(Message Reciever 3)
-    node12(Message Sender 3)
-    node13(wsclient4)
-    node14(Message Reciever 4)
-    node15(Message Sender 4)
-    node16(Message Processor arch)
-    node17[clients list]
-    node18(client1 message sender)
-    node19(client2 message sender)
-    node20(client3 message sender)
-
-    node21[[Client connected]]
-    node22[[Client disconnected]]
-    node23[[Room created]]
-    node24[[Room deleted]]
-    node25[[Client Joined a Room]]
-    node26[[Client Left a Room]]
-    node27[[Event Triggers]]
-
-    node28[(Clients Map <br>cid_key--struct)]
-    node29[(Rooms Map <br>roomname_key--struct)]
-    node30[(Room to client map <br>roomkey--map-clinetkeys)]
-
-    node31[[Message Send in a processor <br> 1. Action to be done/message type <br> 2. Room address <br> 3. If not 2nd then client address <br> 4. Message body]]
-
-node31-->node16
-    node16-->node17
-    node17-->node18
-    node17-->node19
-    node17-->node20
-    node17-->node30
-
-    node27-->node21
-    node27-->node22
-    node27-->node23
-    node27-->node24
-    node27-->node25
-    node27-->node26
-  
-    node21-->node28
-    node22-->node28
-
-    node23-->node29
-    node24-->node29
-  
-    node25-->node30
-    node26-->node30
-    node30-->node28
-    node28-->node17
-
-    node2-->node1-->node3
-    node8-->node1-->node9
-    node11-->node1-->node12
-    node14-->node1-->node15
-
-    node6-->node1
-    node5-.->node2
-    node5-.->node3
-
-    node7-.->node8
-    node7-.->node9
-
-    node10-.->node11
-    node10-.->node12
-
-    node13-.->node14
-    node13-.->node15
-
-    node4-.->node5
-    node4-.->node6
-    node4-.->node1
-    node4-.->node7
-    node4-.->node10
-    node4-.->node13
-```
----
-
 ## Basics
 
 A websocket server which is a protocol to do communication between server and client (browser, mobile etc) . Its asynchronized so the usage is in real time systems . Below will understand what are the blocks in the socket system and how SimplySocket manages it .
@@ -179,6 +88,148 @@ Above one is a snippet from SimplySocket Message which is passed through client 
  - **Sender** :- The client slug /id who has initiated the message if its from the server then it will have its name or a client slug .
 
 ---
+
+## Example 
+
+This is the example from wordsbattle codebase which runs [miniwordgames.com](http://miniwordgames.com)
+
+### NewMeshServer
+Setup the server where it will have all clients and rooms information , roomdata is your information through which a room global will be created and holds the information which you can access interface .
+```golang
+roomdata := &game.RoomData{RandomRooms: []string{}}
+ms := simplysocket.NewMeshServer("cowgame", &simplysocket.MeshServerConfig{DirectBroadCast: false}, roomdata)
+// initialize websocket link cowgame connection clash of words
+r.HandleFunc("/wsmesh", func(w http.ResponseWriter, r *http.Request) {
+	simplysocket.ServeWs(ms, w, r)
+})
+```
+[link to code](https://github.com/DhruvikDonga/wordsbattle/blob/main/internal/handler/routes.go#L46)
+
+### HandleRoomData
+
+Implement HandleRoomData function in your codebase  . This function is the go routine which runs when a newmeshserver is created . The objects will have the property which you wanted to give and can be accessed . In below funciton RoomData is the struct of the object of newMeshServer created . 
+```golang
+func (r *RoomData) HandleRoomData(room simplysocket.Room, server simplysocket.MeshServer) {
+	roomname := room.GetRoomSlugInfo()
+	r.Slug = roomname
+	log.Println("Handeling data Server for ", roomname, server.GetGameName())
+	// ticker := time.NewTicker(5 * time.Second)
+	// defer ticker.Stop()
+	for {
+		select {
+		case message, ok := <-room.ConsumeRoomMessage():
+			//log.Println(server.GetRooms())
+			if !ok {
+				log.Println("Channel closed. Exiting HandleRoomData for", roomname)
+			}
+			log.Println("Room data ", message)
+
+			if message.Target == roomname {
+				r.handleServermessages(room, server, message)
+			}
+
+		case clientevent := <-room.EventTriggers():
+			log.Println("Event triggered", clientevent[0], clientevent[1], clientevent[2], room.GetRoomSlugInfo())
+
+		// case <-ticker.C:
+		// 	log.Println("Room activity server", room.GetRoomSlugInfo(), r.Slug)
+
+		case <-room.RoomStopped():
+			log.Println("Room is stopped so stop the handler")
+			return
+
+		}
+	}
+}
+```
+[link to code](https://github.com/DhruvikDonga/wordsbattle/blob/main/internal/modules/game/handle.go#L30)
+
+### room.GetRoomSlugInfo()
+``room.GetRoomSlugInfo()`` will give you the room id
+
+### room.GetRoomMakerInfo() 
+``room.GetRoomMakerInfo()`` will give you the client id which created this room
+
+### room.GetClientsInRoom() 
+``room.GetClientsInRoom()`` will return ``map[string]map[string]*client`` roomids->clientids [check example](https://github.com/DhruvikDonga/wordsbattle/blob/main/internal/modules/game/handle.go#L107)
+
+### room.ConsumeMessage()
+``room.ConsumeMessage()`` will send messages from the client side to the server . It can be removed if you have a service which push the message . 
+
+### room.EventTriggers()
+``room.EventTriggers()`` will send events it is string list where 1st is the event name which can be client-joined-room , client-left-room , 2nd part is the roomname , 3rd part is clientuniqid . This will help you to implement further logics [like here in wordsbattle](https://github.com/DhruvikDonga/wordsbattle/blob/main/internal/modules/game/gamroomhandle.go#L56)
+
+### room.RoomStopped()
+``room.RoomStopped()`` will notify room is stopped this will happen when no client is there in the room . Implement this in custom funciton for better go routine management .
+
+### simplysocket.Message{}
+This is the standard Message struct which simplysocket process and push it . Keep the same struct pattern in client side as well
+Action: as same as a Title of message
+Target: Its a room id or client id
+MessageBody: map interface of message to be send
+isTargetClient: flag to send message to a client only
+```golang 
+	res := &simplysocket.Message{
+			Action:         "room-setting-applied",
+			Target:         message.Target,
+			MessageBody:    map[string]interface{}{"message": "Room settings applied successfully Player Limit:- " + message.MessageBody["player_limit"].(string) + " Time duration :-" + message.MessageBody["game_duration"].(string)},
+			Sender:         "bot-of-the-room",
+			IsTargetClient: false,
+		}
+```
+
+### room.BroadcastMessage(message)
+``room.BroadcastMessage(message)`` will broadcast the message . room will have the client list in it . This will push message to all clients in it but if it needs to be send to a particular client set IsTargetClient to ``true`` in message.
+```golang
+func (r *RoomData) FailToJoinRoomNotify(reason string, clientsinroom []string, room simplysocket.Room, server simplysocket.MeshServer) {
+	reasonmsg := ""
+	log.Println("Client removed", clientsinroom[2])
+	if reason == "room-full" {
+		reasonmsg = "Failed to join the room its occupied"
+	}
+	message := &simplysocket.Message{
+		Action: "fail-join-room-notify",
+		Target: clientsinroom[2],
+		MessageBody: map[string]interface{}{
+			"message": reasonmsg,
+		},
+		Sender:         "bot-of-the-room",
+		IsTargetClient: true,
+	}
+
+	room.BroadcastMessage(message)
+}
+```
+[link to code](https://github.com/DhruvikDonga/wordsbattle/blob/main/internal/modules/game/handle.go#L136)
+
+### server.JoinClientRoom(roomname string, clientname string, rd RoomData)
+ 
+``server.JoinClientRoom(roomname string, clientname string, rd RoomData)`` :- This function takes roomname uniq id , client uniq slug id and a object of the struct which you have created . So the approach is simplysocket checks whether a room is already there a roomname which you added if not then it will use object and create a room and it will add your client . SimplySocket self initializes a room ```mesh-global``` where a client is automatically added . It contains list of all clients in it. This mechanism will help you to create different rooms with different properties to play with . 
+
+A room created with a object of particular struct must need to implement ``HandleRoomData`` . Incase of wordsbattle there are 2 type of rooms one which is mesh-global has its [implementation)](https://github.com/DhruvikDonga/wordsbattle/blob/main/internal/modules/game/handle.go#L30) and a game room [implementation](https://github.com/DhruvikDonga/wordsbattle/blob/main/internal/modules/game/gamroomhandle.go#L41) . 
+
+```golang
+case "join-room":
+		//needed only if new room is needed
+		rd := GameRoomData{
+			IsRandomGame:     false,
+			PlayerLimit:      int(message.MessageBody["playerlimit"].(float64)),
+			ClientProperties: make(map[string]*ClientProps),
+			GameEnded:        make(chan bool),
+			Wordslist:        make(map[string]bool),
+			Endtime:          1 * 60,
+			Rounds:           0,
+			TurnAttempted:    make(chan []string),
+			HasGameStarted:   false,
+			HasGameEnded:     false,
+			ClientTurnList:   []*ClientProps{},
+		}
+		log.Println("JoinRoomAction ", message.Sender, message.MessageBody, room.GetRoomSlugInfo())
+		roomname := message.MessageBody["roomname"].(string)
+		server.JoinClientRoom(roomname, message.Sender, &rd)
+		log.Println("request send to join a room")
+```
+[link to code](https://github.com/DhruvikDonga/wordsbattle/blob/main/internal/modules/game/handle.go#L86)
 
 ## Contributing
 
