@@ -97,5 +97,5 @@ style = "github-dark"
 [[menu.main]]
   name = "Get My Resume"
   weight = 3
-  url  = "pdf/Dhruvik_Resume.pdf"
+  url  = "pdf/DhruvikDonga_latest.pdf"
 
