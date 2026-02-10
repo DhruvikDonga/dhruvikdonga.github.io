@@ -16,7 +16,7 @@ With my [professional experience](https://dhruvikdonga.github.io/work) across do
 
 ---
 
-## 📍 **AutomateTG**
+## <img src="https://automatetg.com/assets/logo-BXBDxRNe.webp" width="36" style="vertical-align: middle; margin-right: 10px;"> **AutomateTG**
 **Co-founder** | *Dec 2025 – Present*
 
 > [AutomateTG](https://automatetg.com) is a SaaS platform that provides advanced Telegram automation powered by Telegram’s open-source MTProto protocol — the layer between Telegram’s backend and its mobile clients.
