@@ -75,12 +75,6 @@ style = "github-dark"
   weight = 4
   url = "mailto:dongadhruvik@gmail.com"
 
-# Extra box
-[[params.featured]]
-  title = "SimplySocket"
-  description = "Checkout the documentation of simplysocket wrapper"
-  link = "simplysocket/#introduction"
-
 # Menu links
 [[menu.main]]
   name = "About"
