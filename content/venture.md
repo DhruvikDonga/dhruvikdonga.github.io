@@ -16,8 +16,6 @@ To me, a venture sits at the intersection of:
 
 ---
 
-## 🚀 Ventures
-
 ### 📍 **AutomateTG**
 **Co-founder** | *Dec 2025 – Present* | [automatetg.com](https://automatetg.com)
 

@@ -92,8 +92,4 @@ style = "github-dark"
   name = "Open Source"
   weight = 2
   url  = "projects/"
-[[menu.main]]
-  name = "Posts"
-  weight = 2
-  url  = "posts/"
 
