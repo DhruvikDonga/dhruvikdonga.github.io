@@ -8,11 +8,11 @@ author = "Dhruvik Donga"
 
 With my [professional experience](https://dhruvikdonga.github.io/work) across domains, building systems and collaborating with like-minded people, I’ve been driven to pursue ideas that can scale into meaningful products.
 
-To me, a venture sits at the intersection of:
-- A real problem
-- The skillset to solve it
-- A team to scale it
-- A revenue model to sustain it
+> To me, a venture sits at the intersection of:
+> - A real problem
+> - The skillset to solve it
+> - A team to scale it
+> - A revenue model to sustain it
 
 ---
 
