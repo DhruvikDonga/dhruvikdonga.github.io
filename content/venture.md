@@ -1,5 +1,5 @@
 +++
-title = "Venture"
+title = "🚀 Venture"
 description = "Dhruvik's venture page"
 date = "2023-12-25"
 aliases = ["venture", "buisness", "saas"]

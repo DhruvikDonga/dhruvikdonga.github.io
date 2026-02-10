@@ -1,5 +1,5 @@
 +++
-title = "Work"
+title = "💼 Work"
 description = "Dhruvik's work experience page"
 date = "2023-12-25"
 aliases = ["work", "job", "work-experience"]
