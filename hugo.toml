@@ -10,7 +10,7 @@ style = "github-dark"
 
 [params]
   author = "Dhruvik Donga"
-  info = "Software Engineer"
+  info = "Software Dev"
 
   description = "Dhruvik's personal website"
   keywords = "blog,developer,personal"
@@ -87,6 +87,10 @@ style = "github-dark"
   weight = 1
   url = "about/"
 [[menu.main]]
+  name = "Work"
+  weight = 1
+  url = "work/"
+[[menu.main]]
   name = "Open Source"
   weight = 2
   url  = "projects/"
@@ -94,8 +98,4 @@ style = "github-dark"
   name = "Posts"
   weight = 2
   url  = "posts/"
-[[menu.main]]
-  name = "Get My Resume"
-  weight = 3
-  url  = "pdf/DhruvikDonga_latest.pdf"
 
