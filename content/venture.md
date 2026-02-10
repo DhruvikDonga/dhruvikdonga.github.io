@@ -16,10 +16,10 @@ To me, a venture sits at the intersection of:
 
 ---
 
-### 📍 **AutomateTG**
+## 📍 **AutomateTG**
 **Co-founder** | *Dec 2025 – Present* | [automatetg.com](https://automatetg.com)
 
-> [AutomateTG](https://automatetg.com) is a SaaS platform that provides advanced Telegram automation powered by Telegram’s open-source MTProto protocol — the layer between Telegram’s backend and its mobile clients.
+### [AutomateTG](https://automatetg.com) is a SaaS platform that provides advanced Telegram automation powered by Telegram’s open-source MTProto protocol — the layer between Telegram’s backend and its mobile clients.
 
 **The Product**
 * Solves limitations of traditional bots (such as the inability to monitor channels/groups where users are not admins) by enabling user-level session automation.
