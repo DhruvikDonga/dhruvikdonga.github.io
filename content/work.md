@@ -11,8 +11,10 @@ A timeline of my journey across domains, technologies, and impact-driven roles t
 ---
 
 ### 📍 **Infocusp Innovations — Cusp Money**
-*April 2025 — Present* | [Cusp Money](https://cusp.money)
-  
+*April 2025 — Present*
+
+[Cusp Money](https://cusp.money) is a family wealth management consumer product delivered through mobile applications. It is a product venture by [Infocusp Innovations](https://infocusp.com)
+
 > **Key Focus:** Family wealth management & investment infrastructure.
 
 * **Investment Services:** Leading development of KYC, CAN, and mandate workflows ensuring financial regulation compliance.
@@ -22,7 +24,9 @@ A timeline of my journey across domains, technologies, and impact-driven roles t
 ---
 
 ### 📍 **Middleware Labs (YC W23)**
-*January 2024 — March 2025* | [Middleware.io](https://middleware.io)
+*January 2024 — March 2025* 
+
+[Middleware Labs](https://middleware.io) is a Y Combinator–backed startup based in San Francisco, focused on cloud monitoring and observability solutions.
 
 > **Key Focus:** Observability and cloud monitoring at scale.
 
@@ -35,6 +39,8 @@ A timeline of my journey across domains, technologies, and impact-driven roles t
 
 ### 📍 **Jeavio — SevOne (IBM)**
 *May 2022 — January 2024* | [SevOne - IBM](https://www.ibm.com/products/sevone)
+
+[SevOne](https://www.ibm.com/products/sevone) is an enterprise network monitoring solution aquired by IBM. [Jeavio](https://jeavio.com) works on this product.
 
 > **Key Focus:** Legacy migration and enterprise network monitoring.
 
