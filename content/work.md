@@ -8,36 +8,39 @@ author = "Dhruvik Donga"
 
 A timeline of my journey across domains, technologies, and impact-driven roles throughout 4 years of my professional career.
 
-## Infocusp Innovations - Cusp Money
-*April - 2025 to Present*
+---
 
-[Cusp Money](https://cusp.money) is a family wealth management consumer product delivered through mobile applications. It is a product venture by [Infocusp Innovations](https://infocusp.com).
+## 🕒 Timeline
 
-- Leading development of investment services, including creation of KYC, CAN, and mandate workflows while ensuring compliance with financial regulations.
-- Building backend services that enable users to buy and invest in financial products through the app.
+### 📍 **Infocusp Innovations — Cusp Money**
+*April 2025 — Present* | [Cusp Money](https://cusp.money)
+  
+> **Key Focus:** Family wealth management & investment infrastructure.
 
-**Tech: Go, MongoDB, Kubernetes, GCP, gRPC**
+* **Investment Services:** Leading development of KYC, CAN, and mandate workflows ensuring financial regulation compliance.
+* **Backend Systems:** Building scalable services enabling users to invest in financial products via mobile app.
+* **Stack:** `Go` • `MongoDB` • `Kubernetes` • `GCP` • `gRPC`
 
-## Middleware labs - YC-23
-*January - 2024 to March - 2025*
+---
 
-[Middleware Labs](https://middleware.io) is a Y Combinator–backed startup based in San Francisco, focused on cloud monitoring and observability solutions.
+### 📍 **Middleware Labs (YC W23)**
+*January 2024 — March 2025* | [Middleware.io](https://middleware.io)
 
-- Worked on infrastructure monitoring services, developing new features and improving the overall product pipeline.
-- Built and optimized metrics pipelines using OpenTelemetry (OTEL) and improved ClickHouse queries for dashboards and user experience across servers, Kubernetes, and Docker environments.
-- Developed an ETL service to aggregate and process data from Infrastructure, APM, RUM, and Synthetics into Omni BI analytics for better customer insights and management reporting.
-- Optimized Docker images, significantly reducing build size.
+> **Key Focus:** Observability and cloud monitoring at scale.
 
-**Tech: Go, React.js, ClickHouse, Parquet, PostgreSQL, Kubernetes, Docker**
+* **Metrics Pipelines:** Built and optimized pipelines using OpenTelemetry (OTEL) and ClickHouse for high-performance dashboards.
+* **ETL Engineering:** Developed services to aggregate APM, RUM, and Synthetic data into Omni BI analytics.
+* **Optimization:** Significantly reduced Docker image sizes and improved query performance across K8s environments.
+* **Stack:** `Go` • `React.js` • `ClickHouse` • `Parquet` • `PostgreSQL` • `K8s` • `Docker`
 
-## Jeavio - SevOne-IBM
-*May - 2022 to January - 2025*
+---
 
-[SevOne - IBM](https://www.ibm.com/products/sevone) s an enterprise network monitoring solution aquired by IBM .[Jeavio](https://jeavio.com) contributes to this product.
+### 📍 **Jeavio — SevOne (IBM)**
+*May 2022 — January 2024* | [SevOne - IBM](https://www.ibm.com/products/sevone)
 
-- Worked on the SevOne API service, developed in Go and gRPC, migrating from an existing Java-based API used by solution teams, UX teams, and enterprise clients.
-- Handled production escalations with support teams, assisted in on-premise installations, and debugged complex data center issues.
-- Developed a Python-based log processing and visualization tool during a hackathon to analyze logs from Go, C++, and system services, enabling faster root-cause analysis.
-- Migrated a Scala-based ETL service to Go, reducing memory usage by 80% and improving performance by 70%.
+> **Key Focus:** Legacy migration and enterprise network monitoring.
 
-**Tech: Go, gRPC, Docker, VMware vSphere, CentOS, Bash, Python, MySQL/MariaDB**
+* **Migration:** Rewrote legacy Scala/Java ETL services in **Go**, achieving an **80% memory reduction** and 70% performance boost.
+* **API Development:** Migrated gRPC-based API services for enterprise clients and internal UX teams.
+* **Hackathon Win:** Created a Python-based log processing tool for rapid root-cause analysis in distributed systems.
+* **Stack:** `Go` • `gRPC` • `Docker` • `VMware vSphere` • `Python` • `Bash` • `MySQL`
