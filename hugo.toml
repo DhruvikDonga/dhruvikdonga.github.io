@@ -93,3 +93,5 @@ style = "github-dark"
   weight = 2
   url  = "projects/"
 
+[markup.goldmark.renderer]
+  unsafe = true
