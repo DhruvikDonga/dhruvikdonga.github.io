@@ -1,4 +1,4 @@
-# Hello, World! 👋
+# Hello 👋
 
 I'm Dhruvik, a passionate Software Engineer with a focus on building real-time systems using Golang.
 
