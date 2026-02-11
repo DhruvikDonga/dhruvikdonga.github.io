@@ -1,9 +1,11 @@
 <h1 style="margin-bottom: 0; padding-bottom: 0;">{{ .Site.Params.author }}</h1>
-{{ if reflect.IsSlice .Site.Params.info }}
-<h2>{{ range .Site.Params.info }}{{ . | markdownify }}<br>{{ end}}</h2>
-{{ else }}
-<h2><div id="changing-text"></div></h2>
-{{ end }}
+
+<div class="badge-container">
+  <img src="https://img.shields.io/badge/Software%20Dev-blue?style=for-the-badge" alt="Software Dev">
+  <img src="https://img.shields.io/badge/Indie%20Hacker-orange?style=for-the-badge" alt="Indie Hacker">
+  <img src="https://img.shields.io/badge/Guitar%20Hobbyist-green?style=for-the-badge" alt="Guitar Hobbyist">
+</div>
+
 {{ with .Site.Params.featured }}
 <span>{{ range . }}    
   {{ if .description }}
@@ -19,7 +21,21 @@
 <div class="intro-bridge">
   Since you made it this far, <a href="{{ "/about" | relURL }}">let me introduce myself</a>.
 </div>
+
 <style>
+    /* Spacing for badges */
+    .badge-container {
+        margin-top: 10px;
+        margin-bottom: 15px;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .badge-container img {
+        height: 28px; /* Standard height for-the-badge style */
+    }
+
     /* New Style for the Intro Message */
     .intro-bridge {
         margin-top: 25px;
@@ -35,11 +51,6 @@
     }
     .intro-bridge a:hover {
         border-bottom: 1px solid #fff;
-    }
-
-    #changing-text {
-        margin-top: 0;
-        padding-top: 0;
     }
 
     /* Style for the shadow box */
@@ -68,27 +79,3 @@
         color: #0056b3;             
     }
 </style>
-
-<script>
-    // JavaScript code remains exactly as you had it
-    const changingText = document.getElementById('changing-text');
-    const infoLS = {{ .Site.Params.info }};
-
-    function processItemsinfo(index) {
-        if (index <= infoLS.length) {
-            changingText.textContent = infoLS.substring(0, index) + "|";
-
-            setTimeout(function () {
-                processItemsinfo(index + 1);
-            }, 200); 
-            if (index == infoLS.length) {
-                changingText.textContent = infoLS.substring(0, index);
-                setTimeout(function () {
-                    processItemsinfo(index);
-                }, 200); 
-            }
-        }
-    }
-
-    processItemsinfo(0); 
-</script>
