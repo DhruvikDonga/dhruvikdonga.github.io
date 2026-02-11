@@ -9,16 +9,34 @@
   {{ if .description }}
     <div class="description-box">
       {{ .description }}
-      <!-- Arrow Button -->
       <a href="{{ .link }}" class="arrow-button" target="_blank">
-        &#8594; <!-- Right arrow character -->
-      </a>
+        &#8594; </a>
     </div>
   {{ end }}
 {{ end }}</span>
 {{ end }}
 
+<div class="intro-bridge">
+  Since you made it this far, <a href="{{ "/about" | relURL }}">let me introduce myself</a>.
+</div>
 <style>
+    /* New Style for the Intro Message */
+    .intro-bridge {
+        margin-top: 25px;
+        font-size: 0.9em;
+        color: #888;
+        font-style: italic;
+    }
+    .intro-bridge a {
+        color: #fff;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        transition: border-bottom 0.3s ease;
+    }
+    .intro-bridge a:hover {
+        border-bottom: 1px solid #fff;
+    }
+
     #changing-text {
         margin-top: 0;
         padding-top: 0;
@@ -26,33 +44,33 @@
 
     /* Style for the shadow box */
     .description-box {
-        padding: 10px;              /* Padding inside the box */
-        margin-top: 10px;           /* Add some margin above the box */
-        display: inline-block;       /* Adjust display for proper sizing */
-        font-size: 0.8em;           /* Make text smaller */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
-        border-radius: 5px;         /* Optional: rounded corners */
-        background-color: #105eac; /* Navy blue background remains in dark mode */
+        padding: 10px;              
+        margin-top: 10px;           
+        display: inline-block;       
+        font-size: 0.8em;           
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+        border-radius: 5px;         
+        background-color: #105eac; 
         color: white;
     }
 
     /* Style for the arrow button */
     .arrow-button {
-        display: inline-block;       /* Inline block for proper spacing */
-        margin-left: 10px;          /* Space between text and button */
-        text-decoration: none;       /* Remove underline */
-        color: #007bff;             /* Change to your desired color */
-        font-size: 1.2em;           /* Make the arrow larger */
-        transition: color 0.3s;     /* Smooth color transition on hover */
+        display: inline-block;       
+        margin-left: 10px;          
+        text-decoration: none;       
+        color: #007bff;             
+        font-size: 1.2em;           
+        transition: color 0.3s;     
     }
 
     .arrow-button:hover {
-        color: #0056b3;             /* Darker shade on hover */
+        color: #0056b3;             
     }
 </style>
 
 <script>
-    // JavaScript code for text-changing animation
+    // JavaScript code remains exactly as you had it
     const changingText = document.getElementById('changing-text');
     const infoLS = {{ .Site.Params.info }};
 
@@ -62,15 +80,15 @@
 
             setTimeout(function () {
                 processItemsinfo(index + 1);
-            }, 200); // Delay between each character
+            }, 200); 
             if (index == infoLS.length) {
                 changingText.textContent = infoLS.substring(0, index);
                 setTimeout(function () {
                     processItemsinfo(index);
-                }, 200); // Restart after finishing
+                }, 200); 
             }
         }
     }
 
-    processItemsinfo(0); // Start the animation
+    processItemsinfo(0); 
 </script>
