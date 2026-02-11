@@ -2,7 +2,7 @@
 
 <div class="badge-container">
   <img src="https://img.shields.io/badge/Software%20Dev-blue?style=for-the-badge" alt="Software Dev">
-  <img src="https://img.shields.io/badge/Indie%20Hacker-orange?style=for-the-badge" alt="Indie Hacker">
+  <img src="https://img.shields.io/badge/Indie%20Hacker-black?style=for-the-badge" alt="Indie Hacker">
   <img src="https://img.shields.io/badge/Guitar%20Hobbyist-green?style=for-the-badge" alt="Guitar Hobbyist">
 </div>
 
@@ -23,13 +23,18 @@
 </div>
 
 <style>
-    /* Spacing for badges */
+    /* Spacing and Centering for badges */
     .badge-container {
-        margin-top: 10px;
-        margin-bottom: 15px;
+        margin-top: 15px;
+        margin-bottom: 20px;
         display: flex;
         gap: 8px;
         flex-wrap: wrap;
+        justify-content: center; /* This centers them on all screens */
+    }
+
+    .badge-container img {
+        height: 28px;
     }
 
     .badge-container img {
@@ -42,6 +47,7 @@
         font-size: 0.9em;
         color: #888;
         font-style: italic;
+        text-align: center; /* Centers the "Since you made it..." message */
     }
     .intro-bridge a {
         color: #fff;
