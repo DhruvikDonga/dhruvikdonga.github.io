@@ -12,18 +12,14 @@ Dedicated and process-oriented professional with a strong enthusiasm for underst
 
 ## 🛠️ Skills 
 
-- Golang
-- Python
-- Vuejs
-- Docker
-- AWS
-- MySQL
-- Linux
-- Kubernetes
-- n8n
-- Rust
+![Go](https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white) ![React.js](https://img.shields.io/badge/React.js-4FC08D?style=for-the-badge&logo=react&logoColor=white) ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white) ![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white) ![AWS](https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazon-web-services&logoColor=white) ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black) ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white) ![Rust](https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white) ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white) ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white) ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white) ![n8n](https://img.shields.io/badge/n8n-FF6C37?style=for-the-badge&logo=n8n&logoColor=white)
 
-Feel free to explore my repositories, and don't hesitate to reach out for collaboration or just a friendly chat! 🌟
+---
+
+{{< notice note >}}
+Explore my [Professional Journey 💼](https://dhruvik.cc/work), see the ventures I am currently [Building 🚀](https://dhruvik.cc/venture) or check my [Open Source🌱](https://dhruvik.cc/projects) work.
+{{< /notice >}}
+
 
 
 

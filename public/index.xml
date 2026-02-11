@@ -2,45 +2,45 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Dhruvik Donga</title>
-    <link>https://dhruvikdonga.github.io/</link>
+    <link>https://dhruvik.cc/</link>
     <description>Recent content on Dhruvik Donga</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 31 Dec 2023 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://dhruvikdonga.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://dhruvik.cc/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Example Guide</title>
-      <link>https://dhruvikdonga.github.io/simplysocket/guides/getting-started/</link>
+      <link>https://dhruvik.cc/simplysocket/guides/getting-started/</link>
       <pubDate>Thu, 07 Sep 2023 16:04:48 +0200</pubDate>
-      <guid>https://dhruvikdonga.github.io/simplysocket/guides/getting-started/</guid>
+      <guid>https://dhruvik.cc/simplysocket/guides/getting-started/</guid>
       <description>Guides lead a user through a specific task they want to accomplish, often with a sequence of steps. Writing a good guide requires thinking about what your users are trying to do.&#xA;Further reading&#xD;Link to heading&#xD;Read about how-to guides in the Diátaxis framework </description>
     </item>
     <item>
       <title>2023 Wrap up 🌈</title>
-      <link>https://dhruvikdonga.github.io/posts/2023-wrap-up/</link>
+      <link>https://dhruvik.cc/posts/2023-wrap-up/</link>
       <pubDate>Sun, 31 Dec 2023 00:00:00 +0000</pubDate>
-      <guid>https://dhruvikdonga.github.io/posts/2023-wrap-up/</guid>
+      <guid>https://dhruvik.cc/posts/2023-wrap-up/</guid>
       <description>2023 Wrap Up: A Journey of Code, Beaches, and Resilience 🚀🏖️&#xD;Link to heading&#xD;As the pages of 2023 turn, let&amp;rsquo;s go through a series of events—coding escapades, sun-soaked beaches, and the quiet battles fought behind the scenes. Inspired by the wrap-ups from Spotify, YouTube Music, Reddit, and more, let&amp;rsquo;s delve into the major events that shaped 2023.&#xA;1. Miniwordgames.com Launch: 🚀&#xD;Link to heading&#xD;Embarking on a coding journey, the dilemma of &amp;ldquo;what to build&amp;rdquo; led to the birth of miniwordgames.</description>
     </item>
     <item>
       <title>About Me</title>
-      <link>https://dhruvikdonga.github.io/about/</link>
+      <link>https://dhruvik.cc/about/</link>
       <pubDate>Mon, 25 Dec 2023 00:00:00 +0000</pubDate>
-      <guid>https://dhruvikdonga.github.io/about/</guid>
+      <guid>https://dhruvik.cc/about/</guid>
       <description>Dedicated and process-oriented professional with a fervent enthusiasm for understanding and optimizing systems. Adept at implementing cutting-edge technologies to drive business impact. Proven problem-solver, thriving on challenges as opportunities for growth. Quick learner, continuously adapting to new technology stacks. Ready to contribute dynamic solutions in any professional setting.&#xA;🔧 Currently working on: Observabilty system at 🌱 Learning: Golang , Message Queues , Cloud native technologies 👯‍♂️ Looking to collaborate on: Open-source projects, particularly those involving Golang around real time systems , cloud native projects 💬 Ask me about: Anything related to Golang, real-time systems, python or Websockets 🛠️ Skills&#xD;Link to heading&#xD;Golang Python Vuejs Docker AWS MySQL Linux Feel free to explore my repositories, and don&amp;rsquo;t hesitate to reach out for collaboration or just a friendly chat!</description>
     </item>
     <item>
       <title>SimplySocket</title>
-      <link>https://dhruvikdonga.github.io/projects/simplysocket/</link>
+      <link>https://dhruvik.cc/projects/simplysocket/</link>
       <pubDate>Mon, 25 Dec 2023 00:00:00 +0000</pubDate>
-      <guid>https://dhruvikdonga.github.io/projects/simplysocket/</guid>
+      <guid>https://dhruvik.cc/projects/simplysocket/</guid>
       <description>Golang WebSocket Package for Real-time Messaging in Words Battle Game&#xA;This open-source Golang package leverages the power of Gorilla WebSocket to facilitate seamless communication within a Words Battle Game. Serving as a comprehensive wrapper, it efficiently manages clients, rooms, and messages. The package is designed to handle dynamic events, such as the addition or removal of clients from rooms, ensuring a smooth and interactive gaming experience. Dive into the codebase to explore its robust capabilities and enhance your real-time messaging infrastructure.</description>
     </item>
     <item>
       <title>Mini Word Games</title>
-      <link>https://dhruvikdonga.github.io/projects/miniwordgames/</link>
+      <link>https://dhruvik.cc/projects/miniwordgames/</link>
       <pubDate>Mon, 23 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>https://dhruvikdonga.github.io/projects/miniwordgames/</guid>
+      <guid>https://dhruvik.cc/projects/miniwordgames/</guid>
       <description>MiniWordGames is an engaging multiplayer word game that combines the thrill of real-time battles with the challenge of word creation. This project utilizes Golang for the backend server, Vue.js for the frontend application, WebSocket for real-time communication, and Docker for easy deployment. The game is hosted under the domain miniwordgames.com.&#xA;Tech Stack&#xD;Link to heading&#xD;Features&#xD;Link to heading&#xD;Real-time Battles: Challenge your friends or random opponents to fast-paced word battles.</description>
     </item>
   </channel>

@@ -1,4 +1,4 @@
-baseURL = 'https://dhruvikdonga.github.io/'
+baseURL = 'https://dhruvik.cc/'
 languageCode = 'en-us'
 title = 'Dhruvik Donga'
 theme = 'hugo-coder'
@@ -68,7 +68,7 @@ style = "github-dark"
   name = "personal website"
   icon = "fa fa-globe fa-2x"
   weight = 4
-  url = "https://dhruvikdonga.github.io/"
+  url = "https://dhruvik.cc/"
 [[params.social]]
   name = "Email me"
   icon = "fa fa-envelope fa-2x"

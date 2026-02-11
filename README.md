@@ -26,7 +26,7 @@ I'm Dhruvik, a passionate Software Engineer with a focus on building real-time s
 ## 📫 Let's Connect
 
 - LinkedIn: [Dhruvik Donga](https://www.linkedin.com/in/dhruvik-donga-9363a0172/)
-- Portfolio: [Portfolio](https://dhruvikdonga.github.io/)
+- Portfolio: [Portfolio](https://dhruvik.cc/)
 
 Feel free to explore my repositories, and don't hesitate to reach out for collaboration or just a friendly chat! 🌟
 

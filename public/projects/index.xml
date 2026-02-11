@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Projects on Dhruvik Donga</title>
-    <link>https://dhruvikdonga.github.io/projects/</link>
+    <link>https://dhruvik.cc/projects/</link>
     <description>Recent content in Projects on Dhruvik Donga</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 25 Dec 2023 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://dhruvikdonga.github.io/projects/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://dhruvik.cc/projects/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>SimplySocket</title>
-      <link>https://dhruvikdonga.github.io/projects/simplysocket/</link>
+      <link>https://dhruvik.cc/projects/simplysocket/</link>
       <pubDate>Mon, 25 Dec 2023 00:00:00 +0000</pubDate>
-      <guid>https://dhruvikdonga.github.io/projects/simplysocket/</guid>
+      <guid>https://dhruvik.cc/projects/simplysocket/</guid>
       <description>Golang WebSocket Package for Real-time Messaging in Words Battle Game&#xA;This open-source Golang package leverages the power of Gorilla WebSocket to facilitate seamless communication within a Words Battle Game. Serving as a comprehensive wrapper, it efficiently manages clients, rooms, and messages. The package is designed to handle dynamic events, such as the addition or removal of clients from rooms, ensuring a smooth and interactive gaming experience. Dive into the codebase to explore its robust capabilities and enhance your real-time messaging infrastructure.</description>
     </item>
     <item>
       <title>Mini Word Games</title>
-      <link>https://dhruvikdonga.github.io/projects/miniwordgames/</link>
+      <link>https://dhruvik.cc/projects/miniwordgames/</link>
       <pubDate>Mon, 23 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>https://dhruvikdonga.github.io/projects/miniwordgames/</guid>
+      <guid>https://dhruvik.cc/projects/miniwordgames/</guid>
       <description>MiniWordGames is an engaging multiplayer word game that combines the thrill of real-time battles with the challenge of word creation. This project utilizes Golang for the backend server, Vue.js for the frontend application, WebSocket for real-time communication, and Docker for easy deployment. The game is hosted under the domain miniwordgames.com.&#xA;Tech Stack&#xD;Link to heading&#xD;Features&#xD;Link to heading&#xD;Real-time Battles: Challenge your friends or random opponents to fast-paced word battles.</description>
     </item>
   </channel>

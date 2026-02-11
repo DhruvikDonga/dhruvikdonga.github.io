@@ -17,7 +17,7 @@ As the pages of 2023 turn, let's go through a series of events—coding escapade
 
 ## **1. [Miniwordgames.com](http://miniwordgames.com) Launch: 🚀**
 Embarking on a coding journey, the dilemma of "what to build" led to the birth of **miniwordgames.com**. This multiplayer web game, fueled by **Golang, Vue.js, Docker, and AWS**, made waves on Reddit with **50+ upvotes and 20 GitHub stars**. Beyond the code, a sleek websockets wrapper enhanced the streaming experience, marking a tech triumph.  
-{{< centerimage src="http://dhruvikdonga.github.io/images/with-friend.gif" alt="Coding and Gaming" >}}
+{{< centerimage src="http://dhruvik.cc/images/with-friend.gif" alt="Coding and Gaming" >}}
 
 
 

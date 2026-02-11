@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Dhruvik Donga</title>
-    <link>https://dhruvikdonga.github.io/posts/</link>
+    <link>https://dhruvik.cc/posts/</link>
     <description>Recent content in Posts on Dhruvik Donga</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 31 Dec 2023 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://dhruvikdonga.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://dhruvik.cc/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>2023 Wrap up 🌈</title>
-      <link>https://dhruvikdonga.github.io/posts/2023-wrap-up/</link>
+      <link>https://dhruvik.cc/posts/2023-wrap-up/</link>
       <pubDate>Sun, 31 Dec 2023 00:00:00 +0000</pubDate>
-      <guid>https://dhruvikdonga.github.io/posts/2023-wrap-up/</guid>
+      <guid>https://dhruvik.cc/posts/2023-wrap-up/</guid>
       <description>2023 Wrap Up: A Journey of Code, Beaches, and Resilience 🚀🏖️&#xD;Link to heading&#xD;As the pages of 2023 turn, let&amp;rsquo;s go through a series of events—coding escapades, sun-soaked beaches, and the quiet battles fought behind the scenes. Inspired by the wrap-ups from Spotify, YouTube Music, Reddit, and more, let&amp;rsquo;s delve into the major events that shaped 2023.&#xA;1. Miniwordgames.com Launch: 🚀&#xD;Link to heading&#xD;Embarking on a coding journey, the dilemma of &amp;ldquo;what to build&amp;rdquo; led to the birth of miniwordgames.</description>
     </item>
   </channel>
