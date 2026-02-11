@@ -11,7 +11,7 @@ A timeline of my journey across domains, technologies, and impact-driven roles t
 ---
 
 ## <img src="https://avatars.githubusercontent.com/u/162454124?s=200&v=4" width="36" style="vertical-align: middle; margin-right: 10px;"> **Infocusp Innovations — Cusp Money**
-*April 2025 — Present*
+![Date](https://img.shields.io/badge/April%202025-Present-green?style=for-the-badge)
 
 > [Cusp Money](https://cusp.money) is a family wealth management consumer product delivered through mobile applications. It is a product venture by [Infocusp Innovations](https://infocusp.com)  
 
@@ -21,7 +21,7 @@ A timeline of my journey across domains, technologies, and impact-driven roles t
 
 ---
 ## <img src="https://avatars.githubusercontent.com/u/86930792?s=200&v=4" width="36" style="vertical-align: middle; margin-right: 10px;"> **Middleware Labs (YC W23)**
-*January 2024 — March 2025* 
+![Date](https://img.shields.io/badge/January%202024-March%202025-blue?style=for-the-badge)
 
 > [Middleware Labs](https://middleware.io) is a Y Combinator–backed startup based in San Francisco, focused on cloud monitoring and observability solutions.
 
@@ -33,7 +33,7 @@ A timeline of my journey across domains, technologies, and impact-driven roles t
 ---
 
 ## <img src="https://media.licdn.com/dms/image/v2/D560BAQHGkV_QITNLpQ/company-logo_200_200/company-logo_200_200/0/1715962804840/sevone_inc_logo?e=2147483647&v=beta&t=PvT1fPQ7nwh9RY8k0-CO1VyLzRdQevCQgAvgNjiNg04" width="36" style="vertical-align: middle; margin-right: 10px;"> **Jeavio — SevOne (IBM)**
-*May 2022 — January 2024*
+![Date](https://img.shields.io/badge/May%202022-January%202024-blue?style=for-the-badge)
 
 > [SevOne](https://www.ibm.com/products/sevone) is an enterprise network monitoring solution aquired by IBM. [Jeavio](https://jeavio.com) works on this product.
 
