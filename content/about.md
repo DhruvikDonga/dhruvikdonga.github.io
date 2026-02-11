@@ -1,6 +1,6 @@
 +++
 title = "👤 About"
-description = "Dhruvik's about page"
+description = "An overview of my engineering philosophy, technical interests, and the personal journey behind my work."
 date = "2023-12-25"
 aliases = ["about-us", "about-dhruvik", "contact"]
 author = "Dhruvik Donga"

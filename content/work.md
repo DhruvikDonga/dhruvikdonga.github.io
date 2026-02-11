@@ -1,6 +1,6 @@
 +++
 title = "💼 Work"
-description = "Dhruvik's work experience page"
+description = "A timeline of my journey across domains, technologies, and impact-driven roles throughout 4 years of professional career."
 date = "2023-12-25"
 aliases = ["work", "job", "work-experience"]
 author = "Dhruvik Donga"

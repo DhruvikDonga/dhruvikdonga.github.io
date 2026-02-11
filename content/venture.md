@@ -1,6 +1,6 @@
 +++
 title = "🚀 Venture"
-description = "Dhruvik's venture page"
+description = "A showcase of scalable systems and meaningful products built from my experience across domains."
 date = "2023-12-25"
 aliases = ["venture", "buisness", "saas"]
 author = "Dhruvik Donga"
