@@ -77,24 +77,25 @@ style = "github-dark"
 
 # Menu links
 [[menu.main]]
-  name = "👤 About"
-  icon = "fa fa-user-astronaut"
+  name = "About"
+  pre = "person"
   weight = 1
   url = "about/"
 [[menu.main]]
-  name = "💼 Work"
-  icon = "fa fa-briefcase"
+  name = "Work"
+  pre = "business_center"
   weight = 1
   url = "work/"
 [[menu.main]]
-  name = "🚀 Venture"
-  icon = "fa fa-rocket"
+  name = "Venture"
+  pre = "rocket_launch"
   weight = 1
   url = "venture/"
 [[menu.main]]
-  name = "🌱 Open Source"
+  name = "Open Source"
   weight = 2
   url  = "projects/"
+  pre = "terminal"
 
 [markup.goldmark.renderer]
   unsafe = true
