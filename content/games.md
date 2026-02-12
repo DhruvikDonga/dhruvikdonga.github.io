@@ -13,101 +13,52 @@ author = "Dhruvik Donga"
 Engaging in logical puzzles neuroplasticity, essentially "freshening" your brain cells by strengthening the synaptic connections used for pattern recognition.
 {{< /notice >}}
 
-## Nonogram
----
 <style>
     :root {
-        /* --bg-color: #0d1117; */
         --text-color: #c9d1d9;
-        /* --border-color: #30363d; */
         --cell-bg: #2f4f4f;
         --cell-filled: #1f6feb;
         --cell-crossed: #8b949e;
+        --cell-revealed: #161b22;
+        --cell-mine: #f85149;
         --hover-bg: #21262d;
-        --accent-color: #58a6ff;
         --success-color: #238636;
         --btn-bg: #21262d;
         --btn-border: #363b42;
+        --border-color: #30363d;
     }
-    .nonogram-wrapper {
-        width: 100%;
-        color: var(--text-color);
-        background-color: var(--bg-color);
-        padding: 20px 0;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    }
-    .puzzle-container {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        width: 100%;
-    }
-    .controls, .tools, .timer-container {
-        margin-bottom: 1.5rem;
-        display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
-    }
-    .game-btn {
-        background-color: var(--btn-bg);
-        color: var(--text-color);
-        border: 1px solid var(--btn-border);
-        padding: 5px 16px;
-        cursor: pointer;
-        border-radius: 6px;
-        font-size: 14px;
-        font-weight: 500;
-        transition: 0.2s;
-    }
+
+    /* Shared Component Styles */
+    .game-section { width: 100%; margin-bottom: 3rem; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+    .controls, .tools, .timer-container { margin-bottom: 1rem; display: flex; gap: 8px; flex-wrap: wrap; }
+    .game-btn { background-color: var(--btn-bg); color: var(--text-color); border: 1px solid var(--btn-border); padding: 5px 16px; cursor: pointer; border-radius: 6px; font-size: 14px; font-weight: 500; transition: 0.2s; }
     .game-btn:hover { background-color: #30363d; border-color: #8b949e; }
-    .game-btn.active { background-color: #1f6feb; color: #ffffff; border-color: rgba(27, 31, 36, 0.15); }
-    .game-container {
-        display: grid;
-        gap: 2px;
-        background-color: var(--border-color);
-        border: 1px solid var(--border-color);
-        padding: 2px;
-        border-radius: 4px;
-        width: max-content;
-        line-height:0;
-    }
-    .header-cell {
-        background-color: var(--bg-color);
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        align-items: center;
-        padding: 4px;
-        font-size: 12px;
-        font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, monospace;
-        color: #8b949e;
-        line-height: 1.2; 
-        /* Ensure headers don't expand the grid column width beyond the cell size */
-        min-width: 30px;
-    }
-    .header-cell.satisfied { color: var(--success-color); }
-    .row-header { 
-        flex-direction: row; 
-        justify-content: flex-end; 
-        padding-right: 8px; 
-        min-height: 30px;
-    }
-    .cell {
-        background-color: var(--cell-bg);
-        cursor: pointer;
-        width: 30px;
-        height: 30px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        user-select: none;
-    }
-    .cell:hover { background-color: var(--hover-bg); }
-    .cell.filled { background-color: var(--cell-filled); }
-    .cell.crossed::after { content: "×"; color: var(--cell-crossed); font-size: 1.5rem; }
+    .game-btn.active { background-color: #1f6feb; color: #ffffff; }
     .timer { font-size: 2rem; font-family: ui-monospace, SFMono-Regular, monospace; }
     .seed-info { font-size: 12px; color: #8b949e; margin-top: 5px; }
+
+    /* Nonogram Specific */
+    .n-grid { display: grid; gap: 2px; background-color: var(--border-color); border: 1px solid var(--border-color); padding: 2px; border-radius: 4px; width: max-content; line-height: 0; }
+    .n-header { background-color: #0d1117; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; padding: 4px; font-size: 12px; font-family: ui-monospace, monospace; color: #8b949e; line-height: 1.2; min-width: 30px; }
+    .n-header.satisfied { color: var(--success-color); }
+    .n-row-h { flex-direction: row; justify-content: flex-end; padding-right: 8px; min-height: 30px; }
+    .n-cell { background-color: var(--cell-bg); cursor: pointer; width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; user-select: none; transition: background-color 0.4s ease; }
+    .n-cell.filled { background-color: var(--cell-filled); }
+    .n-cell.crossed::after { content: "×"; color: var(--cell-crossed); font-size: 1.5rem; }
+    .victory-animation .n-cell.filled { background-color: var(--success-color) !important; }
+
+    /* Minesweeper Specific */
+    .m-grid { display: grid; gap: 2px; background-color: var(--border-color); border: 1px solid var(--border-color); padding: 2px; border-radius: 4px; width: max-content; line-height: 0; }
+    .m-cell { background-color: var(--cell-bg); cursor: pointer; width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; user-select: none; font-family: ui-monospace, monospace; font-weight: bold; font-size: 14px; line-height: 1; }
+    .m-cell.revealed { background-color: var(--cell-revealed); cursor: default; }
+    .m-cell.mine { background-color: var(--cell-mine); }
+    .m-cell.flagged::after { content: "🚩"; font-size: 12px; }
+    .num-1 { color: #58a6ff; } .num-2 { color: #3fb950; } .num-3 { color: #f85149; }
+    
 </style>
+
+## Nonogram
+---
 
 <div class="nonogram-wrapper">
     <div class="puzzle-container">
@@ -129,141 +80,187 @@ Engaging in logical puzzles neuroplasticity, essentially "freshening" your brain
     </div>
 </div>
 
+
+## Minesweeper
+---
+<div class="game-section" id="mines-wrapper">
+    <div class="controls">
+        <button class="game-btn m-size-btn" id="m-btn-8" onclick="startMines(8, 10)">Easy (8x8)</button>
+        <button class="game-btn m-size-btn" id="m-btn-12" onclick="startMines(12, 20)">Medium (12x12)</button>
+    </div>
+    <div class="timer-container">
+        <div id="m-timer" class="timer">00:00</div>
+        <div id="m-seed" class="seed-info"></div>
+    </div>
+    <div id="m-board" class="m-grid"></div>
+    <div id="m-status" style="font-weight: bold; margin-top: 1rem;"></div>
+</div>
+
 <script>
     //Linear Congruential Generator (LCG).
     class SeededRNG {
         constructor(seed) {
-            this.m = 0x80000000;
-            this.a = 1103515245;
-            this.c = 12345;
+            this.m = 0x80000000; this.a = 1103515245; this.c = 12345;
             this.state = seed ? seed : Math.floor(Math.random() * (this.m - 1));
         }
         nextInt() { this.state = (this.a * this.state + this.c) % this.m; return this.state; }
         nextFloat() { return this.nextInt() / (this.m - 1); }
     }
-    let currentSize = 5, solution = [], playerGrid = [], currentSeed = 0, timerInterval, startTime, currentTool = 0;
-    let gameStarted = false; // Flag to track if the first click has happened
-    function formatTime(seconds) {
-        const m = Math.floor(seconds / 60).toString().padStart(2, '0');
-        const s = (seconds % 60).toString().padStart(2, '0');
-        return m + ":" + s;
-    }
-    function startTimer() {
-        if (timerInterval) clearInterval(timerInterval);
-        startTime = Date.now();
-        timerInterval = setInterval(() => {
-            const elapsed = Math.floor((Date.now() - startTime) / 1000);
-            document.getElementById('timer').textContent = formatTime(elapsed);
-        }, 1000);
-    }
-    function stopTimer() { 
-        clearInterval(timerInterval);
-        timerInterval = null;
-    }
-    function setTool(tool) {
-        currentTool = tool;
-        document.getElementById('tool-fill').classList.toggle('active', tool === 0);
-        document.getElementById('tool-cross').classList.toggle('active', tool === 2);
-    }
-    function calculateHints(line) {
-        let hints = [], count = 0;
-        for (let cell of line) {
-            if (cell) count++;
-            else if (count > 0) { hints.push(count); count = 0; }
-        }
-        if (count > 0) hints.push(count);
-        if (hints.length === 0) hints.push(0);
-        return hints;
-    }
-    function startGame(size) {
-        currentSize = size;
-        gameStarted = false; // Reset start flag
-        stopTimer(); // Ensure timer is stopped on new game
-        setTool(0);
-        currentSeed = Date.now();
-        const rng = new SeededRNG(currentSeed);
-        document.querySelectorAll('.controls .game-btn').forEach(btn => btn.classList.remove('active'));
-        document.getElementById('btn-' + size).classList.add('active');
-        document.getElementById('seed-display').textContent = "Seed: " + currentSeed + " (" + size + "x" + size + ")";
-        document.getElementById('status-message').textContent = '';
-        document.getElementById('timer').textContent = "00:00";
-        solution = []; playerGrid = [];
-        for (let r = 0; r < size; r++) {
-            let row = [], pRow = [];
-            for (let c = 0; c < size; c++) {
-                row.push(rng.nextFloat() > 0.5);
-                pRow.push(0);
-            }
-            solution.push(row);
-            playerGrid.push(pRow);
-        }
-        if (!solution.some(row => row.some(cell => cell))) { solution[0][0] = true; }
-        renderBoard();
-    }
-    function renderBoard() {
-        const container = document.getElementById('game-board');
-        container.innerHTML = '';
-        container.style.gridTemplateColumns = "auto repeat(" + currentSize + ", 1fr)";
-        const corner = document.createElement('div');
-        corner.className = 'header-cell';
-        container.appendChild(corner);
-        for (let c = 0; c < currentSize; c++) {
-            const hints = calculateHints(solution.map(row => row[c]));
-            const playerCol = playerGrid.map(row => row[c] === 1);
-            const isSatisfied = JSON.stringify(hints) === JSON.stringify(calculateHints(playerCol));
-            const header = document.createElement('div');
-            header.className = 'header-cell' + (isSatisfied ? ' satisfied' : '');
-            header.innerHTML = hints.join('<br>');
-            container.appendChild(header);
-        }
-        for (let r = 0; r < currentSize; r++) {
-            const hints = calculateHints(solution[r]);
-            const playerRow = playerGrid[r].map(cell => cell === 1);
-            const isSatisfied = JSON.stringify(hints) === JSON.stringify(calculateHints(playerRow));
-            const header = document.createElement('div');
-            header.className = 'header-cell row-header' + (isSatisfied ? ' satisfied' : '');
-            header.textContent = hints.join(' ');
-            container.appendChild(header);
-            for (let c = 0; c < currentSize; c++) {
-                const cell = document.createElement('div');
-                cell.className = 'cell';
-                if (playerGrid[r][c] === 1) cell.classList.add('filled');
-                if (playerGrid[r][c] === 2) cell.classList.add('crossed');
-                cell.onmousedown = (e) => {
-                    if (e.button === 2) handleInput(r, c, 2);
-                    else handleInput(r, c, currentTool);
-                };
-                cell.oncontextmenu = (e) => e.preventDefault();
-                container.appendChild(cell);
-            }
-        }
-    }
-    function handleInput(r, c, tool) {
-        if (document.getElementById('status-message').textContent) return;
+
+    // --- NONOGRAM LOGIC ---
+    let nSize, nSol, nPlayer, nSeed, nTimer, nStartTime, nTool = 0, nStarted = false;
+
+    function startNonogram(size) {
+        nSize = size; nStarted = false; clearInterval(nTimer);
+        document.getElementById('n-timer').textContent = "00:00";
+        document.getElementById('n-status').textContent = "";
+        document.getElementById('nonogram-wrapper').classList.remove('victory-animation');
+        nSeed = Date.now();
+        document.getElementById('n-seed').textContent = "Seed: " + nSeed;
+        const rng = new SeededRNG(nSeed);
         
-        // Start timer on the very first interaction
-        if (!gameStarted) {
-            gameStarted = true;
-            startTimer();
+        document.querySelectorAll('.n-size-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('n-btn-'+size).classList.add('active');
+
+        nSol = Array(size).fill().map(() => Array(size).fill().map(() => rng.nextFloat() > 0.5));
+        nPlayer = Array(size).fill().map(() => Array(size).fill(0));
+        renderNBoard();
+    }
+
+    function renderNBoard() {
+        const board = document.getElementById('n-board');
+        board.style.gridTemplateColumns = `auto repeat(${nSize}, 30px)`;
+        board.innerHTML = '';
+        const corner = document.createElement('div'); corner.className = 'n-header'; board.appendChild(corner);
+
+        const calcHints = (line) => {
+            let h = [], c = 0;
+            line.forEach(v => { if(v) c++; else if(c>0){ h.push(c); c=0; } });
+            if(c>0) h.push(c); return h.length ? h : [0];
+        };
+
+        for(let c=0; c<nSize; c++) {
+            const h = calcHints(nSol.map(r => r[c]));
+            const sat = JSON.stringify(h) === JSON.stringify(calcHints(nPlayer.map(r => r[c] === 1)));
+            const div = document.createElement('div'); div.className = 'n-header' + (sat?' satisfied':'');
+            div.innerHTML = h.join('<br>'); board.appendChild(div);
         }
 
-        const current = playerGrid[r][c];
-        const target = (tool === 0) ? 1 : 2;
-        playerGrid[r][c] = (current === target) ? 0 : target;
-        renderBoard();
-        checkWin();
-    }
-    function checkWin() {
-        let win = true;
-        for (let r = 0; r < currentSize; r++) {
-            for (let c = 0; c < currentSize; c++) {
-                if (solution[r][c] !== (playerGrid[r][c] === 1)) win = false;
+        for(let r=0; r<nSize; r++) {
+            const h = calcHints(nSol[r]);
+            const sat = JSON.stringify(h) === JSON.stringify(calcHints(nPlayer[r].map(v => v===1)));
+            const head = document.createElement('div'); head.className = 'n-header n-row-h' + (sat?' satisfied':'');
+            head.textContent = h.join(' '); board.appendChild(head);
+
+            for(let c=0; c<nSize; c++) {
+                const cell = document.createElement('div'); cell.className = 'n-cell';
+                if(nPlayer[r][c]===1) cell.classList.add('filled');
+                if(nPlayer[r][c]===2) cell.classList.add('crossed');
+                cell.onmousedown = (e) => handleNInput(r, c, e.button===2?2:nTool);
+                cell.oncontextmenu = e => e.preventDefault();
+                board.appendChild(cell);
             }
         }
-        if (win) {
-            document.getElementById('status-message').textContent = 'Puzzle Solved!🎉';
-            stopTimer();
+    }
+
+    function handleNInput(r, c, tool) {
+        if(document.getElementById('n-status').textContent) return;
+        if(!nStarted) { nStarted = true; nStartTime = Date.now(); nTimer = setInterval(() => {
+            let s = Math.floor((Date.now()-nStartTime)/1000);
+            document.getElementById('n-timer').textContent = Math.floor(s/60).toString().padStart(2,'0')+":"+(s%60).toString().padStart(2,'0');
+        }, 1000); }
+        nPlayer[r][c] = (nPlayer[r][c] === (tool===0?1:2)) ? 0 : (tool===0?1:2);
+        renderNBoard();
+        if(JSON.stringify(nSol) === JSON.stringify(nPlayer.map(row => row.map(v => v===1)))) {
+            document.getElementById('n-status').textContent = "Puzzle Solved!";
+            document.getElementById('nonogram-wrapper').classList.add('victory-animation');
+            clearInterval(nTimer);
         }
     }
-    startGame(5);
+
+    function setNTool(t) { nTool = t; document.getElementById('n-tool-fill').classList.toggle('active', t===0); document.getElementById('n-tool-cross').classList.toggle('active', t===2); }
+
+    // --- MINESWEEPER LOGIC ---
+    let mSize, mGrid, mRev, mFlag, mTimer, mStart, mAct = false, mOver = false;
+
+    function startMines(size, mines) {
+        mSize = size; mOver = false; mAct = false; clearInterval(mTimer);
+        document.getElementById('m-timer').textContent = "00:00";
+        document.getElementById('m-status').textContent = "";
+        let seed = Date.now();
+        document.getElementById('m-seed').textContent = "Seed: " + seed;
+        const rng = new SeededRNG(seed);
+
+        document.querySelectorAll('.m-size-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('m-btn-'+size).classList.add('active');
+
+        mGrid = Array(size).fill().map(() => Array(size).fill(0));
+        mRev = Array(size).fill().map(() => Array(size).fill(false));
+        mFlag = Array(size).fill().map(() => Array(size).fill(false));
+
+        let p = 0; while(p < mines) {
+            let r = Math.floor(rng.nextFloat()*size), c = Math.floor(rng.nextFloat()*size);
+            if(mGrid[r][c] !== 'M') { mGrid[r][c] = 'M'; p++; }
+        }
+
+        for(let r=0; r<size; r++) {
+            for(let c=0; c<size; c++) {
+                if(mGrid[r][c] === 'M') continue;
+                let count = 0;
+                for(let i=-1; i<=1; i++) for(let j=-1; j<=1; j++) {
+                    if(r+i>=0 && r+i<size && c+j>=0 && c+j<size && mGrid[r+i][c+j]==='M') count++;
+                }
+                mGrid[r][c] = count;
+            }
+        }
+        renderMBoard();
+    }
+
+    function renderMBoard() {
+        const board = document.getElementById('m-board');
+        board.style.gridTemplateColumns = `repeat(${mSize}, 30px)`;
+        board.innerHTML = '';
+        for(let r=0; r<mSize; r++) for(let c=0; c<mSize; c++) {
+            const cell = document.createElement('div'); cell.className = 'm-cell';
+            if(mRev[r][c]) {
+                cell.classList.add('revealed');
+                if(mGrid[r][c]==='M') { cell.classList.add('mine'); cell.textContent = '💣'; }
+                else if(mGrid[r][c]>0) { cell.textContent = mGrid[r][c]; cell.classList.add('num-'+mGrid[r][c]); }
+            } else if(mFlag[r][c]) cell.classList.add('flagged');
+            cell.onmousedown = (e) => {
+                if(mOver) return;
+                if(!mAct) { mAct = true; mStart = Date.now(); mTimer = setInterval(() => {
+                    let s = Math.floor((Date.now()-mStart)/1000);
+                    document.getElementById('m-timer').textContent = Math.floor(s/60).toString().padStart(2,'0')+":"+(s%60).toString().padStart(2,'0');
+                }, 1000); }
+                if(e.button===2) { mFlag[r][c] = !mFlag[r][c]; renderMBoard(); }
+                else revealM(r, c);
+            };
+            cell.oncontextmenu = e => e.preventDefault();
+            board.appendChild(cell);
+        }
+    }
+
+    function revealM(r, c) {
+        if(mRev[r][c] || mFlag[r][c]) return;
+        mRev[r][c] = true;
+        if(mGrid[r][c] === 'M') { 
+            mOver = true; clearInterval(mTimer); document.getElementById('m-status').textContent = "GAME OVER";
+            document.getElementById('m-status').style.color = "var(--cell-mine)";
+            for(let ri=0; ri<mSize; ri++) for(let ci=0; ci<mSize; ci++) if(mGrid[ri][ci]==='M') mRev[ri][ci]=true;
+        } else if(mGrid[r][c] === 0) {
+            for(let i=-1; i<=1; i++) for(let j=-1; j<=1; j++) if(r+i>=0 && r+i<mSize && c+j>=0 && c+j<mSize) revealM(r+i, c+j);
+        }
+        renderMBoard();
+        let revC = 0; mRev.forEach(row => row.forEach(v => {if(v) revC++}));
+        let totalMines = (mSize === 8) ? 10 : 20;
+        if(revC === (mSize*mSize) - totalMines && !mOver) {
+            mOver = true; clearInterval(mTimer); document.getElementById('m-status').textContent = "VICTORY!";
+            document.getElementById('m-status').style.color = "var(--success-color)";
+        }
+    }
+
+    // Initialize both
+    startNonogram(5);
+    startMines(8, 10);
 </script>
