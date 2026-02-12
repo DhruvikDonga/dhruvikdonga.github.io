@@ -63,7 +63,28 @@ Do share with your friends and help them kill some time productively. 🚀
     .num-1 { color: #58a6ff; } .num-2 { color: #3fb950; } .num-3 { color: #f85149; }
 
     /*Idea swapper*/
-    .s-wrapper { width: 100%; max-width: 800px; }
+    #shuffle-wrapper.game-section { 
+        width: 100%; 
+        margin-bottom: 4rem; 
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center everything in the wrapper */
+    }
+
+    #shuffle-wrapper .s-level-text { 
+        font-size: 2.2rem; /* Large, bold level indicator */
+        font-weight: 800; 
+        color: var(--accent-color); 
+        margin-bottom: 10px;
+        font-family: ui-monospace, SFMono-Regular, monospace;
+    }
+
+    #shuffle-wrapper .controls { 
+        width: 100%;
+        display: flex;
+        justify-content: center; /* Center the Start Button */
+        margin-bottom: 2rem; 
+    }
     .s-container { 
         position: relative; 
         height: 180px; 
@@ -139,7 +160,7 @@ Do share with your friends and help them kill some time productively. 🚀
 ## Idea swapper
 ---
 
-<div class="game-section s-wrapper">
+<div class="game-section shuffle-wrapper">
     <div class="s-level-text" id="s-level-display">Level: 1/10</div>
     <div class="controls">
         <button class="game-btn" id="s-start-btn" onclick="triggerShuffle()">Start Level</button>
