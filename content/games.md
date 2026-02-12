@@ -6,6 +6,13 @@ aliases = ["games", "puzzle", "fun"]
 author = "Dhruvik Donga"
 +++
 
+> Logic is a muscle. These puzzles are the gym. Created for the moments between the code, to keep the mind sharp and the spirit curious.
+
+{{< notice tip >}}
+**Did you know?** 
+Engaging in logical puzzles neuroplasticity, essentially "freshening" your brain cells by strengthening the synaptic connections used for pattern recognition.
+{{< /notice >}}
+
 ## Nonogram
 ---
 <style>
