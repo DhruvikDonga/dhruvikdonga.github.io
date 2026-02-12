@@ -7,7 +7,7 @@ author = "Dhruvik Donga"
 +++
 
 ## Nonogram
-
+---
 <style>
     :root {
         /* --bg-color: #0d1117; */
