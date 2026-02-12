@@ -11,6 +11,9 @@ author = "Dhruvik Donga"
 {{< notice tip >}}
 **Did you know?** 
 Engaging in logical puzzles neuroplasticity, essentially "freshening" your brain cells by strengthening the synaptic connections used for pattern recognition.
+
+You can also double click on the size option to get a new game.
+Do share with your friends and help them kill some time.
 {{< /notice >}}
 
 <style>
