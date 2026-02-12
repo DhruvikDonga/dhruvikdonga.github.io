@@ -84,16 +84,16 @@ style = "github-dark"
 [[menu.main]]
   name = "Work"
   pre = "business_center"
-  weight = 1
+  weight = 2
   url = "work/"
 [[menu.main]]
   name = "Venture"
   pre = "rocket_launch"
-  weight = 1
+  weight = 3
   url = "venture/"
 [[menu.main]]
   name = "Open Source"
-  weight = 2
+  weight = 4
   url  = "projects/"
   pre = "terminal"
 
