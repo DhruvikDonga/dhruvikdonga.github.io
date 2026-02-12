@@ -40,7 +40,7 @@ Do share with your friends and help them kill some time productively. 🚀
     .controls, .tools, .timer-container { margin-bottom: 1rem; display: flex; gap: 8px; flex-wrap: wrap; }
     .game-btn { background-color: var(--btn-bg); color: var(--text-color); border: 1px solid var(--btn-border); padding: 5px 16px; cursor: pointer; border-radius: 6px; font-size: 14px; font-weight: 500; transition: 0.2s; }
     .game-btn:hover { background-color: #30363d; border-color: #8b949e; }
-    .game-btn.active { background-color: #1f6feb; color: #ffffff; }
+    .game-btn.active { background-color: #2f4f4f; color: #ffffff; }
     .timer { font-size: 2rem; font-family: ui-monospace, SFMono-Regular, monospace; }
     .seed-info { font-size: 12px; color: #8b949e; margin-top: 5px; }
 
