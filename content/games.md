@@ -11,7 +11,7 @@ author = "Dhruvik Donga"
 {{< notice tip >}}
 **Did you know?** Engaging in logical puzzles stimulates neuroplasticity—essentially "freshening" your 🧠 cells.
 
-We have got the classics: [Nonogram](#nonogram) and [Minesweeper](#minesweeper). 
+We have got the classics: [Nonogram](#nonogram) and [Minesweeper](#minesweeper).  
 *Pro-tip: You can click the size options to generate a fresh game anytime.*
 
 Do share with your friends and help them kill some time productively. 🚀
