@@ -18,6 +18,9 @@ Do share with your friends and help them kill some time productively. 🚀
 {{< /notice >}}
 
 <style>
+    html {
+        scroll-behavior: smooth;
+    }
     :root {
         --text-color: #c9d1d9;
         --cell-bg: #2f4f4f;
