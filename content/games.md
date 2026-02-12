@@ -130,6 +130,7 @@ Engaging in logical puzzles neuroplasticity, essentially "freshening" your brain
 </div>
 
 <script>
+    //Linear Congruential Generator (LCG).
     class SeededRNG {
         constructor(seed) {
             this.m = 0x80000000;
