@@ -11,8 +11,7 @@ author = "Dhruvik Donga"
 {{< notice tip >}}
 **Did you know?** Engaging in logical puzzles stimulates neuroplasticity—essentially "freshening" your 🧠 cells.
 
-We have got the classics: [Nonogram](#nonogram) and [Minesweeper](#minesweeper).  
-*Pro-tip: You can click the size options to generate a fresh game anytime.*
+We have got the classics: [Nonogram](#nonogram), [Minesweeper](#minesweeper) and the brain-teaser [Idea Shuffle](#idea-shuffle).    
 
 Do share with your friends and help them kill some time productively. 🚀
 {{< /notice >}}
@@ -119,7 +118,8 @@ Do share with your friends and help them kill some time productively. 🚀
 
 ## Nonogram
 ---
-💡 [How to solve a nonogram](https://www.youtube.com/watch?v=zisu0Qf4TAI)
+💡 [How to solve a nonogram](https://www.youtube.com/watch?v=zisu0Qf4TAI)  
+💡 You can click the size options to generate a fresh game anytime.
 
 <div class="game-section" id="nonogram-wrapper">
     <div class="controls">
@@ -142,7 +142,8 @@ Do share with your friends and help them kill some time productively. 🚀
 
 ## Minesweeper
 ---
-💡 [How to solve a minesweeper](https://www.youtube.com/shorts/Zil7a1hetQE)
+💡 [How to solve a minesweeper](https://www.youtube.com/shorts/Zil7a1hetQE)  
+💡 You can click the size options to generate a fresh game anytime.
 
 <div class="game-section" id="mines-wrapper">
     <div class="controls">
@@ -157,8 +158,9 @@ Do share with your friends and help them kill some time productively. 🚀
     <div id="m-status" style="font-weight: bold; margin-top: 1rem;"></div>
 </div>
 
-## Idea swapper
+## Idea Shuffle
 ---
+💡 Click on levels to start next game
 
 <div class="game-section shuffle-wrapper">
     <div class="s-level-text" id="s-level-display">LEVEL: 1/10</div>
