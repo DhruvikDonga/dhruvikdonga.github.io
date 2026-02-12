@@ -69,6 +69,7 @@ Engaging in logical puzzles neuroplasticity, essentially "freshening" your brain
         padding: 2px;
         border-radius: 4px;
         width: max-content;
+        line-height:0;
     }
     .header-cell {
         background-color: var(--bg-color);
@@ -80,9 +81,17 @@ Engaging in logical puzzles neuroplasticity, essentially "freshening" your brain
         font-size: 12px;
         font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, monospace;
         color: #8b949e;
+        line-height: 1.2; 
+        /* Ensure headers don't expand the grid column width beyond the cell size */
+        min-width: 30px;
     }
     .header-cell.satisfied { color: var(--success-color); }
-    .row-header { flex-direction: row; justify-content: flex-end; padding-right: 8px; }
+    .row-header { 
+        flex-direction: row; 
+        justify-content: flex-end; 
+        padding-right: 8px; 
+        min-height: 30px;
+    }
     .cell {
         background-color: var(--cell-bg);
         cursor: pointer;
