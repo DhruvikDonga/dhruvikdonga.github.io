@@ -60,24 +60,22 @@ Engaging in logical puzzles neuroplasticity, essentially "freshening" your brain
 ## Nonogram
 ---
 
-<div class="nonogram-wrapper">
-    <div class="puzzle-container">
-        <div class="controls">
-            <button class="game-btn" id="btn-5" onclick="startGame(5)">5x5</button>
-            <button class="game-btn" id="btn-8" onclick="startGame(8)">8x8</button>
-            <button class="game-btn" id="btn-10" onclick="startGame(10)">10x10</button>
-        </div>
-        <div class="tools">
-            <button class="game-btn active" id="tool-fill" onclick="setTool(0)">Fill ■</button>
-            <button class="game-btn" id="tool-cross" onclick="setTool(2)">Cross ×</button>
-        </div>
-        <div class="timer-container">
-            <div id="timer" class="timer">00:00</div>
-            <div id="seed-display" class="seed-info"></div>
-        </div>
-        <div id="game-board" class="game-container"></div>
-        <div id="status-message" style="color: var(--success-color); font-weight: bold; margin-top: 1.5rem; min-height: 1.5em;"></div>
+<div class="game-section" id="nonogram-wrapper">
+    <div class="controls">
+        <button class="game-btn n-size-btn" id="n-btn-5" onclick="startNonogram(5)">5x5</button>
+        <button class="game-btn n-size-btn" id="n-btn-8" onclick="startNonogram(8)">8x8</button>
+        <button class="game-btn n-size-btn" id="n-btn-10" onclick="startNonogram(10)">10x10</button>
     </div>
+    <div class="tools">
+        <button class="game-btn active" id="n-tool-fill" onclick="setNTool(0)">Fill ■</button>
+        <button class="game-btn" id="n-tool-cross" onclick="setNTool(2)">Cross ×</button>
+    </div>
+    <div class="timer-container">
+        <div id="n-timer" class="timer">00:00</div>
+        <div id="n-seed" class="seed-info"></div>
+    </div>
+    <div id="n-board" class="n-grid"></div>
+    <div id="n-status" style="color: var(--success-color); font-weight: bold; margin-top: 1rem;"></div>
 </div>
 
 
