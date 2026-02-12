@@ -161,13 +161,13 @@ Do share with your friends and help them kill some time productively. 🚀
 ---
 
 <div class="game-section shuffle-wrapper">
-    <div class="s-level-text" id="s-level-display">Level: 1/10</div>
+    <div class="s-level-text" id="s-level-display">LEVEL: 1/10</div>
     <div class="controls">
-        <button class="game-btn" id="s-start-btn" onclick="triggerShuffle()">Start Level</button>
+        <button class="game-btn" id="s-start-btn" style="padding: 10px 24px; font-size: 16px;" onclick="triggerShuffle()">Start Level</button>
     </div>
     <div class="s-container" id="s-box-area">
-        </div>
-    <div id="s-msg" style="margin-top: 1rem; font-weight: bold; min-height: 1.5em;"></div>
+    </div>
+    <div id="s-msg"></div>
 </div>
 
 <script>
