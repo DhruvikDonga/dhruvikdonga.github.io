@@ -61,6 +61,38 @@ Do share with your friends and help them kill some time productively. 🚀
     .m-cell.mine { background-color: var(--cell-mine); }
     .m-cell.flagged::after { content: "🚩"; font-size: 12px; }
     .num-1 { color: #58a6ff; } .num-2 { color: #3fb950; } .num-3 { color: #f85149; }
+
+    /*Idea swapper*/
+    .s-wrapper { width: 100%; max-width: 800px; }
+    .s-container { 
+        position: relative; 
+        height: 180px; 
+        width: 100%; 
+        border-bottom: 2px solid var(--border-color); /* The Focus Line */
+        display: flex; 
+        justify-content: space-around; 
+        align-items: flex-end; 
+        padding-bottom: 10px; 
+        margin-top: 20px;
+    }
+    .s-box { 
+        width: 60px; 
+        height: 60px; 
+        background-color: var(--cell-bg); 
+        border: 2px solid var(--border-color); 
+        border-radius: 8px; 
+        cursor: pointer; 
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        position: absolute; 
+        transition: left 0.3s ease-in-out, transform 0.3s, background-color 0.3s; 
+        bottom: 10px; 
+    }
+    .s-bulb { font-size: 30px; display: none; pointer-events: none; }
+    .s-box.has-bulb .s-bulb { display: block; }
+    .s-box.revealed { background-color: #161b22; transform: translateY(-30px); }
+    .s-level-text { font-size: 1.1rem; font-weight: bold; color: var(--accent-color); }
     
 </style>
 
@@ -102,6 +134,19 @@ Do share with your friends and help them kill some time productively. 🚀
     </div>
     <div id="m-board" class="m-grid"></div>
     <div id="m-status" style="font-weight: bold; margin-top: 1rem;"></div>
+</div>
+
+## Idea swapper
+---
+
+<div class="game-section s-wrapper">
+    <div class="s-level-text" id="s-level-display">Level: 1/10</div>
+    <div class="controls">
+        <button class="game-btn" id="s-start-btn" onclick="triggerShuffle()">Start Level</button>
+    </div>
+    <div class="s-container" id="s-box-area">
+        </div>
+    <div id="s-msg" style="margin-top: 1rem; font-weight: bold; min-height: 1.5em;"></div>
 </div>
 
 <script>
@@ -268,7 +313,107 @@ Do share with your friends and help them kill some time productively. 🚀
         }
     }
 
+    // --- IDEA SHUFFLE ---
+    let s_lvl = 1, s_elements = [], s_bulb_idx = 0, s_shuffling = false;
+
+    function triggerShuffle() {
+        if (s_shuffling) return;
+        const area = document.getElementById('s-box-area');
+        const msg = document.getElementById('s-msg');
+        const btn = document.getElementById('s-start-btn');
+        
+        msg.textContent = "Locating the idea...";
+        msg.style.color = "var(--text-color)";
+        btn.disabled = true;
+
+        // Difficulty Math
+        let count = 3 + Math.floor((s_lvl - 1) / 3); 
+        let swaps = 4 + (s_lvl * 2);
+        let ms = Math.max(150, 500 - (s_lvl * 35));
+
+        area.innerHTML = '';
+        s_elements = [];
+        const rng = new SeededRNG(Date.now());
+        s_bulb_idx = Math.floor(rng.nextFloat() * count);
+
+        for (let i = 0; i < count; i++) {
+            const b = document.createElement('div');
+            b.className = 's-box';
+            b.style.left = `${(100 / count) * i + (50 / count)}%`;
+            b.style.transform = 'translateX(-50%)';
+            if (i === s_bulb_idx) {
+                b.classList.add('has-bulb');
+                b.innerHTML = '<span class="s-bulb">💡</span>';
+            }
+            area.appendChild(b);
+            s_elements.push(b);
+        }
+
+        // 1. Reveal
+        setTimeout(() => {
+            s_elements[s_bulb_idx].classList.add('revealed');
+            setTimeout(() => {
+                s_elements[s_bulb_idx].classList.remove('revealed');
+                // 2. Shuffle Loop
+                runShuffle(swaps, ms, rng);
+            }, 800);
+        }, 400);
+    }
+
+    function runShuffle(total, speed, rng) {
+        s_shuffling = true;
+        let current = 0;
+        const loop = setInterval(() => {
+            if (current >= total) {
+                clearInterval(loop);
+                s_shuffling = false;
+                document.getElementById('s-msg').textContent = "Where is the idea?";
+                s_elements.forEach(box => {
+                    box.onclick = () => validateBox(box);
+                });
+                return;
+            }
+            let i1 = Math.floor(rng.nextFloat() * s_elements.length);
+            let i2 = Math.floor(rng.nextFloat() * s_elements.length);
+            while(i1 === i2) i2 = Math.floor(rng.nextFloat() * s_elements.length);
+
+            const p1 = s_elements[i1].style.left;
+            const p2 = s_elements[i2].style.left;
+            s_elements[i1].style.left = p2;
+            s_elements[i2].style.left = p1;
+
+            [s_elements[i1], s_elements[i2]] = [s_elements[i2], s_elements[i1]];
+            current++;
+        }, speed);
+    }
+
+    function validateBox(box) {
+        if (s_shuffling) return;
+        box.classList.add('revealed');
+        const msg = document.getElementById('s-msg');
+        
+        if (box.classList.contains('has-bulb')) {
+            msg.textContent = "State verified. Level Up!";
+            msg.style.color = "var(--success-color)";
+            setTimeout(() => {
+                if(s_lvl < 10) s_lvl++;
+                document.getElementById('s-level-display').textContent = `Level: ${s_lvl}/10`;
+                cleanShuffle();
+            }, 1200);
+        } else {
+            msg.textContent = "System mismatch. Resetting level...";
+            msg.style.color = "#f85149";
+            setTimeout(cleanShuffle, 1200);
+        }
+    }
+
+    function cleanShuffle() {
+        document.getElementById('s-start-btn').disabled = false;
+        document.getElementById('s-msg').textContent = "";
+        document.getElementById('s-box-area').innerHTML = '';
+    }
     // Initialize both
     startNonogram(5);
     startMines(8, 10);
+    triggerShuffle();
 </script>
