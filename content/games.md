@@ -262,8 +262,10 @@ Do share with your friends and help them kill some time productively. 🚀
     }
 
     function handleNInput(r, c, tool) {
+        // Stop if already solved
         if(document.getElementById('n-status').textContent !== "") return;
 
+        // Timer initialization
         if(!nStarted) { 
             nStarted = true; 
             nStartTime = Date.now(); 
@@ -275,7 +277,18 @@ Do share with your friends and help them kill some time productively. 🚀
         }
 
         const currentVal = nPlayer[r][c];
-        nPlayer[r][c] = (currentVal === tool) ? 0 : tool;
+        
+        // tool 1 is for Filled (Blue), tool 2 is for Cross (X)
+        // Adjusting the tool mapping to match your UI buttons (Fill=0, Cross=2)
+        let internalTool = (tool === 0) ? 1 : 2; 
+
+        if (currentVal === internalTool) {
+            // If already the same state, clear it
+            nPlayer[r][c] = 0;
+        } else {
+            // Otherwise, set it to the new tool (overwrite whatever was there)
+            nPlayer[r][c] = internalTool;
+        }
 
         renderNBoard();
         checkNWin();
@@ -305,7 +318,7 @@ Do share with your friends and help them kill some time productively. 🚀
         document.getElementById('n-tool-fill').classList.toggle('active', t===0); 
         document.getElementById('n-tool-cross').classList.toggle('active', t===2); 
     }
-    
+
     // --- MINESWEEPER LOGIC ---
     let mSize, mGrid, mRev, mFlag, mTimer, mStart, mAct = false, mOver = false;
 
