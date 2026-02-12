@@ -66,6 +66,7 @@ Do share with your friends and help them kill some time productively. 🚀
 
 ## Nonogram
 ---
+💡 [How to solve a nonogram](https://en.wikipedia.org/wiki/Nonogram#Solution_techniques)
 
 <div class="game-section" id="nonogram-wrapper">
     <div class="controls">
@@ -88,6 +89,8 @@ Do share with your friends and help them kill some time productively. 🚀
 
 ## Minesweeper
 ---
+💡 [How to solve a minesweeper](https://en.wikipedia.org/wiki/Minesweeper_(video_game)#Objective_and_strategy)
+
 <div class="game-section" id="mines-wrapper">
     <div class="controls">
         <button class="game-btn m-size-btn" id="m-btn-8" onclick="startMines(8, 10)">Easy (8x8)</button>
