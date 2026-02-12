@@ -326,7 +326,6 @@ Do share with your friends and help them kill some time productively. 🚀
         msg.style.color = "var(--text-color)";
         btn.disabled = true;
 
-        // Difficulty Math
         let count = 3 + Math.floor((s_lvl - 1) / 3); 
         let swaps = 4 + (s_lvl * 2);
         let ms = Math.max(150, 500 - (s_lvl * 35));
@@ -343,20 +342,26 @@ Do share with your friends and help them kill some time productively. 🚀
             b.style.transform = 'translateX(-50%)';
             if (i === s_bulb_idx) {
                 b.classList.add('has-bulb');
-                b.innerHTML = '<span class="s-bulb">💡</span>';
+                // The bulb starts hidden via CSS 'display: none' in the .s-bulb class
+                b.innerHTML = '<span class="s-bulb" id="active-bulb">💡</span>';
             }
             area.appendChild(b);
             s_elements.push(b);
         }
 
-        // 1. Reveal
+        // 1. Reveal Phase
         setTimeout(() => {
             s_elements[s_bulb_idx].classList.add('revealed');
+            const bulbElement = document.getElementById('active-bulb');
+            bulbElement.style.display = 'block'; // Show bulb
+            
             setTimeout(() => {
                 s_elements[s_bulb_idx].classList.remove('revealed');
-                // 2. Shuffle Loop
+                bulbElement.style.display = 'none'; // HIDE BULB BEFORE SHUFFLE
+                
+                // 2. Shuffle Phase
                 runShuffle(swaps, ms, rng);
-            }, 800);
+            }, 1000);
         }, 400);
     }
 
@@ -389,6 +394,11 @@ Do share with your friends and help them kill some time productively. 🚀
 
     function validateBox(box) {
         if (s_shuffling) return;
+        
+        // Show the bulb if it's in this box
+        const bulb = box.querySelector('.s-bulb');
+        if (bulb) bulb.style.display = 'block';
+        
         box.classList.add('revealed');
         const msg = document.getElementById('s-msg');
         
@@ -403,7 +413,15 @@ Do share with your friends and help them kill some time productively. 🚀
         } else {
             msg.textContent = "System mismatch. Resetting level...";
             msg.style.color = "#f85149";
-            setTimeout(cleanShuffle, 1200);
+            
+            // Also reveal where the bulb actually was so the user knows
+            const correctBox = s_elements.find(b => b.classList.contains('has-bulb'));
+            if (correctBox) {
+                correctBox.classList.add('revealed');
+                correctBox.querySelector('.s-bulb').style.display = 'block';
+            }
+            
+            setTimeout(cleanShuffle, 2000);
         }
     }
 
