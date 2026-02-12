@@ -9,11 +9,12 @@ author = "Dhruvik Donga"
 > Logic is a muscle. These puzzles are the gym. Created for the moments between the code, to keep the mind sharp and the spirit curious.
 
 {{< notice tip >}}
-**Did you know?** 
-Engaging in logical puzzles neuroplasticity, essentially "freshening" your brain cells by strengthening the synaptic connections used for pattern recognition.
+**Did you know?** Engaging in logical puzzles stimulates neuroplasticity—essentially "freshening" your 🧠 cells.
 
-You can also double click on the size option to get a new game.
-Do share with your friends and help them kill some time.
+We have got the classics: [Nonogram](#nonogram) and [Minesweeper](#minesweeper). 
+*Pro-tip: You can click the size options to generate a fresh game anytime.*
+
+Do share with your friends and help them kill some time productively. 🚀
 {{< /notice >}}
 
 <style>
