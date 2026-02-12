@@ -10,7 +10,7 @@ author = "Dhruvik Donga"
 
 <style>
     :root {
-        --bg-color: #001637;
+        --bg-color: #0d1117;
         --text-color: #c9d1d9;
         --border-color: #30363d;
         --cell-bg: #161b22;
