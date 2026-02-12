@@ -187,10 +187,13 @@ Do share with your friends and help them kill some time productively. 🚀
     let nSize, nSol, nPlayer, nSeed, nTimer, nStartTime, nTool = 0, nStarted = false;
 
     function startNonogram(size) {
-        nSize = size; nStarted = false; clearInterval(nTimer);
+        nSize = size; 
+        nStarted = false; 
+        clearInterval(nTimer);
         document.getElementById('n-timer').textContent = "00:00";
         document.getElementById('n-status').textContent = "";
         document.getElementById('nonogram-wrapper').classList.remove('victory-animation');
+        
         nSeed = Date.now();
         document.getElementById('n-seed').textContent = "Seed: " + nSeed;
         const rng = new SeededRNG(nSeed);
@@ -198,16 +201,22 @@ Do share with your friends and help them kill some time productively. 🚀
         document.querySelectorAll('.n-size-btn').forEach(b => b.classList.remove('active'));
         document.getElementById('n-btn-'+size).classList.add('active');
 
+        // Initialize board state
         nSol = Array(size).fill().map(() => Array(size).fill().map(() => rng.nextFloat() > 0.5));
         nPlayer = Array(size).fill().map(() => Array(size).fill(0));
+        
         renderNBoard();
     }
 
     function renderNBoard() {
         const board = document.getElementById('n-board');
-        board.style.gridTemplateColumns = `auto repeat(${nSize}, 30px)`;
+        // Absolute pixel sizing (30px) prevents the grid from collapsing on larger 8x8+ sizes
+        board.style.gridTemplateColumns = `max-content repeat(${nSize}, 30px)`;
         board.innerHTML = '';
-        const corner = document.createElement('div'); corner.className = 'n-header'; board.appendChild(corner);
+        
+        const corner = document.createElement('div'); 
+        corner.className = 'n-header'; 
+        board.appendChild(corner);
 
         const calcHints = (line) => {
             let h = [], c = 0;
@@ -215,24 +224,37 @@ Do share with your friends and help them kill some time productively. 🚀
             if(c>0) h.push(c); return h.length ? h : [0];
         };
 
+        // Column Headers
         for(let c=0; c<nSize; c++) {
             const h = calcHints(nSol.map(r => r[c]));
-            const sat = JSON.stringify(h) === JSON.stringify(calcHints(nPlayer.map(r => r[c] === 1)));
-            const div = document.createElement('div'); div.className = 'n-header' + (sat?' satisfied':'');
-            div.innerHTML = h.join('<br>'); board.appendChild(div);
+            const pCol = nPlayer.map(r => r[c] === 1);
+            const sat = JSON.stringify(h) === JSON.stringify(calcHints(pCol));
+            const div = document.createElement('div'); 
+            div.className = 'n-header' + (sat ? ' satisfied' : '');
+            div.innerHTML = h.join('<br>'); 
+            board.appendChild(div);
         }
 
+        // Row Headers & Cells
         for(let r=0; r<nSize; r++) {
             const h = calcHints(nSol[r]);
-            const sat = JSON.stringify(h) === JSON.stringify(calcHints(nPlayer[r].map(v => v===1)));
-            const head = document.createElement('div'); head.className = 'n-header n-row-h' + (sat?' satisfied':'');
-            head.textContent = h.join(' '); board.appendChild(head);
+            const pRow = nPlayer[r].map(v => v === 1);
+            const sat = JSON.stringify(h) === JSON.stringify(calcHints(pRow));
+            const head = document.createElement('div'); 
+            head.className = 'n-header n-row-h' + (sat ? ' satisfied' : '');
+            head.textContent = h.join(' '); 
+            board.appendChild(head);
 
             for(let c=0; c<nSize; c++) {
-                const cell = document.createElement('div'); cell.className = 'n-cell';
-                if(nPlayer[r][c]===1) cell.classList.add('filled');
-                if(nPlayer[r][c]===2) cell.classList.add('crossed');
-                cell.onmousedown = (e) => handleNInput(r, c, e.button===2?2:nTool);
+                const cell = document.createElement('div'); 
+                cell.className = 'n-cell';
+                if(nPlayer[r][c] === 1) cell.classList.add('filled');
+                if(nPlayer[r][c] === 2) cell.classList.add('crossed');
+                
+                cell.onmousedown = (e) => {
+                    e.preventDefault();
+                    handleNInput(r, c, e.button === 2 ? 2 : nTool);
+                };
                 cell.oncontextmenu = e => e.preventDefault();
                 board.appendChild(cell);
             }
@@ -240,22 +262,50 @@ Do share with your friends and help them kill some time productively. 🚀
     }
 
     function handleNInput(r, c, tool) {
-        if(document.getElementById('n-status').textContent) return;
-        if(!nStarted) { nStarted = true; nStartTime = Date.now(); nTimer = setInterval(() => {
-            let s = Math.floor((Date.now()-nStartTime)/1000);
-            document.getElementById('n-timer').textContent = Math.floor(s/60).toString().padStart(2,'0')+":"+(s%60).toString().padStart(2,'0');
-        }, 1000); }
-        nPlayer[r][c] = (nPlayer[r][c] === (tool===0?1:2)) ? 0 : (tool===0?1:2);
+        if(document.getElementById('n-status').textContent !== "") return;
+
+        if(!nStarted) { 
+            nStarted = true; 
+            nStartTime = Date.now(); 
+            nTimer = setInterval(() => {
+                let s = Math.floor((Date.now() - nStartTime) / 1000);
+                document.getElementById('n-timer').textContent = 
+                    Math.floor(s/60).toString().padStart(2,'0') + ":" + (s%60).toString().padStart(2,'0');
+            }, 1000); 
+        }
+
+        const currentVal = nPlayer[r][c];
+        nPlayer[r][c] = (currentVal === tool) ? 0 : tool;
+
         renderNBoard();
-        if(JSON.stringify(nSol) === JSON.stringify(nPlayer.map(row => row.map(v => v===1)))) {
+        checkNWin();
+    }
+
+    function checkNWin() {
+        let isWin = true;
+        for(let r=0; r<nSize; r++) {
+            for(let c=0; c<nSize; c++) {
+                if(nSol[r][c] !== (nPlayer[r][c] === 1)) {
+                    isWin = false;
+                    break;
+                }
+            }
+            if(!isWin) break;
+        }
+
+        if(isWin) {
             document.getElementById('n-status').textContent = "Puzzle Solved!";
             document.getElementById('nonogram-wrapper').classList.add('victory-animation');
             clearInterval(nTimer);
         }
     }
 
-    function setNTool(t) { nTool = t; document.getElementById('n-tool-fill').classList.toggle('active', t===0); document.getElementById('n-tool-cross').classList.toggle('active', t===2); }
-
+    function setNTool(t) { 
+        nTool = t; 
+        document.getElementById('n-tool-fill').classList.toggle('active', t===0); 
+        document.getElementById('n-tool-cross').classList.toggle('active', t===2); 
+    }
+    
     // --- MINESWEEPER LOGIC ---
     let mSize, mGrid, mRev, mFlag, mTimer, mStart, mAct = false, mOver = false;
 
