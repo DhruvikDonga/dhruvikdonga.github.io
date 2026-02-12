@@ -66,7 +66,7 @@ Do share with your friends and help them kill some time productively. 🚀
 
 ## Nonogram
 ---
-💡 [How to solve a nonogram](https://en.wikipedia.org/wiki/Nonogram#Solution_techniques)
+💡 [How to solve a nonogram](https://www.youtube.com/watch?v=zisu0Qf4TAI)
 
 <div class="game-section" id="nonogram-wrapper">
     <div class="controls">
@@ -89,7 +89,7 @@ Do share with your friends and help them kill some time productively. 🚀
 
 ## Minesweeper
 ---
-💡 [How to solve a minesweeper](https://en.wikipedia.org/wiki/Minesweeper_(video_game)#Objective_and_strategy)
+💡 [How to solve a minesweeper](https://www.youtube.com/shorts/Zil7a1hetQE)
 
 <div class="game-section" id="mines-wrapper">
     <div class="controls">
