@@ -132,20 +132,24 @@ Engaging in logical puzzles neuroplasticity, essentially "freshening" your brain
         nextFloat() { return this.nextInt() / (this.m - 1); }
     }
     let currentSize = 5, solution = [], playerGrid = [], currentSeed = 0, timerInterval, startTime, currentTool = 0;
+    let gameStarted = false; // Flag to track if the first click has happened
     function formatTime(seconds) {
         const m = Math.floor(seconds / 60).toString().padStart(2, '0');
         const s = (seconds % 60).toString().padStart(2, '0');
         return m + ":" + s;
     }
     function startTimer() {
-        clearInterval(timerInterval);
+        if (timerInterval) clearInterval(timerInterval);
         startTime = Date.now();
         timerInterval = setInterval(() => {
             const elapsed = Math.floor((Date.now() - startTime) / 1000);
             document.getElementById('timer').textContent = formatTime(elapsed);
         }, 1000);
     }
-    function stopTimer() { clearInterval(timerInterval); }
+    function stopTimer() { 
+        clearInterval(timerInterval);
+        timerInterval = null;
+    }
     function setTool(tool) {
         currentTool = tool;
         document.getElementById('tool-fill').classList.toggle('active', tool === 0);
@@ -163,6 +167,8 @@ Engaging in logical puzzles neuroplasticity, essentially "freshening" your brain
     }
     function startGame(size) {
         currentSize = size;
+        gameStarted = false; // Reset start flag
+        stopTimer(); // Ensure timer is stopped on new game
         setTool(0);
         currentSeed = Date.now();
         const rng = new SeededRNG(currentSeed);
@@ -171,7 +177,6 @@ Engaging in logical puzzles neuroplasticity, essentially "freshening" your brain
         document.getElementById('seed-display').textContent = "Seed: " + currentSeed + " (" + size + "x" + size + ")";
         document.getElementById('status-message').textContent = '';
         document.getElementById('timer').textContent = "00:00";
-        startTimer();
         solution = []; playerGrid = [];
         for (let r = 0; r < size; r++) {
             let row = [], pRow = [];
@@ -225,6 +230,13 @@ Engaging in logical puzzles neuroplasticity, essentially "freshening" your brain
     }
     function handleInput(r, c, tool) {
         if (document.getElementById('status-message').textContent) return;
+        
+        // Start timer on the very first interaction
+        if (!gameStarted) {
+            gameStarted = true;
+            startTimer();
+        }
+
         const current = playerGrid[r][c];
         const target = (tool === 0) ? 1 : 2;
         playerGrid[r][c] = (current === target) ? 0 : target;
