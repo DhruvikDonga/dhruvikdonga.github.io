@@ -107,21 +107,6 @@ Engaging in logical puzzles neuroplasticity, essentially "freshening" your brain
     .cell.crossed::after { content: "×"; color: var(--cell-crossed); font-size: 1.5rem; }
     .timer { font-size: 2rem; font-family: ui-monospace, SFMono-Regular, monospace; }
     .seed-info { font-size: 12px; color: #8b949e; margin-top: 5px; }
-    /* Success animation for the grid */
-    @keyframes victory-glow {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.02); filter: brightness(1.2); }
-        100% { transform: scale(1); filter: brightness(1); }
-    }
-
-    .victory-animation .cell.filled {
-        background-color: var(--success-color) !important;
-        transition: background-color 0.5s ease-in-out;
-    }
-
-    .victory-animation {
-        animation: victory-glow 0.6s ease-in-out 2;
-    }
 </style>
 
 <div class="nonogram-wrapper">
@@ -193,7 +178,6 @@ Engaging in logical puzzles neuroplasticity, essentially "freshening" your brain
         currentSize = size;
         gameStarted = false; // Reset start flag
         stopTimer(); // Ensure timer is stopped on new game
-        document.getElementById('game-board').classList.remove('victory-animation');
         setTool(0);
         currentSeed = Date.now();
         const rng = new SeededRNG(currentSeed);
@@ -276,9 +260,7 @@ Engaging in logical puzzles neuroplasticity, essentially "freshening" your brain
             }
         }
         if (win) {
-            document.getElementById('status-message').textContent = 'Puzzle Solved!';
-            // Add the animation class to the whole board
-            document.getElementById('game-board').classList.add('victory-animation');
+            document.getElementById('status-message').textContent = 'Puzzle Solved!🎉';
             stopTimer();
         }
     }
