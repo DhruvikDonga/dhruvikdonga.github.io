@@ -92,8 +92,12 @@ style = "github-dark"
   weight = 3
   url = "venture/"
 [[menu.main]]
-  name = "Open Source"
+  name = "Games"
   weight = 4
+  url = "games/"
+[[menu.main]]
+  name = "Open Source"
+  weight = 5
   url  = "projects/"
   pre = "terminal"
 
