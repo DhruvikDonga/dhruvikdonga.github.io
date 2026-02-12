@@ -277,36 +277,42 @@ Do share with your friends and help them kill some time productively. 🚀
         }
 
         const currentVal = nPlayer[r][c];
-        
-        // tool 1 is for Filled (Blue), tool 2 is for Cross (X)
-        // Adjusting the tool mapping to match your UI buttons (Fill=0, Cross=2)
-        let internalTool = (tool === 0) ? 1 : 2; 
+        // Ensure Fill=0 maps to state 1, and Cross=2 maps to state 2
+        let targetState = (tool === 0) ? 1 : 2; 
 
-        if (currentVal === internalTool) {
-            // If already the same state, clear it
-            nPlayer[r][c] = 0;
+        if (currentVal === targetState) {
+            nPlayer[r][c] = 0; // Toggle off
         } else {
-            // Otherwise, set it to the new tool (overwrite whatever was there)
-            nPlayer[r][c] = internalTool;
+            nPlayer[r][c] = targetState; // Toggle on / Overwrite
         }
 
         renderNBoard();
-        checkNWin();
+        
+        // Use a small timeout to ensure the DOM has rendered the latest satisfied classes
+        // before checking the final win condition
+        setTimeout(checkNWin, 10);
     }
 
     function checkNWin() {
-        let isWin = true;
+        // A Nonogram is solved when all hint headers have the 'satisfied' class.
+        // This is more reliable for 8x8+ boards than direct matrix comparison.
+        const allHeaders = document.querySelectorAll('.n-header:not(:first-child)');
+        const satisfiedHeaders = document.querySelectorAll('.n-header.satisfied');
+
+        // Matrix fallback check
+        let matrixMatch = true;
         for(let r=0; r<nSize; r++) {
             for(let c=0; c<nSize; c++) {
                 if(nSol[r][c] !== (nPlayer[r][c] === 1)) {
-                    isWin = false;
+                    matrixMatch = false;
                     break;
                 }
             }
-            if(!isWin) break;
+            if(!matrixMatch) break;
         }
 
-        if(isWin) {
+        // Win if either the matrix matches OR all hint headers are satisfied
+        if(matrixMatch || (allHeaders.length > 0 && allHeaders.length === satisfiedHeaders.length)) {
             document.getElementById('n-status').textContent = "Puzzle Solved!";
             document.getElementById('nonogram-wrapper').classList.add('victory-animation');
             clearInterval(nTimer);
