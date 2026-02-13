@@ -195,13 +195,13 @@ Do share with your friends and help them kill some time productively. 🚀
 
             // Update segment-specific stats
             if (!g.segments[size]) {
-                g.segments[size] = { count: 0, bestTime: formatTime(Infinity) };
+                g.segments[size] = { count: 0, bestTime: Infinity };
             }
             
             const s = g.segments[size];
             s.count++;
             if (timeInSeconds < s.bestTime) {
-                s.bestTime = formatTime(timeInSeconds);
+                s.bestTime = timeInSeconds;
             }
 
             localStorage.setItem('dhruvik_game_stats', JSON.stringify(stats));
@@ -223,7 +223,7 @@ Do share with your friends and help them kill some time productively. 🚀
             // Segment Specific Badges (e.g., 8x8, 10x10)
             Object.keys(g.segments).forEach(size => {
                 const s = g.segments[size];
-                const best = s.bestTime === Infinity ? 'N/A' : `${s.bestTime}s`;
+                const best = s.bestTime === Infinity ? 'N/A' : `${formatTime(s.bestTime)}s`;
 
                 // Badge for count in this segment
                 badgeHTML += `<img src="https://img.shields.io/badge/${size}x${size}_Played-${s.count}-green?style=flat-square" /> `;
