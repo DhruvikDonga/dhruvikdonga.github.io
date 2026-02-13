@@ -171,12 +171,6 @@ Do share with your friends and help them kill some time productively. 🚀
 
 <script>
     const StatsManager = {
-        formatTime(seconds) {
-            if (seconds === Infinity || isNaN(seconds)) return 'N/A';
-            const m = Math.floor(seconds / 60);
-            const s = seconds % 60;
-            return `${m}:${s.toString().padStart(2, '0')}`;
-        },
         // Save details to localStorage
         saveGame(gameName, size, timeInSeconds) {
             let stats = JSON.parse(localStorage.getItem('dhruvik_game_stats')) || {};
@@ -223,7 +217,8 @@ Do share with your friends and help them kill some time productively. 🚀
             // Segment Specific Badges (e.g., 8x8, 10x10)
             Object.keys(g.segments).forEach(size => {
                 const s = g.segments[size];
-                const best = s.bestTime === Infinity ? 'N/A' : `${formatTime(s.bestTime)}s`;
+                const timeFormat = formatTime(s.bestTime)
+                const best = s.bestTime === Infinity ? 'N/A' : `${timeFormat}s`;
 
                 // Badge for count in this segment
                 badgeHTML += `<img src="https://img.shields.io/badge/${size}x${size}_Played-${s.count}-green?style=flat-square" /> `;
@@ -232,6 +227,12 @@ Do share with your friends and help them kill some time productively. 🚀
             });
 
             container.innerHTML = badgeHTML;
+        },
+        formatTime(seconds) {
+            if (seconds === Infinity || isNaN(seconds)) return 'N/A';
+            const m = Math.floor(seconds / 60);
+            const s = seconds % 60;
+            return `${m}:${s.toString().padStart(2, '0')}`;
         }
     };
     //Linear Congruential Generator (LCG).
