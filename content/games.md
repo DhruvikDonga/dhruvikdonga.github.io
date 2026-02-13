@@ -319,17 +319,14 @@ Do share with your friends and help them kill some time productively. 🚀
         });
     }
     function toggleAnalytics() {
-        const section = document.getElementById('analytics-section');
+       const section = document.getElementById('analytics-section');
         const link = document.getElementById('view-analytics-link');
-        
+        if (!section || !link) return;
+
         if (section.style.display === 'none') {
             section.style.display = 'block';
             link.textContent = 'Hide Your Game Analytics';
-            
-            // Use a slight delay to allow the container to expand before Chart.js calculates size
-            setTimeout(() => {
-                renderHistoryChart();
-            }, 50);
+            setTimeout(() => { renderHistoryChart(); }, 50);
         } else {
             section.style.display = 'none';
             link.textContent = 'View Your Game Analytics';
@@ -899,6 +896,5 @@ Do share with your friends and help them kill some time productively. 🚀
     });
     // Global reference for refreshing
      window.updateChart = renderHistoryChart;
-});
 </script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
