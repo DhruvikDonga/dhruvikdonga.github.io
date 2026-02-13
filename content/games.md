@@ -546,7 +546,7 @@ Do share with your friends and help them kill some time productively. 🚀
 
         // Infinite loop protection: try generating a valid maze until solvable
         let attempts = 0;
-        while (attempts < 500-) {
+        while (attempts < 500) {
             let wallDensity = (size === 8) ? (0.35 + rng.nextFloat() * 0.1) : 0.30;
             pGrid = Array(size).fill().map(() => Array(size).fill(0));
             
