@@ -35,7 +35,7 @@ Do share with your friends and help them kill some time productively. 🚀
     <div style="height: 250px; width: 100%; background: #161b22; border-radius: 6px; padding: 10px; border: 1px solid #30363d;">
         <canvas id="historyChart"></canvas>
     </div>
-    <div id="funny-highlights" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 20px;">
+    <div id="funny-highlights" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 10px;margin-top: 10px;">
     </div>
 </div>
 {{< /notice >}}
@@ -954,9 +954,9 @@ Do share with your friends and help them kill some time productively. 🚀
         const higlightItems = StatsManager.getHighlights();
         highlightContainer.innerHTML = higlightItems.map(item => `
             <div style="background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 12px; text-align: center;">
-                <div style="font-size: 1.2rem; margin-bottom: 4px;">${item.icon}</div>
-                <div style="color: #8b949e; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px;">${item.title}</div>
-                <div style="color: #c9d1d9; font-weight: bold; font-size: 0.9rem;">${item.val}</div>
+                <div style="font-size: 1.8rem; margin-bottom: 1px;">${item.icon}</div>
+                <div style="color: #8b949e; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 0.5px;">${item.title}</div>
+                <div style="color: #c9d1d9; font-weight: bold; font-size: 1rem;">${item.val}</div>
             </div>
         `).join('');
 </script>
