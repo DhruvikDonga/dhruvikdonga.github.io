@@ -257,6 +257,54 @@ Do share with your friends and help them kill some time productively. 🚀
             const m = Math.floor(seconds / 60);
             const s = seconds % 60;
             return `${m}:${s.toString().padStart(2, '0')}`;
+        },
+        getHighlights() {
+            const stats = JSON.parse(localStorage.getItem('dhruvik_game_stats')) || {};
+            const history = JSON.parse(localStorage.getItem('dhruvik_game_history')) || [];
+            if (history.length === 0) return [];
+
+            const highlights = [];
+
+            // 1. Favorite Game (Most Sessions)
+            let favorite = Object.keys(stats).reduce((a, b) => stats[a]?.totalCount > stats[b]?.totalCount ? a : b);
+            highlights.push({ 
+                title: "Favorite Game", 
+                val: favorite.charAt(0).toUpperCase() + favorite.slice(1), 
+                icon: "⭐" 
+            });
+
+            // 2. Total Time Spent (formatted)
+            let totalSeconds = Object.values(stats).reduce((acc, curr) => acc + curr.totalTime, 0);
+            highlights.push({ 
+                title: "Overall Time", 
+                val: this.formatTime(totalSeconds), 
+                icon: "⏳" 
+            });
+
+            // 3. Fastest vs. Slowest (Average Speed per Game)
+            // We calculate the average time per game to see where you're a "Pro" vs a "Turtle"
+            let averages = Object.keys(stats).map(name => ({
+                name: name,
+                avg: stats[name].totalTime / stats[name].totalCount
+            }));
+
+            if (averages.length > 1) {
+                let fastest = averages.reduce((a, b) => a.avg < b.avg ? a : b);
+                let slowest = averages.reduce((a, b) => a.avg > b.avg ? a : b);
+                
+                highlights.push({ 
+                    title: "Fastest At", 
+                    val: fastest.name.charAt(0).toUpperCase() + fastest.name.slice(1), 
+                    icon: "🚀" 
+                });
+                highlights.push({ 
+                    title: "Turtle Mode", 
+                    val: slowest.name.charAt(0).toUpperCase() + slowest.name.slice(1), 
+                    icon: "🐢" 
+                });
+            }
+
+            return highlights;
         }
     };
     
@@ -344,54 +392,7 @@ Do share with your friends and help them kill some time productively. 🚀
             document.querySelectorAll('.badge-container').forEach(el => el.innerHTML = '');
         }
     }
-    function getHighlights() {
-        const stats = JSON.parse(localStorage.getItem('dhruvik_game_stats')) || {};
-        const history = JSON.parse(localStorage.getItem('dhruvik_game_history')) || [];
-        if (history.length === 0) return [];
 
-        const highlights = [];
-
-        // 1. Favorite Game (Most Sessions)
-        let favorite = Object.keys(stats).reduce((a, b) => stats[a]?.totalCount > stats[b]?.totalCount ? a : b);
-        highlights.push({ 
-            title: "Favorite Game", 
-            val: favorite.charAt(0).toUpperCase() + favorite.slice(1), 
-            icon: "⭐" 
-        });
-
-        // 2. Total Time Spent (formatted)
-        let totalSeconds = Object.values(stats).reduce((acc, curr) => acc + curr.totalTime, 0);
-        highlights.push({ 
-            title: "Overall Time", 
-            val: this.formatTime(totalSeconds), 
-            icon: "⏳" 
-        });
-
-        // 3. Fastest vs. Slowest (Average Speed per Game)
-        // We calculate the average time per game to see where you're a "Pro" vs a "Turtle"
-        let averages = Object.keys(stats).map(name => ({
-            name: name,
-            avg: stats[name].totalTime / stats[name].totalCount
-        }));
-
-        if (averages.length > 1) {
-            let fastest = averages.reduce((a, b) => a.avg < b.avg ? a : b);
-            let slowest = averages.reduce((a, b) => a.avg > b.avg ? a : b);
-            
-            highlights.push({ 
-                title: "Fastest At", 
-                val: fastest.name.charAt(0).toUpperCase() + fastest.name.slice(1), 
-                icon: "🚀" 
-            });
-            highlights.push({ 
-                title: "Turtle Mode", 
-                val: slowest.name.charAt(0).toUpperCase() + slowest.name.slice(1), 
-                icon: "🐢" 
-            });
-        }
-
-        return highlights;
-    }
     //Linear Congruential Generator (LCG).
     class SeededRNG {
         constructor(seed) {
