@@ -217,7 +217,7 @@ Do share with your friends and help them kill some time productively. 🚀
             // Segment Specific Badges (e.g., 8x8, 10x10)
             Object.keys(g.segments).forEach(size => {
                 const s = g.segments[size];
-                const timeFormat = formatTime(s.bestTime)
+                const timeFormat = this.formatTime(s.bestTime)
                 const best = s.bestTime === Infinity ? 'N/A' : `${timeFormat}s`;
 
                 // Badge for count in this segment
