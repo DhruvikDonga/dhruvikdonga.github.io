@@ -18,7 +18,8 @@ Do share with your friends and help them kill some time productively. 🚀
 <hr style="margin: 15px 0; opacity: 0.2;">
 
 <div style="font-size: 1.2rem; line-height: 1.3; opacity: 0.8;">
-    📊 <i>Your stats are stored locally in your browser. No data leaves your device.</i><br>
+    📊 <i>Stats & history are stored locally in your browser. No data leaves your device.</i><br>
+    <a href="#analytics-dropdown" style="color: var(--success-color); text-decoration: underline; margin-right: 10px;">View Your Game Analytics</a>
     <a href="javascript:void(0)" onclick="clearAllStats()" style="color: var(--error-color); text-decoration: underline;">Clear all local stats</a>
 </div>
 {{< /notice >}}
@@ -181,32 +182,32 @@ Do share with your friends and help them kill some time productively. 🚀
         // Save details to localStorage
         saveGame(gameName, size, timeInSeconds) {
             let stats = JSON.parse(localStorage.getItem('dhruvik_game_stats')) || {};
+            let history = JSON.parse(localStorage.getItem('dhruvik_game_history')) || [];
             
-            if (!stats[gameName]) {
-                stats[gameName] = { 
-                    totalTime: 0, 
-                    totalCount: 0, 
-                    segments: {} // Stores data for 5x5, 8x8, etc.
-                };
-            }
-
+            // 1. Update Aggregated Stats (for Badges)
+            if (!stats[gameName]) stats[gameName] = { totalTime: 0, totalCount: 0, segments: {} };
             const g = stats[gameName];
             g.totalCount++;
             g.totalTime += timeInSeconds;
 
-            // Update segment-specific stats
-            if (!g.segments[size]) {
-                g.segments[size] = { count: 0, bestTime: Infinity };
-            }
-            
+            if (!g.segments[size]) g.segments[size] = { count: 0, bestTime: Infinity };
             const s = g.segments[size];
             s.count++;
-            if (timeInSeconds < s.bestTime) {
-                s.bestTime = timeInSeconds;
-            }
+            if (timeInSeconds < s.bestTime) s.bestTime = timeInSeconds;
+
+            // 2. Update History (for Graphs)
+            history.push({
+                game: gameName,
+                size: size,
+                time: timeInSeconds,
+                date: new Date().toLocaleString()
+            });
 
             localStorage.setItem('dhruvik_game_stats', JSON.stringify(stats));
+            localStorage.setItem('dhruvik_game_history', JSON.stringify(history));
+            
             this.renderBadges(gameName);
+            if(window.updateChart) window.updateChart(); // Refresh chart if it's open
         },
 
         // Generate Shields.io badges
@@ -242,6 +243,68 @@ Do share with your friends and help them kill some time productively. 🚀
             return `${m}:${s.toString().padStart(2, '0')}`;
         }
     };
+    
+    let myChart = null;
+
+    function renderHistoryChart() {
+        const game = document.getElementById('chart-game-select').value;
+        const history = JSON.parse(localStorage.getItem('dhruvik_game_history')) || [];
+        
+        // Filter data for the specific game
+        const gameData = history.filter(h => h.game === game);
+        
+        // Group unique sizes to create separate lines (e.g., 8x8 line, 10x10 line)
+        const segments = [...new Set(gameData.map(h => h.size))];
+        
+        const datasets = segments.map((size, idx) => {
+            const colors = ['#58a6ff', '#3fb950', '#f85149', '#d29922'];
+            // Filter history for this specific size
+            const sessionData = gameData.filter(h => h.size === size);
+            
+            return {
+                label: `${size}x${size} Grid`,
+                data: sessionData.map(h => h.time),
+                borderColor: colors[idx % colors.length],
+                backgroundColor: colors[idx % colors.length] + '33',
+                tension: 0.2,
+                pointRadius: 4
+            };
+        });
+
+        const canvas = document.getElementById('historyChart');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        
+        if (myChart) myChart.destroy();
+        myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: Array.from({length: Math.max(...datasets.map(d => d.data.length), 0)}, (_, i) => i + 1),
+                datasets: datasets
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { 
+                        beginAtZero: true,
+                        title: { display: true, text: 'Seconds', color: '#8b949e' },
+                        grid: { color: '#30363d' },
+                        ticks: { color: '#8b949e' }
+                    },
+                    x: { 
+                        title: { display: true, text: 'Game Number', color: '#8b949e' },
+                        grid: { color: '#30363d' },
+                        ticks: { color: '#8b949e' }
+                    }
+                },
+                plugins: {
+                    legend: { labels: { color: '#c9d1d9' } }
+                }
+            }
+        });
+    }
+    
     function clearAllStats() {
         if (confirm("Reset all game records?")) {
             localStorage.removeItem('dhruvik_game_stats');
@@ -803,4 +866,6 @@ Do share with your friends and help them kill some time productively. 🚀
         StatsManager.renderBadges('binaryLogic');
         StatsManager.renderBadges('pathFinder');
     });
+    window.updateChart = renderHistoryChart;
 </script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
