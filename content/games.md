@@ -13,14 +13,14 @@ author = "Dhruvik Donga"
 
 We have got the classics: [Nonogram](#nonogram), [Minesweeper](#minesweeper), the logical [Binary Sudoku](#binary-sudoku), and the new [Path Finder](#path-finder).
 
+Do share with your friends and help them kill some time productively. 🚀
+
 <hr style="margin: 15px 0; opacity: 0.2;">
 
-<div style="font-size: 0.75rem; line-height: 1.2; opacity: 0.8;">
+<div style="font-size: 0.95rem; line-height: 1.2; opacity: 0.8;">
     📊 <i>Your stats are stored locally in your browser. No data leaves your device.</i><br>
     <a href="javascript:void(0)" onclick="clearAllStats()" style="color: var(--error-color); text-decoration: underline;">Clear all local stats</a>
 </div>
-
-Do share with your friends and help them kill some time productively. 🚀
 {{< /notice >}}
 
 <style>
