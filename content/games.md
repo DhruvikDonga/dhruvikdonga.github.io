@@ -22,17 +22,17 @@ Do share with your friends and help them kill some time productively. 🚀
     <a href="javascript:void(0)" onclick="toggleAnalytics()" id="view-analytics-link" style="color: var(--success-color); text-decoration: underline; margin-right: 10px;">View Your Game Analytics</a>
     <a href="javascript:void(0)" onclick="clearAllStats()" style="color: var(--error-color); text-decoration: underline;">Clear all local stats</a>
 </div>
-<div id="analytics-section" style="display: none; margin-top: 20px; padding-top: 15px; border-top: 1px dashed rgba(255,255,255,0.1);">
+<div id="analytics-section" style="display: none; margin-top: 20px; padding: 20px; background: #0d1117; border: 1px solid #30363d; border-radius: 8px; color: #c9d1d9;">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-        <select id="chart-game-select" class="game-btn" onchange="renderHistoryChart()" style="font-size: 0.8rem; padding: 4px;">
+        <select id="chart-game-select" class="game-btn" onchange="renderHistoryChart()" style="font-size: 0.8rem; padding: 4px; background: #161b22; color: #c9d1d9; border: 1px solid #30363d;">
             <option value="nonogram">Nonogram</option>
             <option value="minesweeper">Minesweeper</option>
-            <option value="binaryLogic">Binary Sudoku</option>
-            <option value="pathFinder">Path Finder</option>
+            <option value="binary">Binary Sudoku</option>
+            <option value="pathfinder">Path Finder</option>
         </select>
         <button onclick="toggleAnalytics()" style="background: none; border: none; color: #8b949e; cursor: pointer; font-size: 0.8rem;">Close ✖</button>
     </div>
-    <div style="height: 250px; width: 100%; background: rgba(0,0,0,0.2); border-radius: 8px; padding: 10px;">
+    <div style="height: 250px; width: 100%; background: #161b22; border-radius: 6px; padding: 10px; border: 1px solid #30363d;">
         <canvas id="historyChart"></canvas>
     </div>
 </div>
@@ -303,17 +303,19 @@ Do share with your friends and help them kill some time productively. 🚀
                     y: { 
                         beginAtZero: true,
                         title: { display: true, text: 'Seconds', color: '#8b949e' },
-                        grid: { color: '#30363d' },
-                        ticks: { color: '#8b949e' }
+                        grid: { color: '#30363d' }, // Dark grid lines
+                        ticks: { color: '#8b949e' }  // Light gray numbers
                     },
                     x: { 
                         title: { display: true, text: 'Game Number', color: '#8b949e' },
-                        grid: { color: '#30363d' },
-                        ticks: { color: '#8b949e' }
+                        grid: { color: '#30363d' }, // Dark grid lines
+                        ticks: { color: '#8b949e' }  // Light gray numbers
                     }
                 },
                 plugins: {
-                    legend: { labels: { color: '#c9d1d9' } }
+                    legend: { 
+                        labels: { color: '#c9d1d9' } // Light gray legend text
+                    }
                 }
             }
         });
