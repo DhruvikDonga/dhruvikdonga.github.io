@@ -13,6 +13,13 @@ author = "Dhruvik Donga"
 
 We have got the classics: [Nonogram](#nonogram), [Minesweeper](#minesweeper), the logical [Binary Sudoku](#binary-sudoku), and the new [Path Finder](#path-finder).
 
+<hr style="margin: 15px 0; opacity: 0.2;">
+
+<div style="font-size: 0.75rem; line-height: 1.2; opacity: 0.8;">
+    📊 <i>Your stats are stored locally in your browser. No data leaves your device.</i><br>
+    <a href="javascript:void(0)" onclick="clearAllStats()" style="color: var(--error-color); text-decoration: underline;">Clear all local stats</a>
+</div>
+
 Do share with your friends and help them kill some time productively. 🚀
 {{< /notice >}}
 
@@ -235,6 +242,13 @@ Do share with your friends and help them kill some time productively. 🚀
             return `${m}:${s.toString().padStart(2, '0')}`;
         }
     };
+    function clearAllStats() {
+        if (confirm("Reset all game records?")) {
+            localStorage.removeItem('dhruvik_game_stats');
+            // Instantly clear the badges from view
+            document.querySelectorAll('.badge-container').forEach(el => el.innerHTML = '');
+        }
+    }
     //Linear Congruential Generator (LCG).
     class SeededRNG {
         constructor(seed) {
@@ -377,7 +391,7 @@ Do share with your friends and help them kill some time productively. 🚀
         if(matrixMatch || (allHeaders.length > 0 && allHeaders.length === satisfiedHeaders.length)) {
             document.getElementById('n-status').textContent = "Puzzle Solved!";
             document.getElementById('nonogram-wrapper').classList.add('victory-animation');
-            const timeTaken = Math.floor((Date.now() - nTimer) / 1000);
+            const timeTaken = Math.floor((Date.now() - nStartTime) / 1000);
             StatsManager.saveGame('nonogram', nSize, timeTaken);
             clearInterval(nTimer);
         }
@@ -513,7 +527,7 @@ Do share with your friends and help them kill some time productively. 🚀
         let revC = 0; mRev.forEach(row => row.forEach(v => {if(v) revC++}));
         let totalMines = (mSize === 8) ? 10 : 20;
         if(revC === (mSize*mSize) - totalMines && !mOver) {
-            const timeTaken = Math.floor((Date.now() - mTimer) / 1000);
+            const timeTaken = Math.floor((Date.now() - mStart) / 1000);
             StatsManager.saveGame('minesweeper', mSize, timeTaken);
             mOver = true; clearInterval(mTimer); document.getElementById('m-status').textContent = "VICTORY!";
             document.getElementById('m-status').style.color = "var(--success-color)";
@@ -604,7 +618,7 @@ Do share with your friends and help them kill some time productively. 🚀
             }
         }
         document.getElementById('b-status').textContent = "Logic Verified! Puzzle Solved.";
-        const timeTaken = Math.floor((Date.now() - bTimer) / 1000);
+        const timeTaken = Math.floor((Date.now() - bStart) / 1000);
             StatsManager.saveGame('binaryLogic', bSize, timeTaken);
         clearInterval(bTimer);
     }
@@ -759,7 +773,7 @@ Do share with your friends and help them kill some time productively. 🚀
             if(pGrid[r][c] === 'E') {
                 pSolved = true;
                 isDrawing = false;
-                const timeTaken = Math.floor((Date.now() - pTimer) / 1000);
+                const timeTaken = Math.floor((Date.now() - pStart) / 1000);
             StatsManager.saveGame('pathFinder', pSize, timeTaken);
                 clearInterval(pTimer);
                 document.getElementById('p-status').textContent = "Path verified. Route saved!";
