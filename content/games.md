@@ -544,37 +544,47 @@ Do share with your friends and help them kill some time productively. 🚀
         document.querySelectorAll('.p-size-btn').forEach(b => b.classList.remove('active'));
         document.getElementById('p-btn-'+size).classList.add('active');
 
-        // Infinite loop protection: try generating a valid maze until solvable
         let attempts = 0;
+        // The "Validation Loop"
         while (attempts < 500) {
-            let wallDensity = (size === 8) ? (0.35 + rng.nextFloat() * 0.1) : 0.30;
-            pGrid = Array(size).fill().map(() => Array(size).fill(0));
+            // Tuning density for Medium/Hard feel (38% to 45%)
+            let wallDensity = (size === 8) ? (0.38 + rng.nextFloat() * 0.07) : 0.35;
             
+            // 1. Initialize empty grid
+            let tempGrid = Array(size).fill().map(() => Array(size).fill(0));
+            
+            // 2. Populate Walls
             for(let r=0; r<size; r++) {
                 for(let c=0; c<size; c++) {
+                    // Reserve Start (0,0) and End (size-1, size-1)
                     if((r===0 && c===0) || (r===size-1 && c===size-1)) continue;
-                    if(rng.nextFloat() < wallDensity) pGrid[r][c] = '1';
+                    if(rng.nextFloat() < wallDensity) tempGrid[r][c] = 'W';
                 }
             }
-            pGrid[0][0] = 'S'; 
-            pGrid[size-1][size-1] = 'E';
+            tempGrid[0][0] = 'S'; 
+            tempGrid[size-1][size-1] = 'E';
 
-            // BFS now returns the distance (step count)
-            let pathDist = getShortestPathDist(size);
+            // 3. BFS Check
+            let pathDist = getShortestPathDist(size, tempGrid);
             
-            // COMPLEXITY LOCK:
-            // 8x8 must be > 13 steps. 10x10 must be > 18 steps.
-            let minSteps = size * 1.6; 
-            if (pathDist >= minSteps) break;
-
+            // 4. Accept only if solvable and sufficiently complex
+            if (pathDist >= (size * 1.6)) {
+                pGrid = tempGrid; // Commit the valid maze
+                break; 
+            }
             attempts++;
         }
         
+        // If we fail after 500 attempts, fall back to a simple grid to avoid infinite loop
+        if (!pGrid) {
+            pGrid = Array(size).fill().map(() => Array(size).fill(0));
+            pGrid[0][0] = 'S'; pGrid[size-1][size-1] = 'E';
+        }
+
         renderPathBoard();
     }
 
-    // Connectivity Check: Simple BFS to ensure path exists
-    function getShortestPathDist(size) {
+    function getShortestPathDist(size, grid) {
         let queue = [{r: 0, c: 0, d: 0}];
         let visited = new Set(['0,0']);
         
@@ -587,13 +597,13 @@ Do share with your friends and help them kill some time productively. 🚀
                 let nr = r + dr, nc = c + dc;
                 let key = `${nr},${nc}`;
                 if (nr >= 0 && nr < size && nc >= 0 && nc < size && 
-                    pGrid[nr][nc] !== 'W' && !visited.has(key)) {
+                    grid[nr][nc] !== 'W' && !visited.has(key)) {
                     visited.add(key);
                     queue.push({r: nr, c: nc, d: d + 1});
                 }
             }
         }
-        return -1; // No path found
+        return -1; // Not solvable
     }
 
     function renderPathBoard() {
