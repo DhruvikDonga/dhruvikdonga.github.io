@@ -27,8 +27,8 @@ Do share with your friends and help them kill some time productively. 🚀
         <select id="chart-game-select" class="game-btn" onchange="renderHistoryChart()" style="font-size: 0.8rem; padding: 4px;">
             <option value="nonogram">Nonogram</option>
             <option value="minesweeper">Minesweeper</option>
-            <option value="binary">Binary Sudoku</option>
-            <option value="pathfinder">Path Finder</option>
+            <option value="binaryLogic">Binary Sudoku</option>
+            <option value="pathFinder">Path Finder</option>
         </select>
         <button onclick="toggleAnalytics()" style="background: none; border: none; color: #8b949e; cursor: pointer; font-size: 0.8rem;">Close ✖</button>
     </div>
