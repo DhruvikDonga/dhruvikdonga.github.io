@@ -149,7 +149,7 @@ Do share with your friends and help them kill some time productively. 🚀
     <div id="b-status" style="color: var(--success-color); font-weight: bold; margin-top: 1rem;"></div>
 </div>
 
-<div id="binary-badges" class="badge-container"></div>
+<div id="binaryLogic-badges" class="badge-container"></div>
 
 ## Path Finder
 ---
@@ -167,10 +167,16 @@ Do share with your friends and help them kill some time productively. 🚀
     <div id="p-status" style="color: var(--success-color); font-weight: bold; margin-top: 1rem; min-height: 1.5em;"></div>
 </div>
 
-<div id="pathfinder-badges" class="badge-container"></div>
+<div id="pathFinder-badges" class="badge-container"></div>
 
 <script>
     const StatsManager = {
+        formatTime(seconds) {
+            if (seconds === Infinity || isNaN(seconds)) return 'N/A';
+            const m = Math.floor(seconds / 60);
+            const s = seconds % 60;
+            return `${m}:${s.toString().padStart(2, '0')}`;
+        }
         // Save details to localStorage
         saveGame(gameName, size, timeInSeconds) {
             let stats = JSON.parse(localStorage.getItem('dhruvik_game_stats')) || {};
@@ -189,13 +195,13 @@ Do share with your friends and help them kill some time productively. 🚀
 
             // Update segment-specific stats
             if (!g.segments[size]) {
-                g.segments[size] = { count: 0, bestTime: Infinity };
+                g.segments[size] = { count: 0, bestTime: formatTime(Infinity) };
             }
             
             const s = g.segments[size];
             s.count++;
             if (timeInSeconds < s.bestTime) {
-                s.bestTime = timeInSeconds;
+                s.bestTime = formatTime(timeInSeconds);
             }
 
             localStorage.setItem('dhruvik_game_stats', JSON.stringify(stats));
@@ -212,7 +218,7 @@ Do share with your friends and help them kill some time productively. 🚀
             let badgeHTML = '';
             
             // Total Games Badge
-            badgeHTML += `<img src="https://img.shields.io/badge/Total_Played-${g.totalCount}-blue?style=flat-square&logo=github" /> `;
+            badgeHTML += `<img src="https://img.shields.io/badge/Total_Played-${g.totalCount}-blue?style=flat-square" /> `;
 
             // Segment Specific Badges (e.g., 8x8, 10x10)
             Object.keys(g.segments).forEach(size => {
