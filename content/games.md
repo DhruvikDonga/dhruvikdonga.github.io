@@ -176,7 +176,7 @@ Do share with your friends and help them kill some time productively. 🚀
             const m = Math.floor(seconds / 60);
             const s = seconds % 60;
             return `${m}:${s.toString().padStart(2, '0')}`;
-        }
+        },
         // Save details to localStorage
         saveGame(gameName, size, timeInSeconds) {
             let stats = JSON.parse(localStorage.getItem('dhruvik_game_stats')) || {};
