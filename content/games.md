@@ -109,6 +109,7 @@ Do share with your friends and help them kill some time productively. 🚀
     <div id="n-status" style="color: var(--success-color); font-weight: bold; margin-top: 1rem;"></div>
 </div>
 
+<div id="nonogram-badges" class="badge-container"></div>
 
 ## Minesweeper
 ---
@@ -129,6 +130,8 @@ Do share with your friends and help them kill some time productively. 🚀
     <div id="m-status" style="font-weight: bold; margin-top: 1rem;"></div>
 </div>
 
+<div id="minesweeper-badges" class="badge-container"></div>
+
 ## Binary Sudoku
 ---
 💡 Fill the grid with 0s and 1s. No more than two same numbers adjacent. Each row/col has equal 0s and 1s.
@@ -146,6 +149,8 @@ Do share with your friends and help them kill some time productively. 🚀
     <div id="b-status" style="color: var(--success-color); font-weight: bold; margin-top: 1rem;"></div>
 </div>
 
+<div id="binary-badges" class="badge-container"></div>
+
 ## Path Finder
 ---
 
@@ -161,6 +166,8 @@ Do share with your friends and help them kill some time productively. 🚀
     <div id="p-board" class="p-grid" onmouseleave="stopDrawing()"></div>
     <div id="p-status" style="color: var(--success-color); font-weight: bold; margin-top: 1rem; min-height: 1.5em;"></div>
 </div>
+
+<div id="pathfinder-badges" class="badge-container"></div>
 
 <script>
     const StatsManager = {
@@ -766,4 +773,13 @@ Do share with your friends and help them kill some time productively. 🚀
     startMines(8, 10);
     startBinary(4);
     startPath(8);
+
+    // At the bottom of your <script>
+    window.addEventListener('load', () => {
+        // Show stats for all games immediately on page load
+        StatsManager.renderBadges('nonogram');
+        StatsManager.renderBadges('minesweeper');
+        StatsManager.renderBadges('binaryLogic');
+        StatsManager.renderBadges('pathFinder');
+    });
 </script>
