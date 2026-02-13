@@ -163,6 +163,64 @@ Do share with your friends and help them kill some time productively. 🚀
 </div>
 
 <script>
+    const StatsManager = {
+        // Save details to localStorage
+        saveGame(gameName, size, timeInSeconds) {
+            let stats = JSON.parse(localStorage.getItem('dhruvik_game_stats')) || {};
+            
+            if (!stats[gameName]) {
+                stats[gameName] = { 
+                    totalTime: 0, 
+                    totalCount: 0, 
+                    segments: {} // Stores data for 5x5, 8x8, etc.
+                };
+            }
+
+            const g = stats[gameName];
+            g.totalCount++;
+            g.totalTime += timeInSeconds;
+
+            // Update segment-specific stats
+            if (!g.segments[size]) {
+                g.segments[size] = { count: 0, bestTime: Infinity };
+            }
+            
+            const s = g.segments[size];
+            s.count++;
+            if (timeInSeconds < s.bestTime) {
+                s.bestTime = timeInSeconds;
+            }
+
+            localStorage.setItem('dhruvik_game_stats', JSON.stringify(stats));
+            this.renderBadges(gameName);
+        },
+
+        // Generate Shields.io badges
+        renderBadges(gameName) {
+            const stats = JSON.parse(localStorage.getItem('dhruvik_game_stats')) || {};
+            const g = stats[gameName];
+            const container = document.getElementById(`${gameName}-badges`);
+            if (!g || !container) return;
+
+            let badgeHTML = '';
+            
+            // Total Games Badge
+            badgeHTML += `<img src="https://img.shields.io/badge/Total_Played-${g.totalCount}-blue?style=flat-square&logo=github" /> `;
+
+            // Segment Specific Badges (e.g., 8x8, 10x10)
+            Object.keys(g.segments).forEach(size => {
+                const s = g.segments[size];
+                const best = s.bestTime === Infinity ? 'N/A' : `${s.bestTime}s`;
+
+                // Badge for count in this segment
+                badgeHTML += `<img src="https://img.shields.io/badge/${size}x${size}_Played-${s.count}-green?style=flat-square" /> `;
+                // Badge for best time in this segment
+                badgeHTML += `<img src="https://img.shields.io/badge/${size}x${size}_Best-${best}-orange?style=flat-square" /> `;
+            });
+
+            container.innerHTML = badgeHTML;
+        }
+    };
     //Linear Congruential Generator (LCG).
     class SeededRNG {
         constructor(seed) {
@@ -305,6 +363,8 @@ Do share with your friends and help them kill some time productively. 🚀
         if(matrixMatch || (allHeaders.length > 0 && allHeaders.length === satisfiedHeaders.length)) {
             document.getElementById('n-status').textContent = "Puzzle Solved!";
             document.getElementById('nonogram-wrapper').classList.add('victory-animation');
+            const timeTaken = Math.floor((Date.now() - nTimer) / 1000);
+            StatsManager.saveGame('nonogram', nSize, timeTaken);
             clearInterval(nTimer);
         }
     }
@@ -439,6 +499,8 @@ Do share with your friends and help them kill some time productively. 🚀
         let revC = 0; mRev.forEach(row => row.forEach(v => {if(v) revC++}));
         let totalMines = (mSize === 8) ? 10 : 20;
         if(revC === (mSize*mSize) - totalMines && !mOver) {
+            const timeTaken = Math.floor((Date.now() - mTimer) / 1000);
+            StatsManager.saveGame('minesweeper', mSize, timeTaken);
             mOver = true; clearInterval(mTimer); document.getElementById('m-status').textContent = "VICTORY!";
             document.getElementById('m-status').style.color = "var(--success-color)";
         }
@@ -528,6 +590,8 @@ Do share with your friends and help them kill some time productively. 🚀
             }
         }
         document.getElementById('b-status').textContent = "Logic Verified! Puzzle Solved.";
+        const timeTaken = Math.floor((Date.now() - bTimer) / 1000);
+            StatsManager.saveGame('binaryLogic', bSize, timeTaken);
         clearInterval(bTimer);
     }
 
@@ -681,6 +745,8 @@ Do share with your friends and help them kill some time productively. 🚀
             if(pGrid[r][c] === 'E') {
                 pSolved = true;
                 isDrawing = false;
+                const timeTaken = Math.floor((Date.now() - pTimer) / 1000);
+            StatsManager.saveGame('pathFinder', pSize, timeTaken);
                 clearInterval(pTimer);
                 document.getElementById('p-status').textContent = "Path verified. Route saved!";
             }
