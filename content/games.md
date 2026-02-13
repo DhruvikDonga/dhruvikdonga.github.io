@@ -68,16 +68,21 @@ Do share with your friends and help them kill some time productively. 🚀
     .b-cell.invalid { color: var(--cell-mine); }
 
     /* Path Finder */
-    .p-grid { display: grid; gap: 2px; background-color: var(--border-color); border: 1px solid var(--border-color); padding: 2px; border-radius: 4px; width: max-content; }
+    .p-grid { 
+        display: grid; gap: 2px; background-color: var(--border-color); 
+        border: 1px solid var(--border-color); padding: 2px; 
+        border-radius: 4px; width: max-content; 
+        touch-action: none; /* Prevents scrolling while drawing on mobile */
+    }
     .p-cell { 
-        background-color: var(--cell-bg); cursor: pointer; width: 35px; height: 35px; 
+        background-color: var(--cell-bg); width: 35px; height: 35px; 
         display: flex; justify-content: center; align-items: center; 
         user-select: none; font-family: ui-monospace, monospace; font-weight: bold; 
     }
     .p-cell.wall { background-color: #0d1117; cursor: not-allowed; }
     .p-cell.start { background-color: #1f6feb; color: white; }
     .p-cell.end { background-color: #f85149; color: white; }
-    .p-cell.path { background-color: var(--success-color); color: white; }
+    .p-cell.path { background-color: var(--success-color); color: white; transition: background-color 0.2s; }
     
 </style>
 
@@ -146,14 +151,14 @@ Do share with your friends and help them kill some time productively. 🚀
 
 <div class="game-section" id="path-wrapper">
     <div class="controls">
-        <button class="game-btn p-size-btn" id="p-btn-8" onclick="startPath(8)">8x8</button>
-        <button class="game-btn p-size-btn" id="p-btn-10" onclick="startPath(10)">10x10</button>
+        <button class="game-btn p-size-btn" id="p-btn-8" onclick="startPath(8)">8x8 (Medium)</button>
+        <button class="game-btn p-size-btn" id="p-btn-10" onclick="startPath(10)">10x10 (Hard)</button>
     </div>
     <div class="timer-container">
         <div id="p-timer" class="timer">00:00</div>
     </div>
-    <div id="p-board" class="p-grid"></div>
-    <div id="p-status" style="color: var(--success-color); font-weight: bold; margin-top: 1rem;"></div>
+    <div id="p-board" class="p-grid" onmouseleave="stopDrawing()"></div>
+    <div id="p-status" style="color: var(--success-color); font-weight: bold; margin-top: 1rem; min-height: 1.5em;"></div>
 </div>
 
 <script>
@@ -526,10 +531,10 @@ Do share with your friends and help them kill some time productively. 🚀
     }
 
     // --- PATH FINDER LOGIC ---
-    let pSize, pGrid, pPath = [], pTimer, pStart, pActive = false, pSolved = false;
+    let pSize, pGrid, pPath = [], pTimer, pStart, pActive = false, pSolved = false, isDrawing = false;
 
     function startPath(size) {
-        pSize = size; pSolved = false; pActive = false; pPath = [];
+        pSize = size; pSolved = false; pActive = false; pPath = []; isDrawing = false;
         clearInterval(pTimer);
         document.getElementById('p-timer').textContent = "00:00";
         document.getElementById('p-status').textContent = "";
@@ -538,20 +543,19 @@ Do share with your friends and help them kill some time productively. 🚀
         document.querySelectorAll('.p-size-btn').forEach(b => b.classList.remove('active'));
         document.getElementById('p-btn-'+size).classList.add('active');
 
-        // Initialize Grid with Walls (25-35% density for 8x8, 20% for 10x10)
-        let wallDensity = (size === 8) ? (0.25 + rng.nextFloat() * 0.1) : 0.20;
+        // Optimized Density: 35-45% for 8x8 to make it feel "Medium"
+        let wallDensity = (size === 8) ? (0.35 + rng.nextFloat() * 0.1) : 0.30;
         pGrid = Array(size).fill().map(() => Array(size).fill(0));
         
         for(let r=0; r<size; r++) {
             for(let c=0; c<size; c++) {
+                if((r===0 && c===0) || (r===size-1 && c===size-1)) continue;
                 if(rng.nextFloat() < wallDensity) pGrid[r][c] = 'W';
             }
         }
 
-        // Set Start and End points
         pGrid[0][0] = 'S'; 
         pGrid[size-1][size-1] = 'E';
-        // Ensure start/end are never walls
         renderPathBoard();
     }
 
@@ -568,18 +572,35 @@ Do share with your friends and help them kill some time productively. 🚀
                 else if(pGrid[r][c] === 'S') { cell.classList.add('start'); cell.textContent = 'S'; }
                 else if(pGrid[r][c] === 'E') { cell.classList.add('end'); cell.textContent = 'E'; }
                 
-                // Highlight the user's current path
-                if(pPath.some(pos => pos.r === r && pos.c === c)) {
-                    cell.classList.add('path');
-                }
+                if(pPath.some(pos => pos.r === r && pos.c === c)) cell.classList.add('path');
 
-                cell.onclick = () => handlePathClick(r, c);
+                // Drag-to-draw mouse events
+                cell.onmousedown = () => { if(!pSolved) { isDrawing = true; handlePathInput(r, c); } };
+                cell.onmouseenter = () => { if(isDrawing) handlePathInput(r, c); };
+                cell.onmouseup = () => stopDrawing();
+                
+                // Mobile Touch support
+                cell.ontouchstart = (e) => { e.preventDefault(); isDrawing = true; handlePathInput(r, c); };
+                cell.ontouchmove = (e) => {
+                    e.preventDefault();
+                    let touch = e.touches[0];
+                    let target = document.elementFromPoint(touch.clientX, touch.clientY);
+                    if(target && target.classList.contains('p-cell')) {
+                        // Extract coords from a data attribute or search logic
+                        // For simplicity, we trigger the click logic if it's a new cell
+                        target.dispatchEvent(new Event('mouseenter'));
+                    }
+                };
+                cell.ontouchend = () => stopDrawing();
+
                 board.appendChild(cell);
             }
         }
     }
 
-    function handlePathClick(r, c) {
+    function stopDrawing() { isDrawing = false; }
+
+    function handlePathInput(r, c) {
         if(pSolved || pGrid[r][c] === 'W' || pGrid[r][c] === 'S') return;
 
         if(!pActive) {
@@ -592,16 +613,17 @@ Do share with your friends and help them kill some time productively. 🚀
             }, 1000);
         }
 
-        // Add to path if adjacent to S or previous path node
         const last = pPath.length > 0 ? pPath[pPath.length-1] : {r: 0, c: 0};
         const dist = Math.abs(r - last.r) + Math.abs(c - last.c);
 
-        if(dist === 1) {
+        // Only allow movement to adjacent cells to prevent skipping walls
+        if(dist === 1 && !pPath.some(pos => pos.r === r && pos.c === c)) {
             pPath.push({r, c});
             if(pGrid[r][c] === 'E') {
                 pSolved = true;
+                isDrawing = false;
                 clearInterval(pTimer);
-                document.getElementById('p-status').textContent = "Path Found! Route optimized.";
+                document.getElementById('p-status').textContent = "Connection Established!";
             }
             renderPathBoard();
         }
