@@ -97,6 +97,7 @@ Do share with your friends and help them kill some time productively. 🚀
 ---
 💡 [How to solve a minesweeper](https://www.youtube.com/shorts/Zil7a1hetQE)  
 💡 You can click the size options to generate a fresh game anytime.
+💡 **How to play:** Left-click to reveal a cell. Right-click or long press on mobile device to toggle a flag (🚩) on suspected mines.
 
 <div class="game-section" id="mines-wrapper">
     <div class="controls">
@@ -321,24 +322,73 @@ Do share with your friends and help them kill some time productively. 🚀
         const board = document.getElementById('m-board');
         board.style.gridTemplateColumns = `repeat(${mSize}, 30px)`;
         board.innerHTML = '';
-        for(let r=0; r<mSize; r++) for(let c=0; c<mSize; c++) {
-            const cell = document.createElement('div'); cell.className = 'm-cell';
-            if(mRev[r][c]) {
-                cell.classList.add('revealed');
-                if(mGrid[r][c]==='M') { cell.classList.add('mine'); cell.textContent = '💣'; }
-                else if(mGrid[r][c]>0) { cell.textContent = mGrid[r][c]; cell.classList.add('num-'+mGrid[r][c]); }
-            } else if(mFlag[r][c]) cell.classList.add('flagged');
-            cell.onmousedown = (e) => {
-                if(mOver) return;
-                if(!mAct) { mAct = true; mStart = Date.now(); mTimer = setInterval(() => {
-                    let s = Math.floor((Date.now()-mStart)/1000);
-                    document.getElementById('m-timer').textContent = Math.floor(s/60).toString().padStart(2,'0')+":"+(s%60).toString().padStart(2,'0');
-                }, 1000); }
-                if(e.button===2) { mFlag[r][c] = !mFlag[r][c]; renderMBoard(); }
-                else revealM(r, c);
-            };
-            cell.oncontextmenu = e => e.preventDefault();
-            board.appendChild(cell);
+        for(let r=0; r<mSize; r++) {
+            for(let c=0; c<mSize; c++) {
+                const cell = document.createElement('div');
+                cell.className = 'm-cell';
+                
+                if(mRev[r][c]) {
+                    cell.classList.add('revealed');
+                    if(mGrid[r][c]==='M') {
+                        cell.classList.add('mine');
+                        cell.textContent = '💣';
+                    } else if(mGrid[r][c]>0) {
+                        cell.textContent = mGrid[r][c];
+                        cell.classList.add('num-'+mGrid[r][c]);
+                    }
+                } else if(mFlag[r][c]) {
+                    cell.classList.add('flagged');
+                }
+
+                // --- MOBILE & DESKTOP UNIFIED LOGIC ---
+                let touchTimer;
+                
+                // Desktop Right-Click
+                cell.onmousedown = (e) => {
+                    if(mOver) return;
+                    initTimer();
+                    if(e.button === 2) {
+                        mFlag[r][c] = !mFlag[r][c];
+                        renderMBoard();
+                    } else {
+                        revealM(r, c);
+                    }
+                };
+
+                // Mobile Long-Press for Flagging
+                cell.ontouchstart = (e) => {
+                    if(mOver) return;
+                    initTimer();
+                    touchTimer = setTimeout(() => {
+                        mFlag[r][c] = !mFlag[r][c];
+                        renderMBoard();
+                        touchTimer = null;
+                    }, 500); // 500ms long press to flag
+                };
+
+                cell.ontouchend = (e) => {
+                    if(touchTimer) {
+                        clearTimeout(touchTimer);
+                        revealM(r, c); // Normal tap reveals
+                    }
+                };
+
+                cell.oncontextmenu = e => e.preventDefault();
+                board.appendChild(cell);
+            }
+        }
+    }
+
+    // Helper to keep the timer logic dry
+    function initTimer() {
+        if(!mAct) {
+            mAct = true;
+            mStart = Date.now();
+            mTimer = setInterval(() => {
+                let s = Math.floor((Date.now()-mStart)/1000);
+                document.getElementById('m-timer').textContent = 
+                    Math.floor(s/60).toString().padStart(2,'0')+":"+(s%60).toString().padStart(2,'0');
+            }, 1000);
         }
     }
 
