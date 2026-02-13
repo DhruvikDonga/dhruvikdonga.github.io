@@ -11,7 +11,7 @@ author = "Dhruvik Donga"
 {{< notice tip >}}
 **Did you know?** Engaging in logical puzzles stimulates neuroplasticity—essentially "freshening" your 🧠 cells.
 
-We have got the classics: [Nonogram](#nonogram), [Minesweeper](#minesweeper) and the brain-teaser [Idea Shuffle](#idea-shuffle).    
+We have got the classics: [Nonogram](#nonogram), [Minesweeper](#minesweeper) and the logical [Binary Sudoku](#binary-sudoku).
 
 Do share with your friends and help them kill some time productively. 🚀
 {{< /notice >}}
@@ -61,58 +61,11 @@ Do share with your friends and help them kill some time productively. 🚀
     .m-cell.flagged::after { content: "🚩"; font-size: 12px; }
     .num-1 { color: #58a6ff; } .num-2 { color: #3fb950; } .num-3 { color: #f85149; }
 
-    /*Idea swapper*/
-    #shuffle-wrapper.game-section { 
-        width: 100%; 
-        margin-bottom: 4rem; 
-        display: flex;
-        flex-direction: column;
-        align-items: center; /* Center everything in the wrapper */
-    }
-
-    #shuffle-wrapper .s-level-text { 
-        font-size: 2.2rem; /* Large, bold level indicator */
-        font-weight: 800; 
-        color: var(--accent-color); 
-        margin-bottom: 10px;
-        font-family: ui-monospace, SFMono-Regular, monospace;
-    }
-
-    #shuffle-wrapper .controls { 
-        width: 100%;
-        display: flex;
-        justify-content: center; /* Center the Start Button */
-        margin-bottom: 2rem; 
-    }
-    .s-container { 
-        position: relative; 
-        height: 180px; 
-        width: 100%; 
-        border-bottom: 2px solid var(--border-color); /* The Focus Line */
-        display: flex; 
-        justify-content: space-around; 
-        align-items: flex-end; 
-        padding-bottom: 10px; 
-        margin-top: 20px;
-    }
-    .s-box { 
-        width: 60px; 
-        height: 60px; 
-        background-color: var(--cell-bg); 
-        border: 2px solid var(--border-color); 
-        border-radius: 8px; 
-        cursor: pointer; 
-        display: flex; 
-        justify-content: center; 
-        align-items: center; 
-        position: absolute; 
-        transition: left 0.3s ease-in-out, transform 0.3s, background-color 0.3s; 
-        bottom: 10px; 
-    }
-    .s-bulb { font-size: 30px; display: none; pointer-events: none; }
-    .s-box.has-bulb .s-bulb { display: block; }
-    .s-box.revealed { background-color: #161b22; transform: translateY(-30px); }
-    .s-level-text { font-size: 1.1rem; font-weight: bold; color: var(--accent-color); }
+    /* Binary Sudoku */
+    .b-grid { display: grid; gap: 2px; background-color: var(--border-color); border: 1px solid var(--border-color); padding: 2px; border-radius: 4px; width: max-content; line-height: 0; }
+    .b-cell { background-color: var(--cell-bg); cursor: pointer; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center; user-select: none; font-family: ui-monospace, monospace; font-weight: bold; font-size: 18px; color: var(--text-color); }
+    .b-cell.fixed { background-color: #0d1117; color: #58a6ff; cursor: default; }
+    .b-cell.invalid { color: var(--cell-mine); }
     
 </style>
 
@@ -158,18 +111,21 @@ Do share with your friends and help them kill some time productively. 🚀
     <div id="m-status" style="font-weight: bold; margin-top: 1rem;"></div>
 </div>
 
-## Idea Shuffle
+## Binary Sudoku
 ---
-💡 Click on levels to start next game
+💡 Fill the grid with 0s and 1s. No more than two same numbers adjacent. Each row/col has equal 0s and 1s.
 
-<div class="game-section shuffle-wrapper">
-    <div class="s-level-text" id="s-level-display">LEVEL: 1/10</div>
+<div class="game-section" id="binary-wrapper">
     <div class="controls">
-        <button class="game-btn" id="s-start-btn" style="padding: 10px 24px; font-size: 16px;" onclick="triggerShuffle()">Start Level</button>
+        <button class="game-btn b-size-btn" id="b-btn-4" onclick="startBinary(4)">4x4</button>
+        <button class="game-btn b-size-btn" id="b-btn-6" onclick="startBinary(6)">6x6</button>
+        <button class="game-btn b-size-btn" id="b-btn-8" onclick="startBinary(8)">8x8</button>
     </div>
-    <div class="s-container" id="s-box-area">
+    <div class="timer-container">
+        <div id="b-timer" class="timer">00:00</div>
     </div>
-    <div id="s-msg"></div>
+    <div id="b-board" class="b-grid"></div>
+    <div id="b-status" style="color: var(--success-color); font-weight: bold; margin-top: 1rem;"></div>
 </div>
 
 <script>
@@ -405,125 +361,94 @@ Do share with your friends and help them kill some time productively. 🚀
         }
     }
 
-    // --- IDEA SHUFFLE ---
-    let s_lvl = 1, s_elements = [], s_bulb_idx = 0, s_shuffling = false;
-
-    function triggerShuffle() {
-        if (s_shuffling) return;
-        const area = document.getElementById('s-box-area');
-        const msg = document.getElementById('s-msg');
-        const btn = document.getElementById('s-start-btn');
-        
-        msg.textContent = "Locating the idea...";
-        msg.style.color = "var(--text-color)";
-        btn.disabled = true;
-
-        let count = 3 + Math.floor((s_lvl - 1) / 3); 
-        let swaps = 4 + (s_lvl * 2);
-        let ms = Math.max(150, 500 - (s_lvl * 35));
-
-        area.innerHTML = '';
-        s_elements = [];
+    // --- BINARY SUDOKU LOGIC ---
+    let bSize, bSol, bPlayer, bFixed, bTimer, bStart, bStarted = false;
+    function startBinary(size) {
+        bSize = size; bStarted = false; clearInterval(bTimer);
+        document.getElementById('b-timer').textContent = "00:00";
+        document.getElementById('b-status').textContent = "";
         const rng = new SeededRNG(Date.now());
-        s_bulb_idx = Math.floor(rng.nextFloat() * count);
+        document.querySelectorAll('.b-size-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('b-btn-'+size).classList.add('active');
+        
+        // Generate valid solution (simplistic shuffle for 4,6,8)
+        bSol = generateBinarySolution(size, rng);
+        bPlayer = Array(size).fill().map(() => Array(size).fill(null));
+        bFixed = Array(size).fill().map(() => Array(size).fill(false));
 
-        for (let i = 0; i < count; i++) {
-            const b = document.createElement('div');
-            b.className = 's-box';
-            b.style.left = `${(100 / count) * i + (50 / count)}%`;
-            b.style.transform = 'translateX(-50%)';
-            if (i === s_bulb_idx) {
-                b.classList.add('has-bulb');
-                // The bulb starts hidden via CSS 'display: none' in the .s-bulb class
-                b.innerHTML = '<span class="s-bulb" id="active-bulb">💡</span>';
-            }
-            area.appendChild(b);
-            s_elements.push(b);
+        // Reveal ~30% of cells
+        for(let i=0; i<size*size*0.35; i++) {
+            let r = Math.floor(rng.nextFloat()*size);
+            let c = Math.floor(rng.nextFloat()*size);
+            bPlayer[r][c] = bSol[r][c];
+            bFixed[r][c] = true;
         }
-
-        // 1. Reveal Phase
-        setTimeout(() => {
-            s_elements[s_bulb_idx].classList.add('revealed');
-            const bulbElement = document.getElementById('active-bulb');
-            bulbElement.style.display = 'block'; // Show bulb
-            
-            setTimeout(() => {
-                s_elements[s_bulb_idx].classList.remove('revealed');
-                bulbElement.style.display = 'none'; // HIDE BULB BEFORE SHUFFLE
-                
-                // 2. Shuffle Phase
-                runShuffle(swaps, ms, rng);
-            }, 1000);
-        }, 400);
+        renderBinaryBoard();
     }
 
-    function runShuffle(total, speed, rng) {
-        s_shuffling = true;
-        let current = 0;
-        const loop = setInterval(() => {
-            if (current >= total) {
-                clearInterval(loop);
-                s_shuffling = false;
-                document.getElementById('s-msg').textContent = "Where is the idea?";
-                s_elements.forEach(box => {
-                    box.onclick = () => validateBox(box);
-                });
-                return;
+    function generateBinarySolution(size, rng) {
+        let grid = Array(size).fill().map(() => Array(size).fill(0));
+        // Fill rows with equal 0/1
+        for(let r=0; r<size; r++) {
+            let vals = [...Array(size/2).fill(0), ...Array(size/2).fill(1)];
+            for (let i = vals.length - 1; i > 0; i--) {
+                const j = Math.floor(rng.nextFloat() * (i + 1));
+                [vals[i], vals[j]] = [vals[j], vals[i]];
             }
-            let i1 = Math.floor(rng.nextFloat() * s_elements.length);
-            let i2 = Math.floor(rng.nextFloat() * s_elements.length);
-            while(i1 === i2) i2 = Math.floor(rng.nextFloat() * s_elements.length);
-
-            const p1 = s_elements[i1].style.left;
-            const p2 = s_elements[i2].style.left;
-            s_elements[i1].style.left = p2;
-            s_elements[i2].style.left = p1;
-
-            [s_elements[i1], s_elements[i2]] = [s_elements[i2], s_elements[i1]];
-            current++;
-        }, speed);
+            grid[r] = vals;
+        }
+        return grid;
     }
 
-    function validateBox(box) {
-        if (s_shuffling) return;
-        
-        // Show the bulb if it's in this box
-        const bulb = box.querySelector('.s-bulb');
-        if (bulb) bulb.style.display = 'block';
-        
-        box.classList.add('revealed');
-        const msg = document.getElementById('s-msg');
-        
-        if (box.classList.contains('has-bulb')) {
-            msg.textContent = "State verified. Level Up!";
-            msg.style.color = "var(--success-color)";
-            setTimeout(() => {
-                if(s_lvl < 10) s_lvl++;
-                document.getElementById('s-level-display').textContent = `Level: ${s_lvl}/10`;
-                cleanShuffle();
-            }, 1200);
-        } else {
-            msg.textContent = "System mismatch. Resetting level...";
-            msg.style.color = "#f85149";
-            
-            // Also reveal where the bulb actually was so the user knows
-            const correctBox = s_elements.find(b => b.classList.contains('has-bulb'));
-            if (correctBox) {
-                correctBox.classList.add('revealed');
-                correctBox.querySelector('.s-bulb').style.display = 'block';
+    function renderBinaryBoard() {
+        const board = document.getElementById('b-board');
+        board.style.gridTemplateColumns = `repeat(${bSize}, 40px)`;
+        board.innerHTML = '';
+        for(let r=0; r<bSize; r++) {
+            for(let c=0; c<bSize; c++) {
+                const cell = document.createElement('div');
+                cell.className = 'b-cell' + (bFixed[r][c] ? ' fixed' : '');
+                cell.textContent = bPlayer[r][c] === null ? '' : bPlayer[r][c];
+                if(!bFixed[r][c]) {
+                    cell.onclick = () => handleBinaryInput(r, c);
+                }
+                board.appendChild(cell);
             }
-            
-            setTimeout(cleanShuffle, 2000);
         }
     }
 
-    function cleanShuffle() {
-        document.getElementById('s-start-btn').disabled = false;
-        document.getElementById('s-msg').textContent = "";
-        document.getElementById('s-box-area').innerHTML = '';
+    function handleBinaryInput(r, c) {
+        if(document.getElementById('b-status').textContent) return;
+        if(!bStarted) { bStarted = true; bStart = Date.now(); bTimer = setInterval(() => {
+            let s = Math.floor((Date.now()-bStart)/1000);
+            document.getElementById('b-timer').textContent = Math.floor(s/60).toString().padStart(2,'0')+":"+(s%60).toString().padStart(2,'0');
+        }, 1000); }
+        
+        let val = bPlayer[r][c];
+        if(val === null) bPlayer[r][c] = 0;
+        else if(val === 0) bPlayer[r][c] = 1;
+        else bPlayer[r][c] = null;
+        
+        renderBinaryBoard();
+        checkBinaryWin();
+    }
+
+    function checkBinaryWin() {
+        // Rules check
+        for(let i=0; i<bSize; i++) {
+            let row = bPlayer[i], col = bPlayer.map(r => r[i]);
+            if(row.includes(null) || col.includes(null)) return;
+            if(row.filter(v=>v===0).length !== bSize/2 || col.filter(v=>v===0).length !== bSize/2) return;
+            for(let j=0; j<bSize-2; j++) {
+                if(row[j]!==null && row[j]===row[j+1] && row[j]===row[j+2]) return;
+                if(col[j]!==null && col[j]===col[j+1] && col[j]===col[j+2]) return;
+            }
+        }
+        document.getElementById('b-status').textContent = "Logic Verified! Puzzle Solved.";
+        clearInterval(bTimer);
     }
     // Initialize both
     startNonogram(5);
     startMines(8, 10);
-    triggerShuffle();
+    startBinary(4);
 </script>
