@@ -11,7 +11,7 @@ author = "Dhruvik Donga"
 {{< notice tip >}}
 **Did you know?** Engaging in logical puzzles stimulates neuroplasticity—essentially "freshening" your 🧠 cells.
 
-We have got the classics: [Nonogram](#nonogram), [Minesweeper](#minesweeper) and the logical [Binary Sudoku](#binary-sudoku).
+We have got the classics: [Nonogram](#nonogram), [Minesweeper](#minesweeper), the logical [Binary Sudoku](#binary-sudoku), and the new [Path Finder](#path-finder).
 
 Do share with your friends and help them kill some time productively. 🚀
 {{< /notice >}}
@@ -151,8 +151,9 @@ Do share with your friends and help them kill some time productively. 🚀
 
 <div class="game-section" id="path-wrapper">
     <div class="controls">
-        <button class="game-btn p-size-btn" id="p-btn-8" onclick="startPath(8)">8x8 (Medium)</button>
-        <button class="game-btn p-size-btn" id="p-btn-10" onclick="startPath(10)">10x10 (Hard)</button>
+        <button class="game-btn p-size-btn" id="p-btn-8" onclick="startPath(8)">8x8</button>
+        <button class="game-btn p-size-btn" id="p-btn-10" onclick="startPath(10)">10x10</button>
+        <button class="game-btn" onclick="undoPath()">Undo Last ⤺</button>
     </div>
     <div class="timer-container">
         <div id="p-timer" class="timer">00:00</div>
@@ -545,20 +546,27 @@ Do share with your friends and help them kill some time productively. 🚀
 
         // Infinite loop protection: try generating a valid maze until solvable
         let attempts = 0;
-        while (attempts < 100) {
+        while (attempts < 500-) {
             let wallDensity = (size === 8) ? (0.35 + rng.nextFloat() * 0.1) : 0.30;
             pGrid = Array(size).fill().map(() => Array(size).fill(0));
             
             for(let r=0; r<size; r++) {
                 for(let c=0; c<size; c++) {
                     if((r===0 && c===0) || (r===size-1 && c===size-1)) continue;
-                    if(rng.nextFloat() < wallDensity) pGrid[r][c] = 'W';
+                    if(rng.nextFloat() < wallDensity) pGrid[r][c] = '1';
                 }
             }
             pGrid[0][0] = 'S'; 
             pGrid[size-1][size-1] = 'E';
 
-            if (isSolvable(size)) break; // Found a good one!
+            // BFS now returns the distance (step count)
+            let pathDist = getShortestPathDist(size);
+            
+            // COMPLEXITY LOCK:
+            // 8x8 must be > 13 steps. 10x10 must be > 18 steps.
+            let minSteps = size * 1.6; 
+            if (pathDist >= minSteps) break;
+
             attempts++;
         }
         
@@ -566,26 +574,26 @@ Do share with your friends and help them kill some time productively. 🚀
     }
 
     // Connectivity Check: Simple BFS to ensure path exists
-    function isSolvable(size) {
-        let queue = [{r: 0, c: 0}];
+    function getShortestPathDist(size) {
+        let queue = [{r: 0, c: 0, d: 0}];
         let visited = new Set(['0,0']);
         
         while (queue.length > 0) {
-            let {r, c} = queue.shift();
-            if (r === size - 1 && c === size - 1) return true;
+            let {r, c, d} = queue.shift();
+            if (r === size - 1 && c === size - 1) return d;
 
-            // Check 4 neighbors
-            [[0,1], [0,-1], [1,0], [-1,0]].forEach(([dr, dc]) => {
+            let neighbors = [[0,1], [0,-1], [1,0], [-1,0]];
+            for(let [dr, dc] of neighbors) {
                 let nr = r + dr, nc = c + dc;
                 let key = `${nr},${nc}`;
                 if (nr >= 0 && nr < size && nc >= 0 && nc < size && 
                     pGrid[nr][nc] !== 'W' && !visited.has(key)) {
                     visited.add(key);
-                    queue.push({r: nr, c: nc});
+                    queue.push({r: nr, c: nc, d: d + 1});
                 }
-            });
+            }
         }
-        return false;
+        return -1; // No path found
     }
 
     function renderPathBoard() {
@@ -632,6 +640,7 @@ Do share with your friends and help them kill some time productively. 🚀
     function handlePathInput(r, c) {
         if(pSolved || pGrid[r][c] === 'W' || pGrid[r][c] === 'S') return;
 
+        // Timer Start
         if(!pActive) {
             pActive = true;
             pStart = Date.now();
@@ -642,20 +651,38 @@ Do share with your friends and help them kill some time productively. 🚀
             }, 1000);
         }
 
+        // Check if the cell is already in the path
+        const existingIndex = pPath.findIndex(pos => pos.r === r && pos.c === c);
+
+        if (existingIndex !== -1) {
+            // REVERT LOGIC: If user moves back to a previous cell in the path, 
+            // truncate the path to that point.
+            pPath = pPath.slice(0, existingIndex + 1);
+            renderPathBoard();
+            return;
+        }
+
         const last = pPath.length > 0 ? pPath[pPath.length-1] : {r: 0, c: 0};
         const dist = Math.abs(r - last.r) + Math.abs(c - last.c);
 
-        // Only allow movement to adjacent cells to prevent skipping walls
-        if(dist === 1 && !pPath.some(pos => pos.r === r && pos.c === c)) {
+        // Only add if adjacent
+        if(dist === 1) {
             pPath.push({r, c});
             if(pGrid[r][c] === 'E') {
                 pSolved = true;
                 isDrawing = false;
                 clearInterval(pTimer);
-                document.getElementById('p-status').textContent = "Connection Established!";
+                document.getElementById('p-status').textContent = "Path verified. Route saved!";
             }
             renderPathBoard();
         }
+    }
+
+    // Manual Undo for the UI
+    function undoPath() {
+        if (pSolved || pPath.length === 0) return;
+        pPath.pop();
+        renderPathBoard();
     }
 
     // Initialize both
