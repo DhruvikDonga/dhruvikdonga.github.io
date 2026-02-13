@@ -19,8 +19,22 @@ Do share with your friends and help them kill some time productively. 🚀
 
 <div style="font-size: 1.2rem; line-height: 1.3; opacity: 0.8;">
     📊 <i>Stats & history are stored locally in your browser. No data leaves your device.</i><br>
-    <a href="#analytics-dropdown" style="color: var(--success-color); text-decoration: underline; margin-right: 10px;">View Your Game Analytics</a>
+    <a href="javascript:void(0)" onclick="toggleAnalytics()" id="view-analytics-link" style="color: var(--success-color); text-decoration: underline; margin-right: 10px;">View Your Game Analytics</a>
     <a href="javascript:void(0)" onclick="clearAllStats()" style="color: var(--error-color); text-decoration: underline;">Clear all local stats</a>
+</div>
+<div id="analytics-section" style="display: none; margin-top: 20px; padding-top: 15px; border-top: 1px dashed rgba(255,255,255,0.1);">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+        <select id="chart-game-select" class="game-btn" onchange="renderHistoryChart()" style="font-size: 0.8rem; padding: 4px;">
+            <option value="nonogram">Nonogram</option>
+            <option value="minesweeper">Minesweeper</option>
+            <option value="binary">Binary Sudoku</option>
+            <option value="pathfinder">Path Finder</option>
+        </select>
+        <button onclick="toggleAnalytics()" style="background: none; border: none; color: #8b949e; cursor: pointer; font-size: 0.8rem;">Close ✖</button>
+    </div>
+    <div style="height: 250px; width: 100%; background: rgba(0,0,0,0.2); border-radius: 8px; padding: 10px;">
+        <canvas id="historyChart"></canvas>
+    </div>
 </div>
 {{< /notice >}}
 
@@ -304,7 +318,24 @@ Do share with your friends and help them kill some time productively. 🚀
             }
         });
     }
-    
+    function toggleAnalytics() {
+        const section = document.getElementById('analytics-section');
+        const link = document.getElementById('view-analytics-link');
+        
+        if (section.style.display === 'none') {
+            section.style.display = 'block';
+            link.textContent = 'Hide Your Game Analytics';
+            
+            // Use a slight delay to allow the container to expand before Chart.js calculates size
+            setTimeout(() => {
+                renderHistoryChart();
+            }, 50);
+        } else {
+            section.style.display = 'none';
+            link.textContent = 'View Your Game Analytics';
+        }
+    }
+
     function clearAllStats() {
         if (confirm("Reset all game records?")) {
             localStorage.removeItem('dhruvik_game_stats');
@@ -866,6 +897,8 @@ Do share with your friends and help them kill some time productively. 🚀
         StatsManager.renderBadges('binaryLogic');
         StatsManager.renderBadges('pathFinder');
     });
-    window.updateChart = renderHistoryChart;
+    // Global reference for refreshing
+     window.updateChart = renderHistoryChart;
+});
 </script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
