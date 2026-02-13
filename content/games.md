@@ -24,7 +24,7 @@ Do share with your friends and help them kill some time productively. 🚀
 </div>
 <div id="analytics-section" style="display: none; margin-top: 20px; padding: 20px; background: #0d1117; border: 1px solid #30363d; border-radius: 8px; color: #c9d1d9;">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-        <select id="chart-game-select" class="game-btn" onchange="renderHistoryChart()" style="font-size: 0.8rem; padding: 4px; background: #161b22; color: #c9d1d9; border: 1px solid #30363d;">
+        <select id="chart-game-select" class="game-btn p-size-btn" onchange="renderHistoryChart()" style="font-size: 1rem; padding: 4px; background: #161b22; color: #c9d1d9; border: 1px solid #30363d;">
             <option value="nonogram">Nonogram</option>
             <option value="minesweeper">Minesweeper</option>
             <option value="binaryLogic">Binary Sudoku</option>
