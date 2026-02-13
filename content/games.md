@@ -35,6 +35,8 @@ Do share with your friends and help them kill some time productively. 🚀
     <div style="height: 250px; width: 100%; background: #161b22; border-radius: 6px; padding: 10px; border: 1px solid #30363d;">
         <canvas id="historyChart"></canvas>
     </div>
+    <div id="funny-highlights" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 20px;">
+    </div>
 </div>
 {{< /notice >}}
 
@@ -341,6 +343,54 @@ Do share with your friends and help them kill some time productively. 🚀
             // Instantly clear the badges from view
             document.querySelectorAll('.badge-container').forEach(el => el.innerHTML = '');
         }
+    }
+    function getHighlights() {
+        const stats = JSON.parse(localStorage.getItem('dhruvik_game_stats')) || {};
+        const history = JSON.parse(localStorage.getItem('dhruvik_game_history')) || [];
+        if (history.length === 0) return [];
+
+        const highlights = [];
+
+        // 1. Favorite Game (Most Sessions)
+        let favorite = Object.keys(stats).reduce((a, b) => stats[a]?.totalCount > stats[b]?.totalCount ? a : b);
+        highlights.push({ 
+            title: "Favorite Game", 
+            val: favorite.charAt(0).toUpperCase() + favorite.slice(1), 
+            icon: "⭐" 
+        });
+
+        // 2. Total Time Spent (formatted)
+        let totalSeconds = Object.values(stats).reduce((acc, curr) => acc + curr.totalTime, 0);
+        highlights.push({ 
+            title: "Overall Time", 
+            val: this.formatTime(totalSeconds), 
+            icon: "⏳" 
+        });
+
+        // 3. Fastest vs. Slowest (Average Speed per Game)
+        // We calculate the average time per game to see where you're a "Pro" vs a "Turtle"
+        let averages = Object.keys(stats).map(name => ({
+            name: name,
+            avg: stats[name].totalTime / stats[name].totalCount
+        }));
+
+        if (averages.length > 1) {
+            let fastest = averages.reduce((a, b) => a.avg < b.avg ? a : b);
+            let slowest = averages.reduce((a, b) => a.avg > b.avg ? a : b);
+            
+            highlights.push({ 
+                title: "Fastest At", 
+                val: fastest.name.charAt(0).toUpperCase() + fastest.name.slice(1), 
+                icon: "🚀" 
+            });
+            highlights.push({ 
+                title: "Turtle Mode", 
+                val: slowest.name.charAt(0).toUpperCase() + slowest.name.slice(1), 
+                icon: "🐢" 
+            });
+        }
+
+        return highlights;
     }
     //Linear Congruential Generator (LCG).
     class SeededRNG {
@@ -898,5 +948,15 @@ Do share with your friends and help them kill some time productively. 🚀
     });
     // Global reference for refreshing
      window.updateChart = renderHistoryChart;
+
+     const highlightContainer = document.getElementById('funny-highlights');
+        const higlightItems = StatsManager.getHighlights();
+        highlightContainer.innerHTML = higlightItems.map(item => `
+            <div style="background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 12px; text-align: center;">
+                <div style="font-size: 1.2rem; margin-bottom: 4px;">${item.icon}</div>
+                <div style="color: #8b949e; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px;">${item.title}</div>
+                <div style="color: #c9d1d9; font-weight: bold; font-size: 0.9rem;">${item.val}</div>
+            </div>
+        `).join('');
 </script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
