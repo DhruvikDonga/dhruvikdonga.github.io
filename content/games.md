@@ -956,7 +956,7 @@ Do share with your friends and help them kill some time productively. 🚀
             <div style="background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 12px; text-align: center;">
                 <div style="font-size: 1.8rem; margin-bottom: 1px;">${item.icon}</div>
                 <div style="color: #8b949e; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 0.5px;">${item.title}</div>
-                <div style="color: #c9d1d9; font-weight: bold; font-size: 1rem;">${item.val}</div>
+                <div style="color: #c9d1d9; font-weight: bold; font-size: 1.2rem;">${item.val}</div>
             </div>
         `).join('');
 </script>
