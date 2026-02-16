@@ -226,9 +226,9 @@ Do share with your friends and help them kill some time productively. 🚀
 <details style="cursor: pointer;"> 
 <summary style="font-size: 1.1rem; font-weight: bold; color: var(--success-color);">🛠️ Technical Deep Dive: How the "Games" Work</summary>
 
-<div style="font-size: 0.9rem; line-height: 1.6; margin-top: 15px; color: #8b949e;">
+<div style="font-size: 1.4rem; line-height: 1.6; margin-top: 15px; color: #8b949e;">
 
-## 🧩 Nonogram: The Constraint Solver
+### 🧩 Nonogram: The Constraint Solver
 - This is essentially a Constraint Satisfaction Problem (CSP).
 - **The Algorithm**: Uses a Linear Congruential Generator (LCG) to create a stable, seeded board.
 - **The Logic**: The engine scans rows and columns for contiguous filled blocks to generate "Hints."
@@ -236,14 +236,14 @@ Do share with your friends and help them kill some time productively. 🚀
 
 *It’s like a Sudoku had a baby with a QR code. 🕵️‍♂️*
 
-## 💣 Minesweeper: The Recursive Flood
+### 💣 Minesweeper: The Recursive Flood
 - Classic Minesweeper logic using the **Flood Fill** algorithm.
 - **The Algorithm**: Triggers a Depth-First Search (DFS) to reveal all adjacent empty (0) tiles.
 - **Safe Start**: The engine reserves a "Safe Zone" around your first click, moving mines elsewhere so you don't 💥 immediately.
     
 *You’re a digital bomb technician with a flag as your only armor. 🚩*
 
-## 🗺️ Path Finder: The BFS Navigator
+### 🗺️ Path Finder: The BFS Navigator
 - This is the "heavy lifter," using real-world routing logic.
 - **The Algorithm**: Uses **BFS (Breadth-First Search)** to validate maze solvability.
 
@@ -251,10 +251,10 @@ Do share with your friends and help them kill some time productively. 🚀
 
 *It’s like Google Maps, but I’ve replaced the roads with walls. 📍*
 
-## 📊 Analytics: The Data Pipeline
+### 📊 Analytics: The Data Pipeline
 - Since I'm into Cloud Services, I built a localized "Data Warehouse".
-- **Ingestion**: `StatsManager` pushes JSON payloads to `localStorage` on every "Win."
-- **Processing**: `getHighlights` performs aggregate functions (Sum, Avg) to determine your "Turtle Mode."
+- **Ingestion**: **StatsManager** pushes JSON payloads to **localStorage** on every "Win."
+- **Processing**: **getHighlights** performs aggregate functions (Sum, Avg) to determine your "Turtle Mode."
 - **Visualization**: **Chart.js** maps your learning curve against time.
 
 *The site isn't mad you're slow, just disappointed. 📈*
