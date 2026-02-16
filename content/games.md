@@ -220,9 +220,7 @@ Do share with your friends and help them kill some time productively. 🚀
     transition: opacity 0.3s;
     width: 3rem;
     height: 3rem;
-">
-    ⬆
-</button>
+">⬆</button>
 
 <script>
     const StatsManager = {
