@@ -39,14 +39,19 @@ Do share with your friends and help them kill some time productively. 🚀
     </div>
     <div id="funny-highlights" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 10px;margin-top: 10px;">
     </div>
-    <div>
-    ### 📊 Analytics: The Data Pipeline
-    - Since I'm into Cloud Services, I built a localized "Data Warehouse".
-    - **Ingestion**: **StatsManager** pushes JSON payloads to **localStorage** on every "Win."
-    - **Processing**: **getHighlights** performs aggregate functions (Sum, Avg) to determine your "Turtle Mode."
-    - **Visualization**: **Chart.js** maps your learning curve against time.
-    *The site isn't mad you're slow, just disappointed. 📈*
-    </div>
+    <details style="cursor: pointer;"> 
+<div style="font-size: 1.4rem; line-height: 1.6; margin-top: 15px; color: #8b949e;">
+
+### 📊 Analytics: The Data Pipeline
+- Since I'm into Cloud Services, I built a localized "Data Warehouse".
+- **Ingestion**: **StatsManager** pushes JSON payloads to **localStorage** on every "Win."
+- **Processing**: **getHighlights** performs aggregate functions (Sum, Avg) to determine your "Turtle Mode."
+- **Visualization**: **Chart.js** maps your learning curve against time.
+*The site isn't mad you're slow, just disappointed. 📈*
+
+</div> 
+</details>
+
 </div>
 {{< /notice >}}
 
@@ -135,6 +140,22 @@ Do share with your friends and help them kill some time productively. 🚀
 💡 [How to solve a nonogram](https://www.youtube.com/watch?v=zisu0Qf4TAI)  
 💡 You can click the size options to generate a fresh game anytime.
 
+<details style="cursor: pointer;"> 
+<summary style="font-size: 1.1rem; font-weight: bold; color: var(--success-color);">🛠️ Technical Deep Dive: How the "Game" Work</summary>
+
+<div style="font-size: 1.4rem; line-height: 1.6; margin-top: 15px; color: #8b949e;">
+
+### 🧩 Nonogram: The Constraint Solver
+- This is essentially a Constraint Satisfaction Problem (CSP).
+- **The Algorithm**: Uses a Linear Congruential Generator (LCG) to create a stable, seeded board.
+- **The Logic**: The engine scans rows and columns for contiguous filled blocks to generate "Hints."
+- **Victory**: Runs a matrix comparison on every click.
+
+*It’s like a Sudoku had a baby with a QR code. 🕵️‍♂️*
+
+
+</div> 
+</details>
 <div class="game-section" id="nonogram-wrapper">
     <div class="controls">
         <button class="game-btn n-size-btn" id="n-btn-5" onclick="startNonogram(5)">5x5</button>
@@ -161,6 +182,20 @@ Do share with your friends and help them kill some time productively. 🚀
 💡 You can click the size options to generate a fresh game anytime.
 💡 **How to play:** Left-click to reveal a cell. Right-click or long press on mobile device to toggle a flag (🚩) on suspected mines.
 
+<details style="cursor: pointer;"> 
+<summary style="font-size: 1.1rem; font-weight: bold; color: var(--success-color);">🛠️ Technical Deep Dive: How the "Game" Work</summary>
+
+<div style="font-size: 1.4rem; line-height: 1.6; margin-top: 15px; color: #8b949e;">
+
+### 💣 Minesweeper: The Recursive Flood
+- Classic Minesweeper logic using the **Flood Fill** algorithm.
+- **The Algorithm**: Triggers a Depth-First Search (DFS) to reveal all adjacent empty (0) tiles.
+- **Safe Start**: The engine reserves a "Safe Zone" around your first click, moving mines elsewhere so you don't 💥 immediately.
+    
+*You’re a digital bomb technician with a flag as your only armor. 🚩*
+</div>
+</details>
+
 <div class="game-section" id="mines-wrapper">
     <div class="controls">
         <button class="game-btn m-size-btn" id="m-btn-8" onclick="startMines(8, 10)">Easy (8x8)</button>
@@ -179,6 +214,21 @@ Do share with your friends and help them kill some time productively. 🚀
 ## Binary Sudoku
 ---
 💡 Fill the grid with 0s and 1s. No more than two same numbers adjacent. Each row/col has equal 0s and 1s.
+
+<details style="cursor: pointer;"> 
+<summary style="font-size: 1.1rem; font-weight: bold; color: var(--success-color);">🛠️ Technical Deep Dive: How the "Game" Work</summary>
+
+<div style="font-size: 1.4rem; line-height: 1.6; margin-top: 15px; color: #8b949e;">
+
+### 0️⃣1️⃣ Binary Sudoku: The Logic Gate
+- This is a test of parity and adjacency rules.
+- The Algorithm: The generator shuffles valid permutations of 0s and 1s while enforcing three strict rules: No more than two identical numbers adjacent, equal count of 0s/1s per row, and no duplicate rows.
+- The Setup: It reveals ~30% of the solution to give you a "fixed" starting point.
+- Victory Condition: A full sweep of the grid to ensure no rule violations exist (The "Logic Verify").
+
+It's like trying to keep two siblings (0 and 1) from sitting next to each other for too long. 🧒↔️🧒
+</div>
+</details>
 
 <div class="game-section" id="binary-wrapper">
     <div class="controls">
@@ -241,30 +291,6 @@ Do share with your friends and help them kill some time productively. 🚀
     width: 3rem;
     height: 3rem;
 ">⬆</button>
-
-{{< notice info >}}
-<details style="cursor: pointer;"> 
-<summary style="font-size: 1.1rem; font-weight: bold; color: var(--success-color);">🛠️ Technical Deep Dive: How the "Game" Work</summary>
-
-<div style="font-size: 1.4rem; line-height: 1.6; margin-top: 15px; color: #8b949e;">
-
-### 🧩 Nonogram: The Constraint Solver
-- This is essentially a Constraint Satisfaction Problem (CSP).
-- **The Algorithm**: Uses a Linear Congruential Generator (LCG) to create a stable, seeded board.
-- **The Logic**: The engine scans rows and columns for contiguous filled blocks to generate "Hints."
-- **Victory**: Runs a matrix comparison on every click.
-
-*It’s like a Sudoku had a baby with a QR code. 🕵️‍♂️*
-
-### 💣 Minesweeper: The Recursive Flood
-- Classic Minesweeper logic using the **Flood Fill** algorithm.
-- **The Algorithm**: Triggers a Depth-First Search (DFS) to reveal all adjacent empty (0) tiles.
-- **Safe Start**: The engine reserves a "Safe Zone" around your first click, moving mines elsewhere so you don't 💥 immediately.
-    
-*You’re a digital bomb technician with a flag as your only armor. 🚩*
-</div> 
-</details> 
-{{< /notice >}}
 
 <script>
     const StatsManager = {
