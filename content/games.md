@@ -10,6 +10,7 @@ author = "Dhruvik Donga"
 
 {{< notice tip >}}
 <div style="font-size: 1.3rem; line-height: 1.5;">
+
 **Did you know?** Engaging in logical puzzles stimulates neuroplasticity—essentially "freshening" your 🧠 cells.
 
 We have got the classics: [Nonogram](#nonogram), [Minesweeper](#minesweeper), the logical [Binary Sudoku](#binary-sudoku), and the new [Path Finder](#path-finder).
