@@ -156,6 +156,7 @@ Do share with your friends and help them kill some time productively. 🚀
 
 </div> 
 </details>
+<br>
 <div class="game-section" id="nonogram-wrapper">
     <div class="controls">
         <button class="game-btn n-size-btn" id="n-btn-5" onclick="startNonogram(5)">5x5</button>
@@ -195,7 +196,7 @@ Do share with your friends and help them kill some time productively. 🚀
 *You’re a digital bomb technician with a flag as your only armor. 🚩*
 </div>
 </details>
-
+<br>
 <div class="game-section" id="mines-wrapper">
     <div class="controls">
         <button class="game-btn m-size-btn" id="m-btn-8" onclick="startMines(8, 10)">Easy (8x8)</button>
@@ -229,7 +230,7 @@ Do share with your friends and help them kill some time productively. 🚀
 It's like trying to keep two siblings (0 and 1) from sitting next to each other for too long. 🧒↔️🧒
 </div>
 </details>
-
+<br>
 <div class="game-section" id="binary-wrapper">
     <div class="controls">
         <button class="game-btn b-size-btn" id="b-btn-4" onclick="startBinary(4)">4x4</button>
@@ -260,6 +261,7 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
 *It’s like Google Maps, but I’ve replaced the roads with walls. 📍*
 </div>
 </details>
+<br>
 <div class="game-section" id="path-wrapper">
     <div class="controls">
         <button class="game-btn p-size-btn" id="p-btn-8" onclick="startPath(8)">8x8</button>
