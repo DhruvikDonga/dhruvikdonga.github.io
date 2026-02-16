@@ -207,7 +207,7 @@ Do share with your friends and help them kill some time productively. 🚀
 <button id="back-to-top" title="Go to top" onclick="scrollToTop()" style="
     display: none; 
     position: fixed; 
-    bottom: 20px; 
+    bottom: 40px; 
     right: 20px; 
     z-index: 99; 
     border: 1px solid #30363d; 
@@ -215,7 +215,7 @@ Do share with your friends and help them kill some time productively. 🚀
     background-color: #161b22; 
     color: #c9d1d9; 
     cursor: pointer; 
-    padding: 10px 15px; 
+    padding: 6px 10px; 
     border-radius: 6px; 
     font-size: 18px;
     transition: opacity 0.3s;
