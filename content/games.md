@@ -988,11 +988,12 @@ Do share with your friends and help them kill some time productively. 🚀
      const highlightContainer = document.getElementById('funny-highlights');
         const higlightItems = StatsManager.getHighlights();
         highlightContainer.innerHTML = higlightItems.map(item => `
-            <div style="background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 12px; text-align: center;">
-                <span title="${item.info}" style="position: absolute; top: 5px; right: 5px; cursor: help; font-size: 0.7rem; color: #8b949e; opacity: 0.6;">ⓘ</span>
-                <div style="font-size: 1.8rem; margin-bottom: 1px;">${item.icon}</div>
-                <div style="color: #8b949e; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 0.5px;">${item.title}</div>
-                <div style="color: #c9d1d9; font-weight: bold; font-size: 1.2rem;">${item.val}</div>
+            <div style="background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 12px; text-align: center; position: relative; min-width: 110px;">
+                <span title="${item.info}" style="position: absolute; top: 5px; right: 8px; cursor: help; font-size: 0.75rem; color: #8b949e; opacity: 0.8;">ⓘ</span>
+                
+                <div style="font-size: 1.5rem; margin-bottom: 2px;">${item.icon}</div>
+                <div style="color: #8b949e; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">${item.title}</div>
+                <div style="color: ${item.color || '#c9d1d9'}; font-weight: bold; font-size: 0.95rem;">${item.val}</div>
             </div>
         `).join('');
 </script>
