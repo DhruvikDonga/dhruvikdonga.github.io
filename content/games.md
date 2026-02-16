@@ -207,7 +207,7 @@ Do share with your friends and help them kill some time productively. 🚀
 <button id="back-to-top" title="Go to top" onclick="scrollToTop()" style="
     display: none; 
     position: fixed; 
-    bottom: 80px; 
+    bottom: 60px; 
     right: 20px; 
     z-index: 99; 
     border: 1px solid #30363d; 
@@ -216,7 +216,7 @@ Do share with your friends and help them kill some time productively. 🚀
     color: #c9d1d9; 
     cursor: pointer; 
     border-radius: 6px; 
-    font-size: 18px;
+    font-size: 15px;
     transition: opacity 0.3s;
     width: 3rem;
     height: 3rem;
@@ -425,7 +425,7 @@ Do share with your friends and help them kill some time productively. 🚀
         if (section.style.display === 'none') {
             section.style.display = 'block';
             link.textContent = 'Hide Your Game Analytics';
-            setTimeout(() => { renderHistoryChart(); }, 50);
+            setTimeout(() => { renderHistoryChart();renderHighlights(); }, 50);
         } else {
             section.style.display = 'none';
             link.textContent = 'View Your Game Analytics';
