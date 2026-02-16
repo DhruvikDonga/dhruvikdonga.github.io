@@ -204,6 +204,24 @@ Do share with your friends and help them kill some time productively. 🚀
 </div>
 
 <div id="pathFinder-badges" class="badge-container"></div>
+<button id="back-to-top" title="Go to top" onclick="scrollToTop()" style="
+    display: none; 
+    position: fixed; 
+    bottom: 20px; 
+    right: 20px; 
+    z-index: 99; 
+    border: 1px solid #30363d; 
+    outline: none; 
+    background-color: #161b22; 
+    color: #c9d1d9; 
+    cursor: pointer; 
+    padding: 10px 15px; 
+    border-radius: 6px; 
+    font-size: 18px;
+    transition: opacity 0.3s;
+">
+    ↑
+</button>
 
 <script>
     const StatsManager = {
@@ -983,9 +1001,9 @@ Do share with your friends and help them kill some time productively. 🚀
         StatsManager.renderBadges('pathFinder');
     });
     // Global reference for refreshing
-     window.updateChart = renderHistoryChart;
+    window.updateChart = renderHistoryChart;
 
-     const highlightContainer = document.getElementById('funny-highlights');
+    const highlightContainer = document.getElementById('funny-highlights');
         const higlightItems = StatsManager.getHighlights();
         highlightContainer.innerHTML = higlightItems.map(item => `
             <div style="background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 12px; text-align: center; position: relative; min-width: 110px;">
@@ -996,5 +1014,25 @@ Do share with your friends and help them kill some time productively. 🚀
                 <div style="color: ${item.color || '#c9d1d9'}; font-weight: bold; font-size: 0.95rem;">${item.val}</div>
             </div>
         `).join('');
+
+    // --- BACK TO TOP LOGIC ---
+    const topBtn = document.getElementById("back-to-top");
+
+    // Show button when user scrolls down 300px from the top
+    window.onscroll = function() {
+        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+            topBtn.style.display = "block";
+        } else {
+            topBtn.style.display = "none";
+        }
+    };
+
+    // Scroll to the top of the document
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
