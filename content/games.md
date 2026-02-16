@@ -277,15 +277,29 @@ Do share with your friends and help them kill some time productively. 🚀
 
             const highlights = [];
 
-            // 1. Favorite Game (Most Sessions)
-            let favorite = Object.keys(stats).reduce((a, b) => stats[a]?.totalCount > stats[b]?.totalCount ? a : b);
+            // 1. Total Games Played
+            let totalGames = Object.values(stats).reduce((acc, curr) => acc + curr.totalCount, 0);
             highlights.push({ 
-                title: "Favorite Game", 
-                val: favorite.charAt(0).toUpperCase() + favorite.slice(1), 
-                icon: "⭐" 
+                title: "Total Played", 
+                val: `${totalGames} Games`, 
+                icon: "🎮" 
             });
 
-            // 2. Total Time Spent (formatted)
+            // 2. Player Rank (Based on Total Games)
+            let rank = "Novice";
+            let rankColor = "#8b949e";
+            if (totalGames > 50) { rank = "Grandmaster"; rankColor = "#f85149"; }
+            else if (totalGames > 25) { rank = "Expert"; rankColor = "#d29922"; }
+            else if (totalGames > 10) { rank = "Architect"; rankColor = "#3fb950"; }
+            
+            highlights.push({ 
+                title: "Player Rank", 
+                val: rank, 
+                icon: "🏆",
+                color: rankColor 
+            });
+
+            // 3. Overall Time Spent
             let totalSeconds = Object.values(stats).reduce((acc, curr) => acc + curr.totalTime, 0);
             highlights.push({ 
                 title: "Overall Time", 
@@ -293,8 +307,7 @@ Do share with your friends and help them kill some time productively. 🚀
                 icon: "⏳" 
             });
 
-            // 3. Fastest vs. Slowest (Average Speed per Game)
-            // We calculate the average time per game to see where you're a "Pro" vs a "Turtle"
+            // 4. Fastest vs. Slowest (Turtle Mode)
             let averages = Object.keys(stats).map(name => ({
                 name: name,
                 avg: stats[name].totalTime / stats[name].totalCount
