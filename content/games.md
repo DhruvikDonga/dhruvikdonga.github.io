@@ -222,6 +222,43 @@ Do share with your friends and help them kill some time productively. 🚀
     height: 3rem;
 ">⬆</button>
 
+{{< notice info >}}
+
+<details style="cursor: pointer;"> 
+<summary style="font-size: 1.3rem; font-weight: bold; color: var(--success-color);"> 🛠️ Technical Deep Dive: How the "Games" Work </summary>
+<div style="font-size: 0.85rem; line-height: 1.4; margin-top: 15px; color: #8b949e;">
+    ## 🧩 Nonogram: The Constraint Solver
+    - This is essentially a Constraint Satisfaction Problem (CSP).
+    - The Algorithm: Uses a Linear Congruential Generator (LCG) to create a stable, seeded board.
+    - The Logic: The engine scans rows and columns for contiguous filled blocks to generate "Hints."
+    - Victory: Runs a matrix comparison on every click.
+
+    It’s like a Sudoku had a baby with a QR code. 🕵️‍♂️
+
+    ## 💣 Minesweeper: The Recursive Flood
+    - Classic Minesweeper logic using the Flood Fill algorithm.
+    - The Algorithm: Triggers a Depth-First Search (DFS) to reveal all adjacent empty (0) tiles.
+    - Safe Start: The engine reserves a "Safe Zone" around your first click, moving mines elsewhere so you don't 💥 immediately.
+    
+    You’re a digital bomb technician with a flag as your only armor. 🚩
+
+    ##🗺️ Path Finder: The BFS Navigator
+    - This is the "heavy lifter," using real-world routing logic.
+    - The Algorithm: Uses BFS (Breadth-First Search) to validate maze solvability.
+    - The Maze: The engine generates walls at ~55% density and runs a simulation. If the path isn't "complex" enough, it trashes the board and starts over.
+
+    It’s like Google Maps, but I’ve replaced the roads with walls. 📍
+
+    ##📊 Analytics: The Data Pipeline
+    - Since I'm into Cloud Services, I built a localized "Data Warehouse." cause of my love to process and analyize data .
+    - Ingestion: StatsManager pushes JSON payloads to localStorage on every "Win."
+    - Processing: getHighlights performs aggregate functions (Sum, Avg) to determine your "Turtle Mode."
+    - Visualization: Chart.js maps your learning curve against time.
+
+    The site isn't mad you're slow, just disappointed. 📈
+</div> 
+</details> 
+{{< /notice >}}
 <script>
     const StatsManager = {
         // Save details to localStorage
