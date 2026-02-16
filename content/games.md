@@ -39,6 +39,14 @@ Do share with your friends and help them kill some time productively. 🚀
     </div>
     <div id="funny-highlights" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 10px;margin-top: 10px;">
     </div>
+    <div>
+    ### 📊 Analytics: The Data Pipeline
+    - Since I'm into Cloud Services, I built a localized "Data Warehouse".
+    - **Ingestion**: **StatsManager** pushes JSON payloads to **localStorage** on every "Win."
+    - **Processing**: **getHighlights** performs aggregate functions (Sum, Avg) to determine your "Turtle Mode."
+    - **Visualization**: **Chart.js** maps your learning curve against time.
+    *The site isn't mad you're slow, just disappointed. 📈*
+    </div>
 </div>
 {{< /notice >}}
 
@@ -189,7 +197,19 @@ Do share with your friends and help them kill some time productively. 🚀
 
 ## Path Finder
 ---
+<details style="cursor: pointer;"> 
+<summary style="font-size: 1.1rem; font-weight: bold; color: var(--success-color);">🛠️ Technical Deep Dive: How the "Game" Work</summary>
 
+<div style="font-size: 1.4rem; line-height: 1.6; margin-top: 15px; color: #8b949e;">
+
+### 🗺️ Path Finder: The BFS Navigator
+- This is the "heavy lifter," using real-world routing logic.
+- **The Algorithm**: Uses **BFS (Breadth-First Search)** to validate maze solvability.
+- **The Maze**: The engine generates walls at ~55% density and runs a simulation. If the path isn't "complex" enough, it trashes the board and starts over.
+
+*It’s like Google Maps, but I’ve replaced the roads with walls. 📍*
+</div>
+</details>
 <div class="game-section" id="path-wrapper">
     <div class="controls">
         <button class="game-btn p-size-btn" id="p-btn-8" onclick="startPath(8)">8x8</button>
@@ -224,7 +244,7 @@ Do share with your friends and help them kill some time productively. 🚀
 
 {{< notice info >}}
 <details style="cursor: pointer;"> 
-<summary style="font-size: 1.1rem; font-weight: bold; color: var(--success-color);">🛠️ Technical Deep Dive: How the "Games" Work</summary>
+<summary style="font-size: 1.1rem; font-weight: bold; color: var(--success-color);">🛠️ Technical Deep Dive: How the "Game" Work</summary>
 
 <div style="font-size: 1.4rem; line-height: 1.6; margin-top: 15px; color: #8b949e;">
 
@@ -242,27 +262,10 @@ Do share with your friends and help them kill some time productively. 🚀
 - **Safe Start**: The engine reserves a "Safe Zone" around your first click, moving mines elsewhere so you don't 💥 immediately.
     
 *You’re a digital bomb technician with a flag as your only armor. 🚩*
-
-### 🗺️ Path Finder: The BFS Navigator
-- This is the "heavy lifter," using real-world routing logic.
-- **The Algorithm**: Uses **BFS (Breadth-First Search)** to validate maze solvability.
-
-- **The Maze**: The engine generates walls at ~55% density and runs a simulation. If the path isn't "complex" enough, it trashes the board and starts over.
-
-*It’s like Google Maps, but I’ve replaced the roads with walls. 📍*
-
-### 📊 Analytics: The Data Pipeline
-- Since I'm into Cloud Services, I built a localized "Data Warehouse".
-- **Ingestion**: **StatsManager** pushes JSON payloads to **localStorage** on every "Win."
-- **Processing**: **getHighlights** performs aggregate functions (Sum, Avg) to determine your "Turtle Mode."
-- **Visualization**: **Chart.js** maps your learning curve against time.
-
-*The site isn't mad you're slow, just disappointed. 📈*
-
 </div> 
-
 </details> 
 {{< /notice >}}
+
 <script>
     const StatsManager = {
         // Save details to localStorage
