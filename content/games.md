@@ -9,11 +9,13 @@ author = "Dhruvik Donga"
 > Logic is a muscle. These puzzles are the gym. Created for the moments between the code, to keep the mind sharp and the spirit curious.
 
 {{< notice tip >}}
+<div style="font-size: 1.8rem; line-height: 1.5;">
 **Did you know?** Engaging in logical puzzles stimulates neuroplasticity—essentially "freshening" your 🧠 cells.
 
 We have got the classics: [Nonogram](#nonogram), [Minesweeper](#minesweeper), the logical [Binary Sudoku](#binary-sudoku), and the new [Path Finder](#path-finder).
 
 Do share with your friends and help them kill some time productively. 🚀
+</div>
 
 <hr style="margin: 15px 0; opacity: 0.2;">
 
@@ -39,6 +41,16 @@ Do share with your friends and help them kill some time productively. 🚀
     </div>
 </div>
 {{< /notice >}}
+
+<div class="game-index-container" style="margin-bottom: 20px;">
+    <select class="game-btn" onchange="location.hash = this.value; this.selectedIndex = 0;" style="width: 100%; max-width: 300px; background: #161b22; border-color: #30363d; font-size: 0.9rem;">
+        <option value="" disabled selected>快速跳转 / Jump to Game...</option>
+        <option value="#nonogram">Nonogram</option>
+        <option value="#minesweeper">Minesweeper</option>
+        <option value="#binary-sudoku">Binary Sudoku</option>
+        <option value="#path-finder">Path Finder</option>
+    </select>
+</div>
 
 <style>
     html {
@@ -565,9 +577,19 @@ Do share with your friends and help them kill some time productively. 🚀
         mRev = Array(size).fill().map(() => Array(size).fill(false));
         mFlag = Array(size).fill().map(() => Array(size).fill(false));
 
-        let p = 0; while(p < mines) {
+        // Choose a random guaranteed start cell (not on edges for better numbers)
+        const startR = 1 + Math.floor(rng.nextFloat() * (size - 2));
+        const startC = 1 + Math.floor(rng.nextFloat() * (size - 2));
+
+        let p = 0; 
+        while(p < mines) {
             let r = Math.floor(rng.nextFloat()*size), c = Math.floor(rng.nextFloat()*size);
-            if(mGrid[r][c] !== 'M') { mGrid[r][c] = 'M'; p++; }
+            // Avoid the start cell and its immediate neighbors to ensure a "numbered" start
+            const isSafeZone = Math.abs(r - startR) <= 1 && Math.abs(c - startC) <= 1;
+            if(mGrid[r][c] !== 'M' && !isSafeZone) { 
+                mGrid[r][c] = 'M'; 
+                p++; 
+            }
         }
 
         for(let r=0; r<size; r++) {
@@ -581,6 +603,8 @@ Do share with your friends and help them kill some time productively. 🚀
             }
         }
         renderMBoard();
+        // Auto-reveal the chosen start cell to give the user a numbered block immediately
+        revealM(startR, startC); 
     }
 
     function renderMBoard() {
@@ -781,42 +805,36 @@ Do share with your friends and help them kill some time productively. 🚀
         document.getElementById('p-btn-'+size).classList.add('active');
 
         let attempts = 0;
-        // The "Validation Loop"
-        while (attempts < 500) {
-            // Tuning density for Medium/Hard feel (38% to 45%)
-            let wallDensity = (size === 8) ? (0.38 + rng.nextFloat() * 0.07) : 0.35;
+        while (attempts < 1000) {
+            // INCREASED DENSITY: Moving from ~40% to ~50-55% for a much tighter maze
+            let wallDensity = (size === 8) ? 0.50 : 0.55; 
             
-            // 1. Initialize empty grid
             let tempGrid = Array(size).fill().map(() => Array(size).fill(0));
             
-            // 2. Populate Walls
             for(let r=0; r<size; r++) {
                 for(let c=0; c<size; c++) {
-                    // Reserve Start (0,0) and End (size-1, size-1)
-                    if((r===0 && c===0) || (r===size-1 && c===size-1)) continue;
+                    // Ensure a small 1-cell buffer around S and E is more likely to be clear
+                    if((r<=1 && c<=1) || (r>=size-2 && c>=size-2)) continue;
                     if(rng.nextFloat() < wallDensity) tempGrid[r][c] = 'W';
                 }
             }
             tempGrid[0][0] = 'S'; 
             tempGrid[size-1][size-1] = 'E';
 
-            // 3. BFS Check
             let pathDist = getShortestPathDist(size, tempGrid);
             
-            // 4. Accept only if solvable and sufficiently complex
-            if (pathDist >= (size * 1.6)) {
-                pGrid = tempGrid; // Commit the valid maze
+            // Validation: Solvable but requires at least 'size * 2' steps to ensure difficulty
+            if (pathDist >= (size * 2)) {
+                pGrid = tempGrid;
                 break; 
             }
             attempts++;
         }
         
-        // If we fail after 500 attempts, fall back to a simple grid to avoid infinite loop
         if (!pGrid) {
             pGrid = Array(size).fill().map(() => Array(size).fill(0));
             pGrid[0][0] = 'S'; pGrid[size-1][size-1] = 'E';
         }
-
         renderPathBoard();
     }
 
