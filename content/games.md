@@ -9,7 +9,7 @@ author = "Dhruvik Donga"
 > Logic is a muscle. These puzzles are the gym. Created for the moments between the code, to keep the mind sharp and the spirit curious.
 
 {{< notice tip >}}
-<div style="font-size: 1.8rem; line-height: 1.5;">
+<div style="font-size: 1.3rem; line-height: 1.5;">
 **Did you know?** Engaging in logical puzzles stimulates neuroplasticity—essentially "freshening" your 🧠 cells.
 
 We have got the classics: [Nonogram](#nonogram), [Minesweeper](#minesweeper), the logical [Binary Sudoku](#binary-sudoku), and the new [Path Finder](#path-finder).
@@ -43,8 +43,8 @@ Do share with your friends and help them kill some time productively. 🚀
 {{< /notice >}}
 
 <div class="game-index-container" style="margin-bottom: 20px;">
-    <select class="game-btn" onchange="location.hash = this.value; this.selectedIndex = 0;" style="width: 100%; max-width: 300px; background: #161b22; border-color: #30363d; font-size: 0.9rem;">
-        <option value="" disabled selected>快速跳转 / Jump to Game...</option>
+    <select class="game-btn" onchange="location.hash = this.value; this.selectedIndex = 0;" style="width: 100%; max-width: 300px; background: #161b22; border-color: #30363d; font-size: 1.5rem;">
+        <option value="" disabled selected>Jump to Game...</option>
         <option value="#nonogram">Nonogram</option>
         <option value="#minesweeper">Minesweeper</option>
         <option value="#binary-sudoku">Binary Sudoku</option>
