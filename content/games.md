@@ -215,12 +215,13 @@ Do share with your friends and help them kill some time productively. 🚀
     background-color: #161b22; 
     color: #c9d1d9; 
     cursor: pointer; 
-    padding: 6px 6px; 
     border-radius: 6px; 
     font-size: 18px;
     transition: opacity 0.3s;
+    width: 3rem;
+    height: 3rem;
 ">
-    ↑
+    ⬆
 </button>
 
 <script>
@@ -254,6 +255,7 @@ Do share with your friends and help them kill some time productively. 🚀
             
             this.renderBadges(gameName);
             if(window.updateChart) window.updateChart(); // Refresh chart if it's open
+            renderHighlights();
         },
 
         // Generate Shields.io badges
@@ -1003,17 +1005,24 @@ Do share with your friends and help them kill some time productively. 🚀
     // Global reference for refreshing
     window.updateChart = renderHistoryChart;
 
-    const highlightContainer = document.getElementById('funny-highlights');
-        const higlightItems = StatsManager.getHighlights();
-        highlightContainer.innerHTML = higlightItems.map(item => `
-            <div style="background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 12px; text-align: center; position: relative; min-width: 110px;">
+    function renderHighlights() {
+        const highlightContainer = document.getElementById('funny-highlights');
+        if (!highlightContainer) return;
+
+        const items = StatsManager.getHighlights();
+        
+        // Ensure the grid is responsive
+        highlightContainer.style.gridTemplateColumns = "repeat(auto-fit, minmax(110px, 1fr))";
+
+        highlightContainer.innerHTML = items.map(item => `
+            <div style="background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 12px; text-align: center; position: relative;">
                 <span title="${item.info}" style="position: absolute; top: 5px; right: 8px; cursor: help; font-size: 0.75rem; color: #8b949e; opacity: 0.8;">ⓘ</span>
-                
                 <div style="font-size: 1.5rem; margin-bottom: 2px;">${item.icon}</div>
                 <div style="color: #8b949e; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">${item.title}</div>
                 <div style="color: ${item.color || '#c9d1d9'}; font-weight: bold; font-size: 0.95rem;">${item.val}</div>
             </div>
         `).join('');
+    }
 
     // --- BACK TO TOP LOGIC ---
     const topBtn = document.getElementById("back-to-top");
