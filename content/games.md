@@ -139,11 +139,10 @@ Do share with your friends and help them kill some time productively. 🚀
 ---
 💡 [How to solve a nonogram](https://www.youtube.com/watch?v=zisu0Qf4TAI)  
 💡 You can click the size options to generate a fresh game anytime.
-
 <details style="cursor: pointer;"> 
-<summary style="font-size: 1.1rem; font-weight: bold; color: var(--success-color);">🛠️ Technical Deep Dive: How the "Game" Work</summary>
+<summary style="font-size: 1.2rem; font-weight: bold; color: var(--success-color);">🛠️ Technical Deep Dive: How the "Game" Works</summary>
 
-<div style="font-size: 1.4rem; line-height: 1.6; margin-top: 15px; color: #8b949e;">
+<div style="font-size: 1.4rem; line-height: 1.6; color: #8b949e;">
 
 ### 🧩 Nonogram: The Constraint Solver
 - This is essentially a Constraint Satisfaction Problem (CSP).
@@ -152,8 +151,6 @@ Do share with your friends and help them kill some time productively. 🚀
 - **Victory**: Runs a matrix comparison on every click.
 
 *It’s like a Sudoku had a baby with a QR code. 🕵️‍♂️*
-
-
 </div> 
 </details>
 <br>
@@ -182,11 +179,10 @@ Do share with your friends and help them kill some time productively. 🚀
 💡 [How to solve a minesweeper](https://www.youtube.com/shorts/Zil7a1hetQE)  
 💡 You can click the size options to generate a fresh game anytime.
 💡 **How to play:** Left-click to reveal a cell. Right-click or long press on mobile device to toggle a flag (🚩) on suspected mines.
-
 <details style="cursor: pointer;"> 
-<summary style="font-size: 1.1rem; font-weight: bold; color: var(--success-color);">🛠️ Technical Deep Dive: How the "Game" Work</summary>
+<summary style="font-size: 1.2rem; font-weight: bold; color: var(--success-color);">🛠️ Technical Deep Dive: How the "Game" Works</summary>
 
-<div style="font-size: 1.4rem; line-height: 1.6; margin-top: 15px; color: #8b949e;">
+<div style="font-size: 1.4rem; line-height: 1.6; color: #8b949e;">
 
 ### 💣 Minesweeper: The Recursive Flood
 - Classic Minesweeper logic using the **Flood Fill** algorithm.
@@ -215,11 +211,10 @@ Do share with your friends and help them kill some time productively. 🚀
 ## Binary Sudoku
 ---
 💡 Fill the grid with 0s and 1s. No more than two same numbers adjacent. Each row/col has equal 0s and 1s.
-
 <details style="cursor: pointer;"> 
-<summary style="font-size: 1.1rem; font-weight: bold; color: var(--success-color);">🛠️ Technical Deep Dive: How the "Game" Work</summary>
+<summary style="font-size: 1.2rem; font-weight: bold; color: var(--success-color);">🛠️ Technical Deep Dive: How the "Game" Works</summary>
 
-<div style="font-size: 1.4rem; line-height: 1.6; margin-top: 15px; color: #8b949e;">
+<div style="font-size: 1.4rem; line-height: 1.6; color: #8b949e;">
 
 ### 0️⃣1️⃣ Binary Sudoku: The Logic Gate
 - This is a test of parity and adjacency rules.
@@ -249,9 +244,9 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
 ## Path Finder
 ---
 <details style="cursor: pointer;"> 
-<summary style="font-size: 1.1rem; font-weight: bold; color: var(--success-color);">🛠️ Technical Deep Dive: How the "Game" Work</summary>
+<summary style="font-size: 1.2rem; font-weight: bold; color: var(--success-color);">🛠️ Technical Deep Dive: How the "Game" Works</summary>
 
-<div style="font-size: 1.4rem; line-height: 1.6; margin-top: 15px; color: #8b949e;">
+<div style="font-size: 1.4rem; line-height: 1.6; color: #8b949e;">
 
 ### 🗺️ Path Finder: The BFS Navigator
 - This is the "heavy lifter," using real-world routing logic.
