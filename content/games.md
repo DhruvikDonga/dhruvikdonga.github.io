@@ -282,12 +282,12 @@ Do share with your friends and help them kill some time productively. 🚀
             highlights.push({ 
                 title: "Total Played", 
                 val: `${totalGames} Games`, 
-                icon: "🎮" 
+                icon: "🎮",
+                info: "Total number of completed puzzle sessions across all games."
             });
 
-            // 2. Player Rank (Based on Total Games)
-            let rank = "Novice";
-            let rankColor = "#8b949e";
+            // 2. Player Rank
+            let rank = "Novice", info = "Play more to rank up! (Architect: 10+, Expert: 25+, Grandmaster: 50+)", rankColor = "#8b949e";
             if (totalGames > 50) { rank = "Grandmaster"; rankColor = "#f85149"; }
             else if (totalGames > 25) { rank = "Expert"; rankColor = "#d29922"; }
             else if (totalGames > 10) { rank = "Architect"; rankColor = "#3fb950"; }
@@ -296,7 +296,8 @@ Do share with your friends and help them kill some time productively. 🚀
                 title: "Player Rank", 
                 val: rank, 
                 icon: "🏆",
-                color: rankColor 
+                color: rankColor,
+                info: info
             });
 
             // 3. Overall Time Spent
@@ -304,10 +305,11 @@ Do share with your friends and help them kill some time productively. 🚀
             highlights.push({ 
                 title: "Overall Time", 
                 val: this.formatTime(totalSeconds), 
-                icon: "⏳" 
+                icon: "⏳",
+                info: "The cumulative time spent solving puzzles on this device."
             });
 
-            // 4. Fastest vs. Slowest (Turtle Mode)
+            // 4. Fastest vs. Slowest
             let averages = Object.keys(stats).map(name => ({
                 name: name,
                 avg: stats[name].totalTime / stats[name].totalCount
@@ -320,12 +322,14 @@ Do share with your friends and help them kill some time productively. 🚀
                 highlights.push({ 
                     title: "Fastest At", 
                     val: fastest.name.charAt(0).toUpperCase() + fastest.name.slice(1), 
-                    icon: "🚀" 
+                    icon: "🚀",
+                    info: `Based on your lowest average solve time: ${this.formatTime(fastest.avg)}.`
                 });
                 highlights.push({ 
                     title: "Turtle Mode", 
                     val: slowest.name.charAt(0).toUpperCase() + slowest.name.slice(1), 
-                    icon: "🐢" 
+                    icon: "🐢",
+                    info: `Based on your highest average solve time: ${this.formatTime(slowest.avg)}.`
                 });
             }
 
@@ -985,6 +989,7 @@ Do share with your friends and help them kill some time productively. 🚀
         const higlightItems = StatsManager.getHighlights();
         highlightContainer.innerHTML = higlightItems.map(item => `
             <div style="background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 12px; text-align: center;">
+                <span title="${item.info}" style="position: absolute; top: 5px; right: 5px; cursor: help; font-size: 0.7rem; color: #8b949e; opacity: 0.6;">ⓘ</span>
                 <div style="font-size: 1.8rem; margin-bottom: 1px;">${item.icon}</div>
                 <div style="color: #8b949e; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 0.5px;">${item.title}</div>
                 <div style="color: #c9d1d9; font-weight: bold; font-size: 1.2rem;">${item.val}</div>
