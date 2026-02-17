@@ -913,8 +913,7 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
 
         let attempts = 0;
         while (attempts < 1000) {
-            // INCREASED DENSITY: Moving from ~40% to ~50-55% for a much tighter maze
-            let wallDensity = (size === 8) ? 0.50 : 0.55; 
+            let wallDensity = (size === 8) ? 0.60 : 0.65; 
             
             let tempGrid = Array(size).fill().map(() => Array(size).fill(0));
             
