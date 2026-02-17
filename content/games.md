@@ -31,6 +31,7 @@ Do share with your friends and help them kill some time productively. 🚀
             <option value="nonogram">Nonogram</option>
             <option value="minesweeper">Minesweeper</option>
             <option value="binaryLogic">Binary Sudoku</option>
+            <option value="2048">2048 (High Tile)</option>
             <option value="pathFinder">Path Finder</option>
         </select>
         <button onclick="toggleAnalytics()" style="background: none; border: none; color: #ffffff; cursor: pointer; font-size: 1.2rem;">Close ✖</button>
@@ -64,6 +65,7 @@ Do share with your friends and help them kill some time productively. 🚀
         <option value="#nonogram">Nonogram</option>
         <option value="#minesweeper">Minesweeper</option>
         <option value="#binary-sudoku">Binary Sudoku</option>
+        <option value="#2048">2048</option>
         <option value="#path-finder">Path Finder</option>
     </select>
 </div>
@@ -135,6 +137,12 @@ Do share with your friends and help them kill some time productively. 🚀
     .p-cell.start { background-color: #1f6feb; color: white; }
     .p-cell.end { background-color: #f85149; color: white; }
     .p-cell.path { background-color: var(--success-color); color: white; transition: background-color 0.2s; }
+
+    /* 2048 Grid Styles */
+    .t-grid { display: grid; grid-template-columns: repeat(4, 75px); grid-template-rows: repeat(4, 75px); gap: 10px; background: #30363d; padding: 10px; border-radius: 8px; width: max-content; margin: 0 auto; }
+    .t-cell { background: #161b22; border-radius: 4px; display: flex; justify-content: center; align-items: center; font-size: 1.4rem; font-weight: bold; transition: all 0.1s; }
+    .t-2 { background: #58a6ff; color: #0d1117; } .t-4 { background: #3fb950; color: #0d1117; }
+    .t-8 { background: #d29922; } .t-16 { background: #f85149; } .t-empty { color: transparent; }
     
 </style>
 
@@ -243,6 +251,25 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
 </div>
 
 <div id="binaryLogic-badges" class="badge-container"></div>
+
+
+## 2048
+---
+{{< notice info >}}
+<details>
+<summary style="cursor:pointer; font-weight:bold;">🛠️ Technical Deep Dive</summary>
+<div style="font-size: 1.4rem; line-height: 1.6; color: #8b949e;">
+
+- Uses **Matrix Rotation** and **Array Compaction**. 
+- Every move is treated as a "Slide Left" by rotating the grid state.
+</div>
+</details>
+{{< /notice >}}
+<div class="game-section" id="2048-wrapper">
+    <div id="t-score" style="font-size: 1.5rem; margin-bottom: 10px;">Score: 0</div>
+    <div id="t-board" class="t-grid"></div>
+    <p style="font-size: 0.8rem; color: #8b949e; margin-top: 10px;">Use Arrow Keys to move tiles.</p>
+</div>
 
 ## Path Finder
 ---
@@ -1093,6 +1120,32 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
         }
     }
 
+    // --- 2048 ENGINE ---
+    let tGrid = [], tScore = 0, tActive = false;
+    function start2048() {
+        tGrid = Array(4).fill().map(() => Array(4).fill(0));
+        tScore = 0; tActive = true;
+        addTile(); addTile(); render2048();
+    }
+    function addTile() {
+        let empty = [];
+        tGrid.forEach((r, ri) => r.forEach((v, ci) => { if(v===0) empty.push({ri, ci}) }));
+        if(empty.length) {
+            let {ri, ci} = empty[Math.floor(Math.random()*empty.length)];
+            tGrid[ri][ci] = Math.random() < 0.9 ? 2 : 4;
+        }
+    }
+    function render2048() {
+        const b = document.getElementById('t-board'); b.innerHTML = '';
+        tGrid.forEach(r => r.forEach(v => {
+            const c = document.createElement('div');
+            c.className = `t-cell ${v ? 't-'+v : 't-empty'}`;
+            c.textContent = v || '';
+            b.appendChild(c);
+        }));
+        document.getElementById('t-score').textContent = `Score: ${tScore}`;
+    }
+    
     // Manual Undo for the UI
     function undoPath() {
         if (pSolved || pPath.length === 0) return;
@@ -1105,6 +1158,7 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
     startMines(8, 10);
     startBinary(4);
     startPath(8);
+    start2048();
 
     // At the bottom of your <script>
     window.addEventListener('load', () => {
