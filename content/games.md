@@ -446,7 +446,11 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
                 borderColor: colors[idx % colors.length],
                 backgroundColor: colors[idx % colors.length] + '33',
                 tension: 0.2,
-                pointRadius: 4
+                pointRadius: 4,
+                // --- CURVE SETTINGS ---
+                tension: 0.4,       
+                pointRadius: 4,
+                pointHoverRadius: 6,
             };
         });
 
