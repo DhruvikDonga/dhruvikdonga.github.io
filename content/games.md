@@ -278,10 +278,10 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
     bottom: 60px; 
     right: 20px; 
     z-index: 99; 
-    border: 1px solid #30363d; 
+    border: 1px solid #424242; 
     outline: none; 
-    background-color: #161b22; 
-    color: #c9d1d9; 
+    background-color: #424242; 
+    color: #ffffff; 
     cursor: pointer; 
     border-radius: 6px; 
     font-size: 15px;
