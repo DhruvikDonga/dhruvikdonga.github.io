@@ -474,6 +474,10 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
                         title: { display: true, text: 'Seconds', color: '#ffff' },
                         grid: { color: 'rgb(60, 60, 60)' }, // Dark grid lines
                         ticks: { color: '#ffff' }  // Light gray numbers
+                        // This changes the Y-axis labels to 1:30, 2:00, etc.
+                        callback: function(value) {
+                            return StatsManager.formatTime(value);
+                        }
                     },
                     x: { 
                         title: { display: true, text: 'Game Number', color: '#ffff' },
@@ -484,6 +488,23 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
                 plugins: {
                     legend: { 
                         labels: { color: '#ffff' } // Light gray legend text
+                    }
+                    tooltip: {
+                        backgroundColor: '#161b22',
+                        titleColor: '#58a6ff',
+                        bodyColor: '#c9d1d9',
+                        borderColor: '#30363d',
+                        borderWidth: 1,
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) label += ': ';
+                                if (context.parsed.y !== null) {
+                                    label += StatsManager.formatTime(context.parsed.y);
+                                }
+                                return label;
+                            }
+                        }
                     }
                 }
             }
