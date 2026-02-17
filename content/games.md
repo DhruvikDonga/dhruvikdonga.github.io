@@ -471,7 +471,7 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
                 scales: {
                     y: { 
                         beginAtZero: true,
-                        title: { display: true, text: 'Seconds', color: '#ffff' },
+                        title: { display: true, text: '⏰ Time', color: '#ffff' },
                         grid: { color: 'rgb(60, 60, 60)' }, // Dark grid lines
                         ticks: { 
                             color: '#ffff',
@@ -481,7 +481,7 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
                         }
                     },
                     x: { 
-                        title: { display: true, text: 'Game Number', color: '#ffff' },
+                        title: { display: true, text: '🧩 Game Number', color: '#ffff' },
                         grid: { color: 'rgb(60, 60, 60)' }, // Dark grid lines
                         ticks: { color: '#ffff' }  // Light gray numbers
                     }
