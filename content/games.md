@@ -287,9 +287,11 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
 
 <div class="game-section" id="2048-wrapper">
     <div class="controls" style="justify-content: center; display: flex; gap: 10px; margin-bottom: 10px;">
-        <button class="game-btn" onclick="init2048()" style="background: #f85149; color: white;">Reset Game 🔄</button>
+    <button class="game-btn m-size-btn" onclick="init2048()" >Reset Game 🔄</button>
     </div>
-    <div id="t-score" style="font-size: 1.5rem; color: #3fb950; margin-bottom: 10px;">Score: 0</div>
+    <div class="timer-container">
+        <div id="t-score" class="timer">Score: 0</div>
+    </div>
     <div class="t-container" id="t-board-container">
         <div class="t-grid-background">
             <div class="t-grid-cell"></div><div class="t-grid-cell"></div><div class="t-grid-cell"></div><div class="t-grid-cell"></div>
