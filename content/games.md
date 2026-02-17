@@ -33,7 +33,7 @@ Do share with your friends and help them kill some time productively. 🚀
             <option value="binaryLogic">Binary Sudoku</option>
             <option value="pathFinder">Path Finder</option>
         </select>
-        <button onclick="toggleAnalytics()" style="background: none; border: none; color: #8b949e; cursor: pointer; font-size: 0.8rem;">Close ✖</button>
+        <button onclick="toggleAnalytics()" style="background: none; border: none; color: #ffffff; cursor: pointer; font-size: 0.8rem;">Close ✖</button>
     </div>
     <div style="height: 250px; width: 100%; background: #424242; border-radius: 6px; padding: 10px; border: 1px solid #424242;">
         <canvas id="historyChart"></canvas>
@@ -471,19 +471,19 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
                 scales: {
                     y: { 
                         beginAtZero: true,
-                        title: { display: true, text: 'Seconds', color: '#8b949e' },
-                        grid: { color: '#30363d' }, // Dark grid lines
-                        ticks: { color: '#8b949e' }  // Light gray numbers
+                        title: { display: true, text: 'Seconds', color: '#ffff' },
+                        grid: { color: 'rgb(60, 60, 60)' }, // Dark grid lines
+                        ticks: { color: '#ffff' }  // Light gray numbers
                     },
                     x: { 
-                        title: { display: true, text: 'Game Number', color: '#8b949e' },
-                        grid: { color: '#30363d' }, // Dark grid lines
-                        ticks: { color: '#8b949e' }  // Light gray numbers
+                        title: { display: true, text: 'Game Number', color: '#ffff' },
+                        grid: { color: 'rgb(60, 60, 60)' }, // Dark grid lines
+                        ticks: { color: '#ffff' }  // Light gray numbers
                     }
                 },
                 plugins: {
                     legend: { 
-                        labels: { color: '#c9d1d9' } // Light gray legend text
+                        labels: { color: '#ffff' } // Light gray legend text
                     }
                 }
             }
@@ -1086,10 +1086,10 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
 
         highlightContainer.innerHTML = items.map(item => `
             <div style="background: #322e2e; border: 1px solid #30363d; border-radius: 6px; padding: 12px; text-align: center; position: relative;">
-                <span title="${item.info}" style="position: absolute; top: 5px; right: 8px; cursor: help; font-size: 0.75rem; color: #ffffff; opacity: 0.8;">ⓘ</span>
-                <div style="font-size: 1.5rem; margin-bottom: 2px;">${item.icon}</div>
-                <div style="color: #ffffff; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">${item.title}</div>
-                <div style="color: ${item.color || '#ffffff'}; font-weight: bold; font-size: 0.95rem;">${item.val}</div>
+                <span title="${item.info}" style="position: absolute; top: 5px; right: 8px; cursor: help; font-size: 0.9rem; color: #ffffff; opacity: 0.9;">ⓘ</span>
+                <div style="font-size: 1.8rem; margin-bottom: 2px;">${item.icon}</div>
+                <div style="color: #ffffff; font-size: 0.80rem; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">${item.title}</div>
+                <div style="color: ${item.color || '#ffffff'}; font-weight: bold; font-size: 1rem;">${item.val}</div>
             </div>
         `).join('');
     }
