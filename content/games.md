@@ -366,7 +366,7 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
 <script>
     const StatsManager = {
         // Save details to localStorage
-        saveGame(gameName, size, timeInSeconds,isScore = false) {
+        saveGame(gameName, size, value,isScore = false) {
             let stats = JSON.parse(localStorage.getItem('dhruvik_game_stats')) || {};
             let history = JSON.parse(localStorage.getItem('dhruvik_game_history')) || [];
             
@@ -374,12 +374,12 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
             if (!stats[gameName]) stats[gameName] = { totalTime: 0, totalCount: 0, segments: {} };
             const g = stats[gameName];
             g.totalCount++;
-            g.totalTime += timeInSeconds;
+            g.totalTime += value;
 
             if (!g.segments[size]) g.segments[size] = { count: 0, bestTime: Infinity };
             const s = g.segments[size];
             s.count++;
-            if (timeInSeconds < s.bestTime) s.bestTime = timeInSeconds;
+            if (value < s.bestTime) s.bestTime = value;
 
             // 2. Update History (for Graphs)
             history.push({
