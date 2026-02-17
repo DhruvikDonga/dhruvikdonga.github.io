@@ -489,7 +489,7 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
                 plugins: {
                     legend: { 
                         labels: { color: '#ffff' } // Light gray legend text
-                    }
+                    },
                     tooltip: {
                         backgroundColor: '#161b22',
                         titleColor: '#58a6ff',
