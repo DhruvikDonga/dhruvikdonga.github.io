@@ -35,7 +35,7 @@ Do share with your friends and help them kill some time productively. 🚀
         </select>
         <button onclick="toggleAnalytics()" style="background: none; border: none; color: #8b949e; cursor: pointer; font-size: 0.8rem;">Close ✖</button>
     </div>
-    <div style="height: 250px; width: 100%; background: #161b22; border-radius: 6px; padding: 10px; border: 1px solid #30363d;">
+    <div style="height: 250px; width: 100%; background: #424242; border-radius: 6px; padding: 10px; border: 1px solid #424242;">
         <canvas id="historyChart"></canvas>
     </div>
     <div id="funny-highlights" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 10px;margin-top: 10px;">
@@ -57,7 +57,7 @@ Do share with your friends and help them kill some time productively. 🚀
 {{< /notice >}}
 
 <div class="game-index-container" style="margin-bottom: 20px;">
-    <select class="game-btn" onchange="location.hash = this.value; this.selectedIndex = 0;" style="width: 100%; max-width: 300px; background: #161b22; border-color: #30363d; font-size: 1.5rem;">
+    <select class="game-btn" onchange="location.hash = this.value; this.selectedIndex = 0;" style="width: 100%; max-width: 300px; background: #424242; border-color: #424242; font-size: 1.5rem;">
         <option value="" disabled selected>Jump to Game...</option>
         <option value="#nonogram">Nonogram</option>
         <option value="#minesweeper">Minesweeper</option>
