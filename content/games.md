@@ -1230,7 +1230,7 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
         
         // Use JSON parse/stringify for deep copy of the state
         let temp = JSON.parse(JSON.stringify(tGrid));
-        let rotCount = dir === 'U' ? 1 : dir === 'R' ? 2 : dir === 'D' ? 3 : 0;
+        let rotCount = dir === 'D' ? 1 : dir === 'R' ? 2 : dir === 'U' ? 3 : 0;
         for(let i=0; i<rotCount; i++) temp = rotate(temp);
 
         for(let r=0; r<4; r++) {
@@ -1316,7 +1316,6 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
     startMines(8, 10);
     startBinary(4);
     startPath(8);
-    reset2048();
     setup2048Input();
     init2048();
 
