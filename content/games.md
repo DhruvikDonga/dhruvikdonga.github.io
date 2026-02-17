@@ -188,7 +188,7 @@ Do share with your friends and help them kill some time productively. 🚀
 </div> 
 </details>
 <br>
-<div class="game-section" id="nonogram-wrapper">
+<div class="game-section" id="nonogram-wrapper" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
     <div class="controls">
         <button class="game-btn n-size-btn" id="n-btn-5" onclick="startNonogram(5)">5x5</button>
         <button class="game-btn n-size-btn" id="n-btn-8" onclick="startNonogram(8)">8x8</button>
@@ -204,9 +204,9 @@ Do share with your friends and help them kill some time productively. 🚀
     </div>
     <div id="n-board" class="n-grid"></div>
     <div id="n-status" style="color: var(--success-color); font-weight: bold; margin-top: 1rem;"></div>
+    <div id="nonogram-badges" class="badge-container"></div>
 </div>
 
-<div id="nonogram-badges" class="badge-container"></div>
 
 ## Minesweeper
 ---
@@ -227,7 +227,7 @@ Do share with your friends and help them kill some time productively. 🚀
 </div>
 </details>
 <br>
-<div class="game-section" id="mines-wrapper">
+<div class="game-section" id="mines-wrapper" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
     <div class="controls">
         <button class="game-btn m-size-btn" id="m-btn-8" onclick="startMines(8, 10)">Easy (8x8)</button>
         <button class="game-btn m-size-btn" id="m-btn-12" onclick="startMines(12, 20)">Medium (12x12)</button>
@@ -238,9 +238,8 @@ Do share with your friends and help them kill some time productively. 🚀
     </div>
     <div id="m-board" class="m-grid"></div>
     <div id="m-status" style="font-weight: bold; margin-top: 1rem;"></div>
+    <div id="minesweeper-badges" class="badge-container"></div>
 </div>
-
-<div id="minesweeper-badges" class="badge-container"></div>
 
 ## Binary Sudoku
 ---
@@ -260,7 +259,7 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
 </div>
 </details>
 <br>
-<div class="game-section" id="binary-wrapper">
+<div class="game-section" id="binary-wrapper" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
     <div class="controls">
         <button class="game-btn b-size-btn" id="b-btn-4" onclick="startBinary(4)">4x4</button>
         <button class="game-btn b-size-btn" id="b-btn-6" onclick="startBinary(6)">6x6</button>
@@ -271,10 +270,8 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
     </div>
     <div id="b-board" class="b-grid"></div>
     <div id="b-status" style="color: var(--success-color); font-weight: bold; margin-top: 1rem;"></div>
+    <div id="binaryLogic-badges" class="badge-container"></div>
 </div>
-
-<div id="binaryLogic-badges" class="badge-container"></div>
-
 
 ## 2048
 ---
@@ -332,9 +329,9 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
     </div>
     <div id="p-board" class="p-grid" onmouseleave="stopDrawing()"></div>
     <div id="p-status" style="color: var(--success-color); font-weight: bold; margin-top: 1rem; min-height: 1.5em;"></div>
+    <div id="pathFinder-badges" class="badge-container"></div>
 </div>
 
-<div id="pathFinder-badges" class="badge-container"></div>
 <button id="back-to-top" title="Go to top" onclick="scrollToTop()" style="
     display: none; 
     position: fixed; 
