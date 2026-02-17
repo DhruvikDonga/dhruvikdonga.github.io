@@ -353,11 +353,30 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
             container.innerHTML = badgeHTML;
         },
         formatTime(seconds) {
-            if (seconds === Infinity || isNaN(seconds)) return 'N/A';
-            const m = Math.floor(seconds / 60);
-            const s = seconds % 60;
-            return `${m}:${s.toString().padStart(2, '0')}`;
-        },
+            if (seconds === Infinity || isNaN(seconds) || seconds === null) return 'N/A';
+            
+            const units = [
+                { label: 'mo', seconds: 30 * 24 * 60 * 60 },
+                { label: 'd', seconds: 24 * 60 * 60 },
+                { label: 'h', seconds: 60 * 60 },
+                { label: 'm', seconds: 60 },
+                { label: 's', seconds: 1 }
+            ];
+
+            let remaining = Math.floor(seconds);
+            let parts = [];
+
+            for (const unit of units) {
+                if (remaining >= unit.seconds) {
+                    const value = Math.floor(remaining / unit.seconds);
+                    remaining %= unit.seconds;
+                    parts.push(`${value}${unit.label}`);
+                }
+            }
+
+            // Return the formatted string, or '0s' if the value was 0
+            return parts.length > 0 ? parts.join(' ') : '0s';
+        }
         getHighlights() {
             const stats = JSON.parse(localStorage.getItem('dhruvik_game_stats')) || {};
             const history = JSON.parse(localStorage.getItem('dhruvik_game_history')) || [];
