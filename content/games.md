@@ -366,7 +366,7 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
 <script>
     const StatsManager = {
         // Save details to localStorage
-        saveGame(gameName, size, timeInSeconds) {
+        saveGame(gameName, size, timeInSeconds,isScore = false) {
             let stats = JSON.parse(localStorage.getItem('dhruvik_game_stats')) || {};
             let history = JSON.parse(localStorage.getItem('dhruvik_game_history')) || [];
             
@@ -385,7 +385,7 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
             history.push({
                 game: gameName,
                 size: size,
-                time: timeInSeconds,
+                [isScore ? 'score' : 'time']: value,
                 date: new Date().toLocaleString()
             });
 
@@ -524,22 +524,19 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
         // Filter data for the specific game
         const gameData = history.filter(h => h.game === game);
         
-        // Group unique sizes to create separate lines (e.g., 8x8 line, 10x10 line)
+        const isScoreGame = (game === '2048' || game === 'game2048');
+        
         const segments = [...new Set(gameData.map(h => h.size))];
         
         const datasets = segments.map((size, idx) => {
             const colors = ['#58a6ff', '#3fb950', '#f85149', '#d29922'];
-            // Filter history for this specific size
             const sessionData = gameData.filter(h => h.size === size);
             
             return {
-                label: `${size}x${size} Grid`,
-                data: sessionData.map(h => h.time),
+                label: isScoreGame ? `Score (${size}x${size})` : `${size}x${size} Grid`,
+                data: sessionData.map(h => isScoreGame ? (h.score || 0) : h.time),
                 borderColor: colors[idx % colors.length],
                 backgroundColor: colors[idx % colors.length] + '33',
-                tension: 0.2,
-                pointRadius: 4,
-                // --- CURVE SETTINGS ---
                 tension: 0.4,       
                 pointRadius: 4,
                 pointHoverRadius: 6,
@@ -563,25 +560,23 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
                 scales: {
                     y: { 
                         beginAtZero: true,
-                        title: { display: true, text: '⏰ Time', color: '#ffff' },
-                        grid: { color: '#424242' }, // Dark grid lines
+                        title: { display: true, text: isScoreGame ? '📈 Score' : '⏰ Time', color: '#ffff' },
+                        grid: { color: '#424242' },
                         ticks: { 
                             color: '#ffff',
                             callback: function(value) {
-                                return StatsManager.formatTime(value);
+                                return isScoreGame ? value : StatsManager.formatTime(value);
                             }
                         }
                     },
                     x: { 
                         title: { display: true, text: '🧩 Game Number', color: '#ffff' },
-                        grid: { color: '#424242' }, // Dark grid lines
-                        ticks: { color: '#ffff' }  // Light gray numbers
+                        grid: { color: '#424242' },
+                        ticks: { color: '#ffff' }
                     }
                 },
                 plugins: {
-                    legend: { 
-                        labels: { color: '#ffff' } // Light gray legend text
-                    },
+                    legend: { labels: { color: '#ffff' } },
                     tooltip: {
                         backgroundColor: '#161b22',
                         titleColor: '#58a6ff',
@@ -593,7 +588,7 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
                                 let label = context.dataset.label || '';
                                 if (label) label += ': ';
                                 if (context.parsed.y !== null) {
-                                    label += StatsManager.formatTime(context.parsed.y);
+                                    label += isScoreGame ? context.parsed.y : StatsManager.formatTime(context.parsed.y);
                                 }
                                 return label;
                             }
@@ -1176,6 +1171,9 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
     let startX, startY;
 
     function init2048() {
+        if (tScore > 0) {
+            StatsManager.saveGame('game2048', 4, tScore, true);
+        }
         tGrid = Array(4).fill().map(() => Array(4).fill(null));
         tScore = 0; 
         nextTileId = 0;
