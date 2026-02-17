@@ -1226,19 +1226,26 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
 
     function move2048(dir) {
         let moved = false;
-        const rotate = (m) => m[0].map((_, i) => m.map(row => row[i]).reverse());
-        
-        // Use JSON parse/stringify for deep copy of the state
+        // Clockwise Rotation
+        const rotateCW = (m) => m[0].map((_, i) => m.map(row => row[i]).reverse());
         let temp = JSON.parse(JSON.stringify(tGrid));
-        let rotCount = dir === 'D' ? 1 : dir === 'R' ? 2 : dir === 'U' ? 3 : 0;
-        for(let i=0; i<rotCount; i++) temp = rotate(temp);
+        // Mapping for Slide Left:
+        // Left: 0, Up: 1 CW, Right: 2 CW, Down: 3 CW
+        let rotCount = 0;
+        if (dir === 'U') rotCount = 1;
+        if (dir === 'R') rotCount = 2;
+        if (dir === 'D') rotCount = 3;
 
+        // Rotate the grid so the requested move becomes a "Slide Left"
+        for(let i=0; i<rotCount; i++) temp = rotateCW(temp);
+
+        // CORE SLIDE & MERGE LOGIC
         for(let r=0; r<4; r++) {
             let row = temp[r].filter(v => v !== null);
             for(let i=0; i<row.length-1; i++) {
                 if(row[i].val === row[i+1].val) {
                     row[i].val *= 2;
-                    row[i].merged = true;
+                    row[i].merged = true; // Signals the "Pop" animation
                     tScore += row[i].val;
                     row.splice(i+1, 1);
                     moved = true;
@@ -1248,16 +1255,21 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
             temp[r] = row;
         }
 
-        for(let i=0; i<(4-rotCount)%4; i++) temp = rotate(temp);
+        // ROTATE BACK: Using (4 - rotCount) clockwise rotations to restore orientation
+        let reverseRotations = (4 - rotCount) % 4;
+        for(let i=0; i<reverseRotations; i++) temp = rotateCW(temp);
         
-        if (JSON.stringify(tGrid) !== JSON.stringify(temp)) {
+        // Check if the state actually changed (to avoid adding tiles on invalid moves)
+        const stateChanged = JSON.stringify(tGrid) !== JSON.stringify(temp);
+        
+        if (stateChanged) {
             tGrid = temp;
             addRandomTile();
             render2048();
             checkGameOver();
         }
     }
-
+    
     function checkGameOver() {
         let canMove = false;
         for(let r=0; r<4; r++) {
