@@ -473,10 +473,11 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
                         beginAtZero: true,
                         title: { display: true, text: 'Seconds', color: '#ffff' },
                         grid: { color: 'rgb(60, 60, 60)' }, // Dark grid lines
-                        ticks: { color: '#ffff' }  // Light gray numbers
-                        // This changes the Y-axis labels to 1:30, 2:00, etc.
-                        callback: function(value) {
-                            return StatsManager.formatTime(value);
+                        ticks: { 
+                            color: '#ffff',
+                            callback: function(value) {
+                                return StatsManager.formatTime(value);
+                            }
                         }
                     },
                     x: { 
