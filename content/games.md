@@ -321,7 +321,7 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
 </div>
 </details>
 <br>
-<div class="game-section" id="path-wrapper">
+<div class="game-section" id="path-wrapper" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
     <div class="controls">
         <button class="game-btn p-size-btn" id="p-btn-8" onclick="startPath(8)">8x8</button>
         <button class="game-btn p-size-btn" id="p-btn-10" onclick="startPath(10)">10x10</button>
