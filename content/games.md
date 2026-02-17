@@ -286,8 +286,8 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
 </details>
 
 <div class="game-section" id="2048-wrapper" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-    <button class="game-btn m-size-btn" onclick="init2048()" >Reset Game 🔄</button>
-    <div class="timer-container">
+    <button class="game-btn m-size-btn" onclick="init2048()">Reset Game 🔄</button>
+    <div class="timer-container" style="margin-top: 5px">
         <div id="t-score" class="timer">Score: 0</div>
     </div>
     <div class="t-container" id="t-board-container">
