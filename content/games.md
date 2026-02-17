@@ -37,7 +37,8 @@ Do share with your friends and help them kill some time productively. 🚀
     </div>
     <div style="height: 250px; width: 100%; background: #424242; border-radius: 6px; padding: 10px; border: 1px solid #424242;">
         <canvas id="historyChart"></canvas>
-    </div>
+    </div>   
+    <hr style="margin: 15px 0; opacity: 0.2;">
     <div id="funny-highlights" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 10px;margin-top: 10px;">
     </div>
     <details style="cursor: pointer;"> 
