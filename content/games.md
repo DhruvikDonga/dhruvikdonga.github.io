@@ -1085,11 +1085,11 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
         highlightContainer.style.gridTemplateColumns = "repeat(auto-fit, minmax(110px, 1fr))";
 
         highlightContainer.innerHTML = items.map(item => `
-            <div style="background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 12px; text-align: center; position: relative;">
-                <span title="${item.info}" style="position: absolute; top: 5px; right: 8px; cursor: help; font-size: 0.75rem; color: #8b949e; opacity: 0.8;">ⓘ</span>
+            <div style="background: #322e2e; border: 1px solid #30363d; border-radius: 6px; padding: 12px; text-align: center; position: relative;">
+                <span title="${item.info}" style="position: absolute; top: 5px; right: 8px; cursor: help; font-size: 0.75rem; color: #ffffff; opacity: 0.8;">ⓘ</span>
                 <div style="font-size: 1.5rem; margin-bottom: 2px;">${item.icon}</div>
-                <div style="color: #8b949e; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">${item.title}</div>
-                <div style="color: ${item.color || '#c9d1d9'}; font-weight: bold; font-size: 0.95rem;">${item.val}</div>
+                <div style="color: #ffffff; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">${item.title}</div>
+                <div style="color: ${item.color || '#ffffff'}; font-weight: bold; font-size: 0.95rem;">${item.val}</div>
             </div>
         `).join('');
     }
