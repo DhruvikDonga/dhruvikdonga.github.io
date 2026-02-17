@@ -27,13 +27,13 @@ Do share with your friends and help them kill some time productively. 🚀
 </div>
 <div id="analytics-section" style="display: none; margin-top: 20px; padding: 20px; background: #424242; border: 1px solid #424242; border-radius: 8px; color: #c9d1d9;">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-        <select id="chart-game-select" class="game-btn p-size-btn" onchange="renderHistoryChart()" style="font-size: 1rem; padding: 4px; background: #424242; color: #ffffff; border: 1px solid #424242;">
+        <select id="chart-game-select" class="game-btn p-size-btn" onchange="renderHistoryChart()" style="font-size: 1.2rem; padding: 4px; background: #424242; color: #ffffff; border: 1px solid #424242;">
             <option value="nonogram">Nonogram</option>
             <option value="minesweeper">Minesweeper</option>
             <option value="binaryLogic">Binary Sudoku</option>
             <option value="pathFinder">Path Finder</option>
         </select>
-        <button onclick="toggleAnalytics()" style="background: none; border: none; color: #ffffff; cursor: pointer; font-size: 0.8rem;">Close ✖</button>
+        <button onclick="toggleAnalytics()" style="background: none; border: none; color: #ffffff; cursor: pointer; font-size: 1.2rem;">Close ✖</button>
     </div>
     <div style="height: 250px; width: 100%; background: #424242; border-radius: 6px; padding: 10px; border: 1px solid #424242;">
         <canvas id="historyChart"></canvas>
