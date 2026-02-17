@@ -162,7 +162,22 @@ Do share with your friends and help them kill some time productively. 🚀
     .t-2 { background: #58a6ff; color: #0d1117; } .t-4 { background: #3fb950; color: #0d1117; }
     .t-8 { background: #d29922; } .t-16 { background: #f85149; } .t-32 { background: #ab7df8; }
 
-    @keyframes pop { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
+    /* Animation for new tiles entering the grid */
+    @keyframes appear {
+        0% { opacity: 0; transform: scale(0) translate(var(--tx), var(--ty)); }
+        100% { opacity: 1; transform: scale(1) translate(var(--tx), var(--ty)); }
+    }
+
+    .t-new {
+        animation: appear 0.2s ease-out forwards;
+    }
+
+    /* Ensure merged tiles also use the same coordinate-aware scale */
+    @keyframes pop {
+        0% { transform: scale(1) translate(var(--tx), var(--ty)); }
+        50% { transform: scale(1.15) translate(var(--tx), var(--ty)); }
+        100% { transform: scale(1) translate(var(--tx), var(--ty)); }
+    }
     .t-merged { animation: pop 0.4s ease-in-out; }
     
 </style>
@@ -1190,15 +1205,26 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
                     activeIds.add(tileData.id.toString());
                     let tileElem = document.getElementById(`tile-${tileData.id}`);
                     
+                    const tx = c * 80;
+                    const ty = r * 80;
+
                     if (!tileElem) {
                         tileElem = document.createElement('div');
                         tileElem.id = `tile-${tileData.id}`;
+                        tileElem.classList.add('t-tile', 't-new');
                         layer.appendChild(tileElem);
                     }
 
-                    tileElem.style.transform = `translate(${c * 80}px, ${r * 80}px)`;
+                    tileElem.style.setProperty('--tx', `${tx}px`);
+                    tileElem.style.setProperty('--ty', `${ty}px`);
+                    
+                    tileElem.style.transform = `translate(${tx}px, ${ty}px)`;
                     tileElem.textContent = tileData.val;
                     tileElem.className = `t-tile t-${tileData.val} ${tileData.merged ? 't-merged' : ''}`;
+                    
+                    if (tileElem.classList.contains('t-new')) {
+                        setTimeout(() => tileElem.classList.remove('t-new'), 200);
+                    }
                 }
             });
         });
@@ -1206,8 +1232,8 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
         Array.from(layer.children).forEach(child => {
             const id = child.id.replace('tile-', '');
             if (!activeIds.has(id)) {
-                child.style.opacity = "0"; // Fade out
-                setTimeout(() => child.remove(), 300); 
+                child.style.opacity = "0";
+                setTimeout(() => child.remove(), 300);
             }
         });
 
