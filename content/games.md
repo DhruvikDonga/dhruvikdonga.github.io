@@ -150,13 +150,16 @@ Do share with your friends and help them kill some time productively. 🚀
     }
     .t-grid-cell { background: rgba(22, 27, 34, 0.5); border-radius: 4px; width: 70px; height: 70px; }
     
-    .t-tile-container { position: absolute; top: 10px; left: 10px; z-index: 10; }
+    .t-tile-layer { position: absolute; top: 10px; left: 10px; width: 300px; height: 300px; pointer-events: none; }
+    
     .t-tile {
         position: absolute; width: 70px; height: 70px;
         background: var(--tile-bg); border-radius: 4px;
         display: flex; justify-content: center; align-items: center;
         font-weight: bold; font-size: 1.5rem; color: #fff;
+        /* THE ANIMATION ENGINE */
         transition: transform 0.15s ease-in-out, background-color 0.1s;
+        z-index: 10;
     }
     .t-2 { background: #58a6ff; color: #0d1117; } .t-4 { background: #3fb950; color: #0d1117; }
     .t-8 { background: #d29922; } .t-16 { background: #f85149; } .t-32 { background: #ab7df8; }
@@ -286,10 +289,10 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
 </details>
 
 <div class="game-section" id="2048-wrapper">
-    <div class="controls" style="justify-content: center;">
-        <button class="game-btn" onclick="reset2048()" style="background: var(--cell-mine);">Reset Game 🔄</button>
+    <div class="controls" style="justify-content: center; display: flex; gap: 10px; margin-bottom: 10px;">
+        <button class="game-btn" onclick="init2048()" style="background: #f85149; color: white;">Reset Game 🔄</button>
     </div>
-    <div id="t-score" style="font-size: 1.5rem; color: #3fb950; margin-bottom: 10px; text-align: center;">Score: 0</div>
+    <div id="t-score" style="font-size: 1.5rem; color: #3fb950; margin-bottom: 10px;">Score: 0</div>
     <div class="t-container" id="t-board-container">
         <div class="t-grid-background">
             <div class="t-grid-cell"></div><div class="t-grid-cell"></div><div class="t-grid-cell"></div><div class="t-grid-cell"></div>
@@ -297,9 +300,9 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
             <div class="t-grid-cell"></div><div class="t-grid-cell"></div><div class="t-grid-cell"></div><div class="t-grid-cell"></div>
             <div class="t-grid-cell"></div><div class="t-grid-cell"></div><div class="t-grid-cell"></div><div class="t-grid-cell"></div>
         </div>
-        <div class="t-tile-container" id="t-tile-layer"></div>
+        <div class="t-tile-layer" id="t-tile-layer"></div>
     </div>
-    <p style="color: #8b949e; font-size: 0.8rem; text-align: center;">Swipe, Drag, or use Arrow Keys to merge bits!</p>
+    <p style="color: #8b949e; font-size: 0.8rem;">Swipe, Drag, or use Arrow Keys to merge!</p>
 </div>
 
 ## Path Finder
@@ -1158,114 +1161,154 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
         renderPathBoard();
     }
 
-    // --- 2048 ---
     // --- 2048 ENGINE ---
-    let tGrid = [], tScore = 0, tActive = true;
+    let tGrid = [], tScore = 0, nextTileId = 0;
     let startX, startY;
 
-    function reset2048() {
-        tGrid = Array(4).fill().map(() => Array(4).fill(0));
-        tScore = 0;
-        addTile(); addTile(); render2048();
+    function init2048() {
+        tGrid = Array(4).fill().map(() => Array(4).fill(null));
+        tScore = 0; 
+        nextTileId = 0;
+        document.getElementById('t-tile-layer').innerHTML = '';
+        addRandomTile(); 
+        addRandomTile();
+        render2048();
+        setup2048Input();
     }
 
-    function addTile() {
+    function addRandomTile() {
         let empty = [];
-        tGrid.forEach((r, ri) => r.forEach((v, ci) => { if(v===0) empty.push({ri, ci}) }));
+        for(let r=0; r<4; r++) for(let c=0; c<4; c++) if(!tGrid[r][c]) empty.push({r, c});
         if(empty.length) {
-            let {ri, ci} = empty[Math.floor(Math.random()*empty.length)];
-            tGrid[ri][ci] = Math.random() < 0.9 ? 2 : 4;
+            let {r, c} = empty[Math.floor(Math.random() * empty.length)];
+            tGrid[r][c] = { val: Math.random() < 0.9 ? 2 : 4, id: nextTileId++, merged: false };
         }
     }
 
     function render2048() {
         const layer = document.getElementById('t-tile-layer');
-        layer.innerHTML = '';
+        const activeIds = new Set();
+
         tGrid.forEach((row, r) => {
-            row.forEach((val, c) => {
-                if (val !== 0) {
-                    const tile = document.createElement('div');
-                    tile.className = `t-tile t-${val}`;
-                    tile.textContent = val;
-                    // Position calculation for 70px tiles + 10px gaps
-                    const x = c * 80;
-                    const y = r * 80;
-                    tile.style.transform = `translate(${x}px, ${y}px)`;
-                    layer.appendChild(tile);
+            row.forEach((tileData, c) => {
+                if (tileData) {
+                    activeIds.add(tileData.id.toString());
+                    let tileElem = document.getElementById(`tile-${tileData.id}`);
+                    
+                    if (!tileElem) {
+                        tileElem = document.createElement('div');
+                        tileElem.id = `tile-${tileData.id}`;
+                        layer.appendChild(tileElem);
+                    }
+
+                    // Update Position, Class, and Value
+                    // 70px tile + 10px gap = 80px offset
+                    tileElem.style.transform = `translate(${c * 80}px, ${r * 80}px)`;
+                    tileElem.textContent = tileData.val;
+                    tileElem.className = `t-tile t-${tileData.val} ${tileData.merged ? 't-merged' : ''}`;
+                    
+                    if(tileData.merged) {
+                        setTimeout(() => tileElem.classList.remove('t-merged'), 200);
+                        tileData.merged = false;
+                    }
                 }
             });
         });
-        document.getElementById('t-score').textContent = `Score: ${tScore}`;
-    }
 
-    // Input Handling (Keyboard + Mouse + Touch)
-    function setup2048Input() {
-        const board = document.getElementById('t-board-container');
-        
-        const startInput = (e) => {
-            startX = e.pageX || e.touches[0].pageX;
-            startY = e.pageY || e.touches[0].pageY;
-        };
-
-        const endInput = (e) => {
-            const endX = e.pageX || e.changedTouches[0].pageX;
-            const endY = e.pageY || e.changedTouches[0].pageY;
-            const dx = endX - startX;
-            const dy = endY - startY;
-            if (Math.abs(dx) > Math.abs(dy)) {
-                if (Math.abs(dx) > 30) move2048(dx > 0 ? 'R' : 'L');
-            } else {
-                if (Math.abs(dy) > 30) move2048(dy > 0 ? 'D' : 'U');
-            }
-        };
-
-        board.addEventListener('mousedown', startInput);
-        board.addEventListener('mouseup', endInput);
-        board.addEventListener('touchstart', startInput, {passive: true});
-        board.addEventListener('touchend', endInput, {passive: true});
-
-        window.addEventListener('keydown', e => {
-            if (e.key === "ArrowLeft") move2048('L');
-            if (e.key === "ArrowRight") move2048('R');
-            if (e.key === "ArrowUp") move2048('U');
-            if (e.key === "ArrowDown") move2048('D');
+        // Garbage Collection: Remove merged/destroyed tile elements
+        Array.from(layer.children).forEach(child => {
+            const id = child.id.replace('tile-', '');
+            if (!activeIds.has(id)) child.remove();
         });
+
+        document.getElementById('t-score').textContent = `Score: ${tScore}`;
     }
 
     function move2048(dir) {
         let moved = false;
-        const rotate = (matrix) => matrix[0].map((_, i) => matrix.map(row => row[i]).reverse());
+        const rotate = (m) => m[0].map((_, i) => m.map(row => row[i]).reverse());
         
-        // Transform grid so we always "slide left"
-        let tempGrid = JSON.parse(JSON.stringify(tGrid));
-        let rotations = dir === 'U' ? 1 : dir === 'R' ? 2 : dir === 'D' ? 3 : 0;
-        for(let i=0; i<rotations; i++) tempGrid = rotate(tempGrid);
+        // Use JSON parse/stringify for deep copy of the state
+        let temp = JSON.parse(JSON.stringify(tGrid));
+        let rotCount = dir === 'U' ? 1 : dir === 'R' ? 2 : dir === 'D' ? 3 : 0;
+        for(let i=0; i<rotCount; i++) temp = rotate(temp);
 
-        // Slide and Merge logic
         for(let r=0; r<4; r++) {
-            let row = tempGrid[r].filter(v => v !== 0);
+            let row = temp[r].filter(v => v !== null);
             for(let i=0; i<row.length-1; i++) {
-                if(row[i] === row[i+1]) {
-                    row[i] *= 2;
-                    tScore += row[i];
+                if(row[i].val === row[i+1].val) {
+                    row[i].val *= 2;
+                    row[i].merged = true;
+                    tScore += row[i].val;
                     row.splice(i+1, 1);
                     moved = true;
                 }
             }
-            while(row.length < 4) row.push(0);
-            if(JSON.stringify(tempGrid[r]) !== JSON.stringify(row)) moved = true;
-            tempGrid[r] = row;
+            while(row.length < 4) row.push(null);
+            temp[r] = row;
         }
 
-        // Rotate back
-        for(let i=0; i<(4-rotations)%4; i++) tempGrid = rotate(tempGrid);
+        for(let i=0; i<(4-rotCount)%4; i++) temp = rotate(temp);
         
-        if(moved) {
-            tGrid = tempGrid;
-            addTile();
+        if (JSON.stringify(tGrid) !== JSON.stringify(temp)) {
+            tGrid = temp;
+            addRandomTile();
             render2048();
-            // Optional: Save to stats if game over
+            checkGameOver();
         }
+    }
+
+    function checkGameOver() {
+        let canMove = false;
+        for(let r=0; r<4; r++) {
+            for(let c=0; c<4; c++) {
+                if(!tGrid[r][c]) { canMove = true; break; }
+                if(c<3 && tGrid[r][c].val === tGrid[r][c+1].val) { canMove = true; break; }
+                if(r<3 && tGrid[r][c].val === tGrid[r+1][c].val) { canMove = true; break; }
+            }
+        }
+        if(!canMove) {
+            alert("Game Over! Score: " + tScore);
+            StatsManager.saveGame('game2048', 4, 0, { score: tScore });
+        }
+    }
+
+    function setup2048Input() {
+        const board = document.getElementById('t-board-container');
+        
+        // Touch events
+        board.addEventListener('touchstart', e => {
+            startX = e.touches[0].pageX;
+            startY = e.touches[0].pageY;
+        }, {passive: true});
+
+        board.addEventListener('touchend', e => {
+            const dx = e.changedTouches[0].pageX - startX;
+            const dy = e.changedTouches[0].pageY - startY;
+            if (Math.abs(dx) > 30 || Math.abs(dy) > 30) {
+                if (Math.abs(dx) > Math.abs(dy)) move2048(dx > 0 ? 'R' : 'L');
+                else move2048(dy > 0 ? 'D' : 'U');
+            }
+        }, {passive: true});
+
+        // Mouse events (Drag)
+        board.onmousedown = (e) => { startX = e.pageX; startY = e.pageY; };
+        board.onmouseup = (e) => {
+            const dx = e.pageX - startX;
+            const dy = e.pageY - startY;
+            if (Math.max(Math.abs(dx), Math.abs(dy)) > 30) {
+                if (Math.abs(dx) > Math.abs(dy)) move2048(dx > 0 ? 'R' : 'L');
+                else move2048(dy > 0 ? 'D' : 'U');
+            }
+        };
+
+        // Keyboard
+        window.onkeydown = (e) => {
+            if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(e.key)) {
+                e.preventDefault();
+                move2048(e.key.replace("Arrow","")[0]);
+            }
+        };
     }
 
     // Initialize both
@@ -1283,6 +1326,7 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
         StatsManager.renderBadges('minesweeper');
         StatsManager.renderBadges('binaryLogic');
         StatsManager.renderBadges('pathFinder');
+        init2048();
     });
     // Global reference for refreshing
     window.updateChart = renderHistoryChart;
