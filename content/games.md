@@ -1318,6 +1318,7 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
     startPath(8);
     reset2048();
     setup2048Input();
+    init2048();
 
     // At the bottom of your <script>
     window.addEventListener('load', () => {
@@ -1326,7 +1327,6 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
         StatsManager.renderBadges('minesweeper');
         StatsManager.renderBadges('binaryLogic');
         StatsManager.renderBadges('pathFinder');
-        init2048();
     });
     // Global reference for refreshing
     window.updateChart = renderHistoryChart;
