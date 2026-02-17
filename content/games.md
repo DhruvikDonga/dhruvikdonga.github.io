@@ -158,14 +158,14 @@ Do share with your friends and help them kill some time productively. 🚀
         display: flex; justify-content: center; align-items: center;
         font-weight: bold; font-size: 1.5rem; color: #fff;
         /* THE ANIMATION ENGINE */
-        transition: transform 0.15s ease-in-out, background-color 0.1s;
+        transition: transform 0.3s ease-in-out, background-color 0.2s;
         z-index: 10;
     }
     .t-2 { background: #58a6ff; color: #0d1117; } .t-4 { background: #3fb950; color: #0d1117; }
     .t-8 { background: #d29922; } .t-16 { background: #f85149; } .t-32 { background: #ab7df8; }
 
     @keyframes pop { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
-    .t-merged { animation: pop 0.2s ease-in-out; }
+    .t-merged { animation: pop 0.4s ease-in-out; }
     
 </style>
 
@@ -299,7 +299,7 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
         </div>
         <div class="t-tile-layer" id="t-tile-layer"></div>
     </div>
-    <p style="color: #8b949e; font-size: 0.8rem;">Swipe, Drag, or use Arrow Keys to merge!</p>
+    <p style="color: #8b949e; font-size: 1.2rem;">Swipe, Drag, or use Arrow Keys to merge!</p>
 </div>
 
 ## Path Finder
