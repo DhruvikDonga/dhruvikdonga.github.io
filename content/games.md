@@ -275,8 +275,8 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
 
 ## 2048
 ---
-<details>
-<summary style="cursor:pointer; font-weight:bold;">🛠️ Technical Deep Dive</summary>
+<details style="cursor: pointer;"> 
+<summary style="font-size: 1.2rem; font-weight: bold; color: var(--success-color);">🛠️ Technical Deep Dive: How the "Game" Works</summary>
 <div style="font-size: 1.4rem; line-height: 1.6; color: #8b949e;">
 
 ### 🗺️ 2048: Matrix game
@@ -1236,7 +1236,7 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
     startMines(8, 10);
     startBinary(4);
     startPath(8);
-    start2048();
+    window.onload = init2048;
 
     // At the bottom of your <script>
     window.addEventListener('load', () => {
