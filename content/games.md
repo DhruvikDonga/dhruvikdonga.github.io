@@ -25,9 +25,9 @@ Do share with your friends and help them kill some time productively. 🚀
     <a href="javascript:void(0)" onclick="toggleAnalytics()" id="view-analytics-link" style="color: var(--success-color); text-decoration: underline; margin-right: 10px;">View Your Game Analytics</a>
     <a href="javascript:void(0)" onclick="clearAllStats()" style="color: var(--error-color); text-decoration: underline;">Clear all local stats</a>
 </div>
-<div id="analytics-section" style="display: none; margin-top: 20px; padding: 20px; background: #0d1117; border: 1px solid #30363d; border-radius: 8px; color: #c9d1d9;">
+<div id="analytics-section" style="display: none; margin-top: 20px; padding: 20px; background: #424242; border: 1px solid #424242; border-radius: 8px; color: #c9d1d9;">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-        <select id="chart-game-select" class="game-btn p-size-btn" onchange="renderHistoryChart()" style="font-size: 1rem; padding: 4px; background: #161b22; color: #c9d1d9; border: 1px solid #30363d;">
+        <select id="chart-game-select" class="game-btn p-size-btn" onchange="renderHistoryChart()" style="font-size: 1rem; padding: 4px; background: #424242; color: #ffffff; border: 1px solid #424242;">
             <option value="nonogram">Nonogram</option>
             <option value="minesweeper">Minesweeper</option>
             <option value="binaryLogic">Binary Sudoku</option>
