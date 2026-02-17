@@ -1196,24 +1196,19 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
                         layer.appendChild(tileElem);
                     }
 
-                    // Update Position, Class, and Value
-                    // 70px tile + 10px gap = 80px offset
                     tileElem.style.transform = `translate(${c * 80}px, ${r * 80}px)`;
                     tileElem.textContent = tileData.val;
                     tileElem.className = `t-tile t-${tileData.val} ${tileData.merged ? 't-merged' : ''}`;
-                    
-                    if(tileData.merged) {
-                        setTimeout(() => tileElem.classList.remove('t-merged'), 200);
-                        tileData.merged = false;
-                    }
                 }
             });
         });
 
-        // Garbage Collection: Remove merged/destroyed tile elements
         Array.from(layer.children).forEach(child => {
             const id = child.id.replace('tile-', '');
-            if (!activeIds.has(id)) child.remove();
+            if (!activeIds.has(id)) {
+                child.style.opacity = "0"; // Fade out
+                setTimeout(() => child.remove(), 300); 
+            }
         });
 
         document.getElementById('t-score').textContent = `Score: ${tScore}`;
