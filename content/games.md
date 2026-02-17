@@ -48,7 +48,8 @@ Do share with your friends and help them kill some time productively. 🚀
 - **Ingestion**: **StatsManager** pushes JSON payloads to **localStorage** on every "Win."
 - **Processing**: **getHighlights** performs aggregate functions (Sum, Avg) to determine your "Turtle Mode."
 - **Visualization**: **Chart.js** maps your learning curve against time.
-*The site isn't mad you're slow, just disappointed. 📈*
+
+***The site isn't mad you're slow, just disappointed. 📈***
 
 </div> 
 </details>
