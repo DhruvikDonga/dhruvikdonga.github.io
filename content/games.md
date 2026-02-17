@@ -376,7 +376,7 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
 
             // Return the formatted string, or '0s' if the value was 0
             return parts.length > 0 ? parts.join(' ') : '0s';
-        }
+        },
         getHighlights() {
             const stats = JSON.parse(localStorage.getItem('dhruvik_game_stats')) || {};
             const history = JSON.parse(localStorage.getItem('dhruvik_game_history')) || [];
