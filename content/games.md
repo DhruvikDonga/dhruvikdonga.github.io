@@ -203,7 +203,7 @@ Do share with your friends and help them kill some time productively. 🚀
         <div id="n-seed" class="seed-info"></div>
     </div>
     <div id="n-board" class="n-grid"></div>
-    <div id="n-status" style="color: var(--success-color); font-weight: bold; margin-top: 1rem;"></div>
+    <div id="n-status" style="color: var(--success-color); font-weight: bold; margin-top: 1rem; min-height: 1.5em;"></div>
     <div id="nonogram-badges" class="badge-container"></div>
 </div>
 
@@ -237,7 +237,7 @@ Do share with your friends and help them kill some time productively. 🚀
         <div id="m-seed" class="seed-info"></div>
     </div>
     <div id="m-board" class="m-grid"></div>
-    <div id="m-status" style="font-weight: bold; margin-top: 1rem;"></div>
+    <div id="m-status" style="font-weight: bold; margin-top: 1rem; min-height: 1.5em;"></div>
     <div id="minesweeper-badges" class="badge-container"></div>
 </div>
 
@@ -269,7 +269,7 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
         <div id="b-timer" class="timer">00:00</div>
     </div>
     <div id="b-board" class="b-grid"></div>
-    <div id="b-status" style="color: var(--success-color); font-weight: bold; margin-top: 1rem;"></div>
+    <div id="b-status" style="color: var(--success-color); font-weight: bold; margin-top: 1rem; min-height: 1.5em;"></div>
     <div id="binaryLogic-badges" class="badge-container"></div>
 </div>
 
