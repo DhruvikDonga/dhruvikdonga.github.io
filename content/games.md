@@ -286,7 +286,10 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
 </details>
 
 <div class="game-section" id="2048-wrapper">
-    <div id="t-score" style="font-size: 1.5rem; color: #3fb950; margin-bottom: 10px;">Score: 0</div>
+    <div class="controls" style="justify-content: center;">
+        <button class="game-btn" onclick="reset2048()" style="background: var(--cell-mine);">Reset Game 🔄</button>
+    </div>
+    <div id="t-score" style="font-size: 1.5rem; color: #3fb950; margin-bottom: 10px; text-align: center;">Score: 0</div>
     <div class="t-container" id="t-board-container">
         <div class="t-grid-background">
             <div class="t-grid-cell"></div><div class="t-grid-cell"></div><div class="t-grid-cell"></div><div class="t-grid-cell"></div>
@@ -296,7 +299,7 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
         </div>
         <div class="t-tile-container" id="t-tile-layer"></div>
     </div>
-    <p style="color: #8b949e; font-size: 0.8rem;">Swipe or use Arrow Keys to merge bits!</p>
+    <p style="color: #8b949e; font-size: 0.8rem; text-align: center;">Swipe, Drag, or use Arrow Keys to merge bits!</p>
 </div>
 
 ## Path Finder
@@ -1156,14 +1159,14 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
     }
 
     // --- 2048 ---
+    // --- 2048 ENGINE ---
     let tGrid = [], tScore = 0, tActive = true;
     let startX, startY;
 
-    function init2048() {
+    function reset2048() {
         tGrid = Array(4).fill().map(() => Array(4).fill(0));
         tScore = 0;
         addTile(); addTile(); render2048();
-        setupInput();
     }
 
     function addTile() {
@@ -1184,7 +1187,7 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
                     const tile = document.createElement('div');
                     tile.className = `t-tile t-${val}`;
                     tile.textContent = val;
-                    // Calculate pixel position: (index * size) + (index * gap)
+                    // Position calculation for 70px tiles + 10px gaps
                     const x = c * 80;
                     const y = r * 80;
                     tile.style.transform = `translate(${x}px, ${y}px)`;
@@ -1195,40 +1198,74 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
         document.getElementById('t-score').textContent = `Score: ${tScore}`;
     }
 
-    function setupInput() {
+    // Input Handling (Keyboard + Mouse + Touch)
+    function setup2048Input() {
         const board = document.getElementById('t-board-container');
         
-        // Touch Support
-        board.addEventListener('touchstart', e => { startX = e.touches[0].pageX; startY = e.touches[0].pageY; }, {passive:true});
-        board.addEventListener('touchend', e => {
-            const dx = e.changedTouches[0].pageX - startX;
-            const dy = e.changedTouches[0].pageY - startY;
-            handleSwipe(dx, dy);
-        }, {passive:true});
+        const startInput = (e) => {
+            startX = e.pageX || e.touches[0].pageX;
+            startY = e.pageY || e.touches[0].pageY;
+        };
 
-        // Keyboard Support
+        const endInput = (e) => {
+            const endX = e.pageX || e.changedTouches[0].pageX;
+            const endY = e.pageY || e.changedTouches[0].pageY;
+            const dx = endX - startX;
+            const dy = endY - startY;
+            if (Math.abs(dx) > Math.abs(dy)) {
+                if (Math.abs(dx) > 30) move2048(dx > 0 ? 'R' : 'L');
+            } else {
+                if (Math.abs(dy) > 30) move2048(dy > 0 ? 'D' : 'U');
+            }
+        };
+
+        board.addEventListener('mousedown', startInput);
+        board.addEventListener('mouseup', endInput);
+        board.addEventListener('touchstart', startInput, {passive: true});
+        board.addEventListener('touchend', endInput, {passive: true});
+
         window.addEventListener('keydown', e => {
-            if (e.key === "ArrowLeft") move('L');
-            if (e.key === "ArrowRight") move('R');
-            if (e.key === "ArrowUp") move('U');
-            if (e.key === "ArrowDown") move('D');
+            if (e.key === "ArrowLeft") move2048('L');
+            if (e.key === "ArrowRight") move2048('R');
+            if (e.key === "ArrowUp") move2048('U');
+            if (e.key === "ArrowDown") move2048('D');
         });
     }
 
-    function handleSwipe(dx, dy) {
-        if (Math.abs(dx) > Math.abs(dy)) {
-            if (Math.abs(dx) > 30) move(dx > 0 ? 'R' : 'L');
-        } else {
-            if (Math.abs(dy) > 30) move(dy > 0 ? 'D' : 'U');
-        }
-    }
-
-    function move(dir) {
+    function move2048(dir) {
         let moved = false;
-        // Logic for sliding and merging tiles (O(n^2) complexity)
-        // This is a simplified move trigger to demonstrate animation
-        addTile(); 
-        render2048(); 
+        const rotate = (matrix) => matrix[0].map((_, i) => matrix.map(row => row[i]).reverse());
+        
+        // Transform grid so we always "slide left"
+        let tempGrid = JSON.parse(JSON.stringify(tGrid));
+        let rotations = dir === 'U' ? 1 : dir === 'R' ? 2 : dir === 'D' ? 3 : 0;
+        for(let i=0; i<rotations; i++) tempGrid = rotate(tempGrid);
+
+        // Slide and Merge logic
+        for(let r=0; r<4; r++) {
+            let row = tempGrid[r].filter(v => v !== 0);
+            for(let i=0; i<row.length-1; i++) {
+                if(row[i] === row[i+1]) {
+                    row[i] *= 2;
+                    tScore += row[i];
+                    row.splice(i+1, 1);
+                    moved = true;
+                }
+            }
+            while(row.length < 4) row.push(0);
+            if(JSON.stringify(tempGrid[r]) !== JSON.stringify(row)) moved = true;
+            tempGrid[r] = row;
+        }
+
+        // Rotate back
+        for(let i=0; i<(4-rotations)%4; i++) tempGrid = rotate(tempGrid);
+        
+        if(moved) {
+            tGrid = tempGrid;
+            addTile();
+            render2048();
+            // Optional: Save to stats if game over
+        }
     }
 
     // Initialize both
@@ -1236,7 +1273,8 @@ It's like trying to keep two siblings (0 and 1) from sitting next to each other 
     startMines(8, 10);
     startBinary(4);
     startPath(8);
-    window.onload = init2048;
+    reset2048();
+    setup2048Input();
 
     // At the bottom of your <script>
     window.addEventListener('load', () => {
