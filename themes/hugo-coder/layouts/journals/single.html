@@ -58,32 +58,4 @@
 
     {{ partial "posts/math.html" . }}
   </section>
-  <button id="back-to-top" title="Go to top" onclick="scrollToTop()" style="
-    display: none; 
-    position: fixed; 
-    bottom: 60px; 
-    right: 20px; 
-    z-index: 99; 
-    border: 1px solid #424242; 
-    outline: none; 
-    background-color: #424242; 
-    color: #ffffff; 
-    cursor: pointer; 
-    border-radius: 6px; 
-    font-size: 15px;
-    transition: opacity 0.3s;
-    width: 3rem;
-    height: 3rem;
-">⬆</button>
 {{ end }}
-
-
-<script>
-    const topBtn = document.getElementById("back-to-top");
-    function scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-</script>
