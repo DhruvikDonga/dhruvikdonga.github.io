@@ -1,7 +1,7 @@
 +++
 authors = ["Dhruvik"]
 title = "How To Journal"
-date = "2023-07-07"
+date = "2026-03-03"
 description = "This is the standard pattern for each journal what each section has to offer"
 categories = [
     "Science","Commerce","Arts","Wellness","Philosophy"
