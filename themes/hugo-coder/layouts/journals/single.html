@@ -186,5 +186,16 @@
             behavior: 'smooth'
         });
     }
+    function toggleTOC() {
+        const drawer = document.getElementById("toc-drawer");
+        drawer.classList.toggle("toc-active");
+    }
+
+    // Optional: Close the drawer when a link inside is clicked
+    document.querySelectorAll('#TableOfContents a').forEach(link => {
+        link.addEventListener('click', () => {
+            document.getElementById("toc-drawer").classList.remove("toc-active");
+        });
+    });
 </script>
 {{ end }}
