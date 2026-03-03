@@ -1,0 +1,35 @@
+{{ define "title" }}
+  {{ title (i18n (lower .Title)) | default .Title }} · {{ .Site.Title }}
+{{ end }}
+
+{{ define "content" }}
+  <section class="container list">
+    <header>
+      <h1 class="title">
+        <a class="title-link" href="{{ .Permalink | safeURL }}">
+          {{ title (i18n (lower .Title)) | default .Title }}
+        </a>
+      </h1>
+    </header>
+
+    <div class="fixed-content-block" style="margin-bottom: 2rem;">
+      <p>
+        Human life is an exploration of domains and uncharted territories — not only to achieve results, but to observe, experiment, and understand the journey itself. 
+        Some explorations lead to meaningful outcomes, others only to better questions.
+      </p>
+      <p>
+        Here, I document my work and inquiries across five categories: 
+        <strong>Science, Commerce, Arts, Wellness, and Philosophy.</strong>
+      </p>
+      <p><em>These are records of experiments — not conclusions.</em></p>
+    </div>
+
+    <ul>
+      {{- range .Paginator.Pages -}}
+        {{- .Render "li" -}}
+      {{- end -}}
+    </ul>
+
+    {{ partial "pagination.html" . }}
+  </section>
+{{ end }}
