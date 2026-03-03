@@ -3,6 +3,56 @@
 {{ end }}
 {{ define "content" }}
 <style>
+  /* The Floating Button */
+#toc-toggle {
+  position: fixed;
+  bottom: 120px; /* Positioned above your 'Back to Top' button */
+  right: 20px;
+  z-index: 100;
+  background-color: #424242;
+  color: white;
+  border: 1px solid #424242;
+  border-radius: 6px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* The Drawer Container */
+#toc-drawer {
+  position: fixed;
+  top: 0;
+  right: -350px; /* Hidden off-screen by default */
+  width: 300px;
+  height: 100%;
+  background: #ffffff;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+  z-index: 1000;
+  transition: right 0.3s ease; /* Smooth slide effect */
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* State when TOC is active/open */
+#toc-drawer.toc-active {
+  right: 0;
+}
+
+/* Header inside the drawer */
+.toc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 15px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
   /* Container styling for the post content area */
 .post-content {
   display: flex;
@@ -63,14 +113,20 @@
         </div>
       </header>
 
-      <div class="post-content">
-          {{ if .TableOfContents }}
-            <nav id="TableOfContents">
-              <h3 class="toc-title">Table of Contents</h3>
-              {{ .TableOfContents }}
-            </nav>
-          {{ end }}
+      <button id="toc-toggle" title="Table of Contents" onclick="toggleTOC()">
+        <i class="fa fa-list" aria-hidden="true"></i> Index
+      </button>
 
+      <div id="toc-drawer" class="toc-hidden">
+        <div class="toc-header">
+          <h3>Table of Contents</h3>
+          <button onclick="toggleTOC()" class="close-btn">&times;</button>
+        </div>
+        <nav id="TableOfContents">
+          {{ .TableOfContents }}
+        </nav>
+      </div>
+      <div class="post-content">
           <div class="main-text">
             {{ if .Params.featuredImage }}
               <img src="{{ .Params.featuredImage | relURL }}" alt="Featured image"/>
