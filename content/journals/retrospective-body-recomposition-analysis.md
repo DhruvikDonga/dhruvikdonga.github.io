@@ -30,7 +30,7 @@ The experiment focused on environmental restriction + nutritional precision + st
 
 I had my gym training every morning from 6am to 7:30am . Plan was Body Recomposition that is weight loss and muscle training as well ,and it had different phases 
 
-### 1st Month (May) :-
+### 1st Month (May)
 - 4 days Weight training and 2 days Cardio
 - Mandatory sleep at 10 am
 - No sugar and close to 0 carbs intake
@@ -38,14 +38,14 @@ I had my gym training every morning from 6am to 7:30am . Plan was Body Recomposi
 - Took no leaves in Gym at that month
 - Cancelled friend trip
 
-### 2nd Month (June):-
+### 2nd Month (June)
 - 4 days Weight training and 2 days Cardio
 - Mandatory sleep at 10 am
 - No sugar and close to 0 carbs intake
 - Heavy protein and fat rich food
 - Took no leaves in Gym at that month
 
-### 3rd Month (July):-
+### 3rd Month (July)
 - 5 days Weight training and 1 day Cardio
 - Mandatory sleep at 10 am
 - No sugar and close to 0 carbs intake
@@ -59,7 +59,7 @@ Focus was to stick to one routine and not break it in any worse situation and av
 ---
 So the results post training phase was a followed 
 
-### 1st Month(May):-
+### 1st Month(May)
 - Starting 15 days
     - Fatigue
     - Body pain
@@ -95,7 +95,7 @@ So the results post training phase was a followed
     - Bloating issue still present
     - Final weight 78 kgs with muscle mass and under normal BMI
 
-### Final Result :- 
+### Final Result
 - Tonned up body
 - Clothes fit well
 - Healthy diet
@@ -106,14 +106,14 @@ So the results post training phase was a followed
 
 ## What changed in my thinking  
 ---
-### Initial Assumptions:-
+### Initial Assumptions
 
 - Carbs rich food is healthy and only option
 - Gym trainer won't help much
 - You can do body recomposition while being socially active in weekends
 - Doing cardio is only enough and long term solution
 
-### Revised Conclusions After 12 Weeks:- 
+### Revised Conclusions After 12 Weeks
 
 - Cut down Carbs and sugars and replace them with proteins , fats rich food 
 - Take social activeness close to 0 in 3 months phase or to least possible value
@@ -127,7 +127,7 @@ So the results post training phase was a followed
 ---
 After ending with trainer I have been doing workout on my own and also with few known people in gym for support during workouts and share plans.
 
-### Now in March 3 2026 :- 
+### Now in March 3 2026
 - My weight is 76 kgs 
 - Visible muscle tonned up
 - No bloating due to protein rich food
