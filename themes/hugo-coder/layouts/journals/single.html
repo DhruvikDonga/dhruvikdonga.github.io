@@ -1,15 +1,18 @@
 {{ define "title" }}
   {{ .Title }} · {{ .Site.Title }}
 {{ end }}
-{{ define "content" }}
-<style>
 
-  /* The 'Index' Toggle Button - styled to match your 'Back to Top' */
+{{ define "content" }}
+
+<style>
+/* =========================
+   TOC Toggle Button
+========================= */
 #toc-toggle {
     position: fixed;
-    bottom: 120px; /* Above the 60px Back-to-Top button */
+    bottom: 120px;
     right: 20px;
-    z-index: 99;
+    z-index: 999;
     border: 1px solid #424242;
     background-color: #424242;
     color: #ffffff;
@@ -17,190 +20,276 @@
     border-radius: 6px;
     width: 3rem;
     height: 3rem;
-    font-size: 12px;
-    font-weight: bold;
+    font-size: 13px;
+    font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 4px;
+    transition: opacity 0.3s ease;
 }
 
-/* The Slide-out Index Drawer */
+#toc-toggle:hover {
+    opacity: 0.85;
+}
+
+
+/* =========================
+   Drawer
+========================= */
 #toc-drawer {
     position: fixed;
     top: 0;
-    right: -350px; /* Hidden */
+    right: -320px;
     width: 300px;
-    height: 100%;
+    height: 100vh;
     z-index: 1000;
     transition: right 0.3s ease;
-    padding: 2rem;
+    padding: 1.8rem;
     overflow-y: auto;
-    
-    /* CRITICAL: Using theme variables for dark/light sync */
-    background-color: var(--bg-color, #ffffff);
-    color: var(--font-color, #212121);
-    box-shadow: -5px 0 15px rgba(0,0,0,0.2);
-    border-left: 1px solid var(--tertiary-color, #424242);
+
+    background: inherit;
+    color: inherit;
+
+    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.15);
+    border-left: 1px solid rgba(0,0,0,0.08);
 }
 
-/* When the drawer is open */
 #toc-drawer.toc-active {
     right: 0;
 }
 
-/* Styling the list inside the drawer */
+
+/* =========================
+   TOC Header
+========================= */
+.toc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.toc-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+
+/* =========================
+   Table of Contents Styling
+========================= */
+#TableOfContents {
+    font-size: 0.9rem;
+}
+
 #TableOfContents ul {
     list-style: none;
-    padding-left: 1.5rem;
-    line-height: 1.8;
+    padding-left: 0.8rem;
+    margin: 0;
+}
+
+#TableOfContents li {
+    margin-bottom: 0.4rem;
 }
 
 #TableOfContents a {
-    color: var(--font-color);
+    color: inherit;
     text-decoration: none;
-    font-size: 0.9rem;
+    display: block;
+    padding: 3px 0;
+    line-height: 1.5;
+    transition: color 0.2s ease;
 }
 
 #TableOfContents a:hover {
     text-decoration: underline;
 }
 
-.toc-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 2rem;
+#TableOfContents a.active {
+    font-weight: 600;
+    opacity: 1;
 }
 
-.close-btn {
-    background: none;
-    border: none;
-    color: var(--font-color);
-    font-size: 2rem;
+/* Nested indentation */
+#TableOfContents ul ul {
+    padding-left: 1rem;
+    border-left: 1px solid rgba(0,0,0,0.06);
+}
+
+/* =========================
+   Back To Top
+========================= */
+#back-to-top {
+    display: none;
+    position: fixed;
+    bottom: 60px;
+    right: 20px;
+    z-index: 999;
+    border: 1px solid #424242;
+    background-color: #424242;
+    color: #ffffff;
     cursor: pointer;
-    line-height: 1;
-}
-</style>
-  <section class="container post">
-    <article>
-      <header>
-        <div class="post-title">
-          <h1 class="title">
-            <a class="title-link" href="{{ .Permalink | safeURL }}">
-              {{ .Title }}
-            </a>
-          </h1>
-        </div>
-        <div class="post-meta">
-          <div class="date">
-            <span class="posted-on">
-              <i class="fa fa-calendar" aria-hidden="true"></i>
-              <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
-                {{ .Date | time.Format (.Site.Params.dateFormat | default "January 2, 2006" ) }}
-              </time>
-            </span>
-            <span class="reading-time">
-              <i class="fa fa-clock-o" aria-hidden="true"></i>
-              {{ i18n "reading_time" .ReadingTime }}
-            </span>
-          </div>
-          {{ with .GetTerms "authors" }}{{ partial "taxonomy/authors.html" . }}{{ end }}
-          {{ with .GetTerms "categories" }}{{ partial "taxonomy/categories.html" . }}{{ end }}
-          {{ with .GetTerms "tags" }}{{ partial "taxonomy/tags.html" . }}{{ end }}
-        </div>
-      </header>
-
-      <button id="toc-toggle" title="Table of Contents" onclick="toggleTOC()">
-        <i class="fa fa-list" aria-hidden="true"></i> Index
-      </button>
-
-      <div id="toc-drawer" class="toc-hidden">
-        <div class="toc-header">
-          <h3>Table of Contents</h3>
-          <button onclick="toggleTOC()" class="close-btn">&times;</button>
-        </div>
-        <nav id="TableOfContents">
-          {{ .TableOfContents }}
-        </nav>
-      </div>
-      <div class="post-content">
-          <div class="main-text">
-            {{ if .Params.featuredImage }}
-              <img src="{{ .Params.featuredImage | relURL }}" alt="Featured image"/>
-            {{ end }}
-            {{ .Content }}
-          </div>
-      </div>
-
-
-      <footer>
-        {{ partial "posts/series.html" . }}
-        {{ partial "posts/disqus.html" . }}
-        {{ partial "posts/commento.html" . }}
-        {{ partial "posts/utterances.html" . }}
-        {{ partial "posts/giscus.html" . }}
-        {{ partial "posts/telegram.html" . }}
-        {{ partial "posts/share.html" . }}
-      </footer>
-    </article>
-
-    {{ partial "posts/math.html" . }}
-  </section>
-
-<button id="back-to-top" title="Go to top" onclick="scrollToTop()" style="
-    display: none; 
-    position: fixed; 
-    bottom: 60px; 
-    right: 20px; 
-    z-index: 99; 
-    border: 1px solid #424242; 
-    outline: none; 
-    background-color: #424242; 
-    color: #ffffff; 
-    cursor: pointer; 
-    border-radius: 6px; 
+    border-radius: 6px;
     font-size: 15px;
-    transition: opacity 0.3s;
     width: 3rem;
     height: 3rem;
-">⬆</button>
+}
+</style>
+
+
+<section class="container post">
+  <article>
+    <header>
+      <div class="post-title">
+        <h1 class="title">
+          <a class="title-link" href="{{ .Permalink | safeURL }}">
+            {{ .Title }}
+          </a>
+        </h1>
+      </div>
+
+      <div class="post-meta">
+        <div class="date">
+          <span class="posted-on">
+            <i class="fa fa-calendar"></i>
+            <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+              {{ .Date | time.Format (.Site.Params.dateFormat | default "January 2, 2006") }}
+            </time>
+          </span>
+          <span class="reading-time">
+            <i class="fa fa-clock-o"></i>
+            {{ i18n "reading_time" .ReadingTime }}
+          </span>
+        </div>
+      </div>
+    </header>
+
+
+    <!-- TOC Button -->
+    <button id="toc-toggle" onclick="toggleTOC()">
+      <i class="fa fa-list"></i> Index
+    </button>
+
+
+    <!-- Drawer -->
+    <div id="toc-drawer">
+      <div class="toc-header">
+        <h3>Table of Contents</h3>
+        <button onclick="toggleTOC()" class="close-btn">&times;</button>
+      </div>
+
+      <nav id="TableOfContents">
+        {{ .TableOfContents }}
+      </nav>
+    </div>
+
+
+    <div class="post-content">
+      <div class="main-text">
+        {{ if .Params.featuredImage }}
+          <img src="{{ .Params.featuredImage | relURL }}" alt="Featured image"/>
+        {{ end }}
+        {{ .Content }}
+      </div>
+    </div>
+
+  </article>
+</section>
+
+
+<!-- Back to Top -->
+<button id="back-to-top" onclick="scrollToTop()">⬆</button>
+
 
 <script>
-    const topBtn = document.getElementById("back-to-top");
+const topBtn = document.getElementById("back-to-top");
+const drawer = document.getElementById("toc-drawer");
+const toggleBtn = document.getElementById("toc-toggle");
 
-    // Show button when user scrolls down 400px
-    window.onscroll = function() {
-        if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
-            topBtn.style.display = "block";
-        } else {
-            topBtn.style.display = "none";
-        }
-    };
-
-    function scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-    function toggleTOC() {
-        const drawer = document.getElementById("toc-drawer");
-        drawer.classList.toggle("toc-active");
+/* =========================
+   Back To Top Visibility
+========================= */
+window.addEventListener("scroll", function () {
+    if (document.documentElement.scrollTop > 400) {
+        topBtn.style.display = "block";
+    } else {
+        topBtn.style.display = "none";
     }
 
-    // Close drawer when a link is clicked
-    document.querySelectorAll('#toc-drawer a').forEach(link => {
-        link.addEventListener('click', () => {
-            document.getElementById("toc-drawer").classList.remove("toc-active");
-        });
-    });
+    highlightActiveHeading();
+});
 
-    // Close drawer if clicking outside of it
-    window.addEventListener('click', function(e) {
-        const drawer = document.getElementById("toc-drawer");
-        const btn = document.getElementById("toc-toggle");
-        if (!drawer.contains(e.target) && e.target !== btn && drawer.classList.contains('toc-active')) {
-            drawer.classList.remove("toc-active");
+/* =========================
+   Scroll To Top
+========================= */
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+/* =========================
+   Toggle Drawer
+========================= */
+function toggleTOC() {
+    drawer.classList.toggle("toc-active");
+}
+
+/* Close drawer on outside click */
+window.addEventListener("click", function (e) {
+    if (!drawer.contains(e.target) && !toggleBtn.contains(e.target)) {
+        drawer.classList.remove("toc-active");
+    }
+});
+
+/* Close drawer when clicking TOC link */
+document.querySelectorAll('#toc-drawer a').forEach(link => {
+    link.addEventListener('click', () => {
+        drawer.classList.remove("toc-active");
+    });
+});
+
+/* =========================
+   Smooth Scroll for TOC
+========================= */
+document.querySelectorAll('#toc-drawer a').forEach(anchor => {
+    anchor.addEventListener("click", function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute("href"));
+        if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
         }
     });
+});
+
+/* =========================
+   Active Section Highlight
+========================= */
+function highlightActiveHeading() {
+    const headings = document.querySelectorAll(".post-content h1, .post-content h2, .post-content h3");
+    const tocLinks = document.querySelectorAll("#TableOfContents a");
+
+    let index = headings.length;
+
+    while(--index && window.scrollY + 100 < headings[index].offsetTop) {}
+
+    tocLinks.forEach(link => link.classList.remove("active"));
+
+    const activeLink = tocLinks[index];
+    if (activeLink) {
+        activeLink.classList.add("active");
+    }
+}
 </script>
+
 {{ end }}
