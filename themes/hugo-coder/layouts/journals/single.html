@@ -3,85 +3,81 @@
 {{ end }}
 {{ define "content" }}
 <style>
-  /* The Floating Button */
+
+  /* The 'Index' Toggle Button - styled to match your 'Back to Top' */
 #toc-toggle {
-  position: fixed;
-  bottom: 120px; /* Positioned above your 'Back to Top' button */
-  right: 20px;
-  z-index: 100;
-  background-color: #424242;
-  color: white;
-  border: 1px solid #424242;
-  border-radius: 6px;
-  padding: 10px 15px;
-  cursor: pointer;
-  font-family: inherit;
+    position: fixed;
+    bottom: 120px; /* Above the 60px Back-to-Top button */
+    right: 20px;
+    z-index: 99;
+    border: 1px solid #424242;
+    background-color: #424242;
+    color: #ffffff;
+    cursor: pointer;
+    border-radius: 6px;
+    width: 3rem;
+    height: 3rem;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* The Drawer Container */
+/* The Slide-out Index Drawer */
 #toc-drawer {
-  position: fixed;
-  top: 0;
-  right: -350px; /* Hidden off-screen by default */
-  width: 300px;
-  height: 100%;
-  background: #ffffff;
-  box-shadow: -2px 0 10px rgba(0,0,0,0.1);
-  z-index: 1000;
-  transition: right 0.3s ease; /* Smooth slide effect */
-  padding: 20px;
-  overflow-y: auto;
+    position: fixed;
+    top: 0;
+    right: -350px; /* Hidden */
+    width: 300px;
+    height: 100%;
+    z-index: 1000;
+    transition: right 0.3s ease;
+    padding: 2rem;
+    overflow-y: auto;
+    
+    /* CRITICAL: Using theme variables for dark/light sync */
+    background-color: var(--bg-color, #ffffff);
+    color: var(--font-color, #212121);
+    box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+    border-left: 1px solid var(--tertiary-color, #424242);
 }
 
-/* State when TOC is active/open */
+/* When the drawer is open */
 #toc-drawer.toc-active {
-  right: 0;
+    right: 0;
 }
 
-/* Header inside the drawer */
+/* Styling the list inside the drawer */
+#TableOfContents ul {
+    list-style: none;
+    padding-left: 1.5rem;
+    line-height: 1.8;
+}
+
+#TableOfContents a {
+    color: var(--font-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+#TableOfContents a:hover {
+    text-decoration: underline;
+}
+
 .toc-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #eee;
-  margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
 }
 
 .close-btn {
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-}
-  /* Container styling for the post content area */
-.post-content {
-  display: flex;
-  flex-direction: row-reverse; /* Put TOC on the right, content on the left */
-  align-items: flex-start;
-  gap: 2rem;
-}
-
-/* Make the TOC sticky */
-#TableOfContents {
-  position: -webkit-sticky; /* Support for Safari */
-  position: sticky;
-  top: 2rem;                /* Distance from the top of the viewport */
-  width: 250px;             /* Fixed width for the TOC */
-  flex-shrink: 0;           /* Prevent the TOC from squishing */
-  max-height: calc(100vh - 4rem); /* Prevent TOC from being taller than screen */
-  overflow-y: auto;         /* Scroll within TOC if it's too long */
-}
-
-/* Ensure mobile responsiveness */
-@media (max-width: 768px) {
-  .post-content {
-    flex-direction: column; /* Stack TOC on top of content for small screens */
-  }
-  
-  #TableOfContents {
-    position: static;       /* Remove stickiness on mobile */
-    width: 100%;
-  }
+    background: none;
+    border: none;
+    color: var(--font-color);
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
 }
 </style>
   <section class="container post">
@@ -191,11 +187,20 @@
         drawer.classList.toggle("toc-active");
     }
 
-    // Optional: Close the drawer when a link inside is clicked
-    document.querySelectorAll('#TableOfContents a').forEach(link => {
+    // Close drawer when a link is clicked
+    document.querySelectorAll('#toc-drawer a').forEach(link => {
         link.addEventListener('click', () => {
             document.getElementById("toc-drawer").classList.remove("toc-active");
         });
+    });
+
+    // Close drawer if clicking outside of it
+    window.addEventListener('click', function(e) {
+        const drawer = document.getElementById("toc-drawer");
+        const btn = document.getElementById("toc-toggle");
+        if (!drawer.contains(e.target) && e.target !== btn && drawer.classList.contains('toc-active')) {
+            drawer.classList.remove("toc-active");
+        }
     });
 </script>
 {{ end }}
