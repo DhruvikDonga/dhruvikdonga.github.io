@@ -41,7 +41,7 @@ style = "github-dark"
 [markup]
   [markup.tableOfContents]
     startLevel = 2
-    endLevel = 3
+    endLevel = 4
     ordered = false
 
 # Social links
