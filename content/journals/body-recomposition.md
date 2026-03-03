@@ -57,41 +57,41 @@ Focus was to stick to one routine and not break it in any worse situation and av
 
 So the results post training phase was a followed 
 
-1st Month(May)
-    - Starting 15 days
-        - Fatigue
-        - Body pain
-        - Sugar crash
-        - Cravings
-        - Mood Swings
-    - Ending 15 days
-        - Sugar cravings were in slight control
-        - Body pain reduced
-        - 3 kgs weight loss
+1st Month(May):-
+- Starting 15 days
+    - Fatigue
+    - Body pain
+    - Sugar crash
+    - Cravings
+    - Mood Swings
+- Ending 15 days
+    - Sugar cravings were in slight control
+    - Body pain reduced
+    - 3 kgs weight loss
 
 2nd Month(June)
-    - Starting 15 days
-        - Adaptability to routine
-        - Exercise difficulty increased
-        - Progression
-        - More diet precision and better protein rich food
-    - Ending 15 days
-        - Stronger body
-        - Bloating issues
-        - Very less cravings
-        - Significant water weight loss of 5 kgs
+- Starting 15 days
+    - Adaptability to routine
+    - Exercise difficulty increased
+    - Progression
+    - More diet precision and better protein rich food
+- Ending 15 days
+    - Stronger body
+    - Bloating issues
+    - Very less cravings
+    - Significant water weight loss of 5 kgs
 
 3rd Month(July)
-    - Starting 15 days
-        - Stronger body 
-        - Tonning up
-        - Weight training progression and new exercises
-        - Controlled diet and very less cravings
-    - Ending 15 days
-        - Better weekly recovery limit
-        - Less muscle fatigue then before
-        - Bloating issue still present
-        - Final weight 78 kgs with muscle mass and under normal BMI
+- Starting 15 days
+    - Stronger body 
+    - Tonning up
+    - Weight training progression and new exercises
+    - Controlled diet and very less cravings
+- Ending 15 days
+    - Better weekly recovery limit
+    - Less muscle fatigue then before
+    - Bloating issue still present
+    - Final weight 78 kgs with muscle mass and under normal BMI
 
 Final Result :- 
 - Tonned up body
