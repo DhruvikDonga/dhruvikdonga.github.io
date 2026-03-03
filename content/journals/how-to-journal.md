@@ -122,62 +122,98 @@ Unresolved edges.
 **This section answers:**
 - What will I do next because of this?
 
-## Journal Titles how to's
 
-**🔬 General Academic Prefixes**
-- A Study of …
-- An Analysis of …
-- A Review of …
-- An Evaluation of …
-- An Examination of …
-- A Controlled Assessment of …
-- A Comparative Study of …
-- A Retrospective Analysis of …
-- A Preliminary Investigation into …
-- An Observational Study of …
-- A Structured Evaluation of …
-- A Phase I / Phase II Study of …
-- Protocol Design: …
-- System Evaluation: …
-- Model Assessment: …
-- Framework Analysis: …
-- Operational Review: …
+## 🧭 Universal Journal Title Generator (Non-Personal, Archival Style)
 
-These work across Science, Arts, Commerce, Wellness, Philosophy.
+> [Work Type] + : + [Precise Variable] + (Scope / Duration / Version / Constraint)
 
-**🏋️ Wellness / Body Recomposition Examples (Academic Tone)**
-- A Retrospective Analysis of a Three-Month Body Recomposition Phase
-- An Evaluation of High-Protein Dietary Structuring
-- A Controlled Assessment of Social Environment Reduction on Dietary Adherence
-- A Structured Review of Trainer-Assisted Progression
-- An Observational Study of Muscle-to-Failure Training (7-Day Block)
-- A Comparative Study of Structured vs Unstructured Training Phases
-- Protocol Design: Progressive Overload Implementation (Phase I)
+This creates nostalgia through structure, not sentiment.
 
-**🎸 Arts (Guitar) Academic Tone Examples**
-- An Examination of Pentatonic Pattern Structures
-- A Study of Improvisational Constraint and Tonal Resolution
-- An Observational Review of Tempo-Induced Breakdown in Phrasing
-- A Comparative Analysis of Scale-Based vs Interval-Based Thinking
-- A Structured Evaluation of Deliberate Practice Blocks
+**1️⃣ Choose Work Type**
+These define intellectual posture.
 
-**🧪 Science (Rust / Systems) Academic Tone Examples**
-- An Analysis of Memory Behavior Under BLE Load Conditions
-- A Structured Investigation into Concurrency Constraints
-- Protocol Review: Performance Profiling Methodology
-- A Preliminary Study of Error Propagation in X System
-- A Controlled Evaluation of Resource Allocation Strategies
+- **Exploration Mode**
+    - Exploratory Study
+    - Preliminary Investigation
+    - Observational Study
+    - Initial Assessment
 
-**💼 Commerce Academic Tone Examples**
-- An Evaluation of Pricing Sensitivity in Early-Stage SaaS
-- A Retrospective Analysis of Initial Market Validation Attempts
-- A Structured Review of Distribution Channel Testing
-- An Observational Study of Retention Behavior in Early Users
-- Framework Assessment: Pre-Product Market Fit Hypotheses
+- **Evaluation Mode**
+    - Structured Evaluation
+    - Controlled Assessment
+    - Comparative Study
+    - Performance Analysis
 
-**🧠 Philosophy Academic Tone Examples**
-- An Examination of Outcome Bias in Personal Projects
-- A Study of Experimentation as a Life Framework
-- An Analysis of Agency Versus Fatalism in Long-Term Planning
-- A Structured Reflection on Skill Compounding
-- An Observational Review of Reduced Certainty and Model Refinement
+- **Reflection Mode**
+    - Retrospective Analysis
+    - Operational Review
+    - Framework Assessment
+    - Model Review
+
+- **Build Mode**
+    - Protocol Design
+    - System Implementation 
+    - Iteration 1
+    - Phase I
+
+**2️⃣ Define the Core Variable (Must Be Precise)**
+
+Examples:
+- 12-Week Body Recomposition Protocol
+- High-Protein Dietary Structuring
+- Muscle-to-Failure (7-Day Block)
+- Pentatonic Constraint Improvisation
+- WebAssembly-Based Log Processing
+- Pricing Sensitivity in Early SaaS
+- Concurrency Constraints Under BLE Load
+
+If it’s vague, it’s weak.
+
+**3️⃣ Add Archival Context (This Replaces Emotion)**
+This is what creates nostalgia later.
+
+Use:
+- (12 Weeks)
+- (Phase I)
+- (Iteration 1)
+- (v1.0)
+- (7-Day Block)
+- (Q1 Trial)
+- (Initial Deployment)
+- (Controlled Environment)
+- (Limited Social Variables)
+- (Client-Side Only Architecture)
+
+These markers freeze time.)
+
+**Examples Across Domains**
+
+- **🏋️ Wellness**
+    - Retrospective Analysis: 12-Week Body Recomposition (Controlled Environment)
+    - Structured Evaluation: Muscle-to-Failure (7-Day Block)
+    - Controlled Assessment: Social Reduction on Dietary Adherence (Phase I)
+    - Protocol Design: Progressive Overload Implementation (v1.0)
+
+- **🎸 Guitar**
+    - Exploratory Study: Pentatonic Restriction (Tempo-Constrained)
+    - Structured Evaluation: Improvisation Under Limited Scale Positions
+    - Comparative Study: Scale-Based vs Interval-Based Thinking (Initial Trial)
+    - Observational Review: Phrasing Breakdown at 120 BPM
+
+- **🧪 Systems**
+    - System Implementation: WebAssembly Log Analyzer (v1.0)
+    - Performance Analysis: Regex Parsing Under Load (Client-Side Only)
+    - Structured Investigation: Concurrency Constraints (Phase I)
+    - Controlled Evaluation: Memory Allocation Strategy (Initial Deployment)
+
+- **💼 Commerce**
+    - Framework Assessment: Pricing Sensitivity (Early-Stage SaaS)
+    - Retrospective Analysis: Market Validation Attempt (Q1 Trial)
+    - Observational Study: Retention Behavior (First 100 Users)
+    - Comparative Study: Organic vs Paid Acquisition (Initial Campaign)
+
+- **🧠 Philosophy**
+    - Structured Reflection: Outcome Bias in Long-Term Projects
+    - Observational Study: Reduced Certainty and Model Refinement
+    - Analysis: Experimentation as a Decision Framework
+    - Framework Review: Agency in Systematic Skill Development
