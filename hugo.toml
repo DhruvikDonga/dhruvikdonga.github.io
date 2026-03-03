@@ -42,6 +42,7 @@ style = "github-dark"
   [markup.tableOfContents]
     startLevel = 2
     endLevel = 3
+    ordered = false
 
 # Social links
 [[params.social]]

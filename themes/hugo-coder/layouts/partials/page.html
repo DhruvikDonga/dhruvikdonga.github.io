@@ -10,10 +10,12 @@
 
     {{ .Content }}
     <footer>
-        {{ partial "posts/share.html" . }}
-      </footer>
+      {{ partial "posts/share.html" . }}
+    </footer>
   </article>
-    <button id="back-to-top" title="Go to top" onclick="scrollToTop()" style="
+</section>
+
+<button id="back-to-top" title="Go to top" onclick="scrollToTop()" style="
     display: none; 
     position: fixed; 
     bottom: 60px; 
@@ -30,9 +32,19 @@
     width: 3rem;
     height: 3rem;
 ">⬆</button>
-</section>
+
 <script>
     const topBtn = document.getElementById("back-to-top");
+
+    // Show button when user scrolls down 400px
+    window.onscroll = function() {
+        if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
+            topBtn.style.display = "block";
+        } else {
+            topBtn.style.display = "none";
+        }
+    };
+
     function scrollToTop() {
         window.scrollTo({
             top: 0,
