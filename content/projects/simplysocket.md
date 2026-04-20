@@ -2,7 +2,7 @@
 authors = ["Dhruvik Donga"]
 title = "SimplySocket"
 date = "2023-12-25"
-description = "About simplysocket package"
+description = "SimplySocket is Go based package which provides abstraction over websocket logic to manage rooms , users and focus on core algorithm and logic"
 projectLink = "https://github.com/DhruvikDonga/simplysocket"
 
 +++  

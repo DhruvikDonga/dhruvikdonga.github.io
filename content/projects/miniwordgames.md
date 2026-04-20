@@ -2,7 +2,7 @@
 authors = ["Dhruvik Donga"]
 title = "Mini Word Games"
 date = "2023-10-23"
-description = "About mini word games"
+description = "Mini Word Games is a text challenger multiplayer puzzle game, inspired from battle text , powered by Go and Simplysocket"
 featuredImage = "images/mwgames3.png"
 projectLink = "https://github.com/DhruvikDonga/wordsbattle"
 projectName = "wordsbattle"
