@@ -28,6 +28,11 @@ If you have a project that needs a technical moat or want to discuss my current 
 
 > [AutomateTG](https://automatetg.com) is a SaaS platform that provides advanced Telegram automation powered by Telegram’s open-source MTProto protocol — the layer between Telegram’s backend and its mobile clients.
 
+<details>
+  <summary><strong>Read more →</strong></summary>
+
+---
+
 **The Product**
 * Solves limitations of traditional bots (such as the inability to monitor channels/groups where users are not admins) by enabling user-level session automation.
 
@@ -39,3 +44,4 @@ If you have a project that needs a technical moat or want to discuss my current 
 * **Strategy:** Driving product roadmap and business development.
 
 **Tech Stack:** `Go` • `React.js` • `Supabase` • `Kamal CI/CD` • `MongoDB`
+</details>
