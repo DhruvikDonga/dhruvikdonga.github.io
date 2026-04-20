@@ -215,8 +215,9 @@ function generateTOC() {
     const toc = document.getElementById("TableOfContents");
     const content = document.querySelector("main") || document.body;
 
-    const headings = content.querySelectorAll("h1, h2, h3:not(#toc-drawer h3)");
-
+    const headings = Array.from(
+    content.querySelectorAll("h1, h2, h3")
+    ).filter(el => !document.getElementById("toc-drawer").contains(el));
     let html = "<ul>";
 
     headings.forEach((heading, index) => {
