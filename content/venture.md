@@ -16,7 +16,7 @@ author = "Dhruvik Donga"
     z-index: 999;
     border: 1px solid #424242;
     background-color: #424242;
-    color: #ffffff;
+    color: #dadada;
     cursor: pointer;
     border-radius: 6px;
     width: 3rem;
