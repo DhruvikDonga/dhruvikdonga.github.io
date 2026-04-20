@@ -94,11 +94,11 @@ style = "github-dark"
   url = "venture/"
 [[menu.main]]
   name = "Games"
-  weight = 4
+  weight = 5
   url = "games/"
 [[menu.main]]
   name = "Projects"
-  weight = 5
+  weight = 4
   url  = "projects/"
   pre = "terminal"
 
