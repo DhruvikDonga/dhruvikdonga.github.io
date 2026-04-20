@@ -179,7 +179,7 @@ If you have a project that needs a technical moat or want to discuss my current 
 
 ---
 
-# <img src="https://automatetg.com/assets/logo-BXBDxRNe.webp" width="36" style="vertical-align: middle; margin-right: 10px;">AutomateTG
+## <img src="https://automatetg.com/assets/logo-BXBDxRNe.webp" width="36" style="vertical-align: middle; margin-right: 10px;">AutomateTG
 ![post](https://img.shields.io/badge/co%20founder-blue?style=for-the-badge) ![Date](https://img.shields.io/badge/December%202025-Present-green?style=for-the-badge)
 
 > [AutomateTG](https://automatetg.com) is a SaaS platform that provides advanced Telegram automation powered by Telegram’s open-source MTProto protocol — the layer between Telegram’s backend and its mobile clients.
@@ -187,17 +187,17 @@ If you have a project that needs a technical moat or want to discuss my current 
 <details>
   <summary><strong><small>Read more →</small></strong></summary>
 
-## The Product
+### The Product
 * Solves limitations of traditional bots (such as the inability to monitor channels/groups where users are not admins) by enabling user-level session automation.
 
-## My Role
+### My Role
 * **Core Engine:** Building and scaling the core platform, including Telegram session handling, MTProto integrations, and high-concurrency job scheduling.
 * **Features:** Developing message rule–based monitoring, scheduled AI summaries, and secure job execution pipelines.
 * **Security:** Designing and implementing advanced data encryption for stored user job data.
 * **Infrastructure:** Maintaining and scaling infrastructure with a strong focus on cost efficiency and reliability.
 * **Strategy:** Driving product roadmap and business development.
 
-## Tech Stack:
+### Tech Stack:
 `Go` • `React.js` • `Supabase` • `Kamal CI/CD` • `MongoDB`
 </details>
 
@@ -216,7 +216,7 @@ function generateTOC() {
     const content = document.querySelector("main") || document.body;
 
     const headings = Array.from(
-    content.querySelectorAll("h1, h2, h3")
+    content.querySelectorAll("h2, h3")
     ).filter(el => !document.getElementById("toc-drawer").contains(el));
     let html = "<ul>";
 
@@ -255,7 +255,7 @@ function generateTOC() {
 /* ========================= Highlight Active ========================= */
 function highlightActiveHeading() {
     const headings = Array.from(
-    content.querySelectorAll("h1, h2, h3")
+    content.querySelectorAll("h2, h3")
     ).filter(el => !document.getElementById("toc-drawer").contains(el));
     
     const tocLinks = document.querySelectorAll("#TableOfContents a");
