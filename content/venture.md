@@ -158,7 +158,6 @@ author = "Dhruvik Donga"
     <h3>Table of Contents</h3>
     <button onclick="toggleTOC()" class="close-btn">&times;</button>
     </div>
-
     <nav id="TableOfContents">
     {{ .TableOfContents }}
     </nav>
