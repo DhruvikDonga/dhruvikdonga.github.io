@@ -4,7 +4,16 @@
     <a class="title" href="{{ .Params.externalLink | default .RelPermalink }}">{{ .Title }}</a>
     <br>
     <p class="description">
-      <small>{{ .Params.description }}</small>
-    </p>
+      <small>
+        {{ with .Params.description }}
+          {{ . }}...
+        {{ else }}
+          {{ .Summary }}
+        {{ end }}
+        <a class="read-more" href="{{ .Params.externalLink | default .RelPermalink }}">
+          Read more →
+        </a>
+      </small>
+  </p>
   </div>
 </li>
