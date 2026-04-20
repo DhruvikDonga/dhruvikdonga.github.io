@@ -1,5 +1,5 @@
 <li>
-  <span class="date">{{ .Date | time.Format (.Site.Params.dateFormat | default "January 2, 2006" ) }}</span>
+  <small><span class="date">{{ .Date | time.Format (.Site.Params.dateFormat | default "January 2, 2006" ) }}</span></small>
   <div>
     <a class="title" href="{{ .Params.externalLink | default .RelPermalink }}">{{ .Title }}</a>
     <br>
