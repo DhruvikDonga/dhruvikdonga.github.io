@@ -187,17 +187,17 @@ If you have a project that needs a technical moat or want to discuss my current 
 <details>
   <summary><strong><small>Read more →</small></strong></summary>
 
-### The Product
+## The Product
 * Solves limitations of traditional bots (such as the inability to monitor channels/groups where users are not admins) by enabling user-level session automation.
 
-### My Role
+## My Role
 * **Core Engine:** Building and scaling the core platform, including Telegram session handling, MTProto integrations, and high-concurrency job scheduling.
 * **Features:** Developing message rule–based monitoring, scheduled AI summaries, and secure job execution pipelines.
 * **Security:** Designing and implementing advanced data encryption for stored user job data.
 * **Infrastructure:** Maintaining and scaling infrastructure with a strong focus on cost efficiency and reliability.
 * **Strategy:** Driving product roadmap and business development.
 
-### Tech Stack:
+## Tech Stack:
 `Go` • `React.js` • `Supabase` • `Kamal CI/CD` • `MongoDB`
 </details>
 
