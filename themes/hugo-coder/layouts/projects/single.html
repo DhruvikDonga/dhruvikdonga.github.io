@@ -2,6 +2,148 @@
   {{ .Title }} · {{ .Site.Title }}
 {{ end }}
 {{ define "content" }}
+<style>
+/* =========================
+   TOC Toggle Button
+========================= */
+#toc-toggle {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    z-index: 999;
+    border: 1px solid #424242;
+    background-color: #424242;
+    color: #dadada;
+    cursor: pointer;
+    border-radius: 6px;
+    width: 3rem;
+    height: 3rem;
+    font-size: 18px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    transition: opacity 0.3s ease;
+}
+
+#toc-toggle:hover {
+    opacity: 0.85;
+}
+
+
+/* =========================
+   Drawer
+========================= */
+#toc-drawer {
+    position: fixed;
+    top: 0;
+    right: -320px;
+    width: 300px;
+    height: 100vh;
+    z-index: 1000;
+    transition: right 0.3s ease;
+    padding: 1.8rem;
+    overflow-y: auto;
+
+    background-color: #424242;
+    color: #ffffff;
+
+    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.15);
+    border-left: 1px solid rgba(0,0,0,0.08);
+}
+
+#toc-drawer.toc-active {
+    right: 0;
+}
+
+
+/* =========================
+   TOC Header
+========================= */
+.toc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.toc-header h3 {
+    margin: 0;
+    font-size: 2.5rem;
+    color: #ffffff;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+
+/* =========================
+   Table of Contents Styling
+========================= */
+#TableOfContents {
+    font-size: 1.5rem;
+}
+
+#TableOfContents ul {
+    list-style: none;
+    padding-left: 0.8rem;
+    margin: 0;
+}
+
+#TableOfContents li {
+    margin-bottom: 0.4rem;
+}
+
+#TableOfContents a {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+    padding: 3px 0;
+    line-height: 1.5;
+    transition: color 0.2s ease;
+}
+
+#TableOfContents a:hover {
+    text-decoration: underline;
+}
+
+#TableOfContents a.active {
+    font-weight: 600;
+    opacity: 1;
+}
+
+/* Nested indentation */
+#TableOfContents ul ul {
+    padding-left: 1rem;
+    border-left: 1px solid rgba(0,0,0,0.06);
+}
+
+/* =========================
+   Back To Top
+========================= */
+#back-to-top {
+    display: none;
+    position: fixed;
+    bottom: 60px;
+    right: 20px;
+    z-index: 999;
+    border: 1px solid #424242;
+    background-color: #424242;
+    color: #dadada;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 15px;
+    width: 3rem;
+    height: 3rem;
+}
+</style>
+
   <section class="container project">
     <article>
       <header>
@@ -40,6 +182,23 @@
           
         </div>
       </header>
+      <!-- TOC Button -->
+    <button id="toc-toggle" onclick="toggleTOC()">
+      <i class="fa fa-list"></i>
+    </button>
+
+
+    <!-- Drawer -->
+    <div id="toc-drawer">
+      <div class="toc-header">
+        <h3>Table of Contents</h3>
+        <button onclick="toggleTOC()" class="close-btn">&times;</button>
+      </div>
+
+      <nav id="TableOfContents">
+        {{ .TableOfContents }}
+      </nav>
+    </div>
 
       <div class="project-content">
         {{ if .Params.featuredImage }}
@@ -68,4 +227,90 @@
 
     {{ partial "posts/math.html" . }}
   </section>
+
+  <!-- Back to Top -->
+<button id="back-to-top" onclick="scrollToTop()">⬆</button>
+
+
+<script>
+const topBtn = document.getElementById("back-to-top");
+const drawer = document.getElementById("toc-drawer");
+const toggleBtn = document.getElementById("toc-toggle");
+
+/* =========================
+   Back To Top Visibility
+========================= */
+window.addEventListener("scroll", function () {
+    if (document.documentElement.scrollTop > 400) {
+        topBtn.style.display = "block";
+    } else {
+        topBtn.style.display = "none";
+    }
+
+    highlightActiveHeading();
+});
+
+/* =========================
+   Scroll To Top
+========================= */
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+/* =========================
+   Toggle Drawer
+========================= */
+function toggleTOC() {
+    drawer.classList.toggle("toc-active");
+}
+
+/* Close drawer on outside click */
+window.addEventListener("click", function (e) {
+    if (!drawer.contains(e.target) && !toggleBtn.contains(e.target)) {
+        drawer.classList.remove("toc-active");
+    }
+});
+
+/* Close drawer when clicking TOC link */
+document.querySelectorAll('#toc-drawer a').forEach(link => {
+    link.addEventListener('click', () => {
+        drawer.classList.remove("toc-active");
+    });
+});
+
+/* =========================
+   Smooth Scroll for TOC
+========================= */
+document.querySelectorAll('#toc-drawer a').forEach(anchor => {
+    anchor.addEventListener("click", function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute("href"));
+        if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+    });
+});
+
+/* =========================
+   Active Section Highlight
+========================= */
+function highlightActiveHeading() {
+    const headings = document.querySelectorAll(".post-content h1, .post-content h2, .post-content h3");
+    const tocLinks = document.querySelectorAll("#TableOfContents a");
+
+    let index = headings.length;
+
+    while(--index && window.scrollY + 100 < headings[index].offsetTop) {}
+
+    tocLinks.forEach(link => link.classList.remove("active"));
+
+    const activeLink = tocLinks[index];
+    if (activeLink) {
+        activeLink.classList.add("active");
+    }
+}
+</script>
 {{ end }}
