@@ -179,7 +179,7 @@ If you have a project that needs a technical moat or want to discuss my current 
 
 ---
 
-# <img src="https://automatetg.com/assets/logo-BXBDxRNe.webp" width="36" style="vertical-align: middle; margin-right: 10px;">**AutomateTG**
+# <img src="https://automatetg.com/assets/logo-BXBDxRNe.webp" width="36" style="vertical-align: middle; margin-right: 10px;">AutomateTG
 ![post](https://img.shields.io/badge/co%20founder-blue?style=for-the-badge) ![Date](https://img.shields.io/badge/December%202025-Present-green?style=for-the-badge)
 
 > [AutomateTG](https://automatetg.com) is a SaaS platform that provides advanced Telegram automation powered by Telegram’s open-source MTProto protocol — the layer between Telegram’s backend and its mobile clients.
@@ -277,5 +277,5 @@ window.addEventListener("click", function (e) {
 });
 
 /* Init */
-generateTOC();
+window.addEventListener("load", generateTOC);
 </script>
