@@ -1,8 +1,15 @@
 <li>
-  <small><span class="date">{{ .Date | time.Format (.Site.Params.dateFormat | default "January 2, 2006" ) }}</span></small>
+  <img 
+    class="date-badge"
+    src="https://img.shields.io/badge/{{ .Date.Format "2006--01--02" }}-blue?style=for-the-badge" 
+    alt="date badge"
+  />
+
   <div>
-    <a class="title" href="{{ .Params.externalLink | default .RelPermalink }}">{{ .Title }}</a>
-    <br>
+    <a class="title" href="{{ .Params.externalLink | default .RelPermalink }}">
+      {{ .Title }}
+    </a>
+
     <p class="description">
       <small>
         {{ with .Params.description }}
@@ -14,6 +21,6 @@
           Read more →
         </a>
       </small>
-  </p>
+    </p>
   </div>
 </li>
