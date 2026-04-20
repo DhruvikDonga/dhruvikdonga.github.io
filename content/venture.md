@@ -158,9 +158,7 @@ author = "Dhruvik Donga"
     <h3>Table of Contents</h3>
     <button onclick="toggleTOC()" class="close-btn">&times;</button>
     </div>
-    <nav id="TableOfContents">
-    {{ .TableOfContents }}
-    </nav>
+    <nav id="TableOfContents"></nav>
 </div>
 
 
@@ -283,4 +281,36 @@ function highlightActiveHeading() {
         activeLink.classList.add("active");
     }
 }
+
+function generateTOC() {
+    const toc = document.getElementById("TableOfContents");
+    const content = document.querySelector(".post-content"); // adjust if needed
+
+    if (!toc || !content) return;
+
+    const headings = content.querySelectorAll("h2, h3");
+
+    let html = "<ul>";
+
+    headings.forEach((heading, index) => {
+        // Ensure ID exists
+        if (!heading.id) {
+            heading.id = "heading-" + index;
+        }
+
+        const tag = heading.tagName.toLowerCase();
+        const indent = tag === "h3" ? "style='margin-left:10px;'" : "";
+
+        html += `
+            <li ${indent}>
+                <a href="#${heading.id}">${heading.innerText}</a>
+            </li>
+        `;
+    });
+
+    html += "</ul>";
+    toc.innerHTML = html;
+}
+
+generateTOC();
 </script>
