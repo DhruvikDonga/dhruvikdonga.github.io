@@ -254,7 +254,10 @@ function generateTOC() {
 
 /* ========================= Highlight Active ========================= */
 function highlightActiveHeading() {
-    const headings = document.querySelectorAll("h1, h2, h3");
+    const headings = Array.from(
+    content.querySelectorAll("h1, h2, h3")
+    ).filter(el => !document.getElementById("toc-drawer").contains(el));
+    
     const tocLinks = document.querySelectorAll("#TableOfContents a");
 
     let index = headings.length;
