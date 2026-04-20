@@ -5,6 +5,165 @@ date = "2023-12-25"
 aliases = ["venture", "buisness", "saas"]
 author = "Dhruvik Donga"
 +++
+<style>
+/* =========================
+   TOC Toggle Button
+========================= */
+#toc-toggle {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    z-index: 999;
+    border: 1px solid #424242;
+    background-color: #424242;
+    color: #ffffff;
+    cursor: pointer;
+    border-radius: 6px;
+    width: 3rem;
+    height: 3rem;
+    font-size: 18px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    transition: opacity 0.3s ease;
+}
+
+#toc-toggle:hover {
+    opacity: 0.85;
+}
+
+
+/* =========================
+   Drawer
+========================= */
+#toc-drawer {
+    position: fixed;
+    top: 0;
+    right: -320px;
+    width: 300px;
+    height: 100vh;
+    z-index: 1000;
+    transition: right 0.3s ease;
+    padding: 1.8rem;
+    overflow-y: auto;
+
+    background-color: #424242;
+    color: #ffffff;
+
+    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.15);
+    border-left: 1px solid rgba(0,0,0,0.08);
+}
+
+#toc-drawer.toc-active {
+    right: 0;
+}
+
+
+/* =========================
+   TOC Header
+========================= */
+.toc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.toc-header h3 {
+    margin: 0;
+    font-size: 2.5rem;
+    color: #ffffff;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+
+/* =========================
+   Table of Contents Styling
+========================= */
+#TableOfContents {
+    font-size: 1.5rem;
+}
+
+#TableOfContents ul {
+    list-style: none;
+    padding-left: 0.8rem;
+    margin: 0;
+}
+
+#TableOfContents li {
+    margin-bottom: 0.4rem;
+}
+
+#TableOfContents a {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+    padding: 3px 0;
+    line-height: 1.5;
+    transition: color 0.2s ease;
+}
+
+#TableOfContents a:hover {
+    text-decoration: underline;
+}
+
+#TableOfContents a.active {
+    font-weight: 600;
+    opacity: 1;
+}
+
+/* Nested indentation */
+#TableOfContents ul ul {
+    padding-left: 1rem;
+    border-left: 1px solid rgba(0,0,0,0.06);
+}
+
+/* =========================
+   Back To Top
+========================= */
+#back-to-top {
+    display: none;
+    position: fixed;
+    bottom: 60px;
+    right: 20px;
+    z-index: 999;
+    border: 1px solid #424242;
+    background-color: #424242;
+    color: #ffffff;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 15px;
+    width: 3rem;
+    height: 3rem;
+}
+</style>
+<!-- TOC Button -->
+<button id="toc-toggle" onclick="toggleTOC()">
+    <i class="fa fa-list"></i>
+</button>
+
+
+<!-- Drawer -->
+<div id="toc-drawer">
+    <div class="toc-header">
+    <h3>Table of Contents</h3>
+    <button onclick="toggleTOC()" class="close-btn">&times;</button>
+    </div>
+
+    <nav id="TableOfContents">
+    {{ .TableOfContents }}
+    </nav>
+</div>
+
 
 With my [professional experience](https://dhruvik.cc/work) across domains, building systems and collaborating with like-minded people, I’ve been driven to pursue ideas that can scale into meaningful products.
 
