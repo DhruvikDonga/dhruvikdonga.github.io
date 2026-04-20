@@ -200,13 +200,19 @@ If you have a project that needs a technical moat or want to discuss my current 
 **Tech Stack:** `Go` • `React.js` • `Supabase` • `Kamal CI/CD` • `MongoDB`
 </details>
 
-
 <script>
+const drawer = document.getElementById("toc-drawer");
+const toggleBtn = document.getElementById("toc-toggle");
+
+/* ========================= Toggle ========================= */
+function toggleTOC() {
+    drawer.classList.toggle("toc-active");
+}
+
+/* ========================= Generate TOC ========================= */
 function generateTOC() {
     const toc = document.getElementById("TableOfContents");
     const content = document.querySelector("main") || document.body;
-
-    if (!toc || !content) return;
 
     const headings = content.querySelectorAll("h2, h3");
 
@@ -217,8 +223,7 @@ function generateTOC() {
             heading.id = "heading-" + index;
         }
 
-        const tag = heading.tagName.toLowerCase();
-        const indent = tag === "h3" ? "style='margin-left:10px;'" : "";
+        const indent = heading.tagName === "H3" ? "style='margin-left:10px;'" : "";
 
         html += `
             <li ${indent}>
@@ -230,21 +235,46 @@ function generateTOC() {
     html += "</ul>";
     toc.innerHTML = html;
 
-    // ✅ Attach click handlers AFTER rendering
+    /* Attach click AFTER render */
     toc.querySelectorAll("a").forEach(anchor => {
         anchor.addEventListener("click", function(e) {
             e.preventDefault();
-
             const target = document.querySelector(this.getAttribute("href"));
+
             if (target) {
                 target.scrollIntoView({ behavior: "smooth", block: "start" });
             }
 
-            // close drawer
-            document.getElementById("toc-drawer").classList.remove("toc-active");
+            drawer.classList.remove("toc-active");
         });
     });
 }
 
+/* ========================= Highlight Active ========================= */
+function highlightActiveHeading() {
+    const headings = document.querySelectorAll("h2, h3");
+    const tocLinks = document.querySelectorAll("#TableOfContents a");
+
+    let index = headings.length;
+
+    while (--index && window.scrollY + 120 < headings[index].offsetTop) {}
+
+    tocLinks.forEach(link => link.classList.remove("active"));
+
+    if (tocLinks[index]) {
+        tocLinks[index].classList.add("active");
+    }
+}
+
+/* ========================= Events ========================= */
+window.addEventListener("scroll", highlightActiveHeading);
+
+window.addEventListener("click", function (e) {
+    if (!drawer.contains(e.target) && !toggleBtn.contains(e.target)) {
+        drawer.classList.remove("toc-active");
+    }
+});
+
+/* Init */
 generateTOC();
 </script>
