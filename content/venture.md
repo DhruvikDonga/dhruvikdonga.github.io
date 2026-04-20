@@ -254,10 +254,12 @@ function generateTOC() {
 
 /* ========================= Highlight Active ========================= */
 function highlightActiveHeading() {
+    const content = document.querySelector("main") || document.body;
+
     const headings = Array.from(
-    content.querySelectorAll("h2, h3")
+        content.querySelectorAll("h2, h3")
     ).filter(el => !document.getElementById("toc-drawer").contains(el));
-    
+
     const tocLinks = document.querySelectorAll("#TableOfContents a");
 
     let index = headings.length;
@@ -270,7 +272,6 @@ function highlightActiveHeading() {
         tocLinks[index].classList.add("active");
     }
 }
-
 /* ========================= Events ========================= */
 window.addEventListener("scroll", highlightActiveHeading);
 
