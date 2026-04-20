@@ -1,7 +1,10 @@
 <li>
   <span class="date">{{ .Date | time.Format (.Site.Params.dateFormat | default "January 2, 2006" ) }}</span>
-  <a class="title" href="{{ .Params.externalLink | default .RelPermalink }}">{{ .Title }}</a>
-  <p class="description">
-    {{ .Params.description }}
-  </p>
+  <div>
+    <a class="title" href="{{ .Params.externalLink | default .RelPermalink }}">{{ .Title }}</a>
+    <br>
+    <p class="description">
+      <small>{{ .Params.description }}</small>
+    </p>
+  </div>
 </li>
