@@ -202,89 +202,9 @@ If you have a project that needs a technical moat or want to discuss my current 
 
 
 <script>
-const topBtn = document.getElementById("back-to-top");
-const drawer = document.getElementById("toc-drawer");
-const toggleBtn = document.getElementById("toc-toggle");
-
-/* =========================
-   Back To Top Visibility
-========================= */
-window.addEventListener("scroll", function () {
-    if (document.documentElement.scrollTop > 400) {
-        topBtn.style.display = "block";
-    } else {
-        topBtn.style.display = "none";
-    }
-
-    highlightActiveHeading();
-});
-
-/* =========================
-   Scroll To Top
-========================= */
-function scrollToTop() {
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-}
-
-/* =========================
-   Toggle Drawer
-========================= */
-function toggleTOC() {
-    drawer.classList.toggle("toc-active");
-}
-
-/* Close drawer on outside click */
-window.addEventListener("click", function (e) {
-    if (!drawer.contains(e.target) && !toggleBtn.contains(e.target)) {
-        drawer.classList.remove("toc-active");
-    }
-});
-
-/* Close drawer when clicking TOC link */
-document.querySelectorAll('#toc-drawer a').forEach(link => {
-    link.addEventListener('click', () => {
-        drawer.classList.remove("toc-active");
-    });
-});
-
-/* =========================
-   Smooth Scroll for TOC
-========================= */
-document.querySelectorAll('#toc-drawer a').forEach(anchor => {
-    anchor.addEventListener("click", function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute("href"));
-        if (target) {
-            target.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-    });
-});
-
-/* =========================
-   Active Section Highlight
-========================= */
-function highlightActiveHeading() {
-    const headings = document.querySelectorAll(".post-content h1, .post-content h2, .post-content h3");
-    const tocLinks = document.querySelectorAll("#TableOfContents a");
-
-    let index = headings.length;
-
-    while(--index && window.scrollY + 100 < headings[index].offsetTop) {}
-
-    tocLinks.forEach(link => link.classList.remove("active"));
-
-    const activeLink = tocLinks[index];
-    if (activeLink) {
-        activeLink.classList.add("active");
-    }
-}
-
 function generateTOC() {
     const toc = document.getElementById("TableOfContents");
-    const content = document.querySelector(".post-content"); // adjust if needed
+    const content = document.querySelector("main") || document.body;
 
     if (!toc || !content) return;
 
@@ -293,7 +213,6 @@ function generateTOC() {
     let html = "<ul>";
 
     headings.forEach((heading, index) => {
-        // Ensure ID exists
         if (!heading.id) {
             heading.id = "heading-" + index;
         }
@@ -310,6 +229,21 @@ function generateTOC() {
 
     html += "</ul>";
     toc.innerHTML = html;
+
+    // ✅ Attach click handlers AFTER rendering
+    toc.querySelectorAll("a").forEach(anchor => {
+        anchor.addEventListener("click", function(e) {
+            e.preventDefault();
+
+            const target = document.querySelector(this.getAttribute("href"));
+            if (target) {
+                target.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+
+            // close drawer
+            document.getElementById("toc-drawer").classList.remove("toc-active");
+        });
+    });
 }
 
 generateTOC();
