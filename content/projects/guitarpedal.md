@@ -18,8 +18,9 @@ Visit the application live at [webpaddle.dhruvik.cc](https://webpaddle.dhruvik.c
 
 ### Normal audio graph
 
-```json
+{{< vega "audio-graph" >}}
 {
+  
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": 600,
   "height": 300,
@@ -51,4 +52,4 @@ Visit the application live at [webpaddle.dhruvik.cc](https://webpaddle.dhruvik.c
     }
   }
 }
-```
+{{< /vega >}}
