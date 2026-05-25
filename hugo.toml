@@ -56,6 +56,11 @@ style = "github-dark"
   weight = 3
   url = "https://www.linkedin.com/in/dhruvik-donga-9363a0172/"
 [[params.social]]
+  name = "Product hunt"
+  icon = "fa  fa-product-hunt fa-2x"
+  weight = 3
+  url = "https://www.producthunt.com/@dhruvik_donga"
+[[params.social]]
   name = "Reddit"
   icon = "fa fa-reddit fa-2x"
   weight = 3
@@ -63,7 +68,7 @@ style = "github-dark"
 [[params.social]]
   name = "Instagram"
   icon = "fa fa-instagram fa-2x"
-  weight = 3
+  weight = 4
   url = "https://www.instagram.com/dongadhruvik/"
 [[params.social]]
   name = "personal website"
