@@ -61,6 +61,11 @@ style = "github-dark"
   weight = 3
   url = "https://www.producthunt.com/@dhruvik_donga"
 [[params.social]]
+  name = "Medium"
+  icon = "fa fa-medium fa-2x"
+  weight = 3
+  url = "https://medium.com/@dongadhruvik"
+[[params.social]]
   name = "Reddit"
   icon = "fa fa-reddit fa-2x"
   weight = 3
