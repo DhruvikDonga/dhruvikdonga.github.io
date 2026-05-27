@@ -180,7 +180,7 @@ If you have a project that needs a technical moat or want to discuss my current 
 
 ---
 
-## <img src="https://automatetg.com/assets/logo-BXBDxRNe.webp" width="36" style="vertical-align: middle; margin-right: 10px;">AutomateTG
+## <img src="https://automatetg.com/_next/static/media/logo.0-w4w7ewdm9-r.webp" width="36" style="vertical-align: middle; margin-right: 10px;">AutomateTG
 ![post](https://img.shields.io/badge/co%20founder-blue?style=for-the-badge) ![Date](https://img.shields.io/badge/December%202025-Present-green?style=for-the-badge)
 
 > [AutomateTG](https://automatetg.com) is a SaaS platform that provides advanced Telegram automation powered by Telegram’s open-source MTProto protocol — the layer between Telegram’s backend and its mobile clients.
@@ -197,9 +197,10 @@ If you have a project that needs a technical moat or want to discuss my current 
 * **Security:** Designing and implementing advanced data encryption for stored user job data.
 * **Infrastructure:** Maintaining and scaling infrastructure with a strong focus on cost efficiency and reliability.
 * **Strategy:** Driving product roadmap and business development.
+* **Marketing & Sales:** Contributing in marketing and sales initiatives
 
 ### Tech Stack:
-`Go` • `React.js` • `Supabase` • `Kamal CI/CD` • `MongoDB`
+`Go` • `Next.js` • `Supabase` • `Kamal CI/CD` • `Cloudfare` • `Netlify`
 </details>
 
 <script>
