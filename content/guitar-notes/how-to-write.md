@@ -24,6 +24,7 @@ Every diagram is declared via the `{{</* guitar ... */>}}` shortcode using three
 | `notes` | `csv` | **Yes** | Comma-separated tuples: `string:fret:label[:tag]`. |
 
 </div>
+
 ---
 
 ## 🎨 Note Tagging & Color Conventions
@@ -52,6 +53,7 @@ string_number : fret_number : note_text [: role_tag]
 | `6` | Low **E** | `2.8px` (Heaviest gauge) |
 
 </div>
+
 ---
 
 ## 🎸 Common Usage Styles & Recipes

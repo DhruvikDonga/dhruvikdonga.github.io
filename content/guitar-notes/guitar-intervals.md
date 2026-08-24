@@ -22,6 +22,7 @@ On a single guitar string:
 Starting from any Root note ($R$), every fret you move up creates a distinct interval with its own unique emotional sound:
 
 <div class="table-responsive">
+
 | Frets Away | Semitones | Interval Name | Short Symbol | Character / Feel |
 |:---:|:---:|:---|:---:|:---|
 | **0** | 0 | **Unison / Root** | $R$ / $P1$ | Home, neutral, identical pitch |
@@ -39,6 +40,7 @@ Starting from any Root note ($R$), every fret you move up creates a distinct int
 | **12** | 12 | **Octave / Perfect 8th** | $P8$ / $8ve$ | Complete cycle, same note name, higher pitch |
 
 </div>
+
 ---
 
 ## 2. Visualizing Intervals Along a Single String
@@ -110,6 +112,8 @@ $$\text{Target on B string} = 7 \text{ frets} - 4 \text{ frets (G-B distance)} =
 
 ## 6. Summary Cheat Sheet for Interval Shapes
 
+<div class="table-responsive">
+
 | Interval | Normal Across-String Rule (E-A, A-D, D-G, B-e) | Across G $\rightarrow$ B String Rule |
 |:---|:---|:---|
 | **Unison ($P1$)** | Same string, same fret | - |
@@ -118,6 +122,8 @@ $$\text{Target on B string} = 7 \text{ frets} - 4 \text{ frets (G-B distance)} =
 | **Perfect 4th ($P4$)** | Down 1 string, same fret | Down 1 string, $+1$ fret |
 | **Perfect 5th ($P5$)** | Down 1 string, $+2$ frets | Down 1 string, $+3$ frets |
 | **Octave ($P8$)** | Down 2 strings, $+2$ frets | Down 2 strings, $+3$ frets |
+
+</div>
 
 ### Key Takeaway
 Mastering these interval shapes unlocks the entire fretboard. Instead of memorizing thousands of individual chord boxes, you can build any chord, arpeggio, or scale on the fly by simply combining intervals from your root note.
