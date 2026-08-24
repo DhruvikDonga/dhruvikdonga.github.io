@@ -1,20 +1,30 @@
-{{/* Self-contained Guitar Fretboard Shortcode — Centered On String */}}
+{{/* Self-contained Guitar Fretboard Shortcode — Mobile Friendly */}}
 <style>
 .guitar-diagram {
-  margin: 2rem 0;
+  margin: 1.5rem 0;
   font-family: monospace;
+  max-width: 100%;
 }
 
 .guitar-title {
   font-size: 0.95rem;
   font-weight: 600;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Scroll container to keep diagrams from overflowing or distorting */
+.fretboard-wrapper {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 4px;
 }
 
 .fretboard {
   display: grid;
-  grid-template-columns: 2rem repeat(var(--fret-count, 4), minmax(45px, 70px));
-  width: fit-content;
+  /* Fixed fret columns prevent distorted stretching */
+  grid-template-columns: 1.75rem repeat(var(--fret-count, 4), 48px);
+  width: max-content;
 }
 
 .fret-numbers {
@@ -24,7 +34,7 @@
   text-align: center;
   font-size: 0.75rem;
   opacity: 0.6;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.25rem;
 }
 
 .string-row {
@@ -35,27 +45,27 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 600;
   opacity: 0.75;
 }
 
-/* Fret cell with vertical fret wire and centered horizontal guitar string */
+/* Fret cell with vertical fret wire */
 .fret {
-  height: 38px;
-  border-right: 2px solid currentColor; /* Fret wire */
+  height: 34px;
+  border-right: 2px solid currentColor;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+  box-sizing: border-box;
 }
 
-/* Nut or Start Fret border */
 .fret:first-of-type {
   border-left: 3px solid currentColor;
 }
 
-/* The actual guitar string running through the cell */
+/* String running horizontally through cell */
 .fret::before {
   content: "";
   position: absolute;
@@ -69,53 +79,65 @@
   z-index: 0;
 }
 
-/* Gauge differentiation: Thicker strings for lower bass strings */
 .string-row:nth-child(n+5) .fret::before {
-  height: 2.2px;
+  height: 2px;
   opacity: 0.6;
 }
 
 .string-row:last-child .fret::before {
-  height: 2.8px;
+  height: 2.5px;
   opacity: 0.75;
 }
 
-/* Note Badges placed directly over the string */
+/* Note Badges */
 .note {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: 700;
   background: #334155;
   color: #ffffff;
   position: relative;
   z-index: 2;
   box-shadow: 0 0 0 2px var(--bg-color, #ffffff);
+  flex-shrink: 0;
 }
 
-/* Dark mode ring isolation */
 @media (prefers-color-scheme: dark) {
   .note {
     box-shadow: 0 0 0 2px #1e293b;
   }
 }
 
-/* Root Note Highlight */
 .note.root {
   background: #e11d48;
   color: #ffffff;
   box-shadow: 0 0 0 2px var(--bg-color, #ffffff), 0 0 6px rgba(225, 29, 72, 0.4);
 }
 
-/* Start Note Highlight */
 .note.start {
   background: #f59e0b;
   color: #0f172a;
   box-shadow: 0 0 0 2px var(--bg-color, #ffffff), 0 0 6px rgba(245, 158, 11, 0.4);
+}
+
+/* Mobile optimizations */
+@media (max-width: 600px) {
+  .fretboard {
+    grid-template-columns: 1.5rem repeat(var(--fret-count, 4), 38px);
+  }
+  .fret {
+    height: 30px;
+  }
+  .note {
+    width: 19px;
+    height: 19px;
+    font-size: 0.6rem;
+  }
 }
 </style>
 
@@ -161,25 +183,27 @@
 
 <div class="guitar-diagram">
   {{ with $title }}<div class="guitar-title">{{ . }}</div>{{ end }}
-  <div class="fretboard" style="--fret-count: {{ $fretCount }};">
-    <div class="fret-numbers">
-      {{ range $frets }}<span>{{ . }}</span>{{ end }}
-    </div>
-    {{ range $strings }}
-      {{ $sNum := .num }}
-      <div class="string-row">
-        <span class="string-name">{{ .name }}</span>
-        {{ range $frets }}
-          {{ $fNum := . }}
-          {{ $key := printf "%s-%s" $sNum $fNum }}
-          {{ $noteData := index $noteMap $key }}
-          <div class="fret">
-            {{ if $noteData }}
-              <span class="note{{ with $noteData.tag }} {{ . }}{{ end }}">{{ $noteData.name }}</span>
-            {{ end }}
-          </div>
-        {{ end }}
+  <div class="fretboard-wrapper">
+    <div class="fretboard" style="--fret-count: {{ $fretCount }};">
+      <div class="fret-numbers">
+        {{ range $frets }}<span>{{ . }}</span>{{ end }}
       </div>
-    {{ end }}
+      {{ range $strings }}
+        {{ $sNum := .num }}
+        <div class="string-row">
+          <span class="string-name">{{ .name }}</span>
+          {{ range $frets }}
+            {{ $fNum := . }}
+            {{ $key := printf "%s-%s" $sNum $fNum }}
+            {{ $noteData := index $noteMap $key }}
+            <div class="fret">
+              {{ if $noteData }}
+                <span class="note{{ with $noteData.tag }} {{ . }}{{ end }}">{{ $noteData.name }}</span>
+              {{ end }}
+            </div>
+          {{ end }}
+        </div>
+      {{ end }}
+    </div>
   </div>
 </div>
