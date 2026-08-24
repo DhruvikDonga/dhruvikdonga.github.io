@@ -53,7 +53,7 @@ string_number : fret_number : note_text [: role_tag]
 ### 1. Open Position Chord Boxes (3-Fret Window)
 Ideal for standard open chords where notes sit in frets 1–3:
 
-```markdown
+```javascript
 {{< guitar
     title="C Major (Open Shape)"
     frets="1,2,3"
@@ -71,7 +71,7 @@ Ideal for standard open chords where notes sit in frets 1–3:
 ### 2. Multi-Root Chords
 Use multiple `:root` tags when a chord contains octave roots:
 
-```markdown
+```javascript
 {{< guitar
     title="G Major (Full 6-String Shape)"
     frets="1,2,3"
@@ -88,7 +88,7 @@ Use multiple `:root` tags when a chord contains octave roots:
 ### 3. Box Scales with Explicit Lead-In (`:start`)
 Use `:start` on the lowest tonic pitch to guide finger sequencing in exercise articles:
 
-```markdown
+```javascript
 {{< guitar
     title="F Major Scale — 1st Position Box"
     frets="1,2,3"
@@ -105,7 +105,7 @@ Use `:start` on the lowest tonic pitch to guide finger sequencing in exercise ar
 ### 4. Wide 3-Note-Per-String (3NPS) Scales (5+ Frets)
 The grid dynamically stretches across 5 or more columns when more fret indices are provided in `frets=""`:
 
-```markdown
+```javascript
 {{< guitar
     title="F Major Scale — 3NPS (Pattern 1)"
     frets="1,2,3,4,5"
@@ -124,7 +124,7 @@ The grid dynamically stretches across 5 or more columns when more fret indices a
 ### 5. High-Register Movable Pentatonic Boxes
 Shift the window anywhere across the neck by defining the start and end frets:
 
-```markdown
+```javascript
 {{< guitar
     title="A Minor Pentatonic — Box 1 (5th Position)"
     frets="5,6,7,8"
@@ -143,7 +143,7 @@ Shift the window anywhere across the neck by defining the start and end frets:
 ### 6. Interval & Scale Degree Labeling
 Replace letter names with interval numbers (`R`, `3`, `5`, `b7`) for theoretical analysis:
 
-```markdown
+```javascript
 {{< guitar
     title="Major Triad Formula (Interval Degrees)"
     frets="3,4,5"
