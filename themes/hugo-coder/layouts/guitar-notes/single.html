@@ -142,6 +142,26 @@
     width: 3rem;
     height: 3rem;
 }
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 1.5rem 0;
+}
+
+.table-responsive table {
+  width: 100%;
+  min-width: 480px; /* Prevents text crushing on narrow phones */
+  border-collapse: collapse;
+}
+
+.table-responsive th,
+.table-responsive td {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  white-space: nowrap; /* Keeps rows neat while scrolling */
+}
 </style>
 
   <section class="container project">

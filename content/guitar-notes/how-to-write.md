@@ -15,12 +15,15 @@ This reference guide establishes standard patterns for creating guitar visualiza
 
 Every diagram is declared via the `{{</* guitar ... */>}}` shortcode using three parameters:
 
+<div class="table-responsive">
+
 | Parameter | Type | Required | Description |
 | :--- | :--- | :--- | :--- |
 | `title` | `string` | Optional | Descriptive label rendered above the fretboard. |
 | `frets` | `csv` | **Yes** | Active fret numbers forming the horizontal grid columns. |
 | `notes` | `csv` | **Yes** | Comma-separated tuples: `string:fret:label[:tag]`. |
 
+</div>
 ---
 
 ## 🎨 Note Tagging & Color Conventions
@@ -37,6 +40,8 @@ string_number : fret_number : note_text [: role_tag]
 
 ### String Index Mapping
 
+<div class="table-responsive">
+
 | Index | String | Visual Gauge |
 | :--- | :--- | :--- |
 | `1` | High **e** | `1.5px` (Standard) |
@@ -46,6 +51,7 @@ string_number : fret_number : note_text [: role_tag]
 | `5` | **A** | `2.2px` (Thick bass wire) |
 | `6` | Low **E** | `2.8px` (Heaviest gauge) |
 
+</div>
 ---
 
 ## 🎸 Common Usage Styles & Recipes
