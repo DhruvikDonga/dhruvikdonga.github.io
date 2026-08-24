@@ -1,11 +1,12 @@
----
++++
+authors = ["Dhruvik Donga"]
 title: "The Recipe for Happiness: Demystifying the Major Scale"
 date: 2026-08-24
 draft: false
 tags: ["guitar", "music-theory", "scales", "major-scale", "fretboard"]
 categories: ["Music Theory", "Guitar Fundamentals"]
 summary: "Why do some songs sound bright and wholesome while others sound melancholic? Learn the Major Scale recipe (W-W-H-W-W-W-H), how to extract it from the 12 musical notes, and how to map it onto your fretboard."
----
++++
 
 Have you ever wondered why hearing *Tum Hi Ho* instantly pulls a heavy, melancholic sigh out of you, while songs like *Dil Chahta Hai* or *Here Comes the Sun* fill the room with immediate warmth, joy, and optimism ?
 
