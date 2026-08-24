@@ -7,7 +7,7 @@ categories: ["Music Theory", "Guitar Fundamentals"]
 summary: "A practical guide to musical intervals on the guitar fretboard—from single-string half steps to cross-string Perfect 5ths and the B-string tuning shift."
 ---
 
-When you play guitar, the fretboard can look like a maze of metal frets and wooden blocks. But beneath the surface, everything in music—chords, scales, arpeggios, and melodies—is built on one foundational concept: **intervals**.
+When you play guitar, the fretboard can look like a maze of metal frets and wooden blocks. But beneath the surface, everything in music chords, scales, arpeggios, and melodies is built on one foundational concept: **intervals**.
 
 An **interval** is simply the measurement of distance (or pitch difference) between two notes.
 
@@ -74,7 +74,7 @@ Notice the distance between adjacent open strings:
 * **G to B** = **4 semitones (Major 3rd) ⚠️ THE EXCEPTION**
 * **B to e** = 5 semitones (Perfect 4th)
 
-Because almost all adjacent strings are tuned **5 frets apart (a Perfect 4th)**, any note on the next higher-pitched string at the exact same fret is a **Perfect 4th** higher.
+Because almost all adjacent strings are tuned **5 frets apart (a Perfect 4th)**, any note on the next higher pitched string at the exact same fret is a **Perfect 4th** higher.
 
 ---
 
