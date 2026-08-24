@@ -54,11 +54,11 @@ string_number : fret_number : note_text [: role_tag]
 Ideal for standard open chords where notes sit in frets 1–3:
 
 ```javascript
-{{< guitar
+{{ /*< guitar
     title="C Major (Open Shape)"
     frets="1,2,3"
     notes="5:3:C:root, 4:2:E, 2:1:C"
->}}
+>*/ }}
 ```
 {{< guitar
     title="C Major (Open Shape)"
@@ -72,11 +72,11 @@ Ideal for standard open chords where notes sit in frets 1–3:
 Use multiple `:root` tags when a chord contains octave roots:
 
 ```javascript
-{{< guitar
+{{/* < guitar
     title="G Major (Full 6-String Shape)"
     frets="1,2,3"
     notes="6:3:G:root, 5:2:B, 1:3:G:root"
->}}
+> */}}
 ```
 {{< guitar
     title="G Major (Full 6-String Shape)"
@@ -89,11 +89,11 @@ Use multiple `:root` tags when a chord contains octave roots:
 Use `:start` on the lowest tonic pitch to guide finger sequencing in exercise articles:
 
 ```javascript
-{{< guitar
+{{/*< guitar
     title="F Major Scale — 1st Position Box"
     frets="1,2,3"
     notes="6:1:F:start, 6:3:G, 5:1:Bb, 5:3:C, 4:2:E, 4:3:F:root, 3:2:A, 2:1:C, 2:3:D, 1:1:F:root, 1:3:G"
->}}
+>*/}}
 ```
 {{< guitar
     title="F Major Scale — 1st Position Box"
@@ -106,11 +106,11 @@ Use `:start` on the lowest tonic pitch to guide finger sequencing in exercise ar
 The grid dynamically stretches across 5 or more columns when more fret indices are provided in `frets=""`:
 
 ```javascript
-{{< guitar
+{{/*< guitar
     title="F Major Scale — 3NPS (Pattern 1)"
     frets="1,2,3,4,5"
     notes="6:1:F:start, 6:3:G, 6:5:A, 5:1:Bb, 5:3:C, 5:5:D, 4:2:E, 4:3:F:root, 4:5:G, 3:2:A, 3:3:Bb, 3:5:C, 2:3:D, 2:5:E, 1:1:F:root, 1:3:G, 1:5:A"
->}}
+>*/}}
 ```
 
 {{< guitar
@@ -125,11 +125,11 @@ The grid dynamically stretches across 5 or more columns when more fret indices a
 Shift the window anywhere across the neck by defining the start and end frets:
 
 ```javascript
-{{< guitar
+{{/*< guitar
     title="A Minor Pentatonic — Box 1 (5th Position)"
     frets="5,6,7,8"
     notes="6:5:A:root, 6:8:C, 5:5:D, 5:7:E, 4:5:G, 4:7:A:root, 3:5:C, 3:7:D, 2:5:E, 2:8:G, 1:5:A:root, 1:8:C"
->}}
+>*/}}
 ```
 
 {{< guitar
@@ -144,11 +144,11 @@ Shift the window anywhere across the neck by defining the start and end frets:
 Replace letter names with interval numbers (`R`, `3`, `5`, `b7`) for theoretical analysis:
 
 ```javascript
-{{< guitar
+{{/*< guitar
     title="Major Triad Formula (Interval Degrees)"
     frets="3,4,5"
     notes="5:3:R:root, 4:2:3, 3:5:5"
->}}
+>*/}}
 ```
 {{< guitar
     title="Major Triad Formula (Interval Degrees)"
