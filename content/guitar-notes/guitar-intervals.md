@@ -23,21 +23,21 @@ Starting from any Root note ($R$), every fret you move up creates a distinct int
 
 <div class="table-responsive">
 
-| Frets Away | Semitones | Interval Name | Short Symbol | Character / Feel |
+| Frets Away | Semitones | Interval Name | Symbol | Character / Feel |
 |:---:|:---:|:---|:---:|:---|
-| **0** | 0 | **Unison / Root** | $R$ / $P1$ | Home, neutral, identical pitch |
-| **1** | 1 | **Minor 2nd** (Half Step) | $m2$ | Dissonant, tense, suspenseful (*Jaws* theme) |
-| **2** | 2 | **Major 2nd** (Whole Step) | $M2$ | Melodic step (*Happy Birthday* opening) |
-| **3** | 3 | **Minor 3rd** | $m3$ | Sad, melancholic, bluesy |
-| **4** | 4 | **Major 3rd** | $M3$ | Bright, happy, triumphant |
-| **5** | 5 | **Perfect 4th** | $P4$ | Open, resolved (*Here Comes the Bride*) |
-| **6** | 6 | **Tritone / Diminished 5th** | $b5$ / $tt$ | High tension, eerie, "devil's interval" |
-| **7** | 7 | **Perfect 5th** | $P5$ | Strong, stable, foundational (Power chords) |
-| **8** | 8 | **Minor 6th** | $m6$ | Dramatic, romantic, yearning |
-| **9** | 9 | **Major 6th** | $M6$ | Warm, sweet (*NBC* chime) |
-| **10** | 10 | **Minor 7th** | $m7$ | Bluesy, funky, unresolved |
-| **11** | 11 | **Major 7th** | $M7$ | Dreamy, nostalgic, jazz tension |
-| **12** | 12 | **Octave / Perfect 8th** | $P8$ / $8ve$ | Complete cycle, same note name, higher pitch |
+| **0** | 0 | **Unison / Root** | R / P1 | Home, neutral, identical pitch |
+| **1** | 1 | **Minor 2nd** | m2 | Dissonant, tense (*Jaws* theme) |
+| **2** | 2 | **Major 2nd** | M2 | Melodic step (*Happy Birthday* opening) |
+| **3** | 3 | **Minor 3rd** | m3 | Sad, melancholic, bluesy |
+| **4** | 4 | **Major 3rd** | M3 | Bright, happy, triumphant |
+| **5** | 5 | **Perfect 4th** | P4 | Open, resolved (*Here Comes the Bride*) |
+| **6** | 6 | **Tritone / Diminished 5th** | b5 / tt | High tension, eerie, "devil's interval" |
+| **7** | 7 | **Perfect 5th** | P5 | Strong, stable, foundational (Power chords) |
+| **8** | 8 | **Minor 6th** | m6 | Dramatic, romantic, yearning |
+| **9** | 9 | **Major 6th** | M6 | Warm, sweet (*NBC* chime) |
+| **10** | 10 | **Minor 7th** | m7 | Bluesy, funky, unresolved |
+| **11** | 11 | **Major 7th** | M7 | Dreamy, nostalgic, jazz tension |
+| **12** | 12 | **Octave / Perfect 8th** | P8 / 8ve | Complete cycle, same note name, higher pitch |
 
 </div>
 
@@ -81,7 +81,7 @@ Because almost all adjacent strings are tuned **5 frets apart (a Perfect 4th)**,
 ## 4. The Perfect 5th Shape
 
 A **Perfect 5th** is 7 frets away on a single string. When jumping to the next higher string:
-$$\text{Target} = 7 \text{ frets} - 5 \text{ frets (string jump)} = +2 \text{ frets}$$
+> **Target Fret** = 7 frets − 5 frets (string jump) = **+2 frets**
 
 This gives us the universal **Power Chord shape**:
 > **Next string up + 2 frets higher**
@@ -100,7 +100,7 @@ This gives us the universal **Power Chord shape**:
 Because the interval between the **G string (3rd)** and the **B string (2nd)** is tuned to a **Major 3rd (4 semitones)** instead of a Perfect 4th (5 semitones), the entire fretboard pattern is shifted **one fret to the right (higher)** whenever an interval crosses from the G string to the B string.
 
 ### The Math:
-$$\text{Target on B string} = 7 \text{ frets} - 4 \text{ frets (G-B distance)} = +3 \text{ frets}$$
+> **Target on B string** = 7 frets − 4 frets (G-to-B distance) = **+3 frets**
 
 ### Comparison:
 
@@ -114,14 +114,14 @@ $$\text{Target on B string} = 7 \text{ frets} - 4 \text{ frets (G-B distance)} =
 
 <div class="table-responsive">
 
-| Interval | Normal Across-String Rule (E-A, A-D, D-G, B-e) | Across G $\rightarrow$ B String Rule |
+| Interval | Normal Rule (E-A, A-D, D-G, B-e) | Crossing G → B Rule |
 |:---|:---|:---|
-| **Unison ($P1$)** | Same string, same fret | - |
-| **Minor 3rd ($m3$)** | Down 1 string, $-2$ frets | Down 1 string, $-1$ fret |
-| **Major 3rd ($M3$)** | Down 1 string, $-1$ fret | Down 1 string, same fret |
-| **Perfect 4th ($P4$)** | Down 1 string, same fret | Down 1 string, $+1$ fret |
-| **Perfect 5th ($P5$)** | Down 1 string, $+2$ frets | Down 1 string, $+3$ frets |
-| **Octave ($P8$)** | Down 2 strings, $+2$ frets | Down 2 strings, $+3$ frets |
+| **Unison (P1)** | Same string, same fret | — |
+| **Minor 3rd (m3)** | Next higher string, -2 frets | Next higher string, -1 fret |
+| **Major 3rd (M3)** | Next higher string, -1 fret | Next higher string, same fret |
+| **Perfect 4th (P4)** | Next higher string, same fret | Next higher string, +1 fret |
+| **Perfect 5th (P5)** | Next higher string, +2 frets | Next higher string, +3 frets |
+| **Octave (P8)** | 2 strings higher, +2 frets | 2 strings higher, +3 frets |
 
 </div>
 

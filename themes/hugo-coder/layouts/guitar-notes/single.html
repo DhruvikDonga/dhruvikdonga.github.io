@@ -152,15 +152,22 @@
 
 .table-responsive table {
   width: 100%;
-  min-width: 480px; /* Prevents text crushing on narrow phones */
+  min-width: 540px; /* Increased to accommodate larger text cleanly */
   border-collapse: collapse;
 }
 
 .table-responsive th,
 .table-responsive td {
-  padding: 0.5rem 0.75rem;
-  font-size: 0.85rem;
-  white-space: nowrap; /* Keeps rows neat while scrolling */
+  padding: 0.75rem 1rem; /* Slightly more breathing room for larger text */
+  font-size: 1.05rem;     /* Increased from 0.85rem for high readability */
+  line-height: 1.5;
+  white-space: nowrap;   /* Keeps rows neat while scrolling */
+}
+
+/* Optional: Make headers stand out slightly more */
+.table-responsive th {
+  font-size: 1.1rem;
+  font-weight: 700;
 }
 </style>
 
