@@ -9,7 +9,7 @@ summary: "Why do some songs sound bright and wholesome while others sound melanc
 
 Have you ever wondered why hearing *Tum Hi Ho* instantly pulls a heavy, melancholic sigh out of you, while songs like *Dil Chahta Hai* or *Here Comes the Sun* fill the room with immediate warmth, joy, and optimism ?
 
-In our (previous article)[/guitar-intervals/], we discovered the **12 musical alphabets** the complete spice rack of Western music. But playing all 12 notes at once is like dumping salt, sugar, turmeric, chili powder, and oregano into the same dish: pure sonic chaos. 
+In our [previous article](/guitar-intervals/), we discovered the **12 musical alphabets** the complete spice rack of Western music. But playing all 12 notes at once is like dumping salt, sugar, turmeric, chili powder, and oregano into the same dish: pure sonic chaos. 
 
 Musicians don't use all 12 notes simultaneously. Instead, they choose a curated **recipe of 7 notes**. That specific selection is what we call a **Scale**. 
 
