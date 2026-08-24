@@ -1,4 +1,4 @@
-{{/* Self-contained Guitar Fretboard Shortcode */}}
+{{/* Self-contained Guitar Fretboard Shortcode — Centered On String */}}
 <style>
 .guitar-diagram {
   margin: 2rem 0;
@@ -36,51 +36,86 @@
   align-items: center;
   justify-content: center;
   font-size: 0.8rem;
-  opacity: 0.65;
+  font-weight: 600;
+  opacity: 0.75;
 }
 
+/* Fret cell with vertical fret wire and centered horizontal guitar string */
 .fret {
-  height: 42px;
-  border-right: 1px solid currentColor;
-  border-bottom: 1px solid currentColor;
-  border-top: 1px solid currentColor;
+  height: 38px;
+  border-right: 2px solid currentColor; /* Fret wire */
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
 }
 
+/* Nut or Start Fret border */
 .fret:first-of-type {
-  border-left: 2px solid currentColor;
+  border-left: 3px solid currentColor;
 }
 
-/* Default / Scale Notes: Slate Grey */
+/* The actual guitar string running through the cell */
+.fret::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1.5px;
+  background-color: currentColor;
+  opacity: 0.45;
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+/* Gauge differentiation: Thicker strings for lower bass strings */
+.string-row:nth-child(n+5) .fret::before {
+  height: 2.2px;
+  opacity: 0.6;
+}
+
+.string-row:last-child .fret::before {
+  height: 2.8px;
+  opacity: 0.75;
+}
+
+/* Note Badges placed directly over the string */
 .note {
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 700;
-  background: #475569;
+  background: #334155;
   color: #ffffff;
-  z-index: 1;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 0 0 2px var(--bg-color, #ffffff);
 }
 
-/* Root Notes: Crimson Coral */
+/* Dark mode ring isolation */
+@media (prefers-color-scheme: dark) {
+  .note {
+    box-shadow: 0 0 0 2px #1e293b;
+  }
+}
+
+/* Root Note Highlight */
 .note.root {
   background: #e11d48;
   color: #ffffff;
-  box-shadow: 0 0 0 2px rgba(225, 29, 72, 0.25);
+  box-shadow: 0 0 0 2px var(--bg-color, #ffffff), 0 0 6px rgba(225, 29, 72, 0.4);
 }
 
-/* Start / Lead-in Note: Electric Amber */
+/* Start Note Highlight */
 .note.start {
   background: #f59e0b;
   color: #0f172a;
-  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.25);
+  box-shadow: 0 0 0 2px var(--bg-color, #ffffff), 0 0 6px rgba(245, 158, 11, 0.4);
 }
 </style>
 
@@ -95,7 +130,6 @@
 {{ end }}
 {{ $fretCount := len $frets }}
 
-{{/* Build note lookup dictionary: "string-fret" -> dict of note data */}}
 {{ $noteMap := dict }}
 {{ $rawNotes := split (.Get "notes") "," }}
 {{ range $rawNotes }}
@@ -116,9 +150,8 @@
   {{ end }}
 {{ end }}
 
-{{/* Standard tuning strings: 1 = High E, 6 = Low E */}}
 {{ $strings := slice 
-  (dict "num" "1" "name" "E")
+  (dict "num" "1" "name" "e")
   (dict "num" "2" "name" "B")
   (dict "num" "3" "name" "G")
   (dict "num" "4" "name" "D")
@@ -127,19 +160,11 @@
 }}
 
 <div class="guitar-diagram">
-  {{ with $title }}
-    <div class="guitar-title">{{ . }}</div>
-  {{ end }}
-
+  {{ with $title }}<div class="guitar-title">{{ . }}</div>{{ end }}
   <div class="fretboard" style="--fret-count: {{ $fretCount }};">
-    <!-- Fret numbers header -->
     <div class="fret-numbers">
-      {{ range $frets }}
-        <span>{{ . }}</span>
-      {{ end }}
+      {{ range $frets }}<span>{{ . }}</span>{{ end }}
     </div>
-
-    <!-- String rows -->
     {{ range $strings }}
       {{ $sNum := .num }}
       <div class="string-row">

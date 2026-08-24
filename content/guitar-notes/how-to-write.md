@@ -1,105 +1,164 @@
 +++
 authors = ["Dhruvik Donga"]
-title = "Guitar Essentials: Essential Open Chords and the F Major Scale (3NPS)"
+title = "Reference Guide: Writing Guitar Articles with the Custom Hugo Shortcode"
 date = "2026-08-24"
-description = "A practical visual guide covering fundamental open guitar chords (C, G, D, Am, Em) and the full 3-Note-Per-String (3NPS) F Major scale pattern."
-tags = ["guitar", "music-theory", "chords", "scales"]
-categories = ["Music"]
+description = "A developer and author guide explaining the design patterns, syntax, and visualization styles available in our string-centered Hugo guitar shortcode."
+tags = ["hugo", "guitar", "music-theory", "guide", "web-dev"]
+categories = ["Guides"]
 +++
 
-Understanding fretboard geometry starts with foundational open chords and modern 3-Note-Per-String (3NPS) scale systems. Here is a breakdown of the core open shapes and the complete 1st-position 3NPS F Major scale.
+This reference guide establishes standard patterns for creating guitar visualizations in future articles. The underlying shortcode renders note badges centered directly on simulated guitar string lines, providing realistic fretboard diagrams with zero client-side JavaScript.
 
 ---
 
-## 🎸 Essential Open Chords
+## 🛠️ Shortcode Parameter Spec
 
-Open chords anchor guitar harmony by utilizing open strings alongside fretted notes within the first 3 frets[cite: 3].
+Every diagram is declared via the `{{</* guitar ... */>}}` shortcode using three parameters:
 
-### 1. C Major
-The classic C shape built from the tonic note **C** on the 5th string[cite: 3]:
+| Parameter | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `title` | `string` | Optional | Descriptive label rendered above the fretboard. |
+| `frets` | `csv` | **Yes** | Active fret numbers forming the horizontal grid columns. |
+| `notes` | `csv` | **Yes** | Comma-separated tuples: `string:fret:label[:tag]`. |
 
+---
+
+## 🎨 Note Tagging & Color Conventions
+
+The 4th parameter of any note tuple specifies its visual role:
+
+```text
+string_number : fret_number : note_text [: role_tag]
+```
+
+* **Standard Note (No Tag):** Defaults to slate grey badge (`#334155`). Used for general scale/chord tones.
+* **Root Note (`:root`):** Highlighted with crimson red badge (`#e11d48`). Used for tonal center landmarks.
+* **Start Note (`:start`):** Highlighted with amber gold badge (`#f59e0b`). Used for the initial exercise note or scale run entry point.
+
+### String Index Mapping
+
+| Index | String | Visual Gauge |
+| :--- | :--- | :--- |
+| `1` | High **e** | `1.5px` (Standard) |
+| `2` | **B** | `1.5px` (Standard) |
+| `3` | **G** | `1.5px` (Standard) |
+| `4` | **D** | `1.5px` (Standard) |
+| `5` | **A** | `2.2px` (Thick bass wire) |
+| `6` | Low **E** | `2.8px` (Heaviest gauge) |
+
+---
+
+## 🎸 Common Usage Styles & Recipes
+
+### 1. Open Position Chord Boxes (3-Fret Window)
+Ideal for standard open chords where notes sit in frets 1–3:
+
+```markdown
 {{< guitar
-    title="C Major Chord"
+    title="C Major (Open Shape)"
+    frets="1,2,3"
+    notes="5:3:C:root, 4:2:E, 2:1:C"
+>}}
+```
+{{< guitar
+    title="C Major (Open Shape)"
     frets="1,2,3"
     notes="5:3:C:root, 4:2:E, 2:1:C"
 >}}
 
-* **Strings Played:** 5 (A), 4 (D), 3 (G - open), 2 (B), 1 (high E - open)[cite: 3]
-* **Root Note:** C (5th string, 3rd fret)[cite: 3]
-
 ---
 
-### 2. G Major
-A resonant open major chord spanning all six strings[cite: 3]:
+### 2. Multi-Root Chords
+Use multiple `:root` tags when a chord contains octave roots:
 
+```markdown
 {{< guitar
-    title="G Major Chord"
+    title="G Major (Full 6-String Shape)"
     frets="1,2,3"
-    notes="6:3:G:root, 5:2:B, 1:3:G"
+    notes="6:3:G:root, 5:2:B, 1:3:G:root"
 >}}
-
-* **Strings Played:** All 6 strings (Strings 4, 3, and 2 ring open)[cite: 3]
-* **Root Note:** G (6th string, 3rd fret)[cite: 3]
-
+```
+{{< guitar
+    title="G Major (Full 6-String Shape)"
+    frets="1,2,3"
+    notes="6:3:G:root, 5:2:B, 1:3:G:root"
+>}}
 ---
 
-### 3. D Major
-A bright, high-register triangle shape centered on the top four strings[cite: 3]:
+### 3. Box Scales with Explicit Lead-In (`:start`)
+Use `:start` on the lowest tonic pitch to guide finger sequencing in exercise articles:
 
+```markdown
 {{< guitar
-    title="D Major Chord"
+    title="F Major Scale — 1st Position Box"
     frets="1,2,3"
-    notes="3:2:A, 2:3:D:root, 1:2:F#"
+    notes="6:1:F:start, 6:3:G, 5:1:Bb, 5:3:C, 4:2:E, 4:3:F:root, 3:2:A, 2:1:C, 2:3:D, 1:1:F:root, 1:3:G"
 >}}
-
-* **Strings Played:** 4 (D - open), 3 (G), 2 (B), 1 (high E)[cite: 3]
-* **Root Note:** D (4th string open)[cite: 3]
-
+```
+{{< guitar
+    title="F Major Scale — 1st Position Box"
+    frets="1,2,3"
+    notes="6:1:F:start, 6:3:G, 5:1:Bb, 5:3:C, 4:2:E, 4:3:F:root, 3:2:A, 2:1:C, 2:3:D, 1:1:F:root, 1:3:G"
+>}}
 ---
 
-### 4. A Minor & E Minor
-The two foundational open minor shapes[cite: 3]:
+### 4. Wide 3-Note-Per-String (3NPS) Scales (5+ Frets)
+The grid dynamically stretches across 5 or more columns when more fret indices are provided in `frets=""`:
 
+```markdown
 {{< guitar
-    title="A Minor Chord"
-    frets="1,2,3"
-    notes="4:2:E, 3:2:A:root, 2:1:C"
->}}
-
-{{< guitar
-    title="E Minor Chord"
-    frets="1,2,3"
-    notes="5:2:B, 4:2:E:root"
->}}
-
----
-
-## 🎼 F Major Scale Design (3 Notes Per String)
-
-The **F Major Scale** consists of seven natural pitches with one flat ($B\flat$):
-$$\text{F} - \text{G} - \text{A} - \text{B}\flat - \text{C} - \text{D} - \text{E}$$
-
-The **3-Note-Per-String (3NPS)** layout provides a uniform picking and fingering pattern across the fretboard, spanning frets 1 to 5 starting from the low E string.
-
-### F Major Scale (Pattern 1 — 3NPS)
-
-{{< guitar
-    title="F Major Scale — 3 Notes Per String"
+    title="F Major Scale — 3NPS (Pattern 1)"
     frets="1,2,3,4,5"
-    notes="6:1:F:start, 6:3:G, 6:5:A, 5:1:Bb, 5:3:C, 5:5:D, 4:2:E, 4:3:F:root, 4:5:G, 3:2:A, 3:3:Bb, 3:5:C, 2:3:D, 2:5:E, 2:6:F:root, 1:1:F:root, 1:3:G, 1:5:A"
+    notes="6:1:F:start, 6:3:G, 6:5:A, 5:1:Bb, 5:3:C, 5:5:D, 4:2:E, 4:3:F:root, 4:5:G, 3:2:A, 3:3:Bb, 3:5:C, 2:3:D, 2:5:E, 1:1:F:root, 1:3:G, 1:5:A"
+>}}
+```
+
+{{< guitar
+    title="F Major Scale — 3NPS (Pattern 1)"
+    frets="1,2,3,4,5"
+    notes="6:1:F:start, 6:3:G, 6:5:A, 5:1:Bb, 5:3:C, 5:5:D, 4:2:E, 4:3:F:root, 4:5:G, 3:2:A, 3:3:Bb, 3:5:C, 2:3:D, 2:5:E, 1:1:F:root, 1:3:G, 1:5:A"
 >}}
 
-### Scale Notes per String (3NPS Layout)
+---
 
-| String | Notes (3NPS) | Frets Used |
-| :--- | :--- | :--- |
-| **1 (High E)** | **F** *(Root)* — **G** — **A** | Frets 1, 3, 5 |
-| **2 (B)** | **D** — **E** — **F** *(Root)* | Frets 3, 5, 6 |
-| **3 (G)** | **A** — **B♭** — **C** | Frets 2, 3, 5 |
-| **4 (D)** | **E** — **F** *(Root)* — **G** | Frets 2, 3, 5 |
-| **5 (A)** | **B♭** — **C** — **D** | Frets 1, 3, 5 |
-| **6 (Low E)** | **F** *(Root/Start)* — **G** — **A** | Frets 1, 3, 5 |
+### 5. High-Register Movable Pentatonic Boxes
+Shift the window anywhere across the neck by defining the start and end frets:
 
-### Practice Tips
-* **Strict Alternate Picking:** Because every string has exactly 3 notes, alternate picking patterns (`Down-Up-Down`, `Up-Down-Up`) switch consistently across string transitions.
-* **Finger Independence:** Utilize your index (fret 1/2), middle (fret 3), and pinky (fret 5) to develop finger stretch and fretboard economy.
+```markdown
+{{< guitar
+    title="A Minor Pentatonic — Box 1 (5th Position)"
+    frets="5,6,7,8"
+    notes="6:5:A:root, 6:8:C, 5:5:D, 5:7:E, 4:5:G, 4:7:A:root, 3:5:C, 3:7:D, 2:5:E, 2:8:G, 1:5:A:root, 1:8:C"
+>}}
+```
+
+{{< guitar
+    title="A Minor Pentatonic — Box 1 (5th Position)"
+    frets="5,6,7,8"
+    notes="6:5:A:root, 6:8:C, 5:5:D, 5:7:E, 4:5:G, 4:7:A:root, 3:5:C, 3:7:D, 2:5:E, 2:8:G, 1:5:A:root, 1:8:C"
+>}}
+
+---
+
+### 6. Interval & Scale Degree Labeling
+Replace letter names with interval numbers (`R`, `3`, `5`, `b7`) for theoretical analysis:
+
+```markdown
+{{< guitar
+    title="Major Triad Formula (Interval Degrees)"
+    frets="3,4,5"
+    notes="5:3:R:root, 4:2:3, 3:5:5"
+>}}
+```
+{{< guitar
+    title="Major Triad Formula (Interval Degrees)"
+    frets="3,4,5"
+    notes="5:3:R:root, 4:2:3, 3:5:5"
+>}}
+---
+
+## ✍️ Best Practices for Blog Authors
+
+* **Order of Strings:** Always specify string numbers `1` (high e) through `6` (low E) correctly.
+* **Keep Ranges Realistic:** Keep `frets` to contiguous sequences (e.g. `1,2,3` or `5,6,7,8`) to prevent awkward horizontal gaps.
+* **Accents First:** Reserve `:start` for the primary entry note and `:root` for octave anchors so diagrams remain scannable.
