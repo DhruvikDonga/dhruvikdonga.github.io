@@ -1,15 +1,21 @@
 {{ $style := resources.Get "css/guitar.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $style.RelPermalink }}">
+
 {{ $title := .Get "title" }}
 {{ $frets := split (.Get "frets") "," }}
-{{ $fretCount := len$frets }}
+{{ $fretCount := len $frets }}
 {{ $rawNotes := split (.Get "notes") "," }}
 
 {{/* Build note lookup dictionary: "string-fret" -> note label */}}
 {{ $noteMap := dict }}
 {{ range $rawNotes }}
   {{ $parts := split . ":" }}
-  {{ if ge (len $parts) 3 }}     {{$s := index $parts 0 }}     {{$f := index $parts 1 }}     {{$n := index $parts 2 }}     {{$key := printf "%s-%s" $s$f }}
-    {{ $noteMap = merge $noteMap (dict $key$n) }}
+  {{ if ge (len $parts) 3 }}
+    {{ $s := index $parts 0 }}
+    {{ $f := index $parts 1 }}
+    {{ $n := index $parts 2 }}
+    {{ $key := printf "%s-%s" $s $f }}
+    {{ $noteMap = merge $noteMap (dict $key $n) }}
   {{ end }}
 {{ end }}
 
@@ -43,7 +49,7 @@
         <span class="string-name">{{ .name }}</span>
         {{ range $frets }}
           {{ $fNum := . }}
-          {{ $key := printf "%s-%s" $sNum$fNum }}
+          {{ $key := printf "%s-%s" $sNum $fNum }}
           {{ $note := index $noteMap $key }}
           <div class="fret">
             {{ if $note }}
