@@ -167,14 +167,6 @@
               {{ i18n "reading_time" .ReadingTime }}
             </span>
           </div>
-          <div class="project-meta">
-            <div class="date">
-              <span class="posted-on">
-                <i class="fa fa-github" aria-hidden="true"></i>
-                <a href="{{ .Params.projectLink }}">{{ .Params.projectName | default .LinkTitle }}</a>
-              </span>
-            </div>
-          </div>
           
           {{ with .GetTerms "authors" }}{{ partial "taxonomy/authors.html" . }}{{ end }}
           {{ with .GetTerms "categories" }}{{ partial "taxonomy/categories.html" . }}{{ end }}
