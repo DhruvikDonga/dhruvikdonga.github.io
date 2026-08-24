@@ -17,7 +17,14 @@ And when you want something bright, triumphant, and wholesome, you reach for the
 
 ---
 
-## 1. The Major Scale Recipe (W-W-H-W-W-W-H)
+## 1. The Indian Classical Connection (Sargam)
+
+If you are familiar with Indian music, the **Major Scale** corresponds directly to **Bilawal Thaat** (*Shuddha Swaras*), while the **Natural Minor Scale** matches **Asavari Thaat** (with flattened *Komal* Re, Ga, Dha, and Ni):
+
+* **Major Scale (Bilawal Thaat):** `Sa – Re – Ga – Ma – Pa – Dha – Ni – Sa` *(All Shuddha / Natural notes)*
+* **Natural Minor Scale (Asavari Thaat):** `Sa – Re – komal Ga (g) – Ma – Pa – komal Dha (d) – komal Ni (n) – Sa`
+
+## 2. The Major Scale Recipe (W-W-H-W-W-W-H)
 
 Every major scale follows an identical step-by-step formula using **Whole Steps (W = 2 frets)** and **Half Steps (H = 1 fret)**:
 
@@ -44,7 +51,7 @@ Notice where the half-steps land: between **3–4** and **7–8**. That tiny hal
 
 ---
 
-## 2. Cooking Two Examples
+## 3. Cooking Two Examples
 
 ### Example A: C Major Scale (The Pure Natural Scale)
 Starting from Root **C**, applying **W-W-H-W-W-W-H**:
@@ -58,7 +65,7 @@ Starting from Root **G**, applying **W-W-H-W-W-W-H** :
 
 ---
 
-## 3. Linear Single-String View (G Major on the 6th String)
+## 4. Linear Single-String View (G Major on the 6th String)
 
 Let's look at the formula laid out end-to-end on the **Low E string** starting from **G (3rd fret)** :
 
@@ -75,7 +82,7 @@ Let's look at the formula laid out end-to-end on the **Low E string** starting f
 
 ---
 
-## 4. Folding into a Playable Fretboard Box (Frets 2 to 5)
+## 5. Folding into a Playable Fretboard Box (Frets 2 to 5)
 
 Just like we learned with intervals, sliding across 13 frets on one string is too slow for quick melodies . 
 
@@ -93,7 +100,7 @@ Using our standard tuning offset (each adjacent string tuned 5 frets / a Perfect
 
 ---
 
-## 5. Summary Cheat Sheet
+## 6. Summary Cheat Sheet
 
 <div class="table-responsive">
 
@@ -110,5 +117,5 @@ Using our standard tuning offset (each adjacent string tuned 5 frets / a Perfect
 
 </div>
 
-## 6. Practice Tip:
+## 7. Practice Tip:
 Play the 2-octave box shape ascending and descending with a metronome . Pay attention to how your ear desperately waits for that 7th note (**F#**) to resolve home into the root (**G**)—that tension-and-release dynamic is the heartbeat of songwriting !
