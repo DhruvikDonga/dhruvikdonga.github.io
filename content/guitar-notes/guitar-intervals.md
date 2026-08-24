@@ -126,7 +126,7 @@ A **Perfect 4th** is **5 frets away** on a single string.
 
 Because adjacent guitar strings (E-A, A-D, D-G, B-e) are already tuned exactly **5 frets apart (a Perfect 4th)**, mapping a 4th to the next higher string requires zero fret shifts:
 
-> **Target Fret** = 5 frets (distance)  5 frets (adjacent string tuning distance) = **Same fret (0 shift)**
+> **Target Fret** = 5 frets (distance) - 5 frets (adjacent string tuning distance) = **Same fret (0 shift)**
 
 This gives us the simplest shape on the fretboard:
 * **Next higher string + exact same fret**
