@@ -1,25 +1,122 @@
-{{ $style := resources.Get "css/guitar.css" | minify | fingerprint }}
-<link rel="stylesheet" href="{{ $style.RelPermalink }}">
+{{/* Self-contained Guitar Fretboard Shortcode */}}
+<style>
+.guitar-diagram {
+  margin: 2rem 0;
+  font-family: monospace;
+}
+
+.guitar-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.fretboard {
+  display: grid;
+  grid-template-columns: 2rem repeat(var(--fret-count, 4), minmax(45px, 70px));
+  width: fit-content;
+}
+
+.fret-numbers {
+  grid-column: 2 / -1;
+  display: grid;
+  grid-template-columns: repeat(var(--fret-count, 4), 1fr);
+  text-align: center;
+  font-size: 0.75rem;
+  opacity: 0.6;
+  margin-bottom: 0.35rem;
+}
+
+.string-row {
+  display: contents;
+}
+
+.string-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  opacity: 0.65;
+}
+
+.fret {
+  height: 42px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  border-top: 1px solid currentColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.fret:first-of-type {
+  border-left: 2px solid currentColor;
+}
+
+/* Default / Scale Notes: Slate Grey */
+.note {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: #475569;
+  color: #ffffff;
+  z-index: 1;
+}
+
+/* Root Notes: Crimson Coral */
+.note.root {
+  background: #e11d48;
+  color: #ffffff;
+  box-shadow: 0 0 0 2px rgba(225, 29, 72, 0.25);
+}
+
+/* Start / Lead-in Note: Electric Amber */
+.note.start {
+  background: #f59e0b;
+  color: #0f172a;
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.25);
+}
+</style>
 
 {{ $title := .Get "title" }}
-{{ $frets := split (.Get "frets") "," }}
+{{ $rawFrets := split (.Get "frets") "," }}
+{{ $frets := slice }}
+{{ range $rawFrets }}
+  {{ $f := trim . " \n\r\t" }}
+  {{ if ne $f "" }}
+    {{ $frets = $frets | append $f }}
+  {{ end }}
+{{ end }}
 {{ $fretCount := len $frets }}
-{{ $rawNotes := split (.Get "notes") "," }}
 
-{{/* Build note lookup dictionary: "string-fret" -> note label */}}
+{{/* Build note lookup dictionary: "string-fret" -> dict of note data */}}
 {{ $noteMap := dict }}
+{{ $rawNotes := split (.Get "notes") "," }}
 {{ range $rawNotes }}
-  {{ $parts := split . ":" }}
-  {{ if ge (len $parts) 3 }}
-    {{ $s := index $parts 0 }}
-    {{ $f := index $parts 1 }}
-    {{ $n := index $parts 2 }}
-    {{ $key := printf "%s-%s" $s $f }}
-    {{ $noteMap = merge $noteMap (dict $key $n) }}
+  {{ $entry := trim . " \n\r\t" }}
+  {{ if ne $entry "" }}
+    {{ $parts := split $entry ":" }}
+    {{ if ge (len $parts) 3 }}
+      {{ $s := trim (index $parts 0) " " }}
+      {{ $f := trim (index $parts 1) " " }}
+      {{ $n := trim (index $parts 2) " " }}
+      {{ $tag := "" }}
+      {{ if ge (len $parts) 4 }}
+        {{ $tag = lower (trim (index $parts 3) " ") }}
+      {{ end }}
+      {{ $key := printf "%s-%s" $s $f }}
+      {{ $noteMap = merge $noteMap (dict $key (dict "name" $n "tag" $tag)) }}
+    {{ end }}
   {{ end }}
 {{ end }}
 
-{{/* Standard tuning string definitions: 1 = high E, 6 = low E */}}
+{{/* Standard tuning strings: 1 = High E, 6 = Low E */}}
 {{ $strings := slice 
   (dict "num" "1" "name" "E")
   (dict "num" "2" "name" "B")
@@ -50,10 +147,10 @@
         {{ range $frets }}
           {{ $fNum := . }}
           {{ $key := printf "%s-%s" $sNum $fNum }}
-          {{ $note := index $noteMap $key }}
+          {{ $noteData := index $noteMap $key }}
           <div class="fret">
-            {{ if $note }}
-              <span class="note">{{ $note }}</span>
+            {{ if $noteData }}
+              <span class="note{{ with $noteData.tag }} {{ . }}{{ end }}">{{ $noteData.name }}</span>
             {{ end }}
           </div>
         {{ end }}
