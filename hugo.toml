@@ -13,7 +13,7 @@ style = "github-dark"
   info = "Software Dev"
 
   description = "Dhruvik's personal website"
-  keywords = "blog,developer,personal"
+  keywords = "blog,developer,personal, guitar"
   avatarurl = "images/avatar.jpg"
   #gravatar = "john.doe@example.com"
 
@@ -110,6 +110,11 @@ style = "github-dark"
   name = "Projects"
   weight = 4
   url  = "projects/"
+  pre = "terminal"
+[[menu.main]]
+  name = "Guitar Notes"
+  weight = 6
+  url  = "guitar-notes/"
   pre = "terminal"
 
 [markup.goldmark.renderer]

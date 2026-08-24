@@ -1,0 +1,70 @@
+.guitar-diagram {
+  margin: 2rem 0;
+  font-family: monospace;
+}
+
+.guitar-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.fretboard {
+  display: grid;
+  grid-template-columns: 2rem repeat(4, minmax(45px, 70px));
+  width: fit-content;
+}
+
+.fret-numbers {
+  grid-column: 2 / -1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  text-align: center;
+  font-size: 0.7rem;
+  opacity: 0.6;
+  margin-bottom: 0.3rem;
+}
+
+.string-row {
+  display: contents;
+}
+
+.string-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  opacity: 0.65;
+}
+
+.fret {
+  height: 42px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  border-top: 1px solid currentColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.fret:first-of-type {
+  border-left: 2px solid currentColor;
+}
+
+.note {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: #444;
+  color: white;
+}
+
+.note.root {
+  background: #d95f59;
+}

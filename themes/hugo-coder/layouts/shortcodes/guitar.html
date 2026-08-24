@@ -1,0 +1,57 @@
+{{ $style := resources.Get "css/guitar.css" | minify | fingerprint }}
+{{ $title := .Get "title" }}
+{{ $frets := split (.Get "frets") "," }}
+{{ $fretCount := len$frets }}
+{{ $rawNotes := split (.Get "notes") "," }}
+
+{{/* Build note lookup dictionary: "string-fret" -> note label */}}
+{{ $noteMap := dict }}
+{{ range $rawNotes }}
+  {{ $parts := split . ":" }}
+  {{ if ge (len $parts) 3 }}     {{$s := index $parts 0 }}     {{$f := index $parts 1 }}     {{$n := index $parts 2 }}     {{$key := printf "%s-%s" $s$f }}
+    {{ $noteMap = merge $noteMap (dict $key$n) }}
+  {{ end }}
+{{ end }}
+
+{{/* Standard tuning string definitions: 1 = high E, 6 = low E */}}
+{{ $strings := slice 
+  (dict "num" "1" "name" "E")
+  (dict "num" "2" "name" "B")
+  (dict "num" "3" "name" "G")
+  (dict "num" "4" "name" "D")
+  (dict "num" "5" "name" "A")
+  (dict "num" "6" "name" "E")
+}}
+
+<div class="guitar-diagram">
+  {{ with $title }}
+    <div class="guitar-title">{{ . }}</div>
+  {{ end }}
+
+  <div class="fretboard" style="--fret-count: {{ $fretCount }};">
+    <!-- Fret numbers header -->
+    <div class="fret-numbers">
+      {{ range $frets }}
+        <span>{{ . }}</span>
+      {{ end }}
+    </div>
+
+    <!-- String rows -->
+    {{ range $strings }}
+      {{ $sNum := .num }}
+      <div class="string-row">
+        <span class="string-name">{{ .name }}</span>
+        {{ range $frets }}
+          {{ $fNum := . }}
+          {{ $key := printf "%s-%s" $sNum$fNum }}
+          {{ $note := index $noteMap $key }}
+          <div class="fret">
+            {{ if $note }}
+              <span class="note">{{ $note }}</span>
+            {{ end }}
+          </div>
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+</div>
