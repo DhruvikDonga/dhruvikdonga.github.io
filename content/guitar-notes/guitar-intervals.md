@@ -148,7 +148,7 @@ Because the interval between the **G string (3rd)** and the **B string (2nd)** i
 
 ---
 
-# 7. From Linear to Box: Mapping Intervals into a 5-Fret Position
+## 7. From Linear to Box: Mapping Intervals into a 5-Fret Position
 
 Stretching across 13 frets on a single string to reach all intervals is impractical for fluid playing. Since adjacent strings (E to A, A to D) are tuned **5 frets apart (a Perfect 4th)**, we can "fold" the long linear line into a stationary, comfortable 5-fret box across the strings.
 
