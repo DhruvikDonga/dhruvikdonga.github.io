@@ -1,4 +1,4 @@
-{{/* Self-contained Guitar Fretboard Shortcode — Continuous Range (No Skipped Frets) */}}
+{{/* Self-contained Guitar Fretboard Shortcode — Always Starts at Fret 0 to Max Fret */}}
 <style>
 .guitar-diagram {
   margin: 1.5rem 0;
@@ -136,7 +136,7 @@
   flex-shrink: 0;
 }
 
-/* Open string badge styling (ring style indicator) */
+/* Open string badge styling */
 .fret-0 .note {
   box-shadow: 0 0 0 2px #f59e0b, inset 0 0 0 2px #f59e0b;
 }
@@ -182,24 +182,20 @@
 {{ $title := .Get "title" }}
 {{ $rawFrets := split (.Get "frets") "," }}
 
-{{/* Parse input frets to find min and max */}}
-{{ $minFret := 999 }}
-{{ $maxFret := -1 }}
+{{/* Determine the highest fret provided */}}
+{{ $maxFret := 0 }}
 {{ range $rawFrets }}
   {{ $val := trim . " \n\r\t" }}
   {{ if ne $val "" }}
     {{ $intVal := int $val }}
-    {{ if lt $intVal $minFret }}{{ $minFret = $intVal }}{{ end }}
     {{ if gt $intVal $maxFret }}{{ $maxFret = $intVal }}{{ end }}
   {{ end }}
 {{ end }}
 
-{{/* Generate contiguous fret sequence so no intermediate frets are skipped */}}
+{{/* Always build range sequentially from 0 to maxFret */}}
 {{ $frets := slice }}
-{{ if le $minFret $maxFret }}
-  {{ range $i := seq $minFret $maxFret }}
-    {{ $frets = $frets | append (string $i) }}
-  {{ end }}
+{{ range $i := seq 0 $maxFret }}
+  {{ $frets = $frets | append (string $i) }}
 {{ end }}
 {{ $fretCount := len $frets }}
 
