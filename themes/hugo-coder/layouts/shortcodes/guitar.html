@@ -1,4 +1,4 @@
-{{/* Self-contained Guitar Fretboard Shortcode — With Fret Inlay Markers */}}
+{{/* Self-contained Guitar Fretboard Shortcode — With Open String (0) & Inlay Markers */}}
 <style>
 .guitar-diagram {
   margin: 1.5rem 0;
@@ -60,8 +60,14 @@
   box-sizing: border-box;
 }
 
-.fret:first-of-type {
-  border-left: 3px solid currentColor;
+/* Open string (0 fret) styling and Nut */
+.fret.fret-0 {
+  border-right: 4px solid currentColor; /* Thick guitar nut */
+  background: rgba(125, 125, 125, 0.05);
+}
+
+.fret:first-of-type:not(.fret-0) {
+  border-left: 2px solid currentColor;
 }
 
 /* String running horizontally through cell */
@@ -130,6 +136,11 @@
   flex-shrink: 0;
 }
 
+/* Open string badge styling (ring style indicator) */
+.fret-0 .note {
+  box-shadow: 0 0 0 2px #f59e0b, inset 0 0 0 2px #f59e0b;
+}
+
 @media (prefers-color-scheme: dark) {
   .note {
     box-shadow: 0 0 0 2px #1e293b;
@@ -164,7 +175,6 @@
   .inlay-dot {
     width: 4px;
     height: 4px;
-    gap: 3px;
   }
 }
 </style>
@@ -219,7 +229,7 @@
   <div class="fretboard-wrapper">
     <div class="fretboard" style="--fret-count: {{ $fretCount }};">
       <div class="fret-numbers">
-        {{ range $frets }}<span>{{ . }}</span>{{ end }}
+        {{ range $frets }}<span>{{ if eq . "0" }}O{{ else }}{{ . }}{{ end }}</span>{{ end }}
       </div>
       {{ range $strings }}
         {{ $sNum := .num }}
@@ -229,7 +239,7 @@
             {{ $fNum := . }}
             {{ $key := printf "%s-%s" $sNum $fNum }}
             {{ $noteData := index $noteMap $key }}
-            <div class="fret">
+            <div class="fret{{ if eq $fNum "0" }} fret-0{{ end }}">
               {{ if $noteData }}
                 <span class="note{{ with $noteData.tag }} {{ . }}{{ end }}">{{ $noteData.name }}</span>
               {{ end }}
