@@ -4,16 +4,45 @@ date: 2026-08-24
 draft: false
 tags: ["guitar", "music-theory", "fretboard", "intervals", "fundamentals"]
 categories: ["Music Theory", "Guitar Fundamentals"]
-summary: "A practical guide to musical intervals on the guitar fretboard—from single-string half steps to cross-string Perfect 5ths and the B-string tuning shift."
+summary: "A practical guide to musical intervals on the guitar fretboard—from the musical alphabet to single-string intervals in F, cross-string Perfect 5ths, and the B-string tuning shift."
 ---
 
-When you play guitar, the fretboard can look like a maze of metal frets and wooden blocks. But beneath the surface, everything in music chords, scales, arpeggios, and melodies is built on one foundational concept: **intervals**.
+When you play guitar, the fretboard can look like a maze of metal frets and wooden blocks. But beneath the surface, everything in music—chords, scales, arpeggios, and melodies—is built on one foundational concept: **intervals**.
 
 An **interval** is simply the measurement of distance (or pitch difference) between two notes.
 
 ---
 
-## 1. The 12 Basic Intervals (Single String View)
+# 1. The Musical Alphabet
+
+In Western music, there are **12 unique notes** before the cycle repeats at the octave. 
+
+Natural notes use letters **A through G**. The distances between natural notes are whole steps (2 frets), except for two natural half-step pairs: **B to C** and **E to F** (no sharps/flats in between).
+
+Every intermediate note can be named using a **Sharp (#)** (raised by 1 fret) or an equivalent **Flat (b)** (lowered by 1 fret). These pairs of different names for the exact same pitch are called **enharmonic equivalents**:
+
+<div class="table-responsive">
+
+| Note # | Sharp Name (#) | Flat Name (b) | Note Type |
+|:---:|:---:|:---:|:---|
+| 1 | **A** | **A** | Natural |
+| 2 | **A#** | **Bb** | Accidental (Sharp / Flat) |
+| 3 | **B** | **B** | Natural |
+| 4 | **C** | **C** | Natural *(Half step from B)* |
+| 5 | **C#** | **Db** | Accidental (Sharp / Flat) |
+| 6 | **D** | **D** | Natural |
+| 7 | **D#** | **Eb** | Accidental (Sharp / Flat) |
+| 8 | **E** | **E** | Natural |
+| 9 | **F** | **F** | Natural *(Half step from E)* |
+| 10 | **F#** | **Gb** | Accidental (Sharp / Flat) |
+| 11 | **G** | **G** | Natural |
+| 12 | **G#** | **Ab** | Accidental (Sharp / Flat) |
+
+</div>
+
+---
+
+# 2. The 12 Basic Intervals (Single String View)
 
 On a single guitar string:
 * **1 Fret** = **1 Semitone (Half Step)**
@@ -31,9 +60,9 @@ Starting from any Root note (R), every fret you move up creates a distinct inter
 | **3** | 3 | **Minor 3rd** | m3 | Sad, melancholic, bluesy |
 | **4** | 4 | **Major 3rd** | M3 | Bright, happy, triumphant |
 | **5** | 5 | **Perfect 4th** | P4 | Open, resolved (*Here Comes the Bride*) |
-| **6** | 6 | **Tritone / Diminished 5th** | b5 / tt | High tension, eerie, "devil's interval" |
+| **6** | 6 | **Tritone / Augmented 4th** | #4 / tt | High tension, eerie, "devil's interval" |
 | **7** | 7 | **Perfect 5th** | P5 | Strong, stable, foundational (Power chords) |
-| **8** | 8 | **Minor 6th** | m6 | Dramatic, romantic, yearning |
+| **8** | 8 | **Minor 6th** | m6 / #5 | Dramatic, romantic, yearning |
 | **9** | 9 | **Major 6th** | M6 | Warm, sweet (*NBC* chime) |
 | **10** | 10 | **Minor 7th** | m7 | Bluesy, funky, unresolved |
 | **11** | 11 | **Major 7th** | M7 | Dreamy, nostalgic, jazz tension |
@@ -43,24 +72,25 @@ Starting from any Root note (R), every fret you move up creates a distinct inter
 
 ---
 
-## 2. Visualizing Intervals Along a Single String
+# 3. Visualizing Intervals Along a Single String (Example: Root F)
 
-Here is how key intervals look along the **A string** (5th string) starting from **C** at the 3rd fret:
+Here is how all key intervals look along the **Low E string** (6th string) starting from **F** at the 1st fret:
 
-{{< guitar title="Single-String Intervals from C (5th String)" frets="3,4,5,6,7,8,9,10,12,15" notes="5:3:C:root, 5:4:Db, 5:5:D, 5:6:Eb, 5:7:E, 5:8:F, 5:10:G:start, 5:15:C:root" >}}
+{{< guitar title="Single-String Intervals from F (6th String)" frets="1,2,3,4,5,6,7,8,13" notes="6:1:F:root, 6:2:F#, 6:3:G, 6:4:G#, 6:5:A, 6:6:A#, 6:7:B, 6:8:C:start, 6:13:F:root" >}}
 
-* **3rd Fret (C)** = Root (R)
-* **4th Fret (Db)** = Minor 2nd (m2, +1 fret)
-* **5th Fret (D)** = Major 2nd (M2, +2 frets)
-* **6th Fret (Eb)** = Minor 3rd (m3, +3 frets)
-* **7th Fret (E)** = Major 3rd (M3, +4 frets)
-* **8th Fret (F)** = Perfect 4th (P4, +5 frets)
-* **10th Fret (G)** = Perfect 5th (P5, +7 frets)
-* **15th Fret (C)** = Octave (P8, +12 frets)
+* **1st Fret (F)** = Root (R)
+* **2nd Fret (F#)** = Minor 2nd (m2, +1 fret)
+* **3rd Fret (G)** = Major 2nd (M2, +2 frets)
+* **4th Fret (G#)** = Minor 3rd (m3, +3 frets)
+* **5th Fret (A)** = Major 3rd (M3, +4 frets)
+* **6th Fret (A#)** = Perfect 4th (P4, +5 frets)
+* **7th Fret (B)** = Augmented 4th / Tritone (#4, +6 frets)
+* **8th Fret (C)** = Perfect 5th (P5, +7 frets)
+* **13th Fret (F)** = Octave (P8, +12 frets)
 
 ---
 
-## 3. Crossing Strings: The Geometry of the Fretboard
+# 4. Crossing Strings: The Geometry of the Fretboard
 
 While playing intervals along a single string is great for understanding linear distance, guitarists play across strings to minimize hand movement.
 
@@ -74,11 +104,11 @@ Notice the distance between adjacent open strings:
 * **G to B** = **4 semitones (Major 3rd) ⚠️ THE EXCEPTION**
 * **B to e** = 5 semitones (Perfect 4th)
 
-Because almost all adjacent strings are tuned **5 frets apart (a Perfect 4th)**, any note on the next higher pitched string at the exact same fret is a **Perfect 4th** higher.
+Because almost all adjacent strings are tuned **5 frets apart (a Perfect 4th)**, any note on the next higher-pitched string at the exact same fret is a **Perfect 4th** higher.
 
 ---
 
-## 4. The Perfect 5th Shape
+# 5. The Perfect 5th Shape
 
 A **Perfect 5th** is 7 frets away on a single string. When jumping to the next higher string:
 
@@ -89,14 +119,14 @@ This gives us the universal **Power Chord shape**:
 
 ### Standard String Pairs (E-A, A-D, D-G)
 
-{{< guitar title="Standard Perfect 5th Shape (Root C to 5th G)" frets="3,4,5" notes="5:3:C:root, 4:5:G:start" >}}
+{{< guitar title="Standard Perfect 5th Shape (Root F to 5th C)" frets="1,2,3" notes="6:1:F:root, 5:3:C:start" >}}
 
-* **Root:** 5th string (A), 3rd fret → **C**
-* **5th:** 4th string (D), 5th fret → **G**
+* **Root:** 6th string (Low E), 1st fret → **F**
+* **5th:** 5th string (A), 3rd fret → **C**
 
 ---
 
-## 5. The B-String Exception (The "G to B Warp")
+# 6. The B-String Exception (The "G to B Warp")
 
 Because the interval between the **G string (3rd)** and the **B string (2nd)** is tuned to a **Major 3rd (4 semitones)** instead of a Perfect 4th (5 semitones), the entire fretboard pattern shifts **one fret higher (to the right)** whenever an interval crosses from the G string to the B string.
 
@@ -104,23 +134,28 @@ Because the interval between the **G string (3rd)** and the **B string (2nd)** i
 
 ### Comparison:
 
-{{< guitar title="Crossing G to B String (Root G to 5th D)" frets="0,1,2,3,4" notes="3:0:G:root, 2:3:D:start" >}}
+{{< guitar title="Crossing G to B String (Root F to 5th C)" frets="8,9,10,11" notes="3:10:F:root, 2:13:C:start" >}}
 
-* When Root is on the **G string (Open G or Fret N)**, the 5th on the **B string** is at **Fret N + 3** (shifted +1 fret further than usual).
+* When Root **F** is on the **G string (10th fret)**, the 5th **C** on the **B string** is at **13th fret** (+3 frets instead of +2).
 
 ---
 
-## 6. Summary Cheat Sheet for Interval Shapes
+# 7. Summary Cheat Sheet for Interval Shapes
 
 <div class="table-responsive">
 
 | Interval | Normal Rule (E-A, A-D, D-G, B-e) | Crossing G → B Rule |
 |:---|:---|:---|
 | **Unison (P1)** | Same string, same fret | — |
+| **Minor 2nd (m2)** | Next higher string, -4 frets | Next higher string, -3 frets |
+| **Major 2nd (M2)** | Next higher string, -3 frets | Next higher string, -2 frets |
 | **Minor 3rd (m3)** | Next higher string, -2 frets | Next higher string, -1 fret |
 | **Major 3rd (M3)** | Next higher string, -1 fret | Next higher string, same fret |
 | **Perfect 4th (P4)** | Next higher string, same fret | Next higher string, +1 fret |
+| **Augmented 4th (#4)** | Next higher string, +1 fret | Next higher string, +2 frets |
 | **Perfect 5th (P5)** | Next higher string, +2 frets | Next higher string, +3 frets |
+| **Minor 6th (#5 / m6)** | Next higher string, +3 frets | Next higher string, +4 frets |
+| **Major 6th (M6)** | Next higher string, +4 frets | Next higher string, +5 frets |
 | **Octave (P8)** | 2 strings higher, +2 frets | 2 strings higher, +3 frets |
 
 </div>
