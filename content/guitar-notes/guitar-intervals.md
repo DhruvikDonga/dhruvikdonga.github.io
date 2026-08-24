@@ -110,21 +110,33 @@ Because almost all adjacent strings are tuned **5 frets apart (a Perfect 4th)**,
 
 ---
 
-## 5. The Perfect 5th Shape
+## 5. The "4th" Interval: Why Perfect, and How It Maps Across Strings
 
-A **Perfect 5th** is 7 frets away on a single string. When jumping to the next higher string:
+Just like the 5th, beginners often wonder: *We have Major 2nds and Major 3rds, so why isn't there a "Major 4th"?*
 
-> **Target Fret** = 7 frets − 5 frets (string jump) = **+2 frets**
+In music theory, 2nds, 3rds, 6ths, and 7ths come in **Major** and **Minor** qualities because they define whether a harmony sounds happy or sad. The **Unisons, 4ths, 5ths, and Octaves** are called **Perfect** intervals:
+* They are acoustic anchors with pure harmonic ratios (4:3 for the 4th).
+* Modifying a Perfect 4th by flattening or sharpening turns it into a **Diminished 4th** (-1 fret) or an **Augmented 4th** (+1 fret / Tritone)—never "Major" or "Minor".
 
-This gives us the universal **Power Chord shape**:
-* **Next higher string + 2 frets up**
+---
 
-### Standard String Pairs (E-A, A-D, D-G)
+### The Geometry of the Perfect 4th
 
-{{< guitar title="Standard Perfect 5th Shape (Root F to 5th C)" frets="1,2,3" notes="6:1:F:root, 5:3:C:start" >}}
+A **Perfect 4th** is **5 frets away** on a single string. 
+
+Because adjacent guitar strings (E-A, A-D, D-G, B-e) are already tuned exactly **5 frets apart (a Perfect 4th)**, mapping a 4th to the next higher string requires zero fret shifts:
+
+> **Target Fret** = 5 frets (distance)  5 frets (adjacent string tuning distance) = **Same fret (0 shift)**
+
+This gives us the simplest shape on the fretboard:
+* **Next higher string + exact same fret**
+
+#### Standard String Pairs (E-A, A-D, D-G)
+
+{{< guitar title="Standard Perfect 4th Shape (Root F to 4th A#)" frets="1,2,3" notes="6:1:F:root, 5:1:A#:start" >}}
 
 * **Root:** 6th string (Low E), 1st fret → **F**
-* **5th:** 5th string (A), 3rd fret → **C**
+* **Perfect 4th:** 5th string (A), 1st fret → **A#**
 
 ---
 
