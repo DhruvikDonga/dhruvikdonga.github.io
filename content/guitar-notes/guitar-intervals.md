@@ -76,7 +76,7 @@ Starting from any Root note (R), every fret you move up creates a distinct inter
 
 Here is how all key intervals look along the **Low E string** (6th string) starting from **F** at the 1st fret:
 
-{{< guitar title="Single-String Intervals from F (6th String)" frets="1,2,3,4,5,6,7,8,13" notes="6:1:F:root, 6:2:F#, 6:3:G, 6:4:G#, 6:5:A, 6:6:A#, 6:7:B, 6:8:C:start, 6:13:F:root" >}}
+{{< guitar title="Single-String Intervals from F (6th String — Full 0 to 12 Frets)" frets="1,2,3,4,5,6,7,8,9,10,11,12,13" notes="6:1:F:root, 6:2:F#, 6:3:G, 6:4:G#, 6:5:A, 6:6:A#, 6:7:B, 6:8:C:start, 6:9:C#, 6:10:D, 6:11:D#, 6:12:E, 6:13:F:root" >}}
 
 * **1st Fret (F)** = Root (R)
 * **2nd Fret (F#)** = Minor 2nd (m2, +1 fret)
@@ -132,15 +132,60 @@ Because the interval between the **G string (3rd)** and the **B string (2nd)** i
 
 > **Target on B string** = 7 frets − 4 frets (G-to-B distance) = **+3 frets**
 
-### Comparison:
+---
 
-{{< guitar title="Crossing G to B String (Root F to 5th C)" frets="8,9,10,11" notes="3:10:F:root, 2:13:C:start" >}}
+# 7. From Linear to Box: Mapping Intervals into a 5-Fret Position
 
-* When Root **F** is on the **G string (10th fret)**, the 5th **C** on the **B string** is at **13th fret** (+3 frets instead of +2).
+Stretching across 13 frets on a single string to reach all intervals is impractical for fluid playing. Since adjacent strings (E to A, A to D) are tuned **5 frets apart (a Perfect 4th)**, we can "fold" the long linear line into a stationary, comfortable 5-fret box across the strings.
 
 ---
 
-## 7. Summary Cheat Sheet for Interval Shapes
+### Before: Linear Single-String (13 Frets Long)
+
+Every interval played sequentially along just the **6th string (Low E)**:
+
+{{< guitar title="Before: Single-String Intervals from F (6th String — Full 13 Frets)" frets="1,2,3,4,5,6,7,8,9,10,11,12,13" notes="6:1:F:root, 6:2:F#, 6:3:G, 6:4:G#, 6:5:A, 6:6:A#, 6:7:B, 6:8:C:start, 6:9:C#, 6:10:D, 6:11:D#, 6:12:E, 6:13:F:root" >}}
+
+* **1st Fret (F)** = Root (R / P1)
+* **2nd Fret (F#)** = Minor 2nd (m2)
+* **3rd Fret (G)** = Major 2nd (M2)
+* **4th Fret (G#)** = Minor 3rd (m3)
+* **5th Fret (A)** = Major 3rd (M3)
+* **6th Fret (A#)** = Perfect 4th (P4)
+* **7th Fret (B)** = Tritone / Augmented 4th (#4)
+* **8th Fret (C)** = Perfect 5th (P5)
+* **9th Fret (C#)** = Minor 6th (m6 / #5)
+* **10th Fret (D)** = Major 6th (M6)
+* **11th Fret (D#)** = Minor 7th (m7)
+* **12th Fret (E)** = Major 7th (M7)
+* **13th Fret (F)** = Octave (P8)
+
+---
+
+### After: Folded Across Strings (Comfortable 5-Fret Box)
+
+By moving to the next string every 5 frets, all 13 notes fit comfortably right under your fingers without shifting your hand up the neck:
+
+{{< guitar title="After: All 12 Intervals Folded Across 3 Strings (Frets 1–5 Box)" frets="1,2,3,4,5" notes="6:1:F:root, 6:2:F#, 6:3:G, 6:4:G#, 6:5:A, 5:1:A#, 5:2:B, 5:3:C:start, 5:4:C#, 5:5:D, 4:1:D#, 4:2:E, 4:3:F:root" >}}
+
+* **6th String (Low E):**
+  * **1st Fret (F)** = Root (R / P1)
+  * **2nd Fret (F#)** = Minor 2nd (m2)
+  * **3rd Fret (G)** = Major 2nd (M2)
+  * **4th Fret (G#)** = Minor 3rd (m3)
+  * **5th Fret (A)** = Major 3rd (M3)
+* **5th String (A):** *(Replaces 6th string frets 6–10)*
+  * **1st Fret (A#)** = Perfect 4th (P4)
+  * **2nd Fret (B)** = Tritone / Augmented 4th (#4)
+  * **3rd Fret (C)** = Perfect 5th (P5)
+  * **4th Fret (C#)** = Minor 6th (m6 / #5)
+  * **5th Fret (D)** = Major 6th (M6)
+* **4th String (D):** *(Replaces 6th string frets 11–13)*
+  * **1st Fret (D#)** = Minor 7th (m7)
+  * **2nd Fret (E)** = Major 7th (M7)
+  * **3rd Fret (F)** = Octave (P8)
+
+## 8. Summary Cheat Sheet for Interval Shapes
 
 <div class="table-responsive">
 
