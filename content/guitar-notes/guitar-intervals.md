@@ -133,7 +133,7 @@ This gives us the simplest shape on the fretboard:
 
 #### Standard String Pairs (E-A, A-D, D-G)
 
-{{< guitar title="Standard Perfect 4th Shape (Root F to 4th A#)" frets="1,2,3" notes="6:1:F:root, 5:1:A#:start" >}}
+{{< guitar title="Perfect 4th Tuning Equivalence (6th String Fret 5 A vs 5th String Open A)" frets="0,1,2,3,4,5" notes="6:1:F:root, 6:5:A:start, 5:0:A:start" >}}
 
 * **Root:** 6th string (Low E), 1st fret → **F**
 * **Perfect 4th:** 5th string (A), 1st fret → **A#**
