@@ -1,4 +1,4 @@
-{{/* Self-contained Guitar Fretboard Shortcode — With Open String (0) & Inlay Markers */}}
+{{/* Self-contained Guitar Fretboard Shortcode — Continuous Range (No Skipped Frets) */}}
 <style>
 .guitar-diagram {
   margin: 1.5rem 0;
@@ -181,11 +181,24 @@
 
 {{ $title := .Get "title" }}
 {{ $rawFrets := split (.Get "frets") "," }}
-{{ $frets := slice }}
+
+{{/* Parse input frets to find min and max */}}
+{{ $minFret := 999 }}
+{{ $maxFret := -1 }}
 {{ range $rawFrets }}
-  {{ $f := trim . " \n\r\t" }}
-  {{ if ne $f "" }}
-    {{ $frets = $frets | append $f }}
+  {{ $val := trim . " \n\r\t" }}
+  {{ if ne $val "" }}
+    {{ $intVal := int $val }}
+    {{ if lt $intVal $minFret }}{{ $minFret = $intVal }}{{ end }}
+    {{ if gt $intVal $maxFret }}{{ $maxFret = $intVal }}{{ end }}
+  {{ end }}
+{{ end }}
+
+{{/* Generate contiguous fret sequence so no intermediate frets are skipped */}}
+{{ $frets := slice }}
+{{ if le $minFret $maxFret }}
+  {{ range $i := seq $minFret $maxFret }}
+    {{ $frets = $frets | append (string $i) }}
   {{ end }}
 {{ end }}
 {{ $fretCount := len $frets }}

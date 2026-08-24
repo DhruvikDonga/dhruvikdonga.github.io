@@ -81,7 +81,7 @@ Just like we learned with intervals, sliding across 13 frets on one string is to
 
 Using our standard tuning offset (each adjacent string tuned 5 frets / a Perfect 4th higher), we fold this exact same G Major formula into an effortless **Position 1 Box** :
 
-{{< guitar title="G Major Scale (2-Octave Box Position — Frets 2 to 5)" frets="2,3,4,5" notes="6:3:G:root, 6:5:A, 5:2:B, 5:3:C, 5:5:D, 4:2:E, 4:4:F#, 4:5:G:root, 3:2:A, 3:4:B, 3:5:C, 2:3:D, 2:5:E, 1:2:F#, 1:3:G:root" >}}
+{{< guitar title="G Major Scale (2-Octave Box Position — Frets 2 to 5)" frets="2,3,4,5" notes="6:3:G:root, 6:5:A, 5:2:B, 5:3:C, 5:5:D, 4:2:E, 4:4:F#, 4:5:G:root,3:0:G:root, 3:2:A, 3:4:B, 3:5:C, 2:3:D, 2:5:E, 1:2:F#, 1:3:G:root" >}}
 
 ### Step-by-Step String Route:
 * **6th String (Low E):** Fret 3 (G - Root), Fret 5 (A) 
