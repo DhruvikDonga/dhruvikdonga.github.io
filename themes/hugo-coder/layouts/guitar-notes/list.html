@@ -1,0 +1,22 @@
+{{ define "title" }}
+  {{ title (i18n (lower .Title)) | default .Title }} · {{ .Site.Title }}
+{{ end }}
+{{ define "content" }}
+  <section class="container list">
+    <header>
+      <h1 class="title">
+        <a class="title-link" href="{{ .Permalink | safeURL }}">
+          Guitar Notes
+        </a>
+      </h1>
+    </header>
+Guitar is a deep instrument rooted in rich fundamentals and music theory. This section is a log of my practice sessions breaking down notes, chord progressions, and fingerstyle arrangements for my favorite songs (especially Bollywood), along with foundational concepts like scales and fretboard mapping.  
+  <ul>
+      {{- range .Paginator.Pages -}}
+        {{- .Render "li" -}}
+      {{- end -}}
+    </ul>
+
+    {{ partial "pagination.html" . }}
+  </section>
+{{ end }}
