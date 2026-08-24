@@ -136,7 +136,7 @@ This gives us the simplest shape on the fretboard:
 {{< guitar title="Perfect 4th Tuning Equivalence (6th String Fret 5 A vs 5th String Open A)" frets="0,1,2,3,4,5" notes="6:1:F:root, 6:5:A:start, 5:0:A:start" >}}
 
 * **Root:** 6th string (Low E), 1st fret → **F**
-* **Perfect 4th:** 5th string (A), 1st fret → **A#**
+* **Perfect 5th:** 5th string (A), 0th fret open string → **A**
 
 ---
 
