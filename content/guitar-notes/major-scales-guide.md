@@ -1,16 +1,15 @@
 +++
 authors = ["Dhruvik Donga"]
-title: "The Recipe for Happiness: Demystifying the Major Scale"
-date: 2026-08-24
-draft: false
-tags: ["guitar", "music-theory", "scales", "major-scale", "fretboard"]
-categories: ["Music Theory", "Guitar Fundamentals"]
-summary: "Why do some songs sound bright and wholesome while others sound melancholic? Learn the Major Scale recipe (W-W-H-W-W-W-H), how to extract it from the 12 musical notes, and how to map it onto your fretboard."
+title = "The Recipe for Happiness: Demystifying the Major Scale"
+date = "2026-08-24"
+tags = ["guitar", "music-theory", "scales", "major-scale", "fretboard"]
+categories = ["Music Theory", "Guitar Fundamentals"]
+summary = "Why do some songs sound bright and wholesome while others sound melancholic? Learn the Major Scale recipe (W-W-H-W-W-W-H), how to extract it from the 12 musical notes, and how to map it onto your fretboard."
 +++
 
 Have you ever wondered why hearing *Tum Hi Ho* instantly pulls a heavy, melancholic sigh out of you, while songs like *Dil Chahta Hai* or *Here Comes the Sun* fill the room with immediate warmth, joy, and optimism ?
 
-In our [previous article](/guitar-notes/guitar-intervals/), we discovered the **12 musical alphabets** the complete spice rack of Western music. But playing all 12 notes at once is like dumping salt, sugar, turmeric, chili powder, and oregano into the same dish: pure sonic chaos. 
+In our [previous blog](/guitar-notes/guitar-intervals/), we discovered the **12 musical alphabets** the complete spice rack of Western music. But playing all 12 notes at once is like dumping salt, sugar, turmeric, chili powder, and oregano into the same dish: pure sonic chaos. 
 
 Musicians don't use all 12 notes simultaneously. Instead, they choose a curated **recipe of 7 notes**. That specific selection is what we call a **Scale**. 
 

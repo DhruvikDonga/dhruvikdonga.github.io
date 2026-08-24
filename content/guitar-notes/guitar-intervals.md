@@ -1,11 +1,10 @@
 +++
 authors = ["Dhruvik Donga"]
-title: "Understanding Guitar Intervals: The Distance Between Notes"
-date: 2026-08-24
-draft: false
-tags: ["guitar", "music-theory", "fretboard", "intervals", "fundamentals"]
-categories: ["Music Theory", "Guitar Fundamentals"]
-summary: "A practical guide to musical intervals on the guitar fretboard from the musical alphabet to single-string intervals in F, cross-string Perfect 5ths, and the B-string tuning shift."
+title = "Understanding Guitar Intervals: The Distance Between Notes"
+date = "2026-08-24"
+tags = ["guitar", "music-theory", "fretboard", "intervals", "fundamentals"]
+categories = ["Music Theory", "Guitar Fundamentals"]
+summary = "A practical guide to musical intervals on the guitar fretboard from the musical alphabet to single-string intervals in F, cross-string Perfect 5ths, and the B-string tuning shift."
 +++
 
 When you first pick up a guitar, the fretboard looks like an endless maze of metal strips and wooden blocks. And have you ever wondered about those little inlay dots on your neck? Why are they scattered across frets 3, 5, 7, 9, and suddenly doubled at 12 did the luthier just run out of dice, or is there a method to the madness?
