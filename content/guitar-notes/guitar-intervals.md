@@ -7,7 +7,9 @@ categories: ["Music Theory", "Guitar Fundamentals"]
 summary: "A practical guide to musical intervals on the guitar fretboard from the musical alphabet to single-string intervals in F, cross-string Perfect 5ths, and the B-string tuning shift."
 ---
 
-When you play guitar, the fretboard can look like a maze of metal frets and wooden blocks. But beneath the surface, everything in music chords, scales, arpeggios, and melodies is built on one foundational concept: **intervals**.
+When you first pick up a guitar, the fretboard looks like an endless maze of metal strips and wooden blocks. And have you ever wondered about those little inlay dots on your neck? Why are they scattered across frets 3, 5, 7, 9, and suddenly doubled at 12 did the luthier just run out of dice, or is there a method to the madness?
+
+As it turns out, those dots aren't just aesthetic landmarks to keep you from getting lost mid-solo. They mark critical acoustic sweet spots on the neck. Beneath the surface, everything in music chords, scales, arpeggios, and melodies is built on one single foundational concept: **intervals**.
 
 An **interval** is simply the measurement of distance (or pitch difference) between two notes.
 

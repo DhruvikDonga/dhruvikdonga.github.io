@@ -1,4 +1,4 @@
-{{/* Self-contained Guitar Fretboard Shortcode — Mobile Friendly */}}
+{{/* Self-contained Guitar Fretboard Shortcode — With Fret Inlay Markers */}}
 <style>
 .guitar-diagram {
   margin: 1.5rem 0;
@@ -12,17 +12,16 @@
   margin-bottom: 0.5rem;
 }
 
-/* Scroll container to keep diagrams from overflowing or distorting */
+/* Scroll container */
 .fretboard-wrapper {
   max-width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  padding-bottom: 4px;
+  padding-bottom: 6px;
 }
 
 .fretboard {
   display: grid;
-  /* Fixed fret columns prevent distorted stretching */
   grid-template-columns: 1.75rem repeat(var(--fret-count, 4), 48px);
   width: max-content;
 }
@@ -76,7 +75,7 @@
   background-color: currentColor;
   opacity: 0.45;
   transform: translateY(-50%);
-  z-index: 0;
+  z-index: 1;
 }
 
 .string-row:nth-child(n+5) .fret::before {
@@ -87,6 +86,30 @@
 .string-row:last-child .fret::before {
   height: 2.5px;
   opacity: 0.75;
+}
+
+/* Fret Markers Row (Dots beneath the board) */
+.inlay-row {
+  grid-column: 2 / -1;
+  display: grid;
+  grid-template-columns: repeat(var(--fret-count, 4), 1fr);
+  height: 14px;
+  margin-top: 4px;
+}
+
+.inlay-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.inlay-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: currentColor;
+  opacity: 0.35;
 }
 
 /* Note Badges */
@@ -138,6 +161,11 @@
     height: 19px;
     font-size: 0.6rem;
   }
+  .inlay-dot {
+    width: 4px;
+    height: 4px;
+    gap: 3px;
+  }
 }
 </style>
 
@@ -181,6 +209,11 @@
   (dict "num" "6" "name" "E")
 }}
 
+{{/* Standard single-dot inlays */}}
+{{ $singleDots := slice "3" "5" "7" "9" "15" "17" "19" "21" }}
+{{/* Double-dot inlays */}}
+{{ $doubleDots := slice "12" "24" }}
+
 <div class="guitar-diagram">
   {{ with $title }}<div class="guitar-title">{{ . }}</div>{{ end }}
   <div class="fretboard-wrapper">
@@ -204,6 +237,19 @@
           {{ end }}
         </div>
       {{ end }}
+      {{/* Position marker dot track */}}
+      <div class="inlay-row">
+        {{ range $frets }}
+          <div class="inlay-cell">
+            {{ if in $singleDots . }}
+              <span class="inlay-dot"></span>
+            {{ else if in $doubleDots . }}
+              <span class="inlay-dot"></span>
+              <span class="inlay-dot"></span>
+            {{ end }}
+          </div>
+        {{ end }}
+      </div>
     </div>
   </div>
 </div>
