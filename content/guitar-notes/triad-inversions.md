@@ -68,7 +68,7 @@ This set delivers thick, resonant body accompaniment while freeing your index an
 
 ### A. E Minor on Lower Strings (A–D–G)
 * **Root Position (Frets 7-5-4):** Root E on A string (fret 7) → `A:7, D:5, G:4`
-* **1st Inversion (Frets 11-9-8):** Root E on G string (fret 9) → `A:11, D:9, G:8`
+* **1st Inversion (Frets 10-9-9):** Root E on G string (fret 9) → `A:10, D:9, G:9`
 * **2nd Inversion (Frets 2-2-0):** Root E on D string (fret 2) → `A:2, D:2, G:0` *(Standard open Em core!)*
 
 {{< guitar title="E Minor Triad Inversions (Lower String Set 5-4-3: A-D-G)" frets="0,1,2,3,4,5,6,7,8,9,10" mute="1,2,6" box="3:5:0:2:#0ea5e9, 3:5:4:7:#10b981, 3:5:9:10:#a855f7" notes="5:2:B, 4:2:E:root, 3:0:G, 5:7:E:root, 4:5:G, 3:4:B, 5:10:G, 4:9:B, 3:9:E:root" >}}
