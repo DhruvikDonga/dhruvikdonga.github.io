@@ -20,7 +20,7 @@ Here is the secret: they aren't memorizing hundreds of obscure 6-string chord di
 Every standard Major and Minor chord is fundamentally built on just **three notes** called a **Triad**:
 
 * **Major Triad:** Root (1) + Major 3rd (3) + Perfect 5th (5) — from [Major Scale](/guitar-notes/major-scales-guide/)
-* **Minor Triad:** Root (1) + Minor 3rd (b3) + Perfect 5th (5) — from [Minor Scale](/guitar-notes/minor-scales-guide/)
+* **Minor Triad:** Root (1) + Minor 3rd (m3 / #2) + Perfect 5th (5) — from [Minor Scale](/guitar-notes/minor-scales-guide/)
 
 When you strum a standard 6-string open chord, you aren't playing 6 unique musical pitches—you are merely repeating those 3 core notes across multiple octaves and unisons. 
 
@@ -37,16 +37,16 @@ To map triads horizontally along any single string, start on your base note and 
 | Triad Quality | Root Position | 1st Inversion | 2nd Inversion |
 |:---|:---|:---|:---|
 | **Major** | Root → +4 frets → 3rd → +3 frets → 5th | 3rd → +3 frets → 5th → +5 frets → Root | 5th → +5 frets → Root → +4 frets → 3rd |
-| **Minor** | Root → +3 frets → b3rd → +4 frets → 5th | b3rd → +4 frets → 5th → +5 frets → Root | 5th → +5 frets → Root → +3 frets → b3rd |
+| **Minor** | Root → +3 frets → #2/m3 → +4 frets → 5th | #2/m3 → +4 frets → 5th → +5 frets → Root | 5th → +5 frets → Root → +3 frets → #2/m3 |
 
 </div>
 
 ### Horizontal Triads on the G String (C Major vs. C Minor)
 
-{{< guitar title="Horizontal Triads: C Major vs C Minor (3rd String: G)" frets="0,1,2,3,4,5,6,7,8,9,10,11,12" mute="1,2,4,5,6" box="3:3:5:12:#0ea5e9" notes="3:5:C:root, 3:8:Eb, 3:9:E, 3:12:G" >}}
+{{< guitar title="Horizontal Triads: C Major vs C Minor (3rd String: G)" frets="0,1,2,3,4,5,6,7,8,9,10,11,12" mute="1,2,4,5,6" box="3:3:5:12:#0ea5e9" notes="3:5:C:root, 3:8:D#, 3:9:E, 3:12:G" >}}
 
 * **C Major Single String:** Fret 5 (C - Root) → +4 frets → Fret 9 (E - 3rd) → +3 frets → Fret 12 (G - 5th)
-* **C Minor Single String:** Fret 5 (C - Root) → +3 frets → Fret 8 (Eb - b3rd) → +4 frets → Fret 12 (G - 5th)
+* **C Minor Single String:** Fret 5 (C - Root) → +3 frets → Fret 8 (D# - Minor 3rd) → +4 frets → Fret 12 (G - 5th)
 
 ---
 
@@ -56,18 +56,18 @@ When mapping vertically across adjacent strings, your shapes depend directly on 
 
 ### A. Standard String Sets (E–A–D or A–D–G)
 * **Major (Root – 3 – 5):** Lowest note (Root) → Next higher string -1 fret (3rd) → Next higher string -3 frets (5th)
-* **Minor (Root – b3 – 5):** Lowest note (Root) → Next higher string -2 frets (b3rd) → Next higher string -3 frets (5th)
+* **Minor (Root – #2/m3 – 5):** Lowest note (Root) → Next higher string -2 frets (Minor 3rd) → Next higher string -3 frets (5th)
 
-{{< guitar title="Vertical Comparison: C Major vs C Minor Root Position (Strings 5-4-3: A-D-G)" frets="0,1,2,3" mute="1,2,6" box="3:5:0:3:#0ea5e9, 3:5:0:3:#10b981" notes="5:3:C:root, 4:2:E, 4:1:Eb, 3:0:G" >}}
+{{< guitar title="Vertical Comparison: C Major vs C Minor Root Position (Strings 5-4-3: A-D-G)" frets="0,1,2,3" mute="1,2,6" box="3:5:0:3:#0ea5e9, 3:5:0:3:#10b981" notes="5:3:C:root, 4:2:E, 4:1:D#, 3:0:G" >}}
 
 ---
 
 ### B. Upper Strings Set (G–B–e Exception)
 Because the interval between the G and B string is tuned 1 fret narrower (4 semitones instead of 5), add **+1 fret** to any note landing on the B and high e strings:
 * **Major (Root – 3 – 5):** G string (Root) → B string same fret (3rd) → high e string -2 frets (5th)
-* **Minor (Root – b3 – 5):** G string (Root) → B string -1 fret (b3rd) → high e string -2 frets (5th)
+* **Minor (Root – #2/m3 – 5):** G string (Root) → B string -1 fret (Minor 3rd) → high e string -2 frets (5th)
 
-{{< guitar title="Vertical Comparison: C Major vs C Minor Root Position (Strings 3-2-1: G-B-e)" frets="0,1,2,3,4,5" mute="4,5,6" box="1:3:3:5:#0ea5e9, 1:3:3:5:#10b981" notes="3:5:C:root, 2:5:E, 2:4:Eb, 1:3:G" >}}
+{{< guitar title="Vertical Comparison: C Major vs C Minor Root Position (Strings 3-2-1: G-B-e)" frets="0,1,2,3,4,5" mute="4,5,6" box="1:3:3:5:#0ea5e9, 1:3:3:5:#10b981" notes="3:5:C:root, 2:5:E, 2:4:D#, 1:3:G" >}}
 
 ---
 
@@ -79,9 +79,9 @@ A chord's identity depends on its notes, not their stacking order. When you rear
 
 | Inversion Type | Lowest Note (Bass) | Stacking Order (Low to High) | Musical Vibe |
 |:---|:---:|:---:|:---|
-| **Root Position** | **Root (1)** | 1 – 3 – 5 (or 1 – b3 – 5) | Grounded, solid, punchy |
-| **1st Inversion** | **3rd (3 / b3)** | 3 – 5 – 1 (or b3 – 5 – 1) | Sweet, melodic, smooth voice-leading |
-| **2nd Inversion** | **5th (5)** | 5 – 1 – 3 (or 5 – 1 – b3) | Suspended, floating, open resonance |
+| **Root Position** | **Root (1)** | 1 – 3 – 5 (or 1 – m3 – 5) | Grounded, solid, punchy |
+| **1st Inversion** | **3rd (3 / m3)** | 3 – 5 – 1 (or m3 – 5 – 1) | Sweet, melodic, smooth voice-leading |
+| **2nd Inversion** | **5th (5)** | 5 – 1 – 3 (or 5 – 1 – m3) | Suspended, floating, open resonance |
 
 </div>
 
