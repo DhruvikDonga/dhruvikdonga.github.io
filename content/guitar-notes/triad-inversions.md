@@ -46,7 +46,8 @@ A chord's identity depends on its notes, not their stacking order. When you rear
 Think of the fretboard like a repeating loop. Since all notes repeat at the 12th fret, **all three inversion shapes always appear exactly once within any 12-fret window** before restarting an octave higher.
 
 The shapes always follow the exact same chronological order as you ascend the neck:
-$$\text{Root Position} \rightarrow \text{1st Inversion} \rightarrow \text{2nd Inversion} \rightarrow \text{Octave Root Position}$$
+
+**Root Position → 1st Inversion → 2nd Inversion → Octave Root Position**
 
 No matter what chord you choose, if you start at the nut (fret 0) and slide up towards fret 12, you will encounter all three shapes sequentially. They cleanly fill up the fretboard without awkward dead zones!
 
@@ -117,16 +118,16 @@ This is a favorite set for fingerstyle because it sits right in the vocal sweet 
 
 | Triad Position | Major Shape (D–G–B) | Minor Shape (D–G–B) | Root Anchor (R) |
 |:---|:---|:---|:---|
-| **Root Position** | Fret `R` / `R-1` / `R-2` | Fret `R` / `R-2` / `R-2` | On the **D string** (Fret $R$) |
-| **1st Inversion** | Fret `R+1` / `R-1` / `R` | Fret `R+1` / `R-2` / `R` | On the **B string** (Fret $R$) |
-| **2nd Inversion** | Fret `R` / `R` / `R` *(Barre)* | Fret `R+1` / `R` / `R-1` | On the **G string** (Fret $R$) |
+| **Root Position** | Fret `R` / `R-1` / `R-2` | Fret `R` / `R-2` / `R-2` | On the **D string** (Fret R) |
+| **1st Inversion** | Fret `R+1` / `R-1` / `R` | Fret `R+1` / `R-2` / `R` | On the **B string** (Fret R) |
+| **2nd Inversion** | Fret `R` / `R` / `R` *(Barre)* | Fret `R+1` / `R` / `R-1` | On the **G string** (Fret R) |
 
 </div>
 
 #### Example (C Major on Strings 4-3-2):
-* **Root Position (Frets 10-9-8):** C on D string (fret 10) $\rightarrow$ `D:10, G:9, B:8`
-* **1st Inversion (Frets 2-0-1 or 14-12-13):** C on B string (fret 1) $\rightarrow$ `D:2, G:0, B:1`
-* **2nd Inversion (Frets 5-5-5):** C on G string (fret 5) $\rightarrow$ `D:5, G:5, B:5` *(The famous 5th-fret barre!)*
+* **Root Position (Frets 10-9-8):** C on D string (fret 10) → `D:10, G:9, B:8`
+* **1st Inversion (Frets 2-0-1 or 14-12-13):** C on B string (fret 1) → `D:2, G:0, B:1`
+* **2nd Inversion (Frets 5-5-5):** C on G string (fret 5) → `D:5, G:5, B:5` *(The famous 5th-fret barre!)*
 
 {{< guitar title="C Major Triad Inversions (String Set 4-3-2: D-G-B)" frets="0,1,2,3,4,5,6,7,8,9,10" mute="1,5,6" box="2:4:0:2:#0ea5e9, 2:4:5:5:#10b981, 2:4:8:10:#a855f7" notes="4:2:E, 3:0:G, 2:1:C:root, 4:5:G, 3:5:C:root, 2:5:E, 4:10:C:root, 3:9:E, 2:8:G" >}}
 
@@ -139,16 +140,16 @@ This set delivers thick, resonant body accompaniment while freeing your index/mi
 
 | Triad Position | Major Shape (A–D–G) | Minor Shape (A–D–G) | Root Anchor (R) |
 |:---|:---|:---|:---|
-| **Root Position** | Fret `R` / `R-1` / `R-3` | Fret `R` / `R-2` / `R-3` | On the **A string** (Fret $R$) |
-| **1st Inversion** | Fret `R+2` / `R` / `R` | Fret `R+2` / `R` / `R-1` | On the **G string** (Fret $R$) |
-| **2nd Inversion** | Fret `R` / `R` / `R-1` | Fret `R` / `R-1` / `R-2` | On the **D string** (Fret $R$) |
+| **Root Position** | Fret `R` / `R-1` / `R-3` | Fret `R` / `R-2` / `R-3` | On the **A string** (Fret R) |
+| **1st Inversion** | Fret `R+2` / `R` / `R` | Fret `R+2` / `R` / `R-1` | On the **G string** (Fret R) |
+| **2nd Inversion** | Fret `R` / `R` / `R-1` | Fret `R` / `R-1` / `R-2` | On the **D string** (Fret R) |
 
 </div>
 
 #### Example (C Major on Strings 5-4-3):
-* **Root Position (Frets 3-2-0):** C on A string (fret 3) $\rightarrow$ `A:3, D:2, G:0` *(Your standard open C chord core!)*
-* **1st Inversion (Frets 7-5-5):** C on G string (fret 5) $\rightarrow$ `A:7, D:5, G:5`
-* **2nd Inversion (Frets 10-10-9):** C on D string (fret 10) $\rightarrow$ `A:10, D:10, G:9`
+* **Root Position (Frets 3-2-0):** C on A string (fret 3) → `A:3, D:2, G:0` *(Your standard open C chord core!)*
+* **1st Inversion (Frets 7-5-5):** C on G string (fret 5) → `A:7, D:5, G:5`
+* **2nd Inversion (Frets 10-10-9):** C on D string (fret 10) → `A:10, D:10, G:9`
 
 {{< guitar title="C Major Triad Inversions (String Set 5-4-3: A-D-G)" frets="0,1,2,3,4,5,6,7,8,9,10" mute="1,2,6" box="3:5:0:3:#0ea5e9, 3:5:5:7:#10b981, 3:5:9:10:#a855f7" notes="5:3:C:root, 4:2:E, 3:0:G, 5:7:E, 4:5:G, 3:5:C:root, 5:10:G, 4:10:C:root, 3:9:E" >}}
 
