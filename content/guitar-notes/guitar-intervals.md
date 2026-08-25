@@ -4,7 +4,7 @@ title = "Understanding Guitar Intervals: The Distance Between Notes"
 date = "2026-08-24"
 tags = ["guitar", "music-theory", "fretboard", "intervals", "fundamentals"]
 categories = ["Music Theory", "Guitar Fundamentals"]
-summary = "A practical guide to musical intervals on the guitar fretboard from the musical alphabet to single-string intervals in F, cross-string Perfect 5ths, and the B-string tuning shift."
+summary = "A practical guide to musical intervals on the guitar fretboard from the musical alphabet to unison note mapping, cross-string Perfect 4ths/5ths, triad construction, and the B-string shift."
 +++
 
 When you first pick up a guitar, the fretboard looks like an endless maze of metal strips and wooden blocks. And have you ever wondered about those little inlay dots on your neck? Why are they scattered across frets 3, 5, 7, 9, and suddenly doubled at 12 did the luthier just run out of dice, or is there a method to the madness?
@@ -78,7 +78,7 @@ Starting from any Root note (R), every fret you move up creates a distinct inter
 
 Here is how all key intervals look along the **Low E string** (6th string) starting from **F** at the 1st fret:
 
-{{< guitar title="Single-String Intervals from F (6th String — Full 0 to 12 Frets)" frets="1,2,3,4,5,6,7,8,9,10,11,12,13" notes="6:1:F:root, 6:2:F#, 6:3:G, 6:4:G#, 6:5:A, 6:6:A#, 6:7:B, 6:8:C:start, 6:9:C#, 6:10:D, 6:11:D#, 6:12:E, 6:13:F:root" >}}
+{{< guitar title="Single-String Intervals from F (6th String — Full 0 to 12 Frets)" frets="0,1,2,3,4,5,6,7,8,9,10,11,12,13" notes="6:1:F:root, 6:2:F#, 6:3:G, 6:4:G#, 6:5:A, 6:6:A#, 6:7:B, 6:8:C:start, 6:9:C#, 6:10:D, 6:11:D#, 6:12:E, 6:13:F:root" >}}
 
 * **1st Fret (F)** = Root (R)
 * **2nd Fret (F#)** = Minor 2nd (m2, +1 fret)
@@ -110,7 +110,37 @@ Because almost all adjacent strings are tuned **5 frets apart (a Perfect 4th)**,
 
 ---
 
-## 5. The "4th" Interval: Why Perfect, and How It Maps Across Strings
+## 5. Unison Notes: The Fretboard's Magic Multipliers
+
+Unlike a piano where each specific pitch exists in only one key, the guitar is unique: **the exact same pitch (Unison) can be played in multiple positions across different strings**.
+
+### Finding Unison Notes (The "5-Fret Rule")
+Because adjacent strings are tuned 5 frets apart, any note on a string is identical in pitch to the note **5 frets lower on the next higher string**:
+
+> **Lower String (Fret N)** = **Adjacent Higher String (Fret N − 5)**
+
+For example, the **A note** at the **5th fret of the 6th string (Low E)** sounds identical in frequency to the **Open 5th string (A)**:
+
+{{< guitar title="Unison Example: 6th String Fret 5 (A) vs 5th String Open (A)" frets="0,1,2,3,4,5" notes="6:5:A:start, 5:0:A:root" >}}
+
+* **6th String, 5th Fret:** Note **A**
+* **5th String, Open (0):** Note **A** *(Identical unison pitch!)*
+
+*(Exception: Between the 3rd (G) and 2nd (B) strings, use **4 frets** instead of 5 due to standard B-string tuning).*
+
+### Why Unisons Matter for Triads & Chords
+A **Triad** (the fundamental building block of chords like Major and Minor) requires just three notes: **Root + 3rd + 5th**.
+
+On a 6-string guitar, when you strum an open **C Major** or **E Major** chord, you aren't playing 6 different notes—you are playing those 3 triad notes duplicated as **unisons and octaves across multiple strings**.
+
+Knowing your unisons allows you to:
+* **Play any chord in multiple inversions:** Shift melody lines or triad shapes across the fretboard without altering their harmonic content.
+* **Keep your hand anchored in one position:** Instead of jumping up and down the neck, grab duplicate unison notes on adjacent strings.
+* **Add tonal variety:** An open string rings with a bright, open chime, while the identical fretted unison on a thicker lower string produces a warm, woody tone.
+
+---
+
+## 6. The "4th" Interval: Why Perfect, and How It Maps Across Strings
 
 Just like the 5th, beginners often wonder: *We have Major 2nds and Major 3rds, so why isn't there a "Major 4th"?*
 
@@ -133,14 +163,14 @@ This gives us the simplest shape on the fretboard:
 
 #### Standard String Pairs (E-A, A-D, D-G)
 
-{{< guitar title="Perfect 4th Tuning Equivalence (6th String Fret 5 A vs 5th String Open A)" frets="0,1,2,3,4,5" notes="6:1:F:root, 6:5:A:start, 5:0:A:start" >}}
+{{< guitar title="Standard Perfect 4th Shape (Root F to 4th A#)" frets="0,1,2,3,4,5" notes="6:1:F:root, 5:1:A#:start" >}}
 
 * **Root:** 6th string (Low E), 1st fret → **F**
-* **Perfect 5th:** 5th string (A), 0th fret open string → **A**
+* **Perfect 4th:** 5th string (A), 1st fret → **A#**
 
 ---
 
-## 6. The B-String Exception (The "G to B Warp")
+## 7. The B-String Exception (The "G to B Warp")
 
 Because the interval between the **G string (3rd)** and the **B string (2nd)** is tuned to a **Major 3rd (4 semitones)** instead of a Perfect 4th (5 semitones), the entire fretboard pattern shifts **one fret higher (to the right)** whenever an interval crosses from the G string to the B string.
 
@@ -148,7 +178,7 @@ Because the interval between the **G string (3rd)** and the **B string (2nd)** i
 
 ---
 
-## 7. From Linear to Box: Mapping Intervals into a 5-Fret Position
+## 8. From Linear to Box: Mapping Intervals into a 5-Fret Position
 
 Stretching across 13 frets on a single string to reach all intervals is impractical for fluid playing. Since adjacent strings (E to A, A to D) are tuned **5 frets apart (a Perfect 4th)**, we can "fold" the long linear line into a stationary, comfortable 5-fret box across the strings.
 
@@ -158,7 +188,7 @@ Stretching across 13 frets on a single string to reach all intervals is impracti
 
 Every interval played sequentially along just the **6th string (Low E)**:
 
-{{< guitar title="Before: Single-String Intervals from F (6th String — Full 13 Frets)" frets="1,2,3,4,5,6,7,8,9,10,11,12,13" notes="6:1:F:root, 6:2:F#, 6:3:G, 6:4:G#, 6:5:A, 6:6:A#, 6:7:B, 6:8:C:start, 6:9:C#, 6:10:D, 6:11:D#, 6:12:E, 6:13:F:root" >}}
+{{< guitar title="Before: Single-String Intervals from F (6th String — Full 13 Frets)" frets="0,1,2,3,4,5,6,7,8,9,10,11,12,13" notes="6:1:F:root, 6:2:F#, 6:3:G, 6:4:G#, 6:5:A, 6:6:A#, 6:7:B, 6:8:C:start, 6:9:C#, 6:10:D, 6:11:D#, 6:12:E, 6:13:F:root" >}}
 
 * **1st Fret (F)** = Root (R / P1)
 * **2nd Fret (F#)** = Minor 2nd (m2)
@@ -180,7 +210,7 @@ Every interval played sequentially along just the **6th string (Low E)**:
 
 By moving to the next string every 5 frets, all 13 notes fit comfortably right under your fingers without shifting your hand up the neck:
 
-{{< guitar title="After: All 12 Intervals Folded Across 3 Strings (Frets 1–5 Box)" frets="1,2,3,4,5" notes="6:1:F:root, 6:2:F#, 6:3:G, 6:4:G#, 6:5:A, 5:1:A#, 5:2:B, 5:3:C:start, 5:4:C#, 5:5:D, 4:1:D#, 4:2:E, 4:3:F:root" >}}
+{{< guitar title="After: All 12 Intervals Folded Across 3 Strings (Frets 1–5 Box)" frets="0,1,2,3,4,5" notes="6:1:F:root, 6:2:F#, 6:3:G, 6:4:G#, 6:5:A, 5:1:A#, 5:2:B, 5:3:C:start, 5:4:C#, 5:5:D, 4:1:D#, 4:2:E, 4:3:F:root" >}}
 
 * **6th String (Low E):**
   * **1st Fret (F)** = Root (R / P1)
@@ -199,13 +229,15 @@ By moving to the next string every 5 frets, all 13 notes fit comfortably right u
   * **2nd Fret (E)** = Major 7th (M7)
   * **3rd Fret (F)** = Octave (P8)
 
-## 8. Summary Cheat Sheet for Interval Shapes
+---
+
+## 9. Summary Cheat Sheet for Interval Shapes
 
 <div class="table-responsive">
 
 | Interval | Normal Rule (E-A, A-D, D-G, B-e) | Crossing G → B Rule |
 |:---|:---|:---|
-| **Unison (P1)** | Same string, same fret |   |
+| **Unison (P1)** | Same string, same fret *(or lower string +5 frets)* | — |
 | **Minor 2nd (m2)** | Next higher string, -4 frets | Next higher string, -3 frets |
 | **Major 2nd (M2)** | Next higher string, -3 frets | Next higher string, -2 frets |
 | **Minor 3rd (m3)** | Next higher string, -2 frets | Next higher string, -1 fret |
