@@ -41,6 +41,7 @@
   font-size: 0.75rem;
   opacity: 0.6;
   margin-bottom: 0.25rem;
+  height: 1.1rem;
 }
 
 .string-row {
@@ -123,13 +124,13 @@
   user-select: none;
 }
 
-/* Overlapping Boxes Container */
+/* Overlapping Boxes Container — adjusted with top padding to clear fret numbers completely */
 .boxes-layer {
   position: absolute;
-  top: 1.45rem; /* Matches height of fret numbers */
+  top: calc(1.35rem + 2px); /* Clears the fret-numbers header */
   left: 1.75rem; /* Matches width of string name column */
   right: 0;
-  bottom: 18px; /* Matches height of inlay track */
+  bottom: 22px; /* Clears above inlay markers */
   pointer-events: none;
   z-index: 0;
 }
@@ -140,6 +141,7 @@
   border: 2px dashed var(--box-color, #38bdf8);
   border-radius: 6px;
   box-sizing: border-box;
+  margin: 3px 2px; /* Inset padding to prevent edge collisions with numbers/markers */
   pointer-events: none;
 }
 
@@ -289,7 +291,7 @@
       {{ $minF := $f1 }}{{ $maxF := $f2 }}
       {{ if gt $f1 $f2 }}{{ $minF = $f2 }}{{ $maxF = $f1 }}{{ end }}
       
-      {{/* Percentage calculation for absolute overlay */}}
+      {{/* Percentage calculation for absolute overlay with clean boundaries */}}
       {{ $topPct := mul (div (sub (float $minS) 1.0) 6.0) 100.0 }}
       {{ $heightPct := mul (div (add (sub (float $maxS) (float $minS)) 1.0) 6.0) 100.0 }}
       {{ $leftPct := mul (div (float $minF) (float $fretCount)) 100.0 }}
@@ -378,7 +380,7 @@
       {{/* Absolute Layer for Overlapping Boxes */}}
       <div class="boxes-layer">
         {{ range $boxes }}
-          <div class="playable-box" style="top: {{ .top }}%; height: {{ .height }}%; left: {{ .left }}%; width: {{ .width }}%; --box-color: {{ .color }}; --box-color-bg: {{ .color }}22;"></div>
+          <div class="playable-box" style="top: {{ .top }}%; height: calc({{ .height }}% - 6px); left: {{ .left }}%; width: calc({{ .width }}% - 4px); --box-color: {{ .color }}; --box-color-bg: {{ .color }}22;"></div>
         {{ end }}
       </div>
     </div>
