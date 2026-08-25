@@ -74,7 +74,7 @@ When fingerpicking, instead of being trapped in the first 3 frets, let's look at
 
 ### B. C Major (Notes: C – E – G)
 
-{{< guitar title="C Major: Standard 5th-String Root Shape vs. Upper Triad Inversions" frets="0,1,2,3,4,5,6,7,8,9,10,11,12,13" notes="5:3:C:root, 4:2:E, 3:0:G, 2:1:C:root, 1:0:E, 3:5:C:root, 2:5:E, 1:3:G, 3:9:E, 2:8:G, 1:8:C:root, 3:12:G, 2:13:C:root, 1:12:E" >}}
+{{< guitar title="C Major: Standard 5th-String Root Shape vs. Upper Triad Inversions" frets="0,1,2,3,4,5,6,7,8,9,10,11,12,13" mute="6" notes="5:3:C:root, 4:2:E, 3:0:G, 2:1:C:root, 1:0:E, 3:5:C:root, 2:5:E, 1:3:G, 3:9:E, 2:8:G, 1:8:C:root, 3:12:G, 2:13:C:root, 1:12:E" >}}
 
 * **Standard Open C Shape (`x-3-2-0-1-0`):**
   * 5th String (Fret 3): `C (Root)`
