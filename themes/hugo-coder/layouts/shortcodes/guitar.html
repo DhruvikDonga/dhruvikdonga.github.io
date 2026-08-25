@@ -1,4 +1,4 @@
-{{/* Self-contained Guitar Fretboard Shortcode — With Playable Region Highlight Boxes */}}
+{{/* Self-contained Guitar Fretboard Shortcode — With True Overlapping Playable Boxes */}}
 <style>
 .guitar-diagram {
   margin: 1.5rem 0;
@@ -20,11 +20,17 @@
   padding-bottom: 6px;
 }
 
+.fretboard-container {
+  position: relative;
+  width: max-content;
+}
+
 .fretboard {
   display: grid;
   grid-template-columns: 1.75rem repeat(var(--fret-count, 4), 48px);
   width: max-content;
   position: relative;
+  z-index: 1;
 }
 
 .fret-numbers {
@@ -117,16 +123,23 @@
   user-select: none;
 }
 
-/* Playable Region Box Overlay */
+/* Overlapping Boxes Container */
+.boxes-layer {
+  position: absolute;
+  top: 1.45rem; /* Matches height of fret numbers */
+  left: 1.75rem; /* Matches width of string name column */
+  right: 0;
+  bottom: 18px; /* Matches height of inlay track */
+  pointer-events: none;
+  z-index: 0;
+}
+
 .playable-box {
-  position: relative;
-  grid-row: var(--box-row-start) / var(--box-row-end);
-  grid-column: var(--box-col-start) / var(--box-col-end);
-  background-color: var(--box-color-bg, rgba(56, 189, 248, 0.12));
+  position: absolute;
+  background-color: var(--box-color-bg, rgba(56, 189, 248, 0.15));
   border: 2px dashed var(--box-color, #38bdf8);
   border-radius: 6px;
-  margin: 2px 2px;
-  z-index: 0;
+  box-sizing: border-box;
   pointer-events: none;
 }
 
@@ -200,6 +213,9 @@
   .fretboard {
     grid-template-columns: 1.5rem repeat(var(--fret-count, 4), 38px);
   }
+  .boxes-layer {
+    left: 1.5rem;
+  }
   .fret {
     height: 30px;
   }
@@ -247,7 +263,7 @@
   {{ end }}
 {{ end }}
 
-{{/* Parse Playable Boxes: box="startString:endString:startFret:endFret[:color]" */}}
+{{/* Parse Playable Boxes */}}
 {{ $boxColors := slice "#0ea5e9" "#10b981" "#a855f7" "#f97316" "#ec4899" }}
 {{ $rawBoxes := split (or (.Get "box") (.Get "boxes") "") "," }}
 {{ $boxes := slice }}
@@ -268,17 +284,18 @@
         {{ $c = index $boxColors (mod $colorIdx (len $boxColors)) }}
         {{ $colorIdx = add $colorIdx 1 }}
       {{ end }}
-      {{/* Calculate CSS Grid row numbers (Strings 1 to 6 correspond to grid rows 2 to 7) */}}
       {{ $minS := $s1 }}{{ $maxS := $s2 }}
       {{ if gt $s1 $s2 }}{{ $minS = $s2 }}{{ $maxS = $s1 }}{{ end }}
-      {{ $rowStart := add $minS 1 }}
-      {{ $rowEnd := add $maxS 2 }}
-      {{/* Calculate CSS Grid column numbers (Frets 0..max correspond to columns 2..N+2) */}}
       {{ $minF := $f1 }}{{ $maxF := $f2 }}
       {{ if gt $f1 $f2 }}{{ $minF = $f2 }}{{ $maxF = $f1 }}{{ end }}
-      {{ $colStart := add $minF 2 }}
-      {{ $colEnd := add $maxF 3 }}
-      {{ $boxes = $boxes | append (dict "rowStart" $rowStart "rowEnd" $rowEnd "colStart" $colStart "colEnd" $colEnd "color" $c) }}
+      
+      {{/* Percentage calculation for absolute overlay */}}
+      {{ $topPct := mul (div (sub (float $minS) 1.0) 6.0) 100.0 }}
+      {{ $heightPct := mul (div (add (sub (float $maxS) (float $minS)) 1.0) 6.0) 100.0 }}
+      {{ $leftPct := mul (div (float $minF) (float $fretCount)) 100.0 }}
+      {{ $widthPct := mul (div (add (sub (float $maxF) (float $minF)) 1.0) (float $fretCount)) 100.0 }}
+      
+      {{ $boxes = $boxes | append (dict "top" $topPct "height" $heightPct "left" $leftPct "width" $widthPct "color" $c) }}
     {{ end }}
   {{ end }}
 {{ end }}
@@ -320,44 +337,48 @@
 <div class="guitar-diagram">
   {{ with $title }}<div class="guitar-title">{{ . }}</div>{{ end }}
   <div class="fretboard-wrapper">
-    <div class="fretboard" style="--fret-count: {{ $fretCount }};">
-      <div class="fret-numbers">
-        {{ range $frets }}<span>{{ if eq . "0" }}O{{ else }}{{ . }}{{ end }}</span>{{ end }}
-      </div>
-      {{ range $strings }}
-        {{ $sNum := .num }}
-        {{ $isMuted := in $mutedStrings $sNum }}
-        <div class="string-row{{ if $isMuted }} muted-string{{ end }}">
-          <span class="string-name">{{ .name }}</span>
+    <div class="fretboard-container">
+      <div class="fretboard" style="--fret-count: {{ $fretCount }};">
+        <div class="fret-numbers">
+          {{ range $frets }}<span>{{ if eq . "0" }}O{{ else }}{{ . }}{{ end }}</span>{{ end }}
+        </div>
+        {{ range $strings }}
+          {{ $sNum := .num }}
+          {{ $isMuted := in $mutedStrings $sNum }}
+          <div class="string-row{{ if $isMuted }} muted-string{{ end }}">
+            <span class="string-name">{{ .name }}</span>
+            {{ range $frets }}
+              {{ $fNum := . }}
+              {{ $key := printf "%s-%s" $sNum $fNum }}
+              {{ $noteData := index $noteMap $key }}
+              <div class="fret{{ if eq $fNum "0" }} fret-0{{ end }}">
+                {{ if and $isMuted (eq $fNum "0") }}
+                  <span class="mute-indicator">✕</span>
+                {{ else if $noteData }}
+                  <span class="note{{ with $noteData.tag }} {{ . }}{{ end }}">{{ $noteData.name }}</span>
+                {{ end }}
+              </div>
+            {{ end }}
+          </div>
+        {{ end }}
+        {{/* Position marker dot track */}}
+        <div class="inlay-row">
           {{ range $frets }}
-            {{ $fNum := . }}
-            {{ $key := printf "%s-%s" $sNum $fNum }}
-            {{ $noteData := index $noteMap $key }}
-            <div class="fret{{ if eq $fNum "0" }} fret-0{{ end }}">
-              {{ if and $isMuted (eq $fNum "0") }}
-                <span class="mute-indicator">✕</span>
-              {{ else if $noteData }}
-                <span class="note{{ with $noteData.tag }} {{ . }}{{ end }}">{{ $noteData.name }}</span>
+            <div class="inlay-cell">
+              {{ if in $singleDots . }}
+                <span class="inlay-dot"></span>
+              {{ else if in $doubleDots . }}
+                <span class="inlay-dot"></span>
+                <span class="inlay-dot"></span>
               {{ end }}
             </div>
           {{ end }}
         </div>
-      {{ end }}
-      {{/* Render Playable Highlight Boxes */}}
-      {{ range $boxes }}
-        <div class="playable-box" style="--box-row-start: {{ .rowStart }}; --box-row-end: {{ .rowEnd }}; --box-col-start: {{ .colStart }}; --box-col-end: {{ .colEnd }}; --box-color: {{ .color }}; --box-color-bg: {{ .color }}20;"></div>
-      {{ end }}
-      {{/* Position marker dot track */}}
-      <div class="inlay-row">
-        {{ range $frets }}
-          <div class="inlay-cell">
-            {{ if in $singleDots . }}
-              <span class="inlay-dot"></span>
-            {{ else if in $doubleDots . }}
-              <span class="inlay-dot"></span>
-              <span class="inlay-dot"></span>
-            {{ end }}
-          </div>
+      </div>
+      {{/* Absolute Layer for Overlapping Boxes */}}
+      <div class="boxes-layer">
+        {{ range $boxes }}
+          <div class="playable-box" style="top: {{ .top }}%; height: {{ .height }}%; left: {{ .left }}%; width: {{ .width }}%; --box-color: {{ .color }}; --box-color-bg: {{ .color }}22;"></div>
         {{ end }}
       </div>
     </div>
