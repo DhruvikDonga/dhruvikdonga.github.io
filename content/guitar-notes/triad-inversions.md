@@ -48,41 +48,53 @@ A chord's identity depends on its notes, not their stacking order. When you rear
 
 Let's look at one of the most emotional and iconic progressions in acoustic fingerstyle: **Em → D → C** (in the key of E Minor / G Major).
 
-Instead of jumping back and forth between open cowboy chords, let's map all three chords across the **Top 3 Strings (G, B, high e)** so your right-hand fingerpicking stays smooth and consistent.
+Normally, you would strum these as open "cowboy" chords:
+* **Standard Open Em:** Holding fret 2 on the 5th (A) and 4th (D) strings while letting all other strings ring open (`0-2-2-0-0-0`).
+* **Standard Open C:** Rooted on the 5th string at the 3rd fret (`x-3-2-0-1-0`).
+* **Standard Open D:** Rooted on the 4th string open D (`x-x-0-2-3-2`).
+
+When fingerpicking, instead of being trapped in the first 3 frets, let's look at how the notes in those classic shapes break down into movable **3-note triads across the top strings (G, B, high e)**:
 
 ---
 
-### A. E Minor Triads (Notes: E – G – B)
+### A. E Minor (Notes: E – G – B)
 
-{{< guitar title="E Minor Triads: Root, 1st & 2nd Inversions (Strings 1-3)" frets="0,1,2,3,4,5,6,7,8,9,10,11,12" notes="3:0:G, 2:0:B, 1:0:E:root, 3:4:B, 2:5:E:root, 1:3:G, 3:9:E:root, 2:8:G, 1:7:B, 3:12:G, 2:12:B, 1:12:E:root" >}}
+{{< guitar title="E Minor: Full Open Shape vs. Upper Triad Inversions (Strings 1-3)" frets="0,1,2,3,4,5,6,7,8,9,10,11,12" notes="6:0:E:root, 5:2:B, 4:2:E:root, 3:0:G, 2:0:B, 1:0:E:root, 3:4:B, 2:5:E:root, 1:3:G, 3:9:E:root, 2:8:G, 1:7:B, 3:12:G, 2:12:B, 1:12:E:root" >}}
 
-* **Open Strings (Frets 0-0-0):** `G (b3) - B (5) - E (1)` → **1st Inversion**
+* **Standard Open Em Shape (`0-2-2-0-0-0`):** 
+  * 6th String (Open): `E (Root)`
+  * 5th String (Fret 2): `B (5th)`
+  * 4th String (Fret 2): `E (Root)`
+  * Top 3 Strings (Frets `0-0-0`): `G (b3) - B (5) - E (Root)` → **1st Inversion Triad**
 * **Frets 4-5-3:** `B (5) - E (1) - G (b3)` → **2nd Inversion** *(Grip: G:4, B:5, e:3)*
 * **Frets 9-8-7:** `E (1) - G (b3) - B (5)` → **Root Position** *(Grip: G:9, B:8, e:7)*
 * **12th Fret (Frets 12-12-12):** `G (b3) - B (5) - E (1)` → **1st Inversion Octave**
 
 ---
 
-### B. D Major Triads (Notes: D – F# – A)
+### B. C Major (Notes: C – E – G)
 
-{{< guitar title="D Major Triads: Root, 1st & 2nd Inversions (Strings 1-3)" frets="0,1,2,3,4,5,6,7,8,9,10,11" notes="3:2:A, 2:3:D:root, 1:2:F#, 3:7:D:root, 2:7:F#, 1:5:A, 3:11:F#, 2:10:A, 1:10:D:root" >}}
+{{< guitar title="C Major: Standard 5th-String Root Shape vs. Upper Triad Inversions" frets="0,1,2,3,4,5,6,7,8,9,10,11,12,13" notes="5:3:C:root, 4:2:E, 3:0:G, 2:1:C:root, 1:0:E, 3:5:C:root, 2:5:E, 1:3:G, 3:9:E, 2:8:G, 1:8:C:root, 3:12:G, 2:13:C:root, 1:12:E" >}}
 
-* **Frets 2-3-2 (Standard Open D shape):** `A (5) - D (1) - F# (3)` → **2nd Inversion**
-* **Frets 7-7-5:** `D (1) - F# (3) - A (5)` → **Root Position** *(Grip: G:7, B:7, e:5)*
-* **Frets 11-10-10:** `F# (3) - A (5) - D (1)` → **1st Inversion** *(Grip: G:11, B:10, e:10)*
-
----
-
-### C. C Major Triads (Notes: C – E – G)
-
-{{< guitar title="C Major Triads: Root, 1st & 2nd Inversions (Strings 1-3)" frets="0,1,2,3,4,5,6,7,8,9,10,11,12,13" notes="3:0:G, 2:1:C:root, 1:0:E, 3:5:C:root, 2:5:E, 1:3:G, 3:9:E, 2:8:G, 1:8:C:root, 3:12:G, 2:13:C:root, 1:12:E" >}}
-
-* **Frets 0-1-0 (From Open C shape):** `G (5) - C (1) - E (3)` → **2nd Inversion**
+* **Standard Open C Shape (`x-3-2-0-1-0`):**
+  * 5th String (Fret 3): `C (Root)`
+  * 4th String (Fret 2): `E (3rd)`
+  * Top 3 Strings (Frets `0-1-0`): `G (5) - C (1) - E (3)` → **2nd Inversion Triad**
 * **Frets 5-5-3:** `C (1) - E (3) - G (5)` → **Root Position** *(Grip: G:5, B:5, e:3)*
 * **Frets 9-8-8:** `E (3) - G (5) - C (1)` → **1st Inversion** *(Grip: G:9, B:8, e:8)*
 * **Frets 12-13-12:** `G (5) - C (1) - E (3)` → **2nd Inversion Octave**
 
 ---
+
+### C. D Major (Notes: D – F# – A)
+
+{{< guitar title="D Major: Standard Open Shape vs. Upper Triad Inversions" frets="0,1,2,3,4,5,6,7,8,9,10,11" notes="4:0:D:root, 3:2:A, 2:3:D:root, 1:2:F#, 3:7:D:root, 2:7:F#, 1:5:A, 3:11:F#, 2:10:A, 1:10:D:root" >}}
+
+* **Standard Open D Shape (`x-x-0-2-3-2`):**
+  * 4th String (Open): `D (Root)`
+  * Top 3 Strings (Frets `2-3-2`): `A (5) - D (1) - F# (3)` → **2nd Inversion Triad**
+* **Frets 7-7-5:** `D (1) - F# (3) - A (5)` → **Root Position** *(Grip: G:7, B:7, e:5)*
+* **Frets 11-10-10:** `F# (3) - A (5) - D (1)` → **1st Inversion** *(Grip: G:11, B:10, e:10)*
 
 ## 4. Putting It Together: Creating Smooth Fingerstyle Lines
 
