@@ -1,4 +1,4 @@
-{{/* Self-contained Guitar Fretboard Shortcode — Always Starts at Fret 0 to Max Fret */}}
+{{/* Self-contained Guitar Fretboard Shortcode — With Muted String Dashes (---) & Inlay Markers */}}
 <style>
 .guitar-diagram {
   margin: 1.5rem 0;
@@ -70,7 +70,7 @@
   border-left: 2px solid currentColor;
 }
 
-/* String running horizontally through cell */
+/* Normal solid string line running horizontally */
 .fret::before {
   content: "";
   position: absolute;
@@ -92,6 +92,28 @@
 .string-row:last-child .fret::before {
   height: 2.5px;
   opacity: 0.75;
+}
+
+/* Muted unplayed strings: dashed horizontal line (- - -) & lowered opacity */
+.string-row.muted-string .fret::before {
+  height: 0 !important;
+  border-top: 1.5px dashed currentColor;
+  background-color: transparent !important;
+  opacity: 0.25 !important;
+}
+
+.string-row.muted-string .string-name {
+  opacity: 0.35;
+}
+
+/* Muted badge cross (✕) on string 0/open zone */
+.mute-indicator {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #ef4444;
+  opacity: 0.7;
+  z-index: 2;
+  user-select: none;
 }
 
 /* Fret Markers Row (Dots beneath the board) */
@@ -199,6 +221,18 @@
 {{ end }}
 {{ $fretCount := len $frets }}
 
+{{/* Parse muted strings: mute="5,6" */}}
+{{ $muteParam := or (.Get "mute") (.Get "muted") "" }}
+{{ $mutedStrings := slice }}
+{{ if ne $muteParam "" }}
+  {{ range (split $muteParam ",") }}
+    {{ $m := trim . " \n\r\t" }}
+    {{ if ne $m "" }}
+      {{ $mutedStrings = $mutedStrings | append $m }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
 {{ $noteMap := dict }}
 {{ $rawNotes := split (.Get "notes") "," }}
 {{ range $rawNotes }}
@@ -242,14 +276,17 @@
       </div>
       {{ range $strings }}
         {{ $sNum := .num }}
-        <div class="string-row">
+        {{ $isMuted := in $mutedStrings $sNum }}
+        <div class="string-row{{ if $isMuted }} muted-string{{ end }}">
           <span class="string-name">{{ .name }}</span>
           {{ range $frets }}
             {{ $fNum := . }}
             {{ $key := printf "%s-%s" $sNum $fNum }}
             {{ $noteData := index $noteMap $key }}
             <div class="fret{{ if eq $fNum "0" }} fret-0{{ end }}">
-              {{ if $noteData }}
+              {{ if and $isMuted (eq $fNum "0") }}
+                <span class="mute-indicator">✕</span>
+              {{ else if $noteData }}
                 <span class="note{{ with $noteData.tag }} {{ . }}{{ end }}">{{ $noteData.name }}</span>
               {{ end }}
             </div>

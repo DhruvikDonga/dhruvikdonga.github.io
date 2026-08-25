@@ -88,7 +88,7 @@ When fingerpicking, instead of being trapped in the first 3 frets, let's look at
 
 ### C. D Major (Notes: D – F# – A)
 
-{{< guitar title="D Major: Standard Open Shape vs. Upper Triad Inversions" frets="0,1,2,3,4,5,6,7,8,9,10,11" notes="4:0:D:root, 3:2:A, 2:3:D:root, 1:2:F#, 3:7:D:root, 2:7:F#, 1:5:A, 3:11:F#, 2:10:A, 1:10:D:root" >}}
+{{< guitar title="D Major: Standard Open Shape vs. Upper Triad Inversions" frets="0,1,2,3,4,5,6,7,8,9,10,11" mute="5,6" notes="4:0:D:root, 3:2:A, 2:3:D:root, 1:2:F#, 3:7:D:root, 2:7:F#, 1:5:A, 3:11:F#, 2:10:A, 1:10:D:root" >}}
 
 * **Standard Open D Shape (`x-x-0-2-3-2`):**
   * 4th String (Open): `D (Root)`
