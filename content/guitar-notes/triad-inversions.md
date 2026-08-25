@@ -111,17 +111,41 @@ Notice how the top melody line descends smoothly step-by-step: **B (fret 7) → 
 
 ---
 
-## 5. Summary Cheat Sheet for String Set 1-2-3
+## 5. Fret-Counting and Unison Mapping Formulas
+
+To transition from memorizing shapes to creating arrangements on the fly, you need to know exactly how to calculate these positions without guessing. There are two primary shortcuts to navigate the fretboard dynamically: tracking your shapes relative to the **Root Note**, and using **Unison Pitches** to shift strings.
+
+### A. The "Root-Anchored" Fret-Counting Formula
+Tie `R` to the **exact fret of your target Root note**. Because the root note shifts strings in each inversion, use this formula to map your triads instantly:
 
 <div class="table-responsive">
 
-| Triad Shape | Major Shape (G-B-e) | Minor Shape (G-B-e) | Top Note (High e String) |
+| Triad Position | Major Shape (G–B–e) | Minor Shape (G–B–e) | Where to Find the Root Note (`R`) |
 |:---|:---|:---|:---|
-| **Root Position** | Fret `N` / `N` / `N-2` | Fret `N` / `N-1` / `N-2` | 5th of chord |
-| **1st Inversion** | Fret `N+2` / `N+1` / `N+1` | Fret `N+1` / `N+1` / `N+1` (Barre) | Root of chord |
-| **2nd Inversion** | Fret `N` / `N+1` / `N` (D-shape) | Fret `N+1` / `N+2` / `N` | 3rd of chord |
+| **Root Position** | Fret `R` / `R` / `R-2` | Fret `R` / `R-1` / `R-2` | **On the G string** (Fret `R`) |
+| **1st Inversion** | Fret `R+1` / `R` / `R` | Fret `R` / `R` / `R` *(Barre)* | **On the High e string** (Fret `R`) |
+| **2nd Inversion** | Fret `R-1` / `R` / `R-1` | Fret `R` / `R+1` / `R-1` | **On the B string** (Fret `R`) |
 
 </div>
 
-### Practice Routine
-Pick a backing track in **E Minor**. Instead of strumming full open chords, arpeggiate these 3-note triad voicings along strings 1, 2, and 3. As your muscle memory grows, you will naturally discover melody lines and improvisations hiding right beneath your fingers.
+**How to use this formula:** 
+If you want to play a **C Major** chord on the top three strings, find a C note on the fretboard. 
+1. Found C on the **G string** (5th fret)? `R = 5`. The Root Position formula gives you frets: `5 / 5 / 3`.
+2. Found C on the **High e string** (8th fret)? `R = 8`. The 1st Inversion formula gives you frets: `9 / 8 / 8`.
+3. Found C on the **B string** (13th fret)? `R = 13`. The 2nd Inversion formula gives you frets: `12 / 13 / 12`.
+
+---
+
+### B. Shifting String Sets Using Unison Notes
+What if you want to move a triad shape from the top three strings down to a lower string set (like strings 4, 3, and 2)? This is where **unison notes** (two different locations on the fretboard that produce the exact same pitch frequency) come to the rescue.
+
+Because of standard guitar tuning, you can translate pitches across adjacent strings using a simple intervals-based fret shift:
+
+* **The 5-Fret Rule (Between most strings):** To find the exact unison pitch of a note on an adjacent higher string, move **5 frets higher** on your current lower string.
+  * *Example:* The note on the 5th fret of the D string is the exact unison pitch of the open G string.
+* **The 4-Fret Exception (G to B string):** Because the B string is tuned to a major third interval from G, you only move **4 frets higher** on the G string to find the unison pitch of the open B string.
+
+#### Putting Unisons into Practice
+If you have an E minor triad sitting on strings 4, 3, and 2 (D, G, B) at frets `14 / 12 / 12`, you can easily use the rules above to duplicate those exact same pitches on strings 3, 2, and 1 (G, B, e). By shifting your target notes down the neck using the 5-fret and 4-fret rules, you discover that the pitch equivalent lives right at frets `9 / 8 / 7`. 
+
+By matching visual patterns with root-anchored math and unison transitions, you will stop seeing the fretboard as isolated boxes and start seeing it as one beautifully connected playground for your fingerstyle arrangements.
