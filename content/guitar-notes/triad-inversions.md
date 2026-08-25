@@ -7,24 +7,24 @@ categories = ["Music Theory", "Guitar Fundamentals"]
 summary = "Ever wondered how fingerstyle guitarists float effortlessly across the neck without sticking to stiff cowboy chords? Learn how fundamental intervals, horizontal formulas, vertical shapes, and multi-string triad inversions transform simple chord progressions into fluid acoustic arrangements."
 +++
 
-Whenever you watch modern fingerstyle guitarists on YouTube or Instagram, a sense of wonder and curiosity immediately kicks in[cite: 4]. Their hands glide effortlessly across the fretboard, interweaving bass lines, flowing accompaniment, and soaring melody notes[cite: 4]. 
+Whenever you watch modern fingerstyle guitarists on YouTube or Instagram, a sense of wonder and curiosity immediately kicks in. Their hands glide effortlessly across the fretboard, interweaving bass lines, flowing accompaniment, and soaring melody notes. 
 
-You find yourself pausing the video, squinting at their fret hand, and wondering: *“What exotic chord shape are they playing?”*[cite: 4]
+You find yourself pausing the video, squinting at their fret hand, and wondering: *“What exotic chord shape are they playing?”*
 
-Here is the secret: they aren't memorizing hundreds of obscure 6-string chord diagrams[cite: 4]. They are building dynamic shapes on the fly using core guitar fundamentals[cite: 4]. By taking the [**intervals**](/guitar-notes/guitar-intervals/) and [**scales**](/guitar-notes/minor-scales-guide/) we learned in our previous blogs, combining them with [**unison notes**](/guitar-notes/guitar-intervals/), and applying **triad formulas and inversions**, fingerstyle players break bulky open chords into elegant 3-note packages that support the melody wherever it travels on the neck[cite: 4].
+Here is the secret: they aren't memorizing hundreds of obscure 6-string chord diagrams. They are building dynamic shapes on the fly using core guitar fundamentals. By taking the [**intervals**](/guitar-notes/guitar-intervals/) and [**scales**](/guitar-notes/minor-scales-guide/) we learned in our previous blogs, combining them with [**unison notes**](/guitar-notes/guitar-intervals/), and applying **triad formulas and inversions**, fingerstyle players break bulky open chords into elegant 3-note packages that support the melody wherever it travels on the neck.
 
 ---
 
 ## 1. What Is a Triad? (Stripping Away the Clutter)
 
-Every standard Major and Minor chord is fundamentally built on just **three notes** called a **Triad**[cite: 4]:
+Every standard Major and Minor chord is fundamentally built on just **three notes** called a **Triad**:
 
-* **Major Triad:** Root (1) + Major 3rd (3) + Perfect 5th (5) — from [Major Scale](/guitar-notes/major-scales-guide/)[cite: 4]
-* **Minor Triad:** Root (1) + Minor 3rd (b3) + Perfect 5th (5) — from [Minor Scale](/guitar-notes/minor-scales-guide/)[cite: 4]
+* **Major Triad:** Root (1) + Major 3rd (3) + Perfect 5th (5) — from [Major Scale](/guitar-notes/major-scales-guide/)
+* **Minor Triad:** Root (1) + Minor 3rd (b3) + Perfect 5th (5) — from [Minor Scale](/guitar-notes/minor-scales-guide/)
 
-When you strum a standard 6-string open chord, you aren't playing 6 unique musical pitches—you are merely repeating those 3 core notes across multiple octaves and unisons[cite: 4]. 
+When you strum a standard 6-string open chord, you aren't playing 6 unique musical pitches—you are merely repeating those 3 core notes across multiple octaves and unisons. 
 
-For fingerstyle playing, stripping chords down to **compact 3-note triads on adjacent strings (like strings 5–4–3, 4–3–2, or 3–2–1)** frees up your extra fingers to pick melodies, create bass counterpoint, and eliminate clunky hand jumps[cite: 4].
+For fingerstyle playing, stripping chords down to **compact 3-note triads on adjacent strings (like strings 5–4–3, 4–3–2, or 3–2–1)** frees up your extra fingers to pick melodies, create bass counterpoint, and eliminate clunky hand jumps.
 
 ---
 
@@ -73,15 +73,15 @@ Because the interval between the G and B string is tuned 1 fret narrower (4 semi
 
 ## 4. Understanding Inversions & The "Always-Spaced" 12-Fret Rule
 
-A chord's identity depends on its notes, not their stacking order[cite: 4]. When you rearrange which note sits at the bottom (the lowest pitch), you create an **inversion**[cite: 4]:
+A chord's identity depends on its notes, not their stacking order. When you rearrange which note sits at the bottom (the lowest pitch), you create an **inversion**:
 
 <div class="table-responsive">
 
 | Inversion Type | Lowest Note (Bass) | Stacking Order (Low to High) | Musical Vibe |
 |:---|:---:|:---:|:---|
-| **Root Position** | **Root (1)** | 1 – 3 – 5 (or 1 – b3 – 5) | Grounded, solid, punchy[cite: 4] |
-| **1st Inversion** | **3rd (3 / b3)** | 3 – 5 – 1 (or b3 – 5 – 1) | Sweet, melodic, smooth voice-leading[cite: 4] |
-| **2nd Inversion** | **5th (5)** | 5 – 1 – 3 (or 5 – 1 – b3) | Suspended, floating, open resonance[cite: 4] |
+| **Root Position** | **Root (1)** | 1 – 3 – 5 (or 1 – b3 – 5) | Grounded, solid, punchy |
+| **1st Inversion** | **3rd (3 / b3)** | 3 – 5 – 1 (or b3 – 5 – 1) | Sweet, melodic, smooth voice-leading |
+| **2nd Inversion** | **5th (5)** | 5 – 1 – 3 (or 5 – 1 – b3) | Suspended, floating, open resonance |
 
 </div>
 
@@ -200,27 +200,27 @@ This set handles your primary vocal and melodic lead lines, making it effortless
 ---
 
 ### A. E Minor on Top Strings (G–B–e)
-* **Root Position (Frets 9-8-7):** Root E on G string (fret 9) → `G:9, B:8, e:7`[cite: 4]
-* **1st Inversion (Frets 0-0-0 or 12-12-12):** Root E on high e string (fret 0/12) → `G:0, B:0, e:0`[cite: 4]
-* **2nd Inversion (Frets 4-5-3):** Root E on B string (fret 5) → `G:4, B:5, e:3`[cite: 4]
+* **Root Position (Frets 9-8-7):** Root E on G string (fret 9) → `G:9, B:8, e:7`
+* **1st Inversion (Frets 0-0-0 or 12-12-12):** Root E on high e string (fret 0/12) → `G:0, B:0, e:0`
+* **2nd Inversion (Frets 4-5-3):** Root E on B string (fret 5) → `G:4, B:5, e:3`
 
 {{< guitar title="E Minor Triad Inversions (Top String Set 3-2-1: G-B-e)" frets="0,1,2,3,4,5,6,7,8,9,10,11,12" mute="4,5,6" box="1:3:0:0:#0ea5e9, 1:3:3:5:#10b981, 1:3:7:9:#a855f7, 1:3:12:12:#f97316" notes="3:0:G, 2:0:B, 1:0:E:root, 3:4:B, 2:5:E:root, 1:3:G, 3:9:E:root, 2:8:G, 1:7:B, 3:12:G, 2:12:B, 1:12:E:root" >}}
 
 ---
 
 ### B. D Major on Top Strings (G–B–e)
-* **Root Position (Frets 7-7-5):** Root D on G string (fret 7) → `G:7, B:7, e:5`[cite: 4]
-* **1st Inversion (Frets 11-10-10):** Root D on high e string (fret 10) → `G:11, B:10, e:10`[cite: 4]
-* **2nd Inversion (Frets 2-3-2):** Root D on B string (fret 3) → `G:2, B:3, e:2` *(Standard open D shape!)*[cite: 4]
+* **Root Position (Frets 7-7-5):** Root D on G string (fret 7) → `G:7, B:7, e:5`
+* **1st Inversion (Frets 11-10-10):** Root D on high e string (fret 10) → `G:11, B:10, e:10`
+* **2nd Inversion (Frets 2-3-2):** Root D on B string (fret 3) → `G:2, B:3, e:2` *(Standard open D shape!)*
 
 {{< guitar title="D Major Triad Inversions (Top String Set 3-2-1: G-B-e)" frets="0,1,2,3,4,5,6,7,8,9,10,11" mute="4,5,6" box="1:3:2:3:#0ea5e9, 1:3:5:7:#10b981, 1:3:10:11:#a855f7" notes="3:2:A, 2:3:D:root, 1:2:F#, 3:7:D:root, 2:7:F#, 1:5:A, 3:11:F#, 2:10:A, 1:10:D:root" >}}
 
 ---
 
 ### C. C Major on Top Strings (G–B–e)
-* **Root Position (Frets 5-5-3):** Root C on G string (fret 5) → `G:5, B:5, e:3`[cite: 4]
-* **1st Inversion (Frets 9-8-8):** Root C on high e string (fret 8) → `G:9, B:8, e:8`[cite: 4]
-* **2nd Inversion (Frets 0-1-0 or 12-13-12):** Root C on B string (fret 1/13) → `G:0, B:1, e:0`[cite: 4]
+* **Root Position (Frets 5-5-3):** Root C on G string (fret 5) → `G:5, B:5, e:3`
+* **1st Inversion (Frets 9-8-8):** Root C on high e string (fret 8) → `G:9, B:8, e:8`
+* **2nd Inversion (Frets 0-1-0 or 12-13-12):** Root C on B string (fret 1/13) → `G:0, B:1, e:0`
 
 {{< guitar title="C Major Triad Inversions (Top String Set 3-2-1: G-B-e)" frets="0,1,2,3,4,5,6,7,8,9,10,11,12,13" mute="4,5,6" box="1:3:0:1:#0ea5e9, 1:3:3:5:#10b981, 1:3:8:9:#a855f7, 1:3:12:13:#f97316" notes="3:0:G, 2:1:C:root, 1:0:E, 3:5:C:root, 2:5:E, 1:3:G, 3:9:E, 2:8:G, 1:8:C:root, 3:12:G, 2:13:C:root, 1:12:E" >}}
 
@@ -247,4 +247,4 @@ Use this master reference to instantly construct any Major or Minor triad across
 </div>
 
 ### Practice Routine
-Pick a backing track in **E Minor**[cite: 4]. Instead of strumming static open chords, pick a single string set (like 4–3–2 or 5–4–3) and play the **Em → D → C** progression using the closest available inversions. You will immediately hear how much smoother, cleaner, and more expressive your fingerstyle accompaniment becomes!
+Pick a backing track in **E Minor**. Instead of strumming static open chords, pick a single string set (like 4–3–2 or 5–4–3) and play the **Em → D → C** progression using the closest available inversions. You will immediately hear how much smoother, cleaner, and more expressive your fingerstyle accompaniment becomes!
