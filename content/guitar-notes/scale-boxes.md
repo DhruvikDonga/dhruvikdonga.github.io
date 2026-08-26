@@ -39,7 +39,30 @@ A standard Major Scale (Bilawal Thaat) and its Natural Minor Scale (Asavari Thaa
 
 ---
 
-## 2. Key of C Major / A Minor: The 5 Connected Boxes
+## 2. The Whole-Step / Half-Step Engine (Why C Major & A Minor Share the Exact Same Notes)
+
+Every scale in Western music is constructed using a fixed sequence of **Whole steps (W = 2 frets)** and **Half steps (H = 1 fret)**:
+
+* **Major Scale Formula:** `W – W – H – W – W – W – H`
+* **Natural Minor Scale Formula:** `W – H – W – W – H – W – W`
+
+Notice what happens when you start on **C** vs. when you start on **A**:
+
+<div class="table-responsive">
+
+| Scale | Starting Note (Root) | Step-by-Step Interval Formula | Resulting Notes |
+|:---|:---|:---|:---|
+| **C Major** | **C** | C `(+W)` D `(+W)` E `(+H)` F `(+W)` G `(+W)` A `(+W)` B `(+H)` **C** | **C – D – E – F – G – A – B** |
+| **A Minor** | **A** | A `(+W)` B `(+H)` C `(+W)` D `(+W)` E `(+H)` F `(+W)` G `(+W)` **A** | **A – B – C – D – E – F – G** |
+
+</div>
+
+### The Relative Connection
+* **Identical Pitch Pool:** Neither scale contains any sharps or flats. They use the **exact same 7 notes**.
+* **Rotational Shift:** The Natural Minor formula is simply the Major formula **rotated to start on the 6th note (`A`)**. 
+* **Fretboard Result:** Because the notes are identical, **every single box shape on the fretboard is 100% identical for both scales**. The only difference is your tonal center: resolve your phrases on **C** for the bright Major sound (*Bilawal*), or resolve on **A** (3 frets / 3 semitones lower) for the melancholic Minor mood (*Asavari*).
+
+## 3. Key of C Major / A Minor: The 5 Connected Boxes
 
 Below is the complete 5-box system mapped across the fretboard in the standard key of **C Major / A Minor**:
 * **Red (`:root`)** = C (Major Root / Sa)
@@ -128,7 +151,7 @@ Below is the complete 5-box system mapped across the fretboard in the standard k
 
 ---
 
-## 3. Master Summary: 5 Box Connection Map
+## 4. Master Summary: 5 Box Connection Map
 
 <div class="table-responsive">
 
