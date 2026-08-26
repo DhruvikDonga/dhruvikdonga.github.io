@@ -1,4 +1,4 @@
-{{/* Self-contained Guitar Fretboard Shortcode — With True Overlapping Playable Boxes */}}
+{{/* Self-contained Guitar Fretboard Shortcode — With Sequential Pulse Animation Support */}}
 <style>
 .guitar-diagram {
   margin: 1.5rem 0;
@@ -124,13 +124,13 @@
   user-select: none;
 }
 
-/* Overlapping Boxes Container — adjusted with top padding to clear fret numbers completely */
+/* Overlapping Boxes Container */
 .boxes-layer {
   position: absolute;
-  top: calc(1.35rem + 2px); /* Clears the fret-numbers header */
-  left: 1.75rem; /* Matches width of string name column */
+  top: calc(1.35rem + 2px);
+  left: 1.75rem;
   right: 0;
-  bottom: 22px; /* Clears above inlay markers */
+  bottom: 22px;
   pointer-events: none;
   z-index: 0;
 }
@@ -141,7 +141,7 @@
   border: 2px dashed var(--box-color, #38bdf8);
   border-radius: 6px;
   box-sizing: border-box;
-  margin: 3px 2px; /* Inset padding to prevent edge collisions with numbers/markers */
+  margin: 3px 2px;
   pointer-events: none;
 }
 
@@ -210,6 +210,31 @@
   box-shadow: 0 0 0 2px var(--bg-color, #ffffff), 0 0 6px rgba(245, 158, 11, 0.4);
 }
 
+/* Sequential Note Animations */
+@keyframes notePlayPulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  15% {
+    transform: scale(1.35);
+    filter: brightness(1.5) drop-shadow(0 0 8px #f59e0b);
+    z-index: 10;
+  }
+  35% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+
+.guitar-diagram.animated .note.has-anim {
+  animation-name: notePlayPulse;
+  animation-duration: var(--anim-total-dur, 4s);
+  animation-delay: var(--note-anim-delay, 0s);
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
 /* Mobile optimizations */
 @media (max-width: 600px) {
   .fretboard {
@@ -235,6 +260,8 @@
 
 {{ $title := .Get "title" }}
 {{ $rawFrets := split (.Get "frets") "," }}
+{{ $animateParam := or (.Get "animate") (.Get "animation") false }}
+{{ $isAnimated := and (ne $animateParam false) (ne $animateParam "false") (ne $animateParam "") }}
 
 {{/* Determine the highest fret provided */}}
 {{ $maxFret := 0 }}
@@ -246,14 +273,14 @@
   {{ end }}
 {{ end }}
 
-{{/* Always build range sequentially from 0 to maxFret */}}
+{{/* Build sequential fret range */}}
 {{ $frets := slice }}
 {{ range $i := seq 0 $maxFret }}
   {{ $frets = $frets | append (string $i) }}
 {{ end }}
 {{ $fretCount := len $frets }}
 
-{{/* Parse muted strings: mute="5,6" */}}
+{{/* Parse muted strings */}}
 {{ $muteParam := or (.Get "mute") (.Get "muted") "" }}
 {{ $mutedStrings := slice }}
 {{ if ne $muteParam "" }}
@@ -291,7 +318,6 @@
       {{ $minF := $f1 }}{{ $maxF := $f2 }}
       {{ if gt $f1 $f2 }}{{ $minF = $f2 }}{{ $maxF = $f1 }}{{ end }}
       
-      {{/* Percentage calculation for absolute overlay with clean boundaries */}}
       {{ $topPct := mul (div (sub (float $minS) 1.0) 6.0) 100.0 }}
       {{ $heightPct := mul (div (add (sub (float $maxS) (float $minS)) 1.0) 6.0) 100.0 }}
       {{ $leftPct := mul (div (float $minF) (float $fretCount)) 100.0 }}
@@ -302,8 +328,21 @@
   {{ end }}
 {{ end }}
 
+{{/* Parse Notes and Order Index for Sequential Animation */}}
 {{ $noteMap := dict }}
 {{ $rawNotes := split (.Get "notes") "," }}
+{{ $totalNotes := 0 }}
+{{ range $rawNotes }}
+  {{ if ne (trim . " \n\r\t") "" }}
+    {{ $totalNotes = add $totalNotes 1 }}
+  {{ end }}
+{{ end }}
+
+{{/* Step duration per note: 0.45s; Loop includes 1s pause */}}
+{{ $stepDur := 0.45 }}
+{{ $totalDur := add (mul (float $totalNotes) $stepDur) 1.0 }}
+
+{{ $noteIdx := 0 }}
 {{ range $rawNotes }}
   {{ $entry := trim . " \n\r\t" }}
   {{ if ne $entry "" }}
@@ -316,8 +355,10 @@
       {{ if ge (len $parts) 4 }}
         {{ $tag = lower (trim (index $parts 3) " ") }}
       {{ end }}
+      {{ $delay := mul (float $noteIdx) $stepDur }}
       {{ $key := printf "%s-%s" $s $f }}
-      {{ $noteMap = merge $noteMap (dict $key (dict "name" $n "tag" $tag)) }}
+      {{ $noteMap = merge $noteMap (dict $key (dict "name" $n "tag" $tag "delay" (printf "%.2fs" $delay))) }}
+      {{ $noteIdx = add $noteIdx 1 }}
     {{ end }}
   {{ end }}
 {{ end }}
@@ -331,12 +372,10 @@
   (dict "num" "6" "name" "E")
 }}
 
-{{/* Standard single-dot inlays */}}
 {{ $singleDots := slice "3" "5" "7" "9" "15" "17" "19" "21" }}
-{{/* Double-dot inlays */}}
 {{ $doubleDots := slice "12" "24" }}
 
-<div class="guitar-diagram">
+<div class="guitar-diagram{{ if $isAnimated }} animated{{ end }}" style="--anim-total-dur: {{ printf "%.2fs" $totalDur }};">
   {{ with $title }}<div class="guitar-title">{{ . }}</div>{{ end }}
   <div class="fretboard-wrapper">
     <div class="fretboard-container">
@@ -357,7 +396,7 @@
                 {{ if and $isMuted (eq $fNum "0") }}
                   <span class="mute-indicator">✕</span>
                 {{ else if $noteData }}
-                  <span class="note{{ with $noteData.tag }} {{ . }}{{ end }}">{{ $noteData.name }}</span>
+                  <span class="note{{ with $noteData.tag }} {{ . }}{{ end }}{{ if $isAnimated }} has-anim{{ end }}"{{ if $isAnimated }} style="--note-anim-delay: {{ $noteData.delay }};"{{ end }}>{{ $noteData.name }}</span>
                 {{ end }}
               </div>
             {{ end }}

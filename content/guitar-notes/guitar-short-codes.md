@@ -169,6 +169,46 @@ Enclose the whole scale pattern inside a multi-string box:
 
 ---
 
+### 6. How to Use Animation in Your Markdown:
+
+Add animate="true" to any shortcode. The notes will pulse and highlight sequentially in the exact order declared inside notes="...":
+
+```javascript
+{{/*< guitar 
+    title="Box 1 Scale: Step-by-Step Playing Animation" 
+    frets="0,7,8,9,10" 
+    animate="true" 
+    box="1:6:7:10:#0ea5e9" 
+    notes="6:7:B, 6:8:C:root, 6:10:D, 5:7:E, 5:8:F, 5:10:G, 4:7:A:start, 4:9:B, 4:10:C:root, 3:7:D, 3:9:E, 3:10:F, 2:8:G, 2:10:A:start, 1:7:B, 1:8:C:root, 1:10:D" 
+>*/}}
+```
+
+{{< guitar 
+    title="Box 1 Scale: Step-by-Step Playing Animation" 
+    frets="0,7,8,9,10" 
+    animate="true" 
+    box="1:6:7:10:#0ea5e9" 
+    notes="6:7:B, 6:8:C:root, 6:10:D, 5:7:E, 5:8:F, 5:10:G, 4:7:A:start, 4:9:B, 4:10:C:root, 3:7:D, 3:9:E, 3:10:F, 2:8:G, 2:10:A:start, 1:7:B, 1:8:C:root, 1:10:D" 
+>}}
+
+Example Aminor Pentatonics and its relative Cmajor
+
+{{< guitar 
+    title="A Minor Pentatonic — Ascending (Low A to High C)" 
+    frets="0,5,6,7,8" 
+    animate="true" 
+    box="1:6:5:8:#0ea5e9" 
+    notes="6:5:A:start, 6:8:C:root, 5:5:D, 5:7:E, 4:5:G, 4:7:A:start, 3:5:C:root, 3:7:D, 2:5:E, 2:8:G, 1:5:A:start, 1:8:C:root" 
+>}}
+
+{{< guitar 
+    title="C Major Pentatonic — Descending (High C to Low C)" 
+    frets="0,5,6,7,8" 
+    animate="true" 
+    box="1:6:5:8:#10b981" 
+    notes="1:8:C:root, 1:5:A:start, 2:8:G, 2:5:E, 3:7:D, 3:5:C:root, 4:7:A:start, 4:5:G, 5:7:E, 5:5:D, 6:8:C:root, 6:5:A:start" 
+>}}
+
 ## ✍️ Best Practices for Blog Authors
 
 * **Order of Strings:** Always specify string numbers `1` (high e) through `6` (low E) correctly.
