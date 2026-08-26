@@ -1,4 +1,4 @@
-{{/* Self-contained Guitar Fretboard Shortcode — Zoom-In & Normal Return Animation */}}
+{{/* Self-contained Guitar Fretboard Shortcode — With Interactive Box Hover/Click Isolation */}}
 {{ $uniqueId := printf "guitar-%d" (now.UnixNano) }}
 {{ $title := .Get "title" }}
 {{ $rawFrets := split (.Get "frets") "," }}
@@ -26,35 +26,42 @@
   font-weight: 600;
 }
 
-/* Interactive Controls Toolbar */
-.anim-toolbar {
+/* Interactive Controls Toolbars */
+.guitar-controls {
   display: flex;
   align-items: center;
-  gap: 0.35rem;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.anim-toolbar, .box-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
   background: rgba(125, 125, 125, 0.1);
   padding: 3px 6px;
   border-radius: 999px;
   user-select: none;
 }
 
-.anim-btn {
+.anim-btn, .box-filter-btn {
   background: transparent;
   border: 1px solid rgba(125, 125, 125, 0.25);
   color: inherit;
   border-radius: 999px;
   padding: 2px 8px;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.15s ease;
   font-family: monospace;
 }
 
-.anim-btn:hover {
+.anim-btn:hover, .box-filter-btn:hover {
   background: rgba(125, 125, 125, 0.2);
 }
 
-.anim-btn.active {
+.anim-btn.active, .box-filter-btn.active {
   background: #38bdf8;
   color: #0f172a;
   border-color: #38bdf8;
@@ -180,17 +187,26 @@
   right: 0;
   bottom: 22px;
   pointer-events: none;
-  z-index: 0;
+  z-index: 3;
 }
 
 .playable-box {
   position: absolute;
-  background-color: var(--box-color-bg, rgba(56, 189, 248, 0.15));
+  background-color: var(--box-color-bg, rgba(56, 189, 248, 0.12));
   border: 2px dashed var(--box-color, #38bdf8);
   border-radius: 8px;
   box-sizing: border-box;
   margin: 3px 2px;
-  pointer-events: none;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.playable-box:hover, .playable-box.active-box {
+  background-color: var(--box-color-active-bg, rgba(56, 189, 248, 0.24)) !important;
+  border: 2.5px solid var(--box-color, #38bdf8) !important;
+  box-shadow: 0 0 14px var(--box-color);
+  z-index: 5;
 }
 
 /* Inlay dots */
@@ -234,7 +250,8 @@
   box-shadow: 0 0 0 2px var(--bg-color, #ffffff);
   flex-shrink: 0;
   transform: scale(1);
-  will-change: transform, filter;
+  will-change: transform, opacity, filter;
+  transition: opacity 0.22s ease, transform 0.22s ease, filter 0.22s ease;
 }
 
 .fret-0 .note {
@@ -257,6 +274,20 @@
   background: #f59e0b;
   color: #0f172a;
   box-shadow: 0 0 0 2px var(--bg-color, #ffffff), 0 0 6px rgba(245, 158, 11, 0.4);
+}
+
+/* Box Hover / Focus State Note Dimming */
+.guitar-diagram.filtering-box .note:not(.in-active-box) {
+  opacity: 0.04 !important;
+  transform: scale(0.85);
+  pointer-events: none;
+}
+
+.guitar-diagram.filtering-box .note.in-active-box {
+  opacity: 1 !important;
+  transform: scale(1.08);
+  box-shadow: 0 0 0 2.5px var(--bg-color, #ffffff), 0 0 10px rgba(56, 189, 248, 0.7);
+  z-index: 4;
 }
 
 /* Floating Pill Start/Stop Indicators */
@@ -319,7 +350,7 @@
   animation: startPulse 2s ease-in-out infinite;
 }
 
-/* Pure Zoom-In and Smooth Return to Normal (Never Scales Below 1.0) */
+/* Zoom-In Keyframe */
 @keyframes notePlayZoomIn {
   0% {
     transform: scale(1);
@@ -343,7 +374,7 @@
   }
 }
 
-.guitar-diagram.animated .note.has-anim {
+.guitar-diagram.animated:not(.filtering-box) .note.has-anim {
   animation-name: notePlayZoomIn;
   animation-duration: calc(var(--anim-base-dur, 6s) / var(--speed-multiplier, 1));
   animation-delay: calc(var(--note-base-delay, 0s) / var(--speed-multiplier, 1));
@@ -412,8 +443,8 @@
 {{ $rawBoxes := split (or (.Get "box") (.Get "boxes") "") "," }}
 {{ $boxes := slice }}
 {{ $colorIdx := 0 }}
-{{ range $rawBoxes }}
-  {{ $bEntry := trim . " \n\r\t" }}
+{{ range $bIdx, $bEntryRaw := $rawBoxes }}
+  {{ $bEntry := trim $bEntryRaw " \n\r\t" }}
   {{ if ne $bEntry "" }}
     {{ $bParts := split $bEntry ":" }}
     {{ if ge (len $bParts) 4 }}
@@ -438,12 +469,12 @@
       {{ $leftPct := mul (div (float $minF) (float $fretCount)) 100.0 }}
       {{ $widthPct := mul (div (add (sub (float $maxF) (float $minF)) 1.0) (float $fretCount)) 100.0 }}
       
-      {{ $boxes = $boxes | append (dict "top" $topPct "height" $heightPct "left" $leftPct "width" $widthPct "color" $c) }}
+      {{ $boxes = $boxes | append (dict "id" (printf "b%d" $bIdx) "label" (printf "Box %d" (add $bIdx 1)) "minS" $minS "maxS" $maxS "minF" $minF "maxF" $maxF "top" $topPct "height" $heightPct "left" $leftPct "width" $widthPct "color" $c) }}
     {{ end }}
   {{ end }}
 {{ end }}
 
-{{/* Base Timing: 0.55s per note with clean resting pause */}}
+{{/* Base Timing */}}
 {{ $noteMap := dict }}
 {{ $rawNotes := split (.Get "notes") "," }}
 {{ $validNotes := slice }}
@@ -472,7 +503,7 @@
     {{ $key := printf "%s-%s" $s $f }}
     {{ $isStartNode := eq $idx 0 }}
     {{ $isStopNode := eq $idx (sub $totalNotes 1) }}
-    {{ $noteMap = merge $noteMap (dict $key (dict "name" $n "tag" $tag "delay" (printf "%.2fs" $delay) "isStart" $isStartNode "isStop" $isStopNode)) }}
+    {{ $noteMap = merge $noteMap (dict $key (dict "name" $n "string" $s "fret" $f "tag" $tag "delay" (printf "%.2fs" $delay) "isStart" $isStartNode "isStop" $isStopNode)) }}
   {{ end }}
 {{ end }}
 
@@ -491,15 +522,27 @@
 <div class="guitar-diagram{{ if $isAnimated }} animated{{ end }}" id="{{ $uniqueId }}" style="--anim-base-dur: {{ printf "%.2fs" $totalDur }}; --speed-multiplier: 1;">
   <div class="guitar-header">
     {{ with $title }}<div class="guitar-title">{{ . }}</div>{{ end }}
-    {{ if $isAnimated }}
-    <div class="anim-toolbar">
-      <button type="button" class="anim-btn" onclick="togglePlay('{{ $uniqueId }}', this)" title="Play / Pause">⏸</button>
-      <button type="button" class="anim-btn" onclick="setSpeed('{{ $uniqueId }}', 0.5, this)">0.5x</button>
-      <button type="button" class="anim-btn active" onclick="setSpeed('{{ $uniqueId }}', 1.0, this)">1x</button>
-      <button type="button" class="anim-btn" onclick="setSpeed('{{ $uniqueId }}', 1.5, this)">1.5x</button>
-      <button type="button" class="anim-btn" onclick="setSpeed('{{ $uniqueId }}', 2.0, this)">2x</button>
+    
+    <div class="guitar-controls">
+      {{ if gt (len $boxes) 1 }}
+      <div class="box-toolbar" title="Filter Box View">
+        <button type="button" class="box-filter-btn active" onclick="clearBoxFilter('{{ $uniqueId }}', this)">All</button>
+        {{ range $boxes }}
+          <button type="button" class="box-filter-btn" style="--box-btn-color: {{ .color }};" onclick="filterBox('{{ $uniqueId }}', '{{ .id }}', {{ .minS }}, {{ .maxS }}, {{ .minF }}, {{ .maxF }}, this)">{{ .label }}</button>
+        {{ end }}
+      </div>
+      {{ end }}
+
+      {{ if $isAnimated }}
+      <div class="anim-toolbar">
+        <button type="button" class="anim-btn" onclick="togglePlay('{{ $uniqueId }}', this)" title="Play / Pause">⏸</button>
+        <button type="button" class="anim-btn" onclick="setSpeed('{{ $uniqueId }}', 0.5, this)">0.5x</button>
+        <button type="button" class="anim-btn active" onclick="setSpeed('{{ $uniqueId }}', 1.0, this)">1x</button>
+        <button type="button" class="anim-btn" onclick="setSpeed('{{ $uniqueId }}', 1.5, this)">1.5x</button>
+        <button type="button" class="anim-btn" onclick="setSpeed('{{ $uniqueId }}', 2.0, this)">2x</button>
+      </div>
+      {{ end }}
     </div>
-    {{ end }}
   </div>
 
   <div class="fretboard-wrapper">
@@ -521,7 +564,10 @@
                 {{ if and $isMuted (eq $fNum "0") }}
                   <span class="mute-indicator">✕</span>
                 {{ else if $noteData }}
-                  <span class="note{{ with $noteData.tag }} {{ . }}{{ end }}{{ if $noteData.isStart }} is-start{{ end }}{{ if $noteData.isStop }} is-stop{{ end }}{{ if $isAnimated }} has-anim{{ end }}"{{ if $isAnimated }} style="--note-base-delay: {{ $noteData.delay }};"{{ end }}>
+                  <span class="note{{ with $noteData.tag }} {{ . }}{{ end }}{{ if $noteData.isStart }} is-start{{ end }}{{ if $noteData.isStop }} is-stop{{ end }}{{ if $isAnimated }} has-anim{{ end }}" 
+                        data-string="{{ $sNum }}" 
+                        data-fret="{{ $fNum }}"
+                        {{ if $isAnimated }} style="--note-base-delay: {{ $noteData.delay }};"{{ end }}>
                     {{ if and $isAnimated $noteData.isStart }}<span class="order-badge">Start</span>{{ end }}
                     {{ if and $isAnimated $noteData.isStop }}<span class="order-badge">Stop</span>{{ end }}
                     {{ $noteData.name }}
@@ -545,19 +591,101 @@
           {{ end }}
         </div>
       </div>
-      {{/* Absolute Layer for Overlapping Boxes */}}
+      {{/* Absolute Layer for Overlapping Playable Boxes with Hover Events */}}
       <div class="boxes-layer">
         {{ range $boxes }}
-          <div class="playable-box" style="top: {{ .top }}%; height: calc({{ .height }}% - 6px); left: {{ .left }}%; width: calc({{ .width }}% - 4px); --box-color: {{ .color }}; --box-color-bg: {{ .color }}22;"></div>
+          <div class="playable-box" 
+               id="{{ $uniqueId }}-{{ .id }}" 
+               data-box-id="{{ .id }}"
+               data-min-s="{{ .minS }}" 
+               data-max-s="{{ .maxS }}" 
+               data-min-f="{{ .minF }}" 
+               data-max-f="{{ .maxF }}"
+               onmouseenter="onBoxHover('{{ $uniqueId }}', {{ .minS }}, {{ .maxS }}, {{ .minF }}, {{ .maxF }}, this)" 
+               onmouseleave="onBoxLeave('{{ $uniqueId }}')" 
+               onclick="onBoxClick('{{ $uniqueId }}', '{{ .id }}', {{ .minS }}, {{ .maxS }}, {{ .minF }}, {{ .maxF }})"
+               style="top: {{ .top }}%; height: calc({{ .height }}% - 6px); left: {{ .left }}%; width: calc({{ .width }}% - 4px); --box-color: {{ .color }}; --box-color-bg: {{ .color }}22; --box-color-active-bg: {{ .color }}44;">
+          </div>
         {{ end }}
       </div>
     </div>
   </div>
 </div>
 
-{{ if $isAnimated }}
 <script>
-if (typeof setSpeed === 'undefined') {
+if (typeof initGuitarFretboardScript === 'undefined') {
+  window.initGuitarFretboardScript = true;
+
+  window.onBoxHover = function(diagramId, minS, maxS, minF, maxF, boxEl) {
+    const el = document.getElementById(diagramId);
+    if (!el || el.dataset.pinnedBox) return;
+    highlightBoxNotes(el, minS, maxS, minF, maxF);
+    boxEl.classList.add('active-box');
+  };
+
+  window.onBoxLeave = function(diagramId) {
+    const el = document.getElementById(diagramId);
+    if (!el || el.dataset.pinnedBox) return;
+    clearHighlightNotes(el);
+  };
+
+  window.onBoxClick = function(diagramId, boxId, minS, maxS, minF, maxF) {
+    const el = document.getElementById(diagramId);
+    if (!el) return;
+    if (el.dataset.pinnedBox === boxId) {
+      clearBoxFilter(diagramId, el.querySelector('.box-filter-btn:first-child'));
+    } else {
+      const btn = Array.from(el.querySelectorAll('.box-filter-btn')).find(b => b.textContent.includes(boxId.replace('b', 'Box ')));
+      filterBox(diagramId, boxId, minS, maxS, minF, maxF, btn);
+    }
+  };
+
+  window.filterBox = function(diagramId, boxId, minS, maxS, minF, maxF, btn) {
+    const el = document.getElementById(diagramId);
+    if (!el) return;
+    el.dataset.pinnedBox = boxId;
+    highlightBoxNotes(el, minS, maxS, minF, maxF);
+
+    el.querySelectorAll('.playable-box').forEach(b => {
+      b.classList.toggle('active-box', b.id === `${diagramId}-${boxId}`);
+    });
+
+    const toolbar = el.querySelector('.box-toolbar');
+    if (toolbar) {
+      toolbar.querySelectorAll('.box-filter-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+    }
+  };
+
+  window.clearBoxFilter = function(diagramId, btn) {
+    const el = document.getElementById(diagramId);
+    if (!el) return;
+    delete el.dataset.pinnedBox;
+    clearHighlightNotes(el);
+
+    const toolbar = el.querySelector('.box-toolbar');
+    if (toolbar) {
+      toolbar.querySelectorAll('.box-filter-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+    }
+  };
+
+  function highlightBoxNotes(el, minS, maxS, minF, maxF) {
+    el.classList.add('filtering-box');
+    el.querySelectorAll('.note').forEach(note => {
+      const s = parseInt(note.dataset.string, 10);
+      const f = parseInt(note.dataset.fret, 10);
+      const isInside = s >= minS && s <= maxS && f >= minF && f <= maxF;
+      note.classList.toggle('in-active-box', isInside);
+    });
+  }
+
+  function clearHighlightNotes(el) {
+    el.classList.remove('filtering-box');
+    el.querySelectorAll('.playable-box').forEach(b => b.classList.remove('active-box'));
+    el.querySelectorAll('.note').forEach(note => note.classList.remove('in-active-box'));
+  }
+
   window.setSpeed = function(diagramId, speed, btn) {
     const el = document.getElementById(diagramId);
     if (!el) return;
@@ -568,6 +696,7 @@ if (typeof setSpeed === 'undefined') {
     });
     btn.classList.add('active');
   };
+
   window.togglePlay = function(diagramId, btn) {
     const el = document.getElementById(diagramId);
     if (!el) return;
@@ -576,4 +705,3 @@ if (typeof setSpeed === 'undefined') {
   };
 }
 </script>
-{{ end }}
