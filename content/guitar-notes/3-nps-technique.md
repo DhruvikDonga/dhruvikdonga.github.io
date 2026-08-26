@@ -1,100 +1,172 @@
 +++
 authors = ["Dhruvik Donga"]
-title = "3 Notes Per String (3NPS) Scale System: Fretboard Symmetry system"
+title = "Mastering the 3 Notes Per String (3NPS) Scale System: All 7 Symmetrical Boxes (Fret 1 to Fret 15) & Indian Sargam"
 date = "2026-08-26"
-tags = ["guitar", "scales", "music-theory", "3nps", "sargam", "guitar-practice", "lead-guitar"]
+tags = ["guitar", "scales", "music-theory", "3nps", "sargam", "guitar-practice", "lead-guitar", "shred"]
 categories = ["Guitar Fundamentals", "Scale Mastery", "Reference Guides"]
-summary = "Unlock lightning-fast alternate picking and diagonal fretboard fluency. Master the 7 symmetrical 3 Notes Per String (3NPS) scale boxes, connect Indian Classical Sargam swaras, and utilize interactive box isolation."
+summary = "Unlock fluid alternate picking, economy runs, and diagonal neck mastery. Explore all 7 symmetrical 3 Notes Per String (3NPS) scale patterns ordered sequentially from the nut (Fret 1) up to the 15th fret for C Major and A Minor, complete with interactive box isolation, start/stop animations, and Indian Classical Sargam mappings."
 +++
 
-Traditional CAGED box shapes change the number of notes per string, which can disrupt smooth alternate-picking mechanics. The **3 Notes Per String (3NPS)** system solves this by forcing **exactly 3 sequential notes onto every single string**. 
-
-This creates a highly symmetrical, geometric layout across the fretboard that is ideal for three-note-per-beat syncopation, sweeping, and high-speed alternate picking.
+Traditional box shapes change the number of notes per string, which can interrupt picking consistency. The **3 Notes Per String (3NPS)** framework eliminates this by placing **exactly 3 sequential notes on every single string**.
 
 ---
 
-## 1. The 3NPS Blueprint & Sargam Mapping
+## 1. The 7 3NPS Positions & Swara Directory (Nut to High Frets)
 
-In a 3NPS system, the scale is broken into **7 distinct positional boxes** (corresponding to the 7 modes of the major scale). Each box spans 3 to 4 frets horizontally and covers all 6 strings vertically.
+Here are the 7 interconnected 3NPS scale boxes ordered sequentially from the low end of the fretboard (Fret 1) up to the 15th fret:
 
 <div class="table-responsive">
 
-| 3NPS Position | Mode Name (C Major Base) | Starting Note (6th String) | Sargam Swara Start | Interval Structure per String |
-|:---:|:---|:---|:---|:---:|
-| **Position 1** | **Ionian (Major)** | C | Sa | Tone – Tone – Semitone |
-| **Position 2** | **Dorian** | D | Re | Tone – Semitone – Tone |
-| **Position 3** | **Phrygian** | E | Ga | Semitone – Tone – Tone |
-| **Position 4** | **Lydian** | F | Ma | Tone – Tone – Tone |
-| **Position 5** | **Mixolydian** | G | Pa | Tone – Tone – Semitone |
-| **Position 6** | **Aeolian (Natural Minor)** | A | Dha (Minor Sa) | Tone – Semitone – Tone |
-| **Position 7** | **Locrian** | B | Ni | Semitone – Tone – Tone |
+| Sequential Order | 3NPS Box / Mode | Primary Fret Span | String 6 Start Note | Indian Swara Start | Finger Pattern (per String) |
+|:---:|:---|:---:|:---:|:---:|:---:|
+| **Box 1** | **F Lydian** | Frets 1 – 6 | **F** (Fret 1) | **Ma** | Tone – Tone (Whole – Whole) |
+| **Box 2** | **G Mixolydian** | Frets 3 – 8 | **G** (Fret 3) | **Pa** | Tone – Tone (Whole – Whole) |
+| **Box 3** | **A Aeolian (Minor Root)** | Frets 5 – 10 | **A** (Fret 5) | **Dha (Minor Sa)** | Tone – Semitone (Whole – Half) |
+| **Box 4** | **B Locrian** | Frets 7 – 12 | **B** (Fret 7) | **Ni** | Semitone – Tone (Half – Whole) |
+| **Box 5** | **C Ionian (Major Root)** | Frets 8 – 13 | **C** (Fret 8) | **Sa** | Tone – Tone (Whole – Whole) |
+| **Box 6** | **D Dorian** | Frets 10 – 15 | **D** (Fret 10) | **Re** | Tone – Semitone (Whole – Half) |
+| **Box 7** | **E Phrygian** | Frets 12 – 17 | **E** (Fret 12) | **Ga** | Semitone – Tone (Half – Whole) |
 
 </div>
 
-> **Why 3NPS Changes Everything:**
-> * **Symmetric Mechanics:** Every string transition uses either an even shift or a consistent 3-note grouping, making it frictionless for economy and alternate picking.
-> * **Diagonal Flow:** Unlike boxed CAGED shapes that stay vertically confined, 3NPS naturally guides your hand diagonally up the neck.
+* **Red (`:root`):** Major Root (**C** / `Sa`)
+* **Gold (`:start`):** Relative Minor Root (**A** / `Dha` / Minor `Sa`)
 
 ---
 
-## 2. The Master 7-Box 3NPS Map: C Major / A Minor
-
-Hover over any box boundary below to isolate that specific 3NPS position, or click it to lock the view.
-
-* **Red (`:root`)** = C (Major Root / Sa)
-* **Gold (`:start`)** = A (Minor Root / Aeolian Sa)
+## 2. All 7 3NPS Scale Boxes (Ordered from Fret 1 to Fret 17)
 
 ---
 
-### Position 1: Ionian Box (C Major Root / 8th Position)
-* **Fret Span:** Frets 7 to 10
-* **Starting Note:** C (String 6, Fret 8)
+### Box 1: F Lydian (Frets 1 to 6)
+* **Starting Note on String 6:** F (Fret 1 / `Ma`)
+* **Root Anchors:** String 5 Fret 3 (**C** / `Sa`), String 3 Fret 5 (**C** / `Sa`), String 6 & 1 Fret 5 (**A** / `Dha`)
 
-{{< guitar title="3NPS Position 1: C Ionian (Major Box)" frets="0,7,8,9,10" box="1:6:7:10:#0ea5e9" notes="6:7:B, 6:8:C:root, 6:10:D, 5:7:E, 5:8:F, 5:10:G, 4:7:A:start, 4:9:B, 4:10:C:root, 3:7:D, 3:9:E, 3:10:F, 2:8:G, 2:10:A:start, 2:12:B, 1:8:C:root, 1:10:D, 1:12:E" >}}
+{{< guitar title="3NPS Box 1: F Lydian (Frets 1 to 6)" frets="0,1,2,3,4,5,6,7" animate="true" box="1:6:1:6:#f97316" notes="6:1:F, 6:3:G, 6:5:A:start, 5:2:B, 5:3:C:root, 5:5:D, 4:2:E, 4:3:F, 4:5:G, 3:2:A:start, 3:4:B, 3:5:C:root, 2:3:D, 2:5:E, 2:6:F, 1:3:G, 1:5:A:start, 1:7:B" >}}
 
----
-
-### Position 2: Dorian Box (D Root / 10th Position)
-* **Fret Span:** Frets 10 to 13
-* **Starting Note:** D (String 6, Fret 10)
-
-{{< guitar title="3NPS Position 2: D Dorian Box" frets="0,9,10,11,12,13" box="1:6:10:13:#10b981" notes="6:10:D, 6:12:E, 6:13:F, 5:10:G, 5:12:A:start, 5:13:B, 4:10:C:root, 4:12:D, 4:14:E, 3:10:F, 3:12:G, 3:14:A:start, 2:12:B, 2:13:C:root, 2:15:D, 1:12:E, 1:13:F, 1:15:G" >}}
-
----
-
-### Position 3: Phrygian Box (E Root / 12th Position)
-* **Fret Span:** Frets 12 to 15
-* **Starting Note:** E (String 6, Fret 12)
-
-{{< guitar title="3NPS Position 3: E Phrygian Box" frets="0,12,13,14,15" box="1:6:12:15:#a855f7" notes="6:12:E, 6:13:F, 6:15:G, 5:12:A:start, 5:14:B, 5:15:C:root, 4:12:D, 4:14:E, 4:15:F, 3:12:G, 3:14:A:start, 3:16:B, 2:13:C:root, 2:15:D, 2:17:E, 1:13:F, 1:15:G, 1:17:A:start" >}}
+* **Sargam Breakdown (Low to High):**
+  * String 6: `Ma (1) → Pa (3) → Dha (5)`
+  * String 5: `Ni (2) → Sa (3) → Re (5)`
+  * String 4: `Ga (2) → Ma (3) → Pa (5)`
+  * String 3: `Dha (2) → Ni (4) → Sa (5)`
+  * String 2: `Re (3) → Ga (5) → Ma (6)`
+  * String 1: `Pa (3) → Dha (5) → Ni (7)`
 
 ---
 
-### Position 6: Aeolian Box (A Minor Root / 5th Position)
-* **Fret Span:** Frets 4 to 8
-* **Starting Note:** A (String 6, Fret 5)
+### Box 2: G Mixolydian (Frets 3 to 8)
+* **Starting Note on String 6:** G (Fret 3 / `Pa`)
+* **Root Anchors:** String 5 Fret 3 (**C** / `Sa`), String 3 Fret 5 (**C** / `Sa`), String 1 Fret 8 (**C** / `Sa`), String 6 & 1 Fret 5 (**A** / `Dha`)
 
-{{< guitar title="3NPS Position 6: A Natural Minor / Aeolian (Home Base)" frets="0,4,5,6,7,8" box="1:6:4:8:#ec4899" notes="6:5:A:start, 6:7:B, 6:8:C:root, 5:5:D, 5:7:E, 5:8:F, 4:5:G, 4:7:A:start, 4:9:B, 3:5:C:root, 3:7:D, 3:9:E, 2:6:F, 2:8:G, 2:10:A:start, 1:5:A:start, 1:7:B, 1:8:C:root" >}}
+{{< guitar title="3NPS Box 2: G Mixolydian (Frets 3 to 8)" frets="0,3,4,5,6,7,8" animate="true" box="1:6:3:8:#ec4899" notes="6:3:G, 6:5:A:start, 6:7:B, 5:3:C:root, 5:5:D, 5:7:E, 4:3:F, 4:5:G, 4:7:A:start, 3:4:B, 3:5:C:root, 3:7:D, 2:5:E, 2:6:F, 2:8:G, 1:5:A:start, 1:7:B, 1:8:C:root" >}}
+
+* **Sargam Breakdown (Low to High):**
+  * String 6: `Pa (3) → Dha (5) → Ni (7)`
+  * String 5: `Sa (3) → Re (5) → Ga (7)`
+  * String 4: `Ma (3) → Pa (5) → Dha (7)`
+  * String 3: `Ni (4) → Sa (5) → Re (7)`
+  * String 2: `Ga (5) → Ma (6) → Pa (8)`
+  * String 1: `Dha (5) → Ni (7) → Sa (8)`
 
 ---
 
-## 3. Master 3NPS Interlocking Reference Table
+### Box 3: A Aeolian (Natural Minor Home Base / Frets 5 to 10)
+* **Starting Note on String 6:** A (Fret 5 / `Dha` / Minor `Sa`)
+* **Root Anchors:** String 6 & 1 Fret 5 (**A** / `Dha`), String 4 Fret 7 (**A** / `Dha`), String 6 & 1 Fret 8 (**C** / `Sa`), String 3 Fret 5 (**C** / `Sa`)
+
+{{< guitar title="3NPS Box 3: A Aeolian (Natural Minor Home Base / Frets 5 to 10)" frets="0,5,6,7,8,9,10" animate="true" box="1:6:5:10:#0ea5e9" notes="6:5:A:start, 6:7:B, 6:8:C:root, 5:5:D, 5:7:E, 5:8:F, 4:5:G, 4:7:A:start, 4:9:B, 3:5:C:root, 3:7:D, 3:9:E, 2:6:F, 2:8:G, 2:10:A:start, 1:5:A:start, 1:7:B, 1:8:C:root" >}}
+
+* **Sargam Breakdown (Low to High):**
+  * String 6: `Dha (5) → Ni (7) → Sa (8)`
+  * String 5: `Re (5) → Ga (7) → Ma (8)`
+  * String 4: `Pa (5) → Dha (7) → Ni (9)`
+  * String 3: `Sa (5) → Re (7) → Ga (9)`
+  * String 2: `Ma (6) → Pa (8) → Dha (10)`
+  * String 1: `Dha (5) → Ni (7) → Sa (8)`
+
+---
+
+### Box 4: B Locrian (Frets 7 to 12)
+* **Starting Note on String 6:** B (Fret 7 / `Ni`)
+* **Root Anchors:** String 6 & 1 Fret 8 (**C** / `Sa`), String 4 Fret 10 (**C** / `Sa`), String 4 Fret 7 (**A** / `Dha`), String 2 Fret 10 (**A** / `Dha`)
+
+{{< guitar title="3NPS Box 4: B Locrian (Frets 7 to 12)" frets="0,7,8,9,10,11,12" animate="true" box="1:6:7:12:#10b981" notes="6:7:B, 6:8:C:root, 6:10:D, 5:7:E, 5:8:F, 5:10:G, 4:7:A:start, 4:9:B, 4:10:C:root, 3:7:D, 3:9:E, 3:10:F, 2:8:G, 2:10:A:start, 2:12:B, 1:7:B, 1:8:C:root, 1:10:D" >}}
+
+* **Sargam Breakdown (Low to High):**
+  * String 6: `Ni (7) → Sa (8) → Re (10)`
+  * String 5: `Ga (7) → Ma (8) → Pa (10)`
+  * String 4: `Dha (7) → Ni (9) → Sa (10)`
+  * String 3: `Re (7) → Ga (9) → Ma (10)`
+  * String 2: `Pa (8) → Dha (10) → Ni (12)`
+  * String 1: `Ni (7) → Sa (8) → Re (10)`
+
+---
+
+### Box 5: C Ionian (Major Root Base / Frets 8 to 13)
+* **Starting Note on String 6:** C (Fret 8 / `Sa`)
+* **Root Anchors:** String 6 Fret 8 (**C** / `Sa`), String 4 Fret 10 (**C** / `Sa`), String 2 Fret 13 (**C** / `Sa`), String 5 Fret 12 (**A** / `Dha`), String 2 Fret 10 (**A** / `Dha`)
+
+{{< guitar title="3NPS Box 5: C Ionian (Major Root / Sa / Frets 8 to 13)" frets="0,8,9,10,11,12,13" animate="true" box="1:6:8:13:#a855f7" notes="6:8:C:root, 6:10:D, 6:12:E, 5:8:F, 5:10:G, 5:12:A:start, 4:9:B, 4:10:C:root, 4:12:D, 3:9:E, 3:10:F, 3:12:G, 2:10:A:start, 2:12:B, 2:13:C:root, 1:10:D, 1:12:E, 1:13:F" >}}
+
+* **Sargam Breakdown (Low to High):**
+  * String 6: `Sa (8) → Re (10) → Ga (12)`
+  * String 5: `Ma (8) → Pa (10) → Dha (12)`
+  * String 4: `Ni (9) → Sa (10) → Re (12)`
+  * String 3: `Ga (9) → Ma (10) → Pa (12)`
+  * String 2: `Dha (10) → Ni (12) → Sa (13)`
+  * String 1: `Re (10) → Ga (12) → Ma (13)`
+
+---
+
+### Box 6: D Dorian (Frets 10 to 15)
+* **Starting Note on String 6:** D (Fret 10 / `Re`)
+* **Root Anchors:** String 4 Fret 10 (**C** / `Sa`), String 2 Fret 13 (**C** / `Sa`), String 5 Fret 12 (**A** / `Dha`), String 3 Fret 14 (**A** / `Dha`)
+
+{{< guitar title="3NPS Box 6: D Dorian (Frets 10 to 15)" frets="0,10,11,12,13,14,15" animate="true" box="1:6:10:15:#f97316" notes="6:10:D, 6:12:E, 6:13:F, 5:10:G, 5:12:A:start, 5:14:B, 4:10:C:root, 4:12:D, 4:14:E, 3:10:F, 3:12:G, 3:14:A:start, 2:12:B, 2:13:C:root, 2:15:D, 1:12:E, 1:13:F, 1:15:G" >}}
+
+* **Sargam Breakdown (Low to High):**
+  * String 6: `Re (10) → Ga (12) → Ma (13)`
+  * String 5: `Pa (10) → Dha (12) → Ni (14)`
+  * String 4: `Sa (10) → Re (12) → Ga (14)`
+  * String 3: `Ma (10) → Pa (12) → Dha (14)`
+  * String 2: `Ni (12) → Sa (13) → Re (15)`
+  * String 1: `Ga (12) → Ma (13) → Pa (15)`
+
+---
+
+### Box 7: E Phrygian (Frets 12 to 17)
+* **Starting Note on String 6:** E (Fret 12 / `Ga`)
+* **Root Anchors:** String 5 Fret 15 (**C** / `Sa`), String 2 Fret 13 (**C** / `Sa`), String 5 Fret 12 (**A** / `Dha`), String 3 Fret 14 (**A** / `Dha`), String 1 Fret 17 (**A** / `Dha`)
+
+{{< guitar title="3NPS Box 7: E Phrygian (Frets 12 to 17)" frets="0,12,13,14,15,16,17" animate="true" box="1:6:12:17:#ec4899" notes="6:12:E, 6:13:F, 6:15:G, 5:12:A:start, 5:14:B, 5:15:C:root, 4:12:D, 4:14:E, 4:15:F, 3:12:G, 3:14:A:start, 3:16:B, 2:13:C:root, 2:15:D, 2:17:E, 1:13:F, 1:15:G, 1:17:A:start" >}}
+
+* **Sargam Breakdown (Low to High):**
+  * String 6: `Ga (12) → Ma (13) → Pa (15)`
+  * String 5: `Dha (12) → Ni (14) → Sa (15)`
+  * String 4: `Re (12) → Ga (14) → Ma (15)`
+  * String 3: `Pa (12) → Dha (14) → Ni (16)`
+  * String 2: `Sa (13) → Re (15) → Ga (17)`
+  * String 1: `Ma (13) → Pa (15) → Dha (17)`
+
+---
+
+## 3. Master 3NPS Interlocking Fret Map (Low to High Summary)
 
 <div class="table-responsive">
 
-| 3NPS Box Position | Mode / Key Function | Root Note on String 6 | Relative Minor Root (A) Position | Fret Span (C Major / A Minor) |
-|:---:|:---|:---:|:---:|:---:|
-| **Position 1** | Ionian (Major / Sa) | Fret 8 (C) | Fret 5 (A) | Frets 7 – 12 |
-| **Position 2** | Dorian | Fret 10 (D) | Fret 7 (B) | Frets 10 – 15 |
-| **Position 3** | Phrygian | Fret 12 (E) | Fret 9 (C#) | Frets 12 – 17 |
-| **Position 4** | Lydian | Fret 13 (F) | Fret 10 (D) | Frets 13 – 18 |
-| **Position 5** | Mixolydian | Fret 15 (G) | Fret 12 (E) | Frets 15 – 20 |
-| **Position 6** | Aeolian (Natural Minor) | Fret 5 (A) | Fret 2 (F#) | Frets 4 – 10 |
-| **Position 7** | Locrian | Fret 7 (B) | Fret 4 (G#) | Frets 6 – 12 |
+| Box # | Primary Fret Span | String 6 Notes (Low to High) | Major Root (`Sa`) Coordinates | Minor Root (`Dha`) Coordinates |
+|:---:|:---:|:---:|:---:|:---:|
+| **Box 1** | **Frets 1 – 6** | F (1) – G (3) – A (5) | String 5 Fret 3, String 3 Fret 5 | String 6 & 1 Fret 5, String 3 Fret 2 |
+| **Box 2** | **Frets 3 – 8** | G (3) – A (5) – B (7) | String 5 Fret 3, String 3 Fret 5, String 1 Fret 8 | String 6 & 1 Fret 5, String 4 Fret 7 |
+| **Box 3** | **Frets 5 – 10** | A (5) – B (7) – C (8) | String 6 & 1 Fret 8, String 3 Fret 5 | String 6 & 1 Fret 5, String 4 Fret 7, String 2 Fret 10 |
+| **Box 4** | **Frets 7 – 12** | B (7) – C (8) – D (10) | String 6 & 1 Fret 8, String 4 Fret 10 | String 4 Fret 7, String 2 Fret 10 |
+| **Box 5** | **Frets 8 – 13** | C (8) – D (10) – E (12) | String 6 Fret 8, String 4 Fret 10, String 2 Fret 13 | String 5 Fret 12, String 2 Fret 10 |
+| **Box 6** | **Frets 10 – 15** | D (10) – E (12) – F (13) | String 4 Fret 10, String 2 Fret 13 | String 5 Fret 12, String 3 Fret 14 |
+| **Box 7** | **Frets 12 – 17** | E (12) – F (13) – G (15) | String 5 Fret 15, String 2 Fret 13 | String 5 Fret 12, String 3 Fret 14, String 1 Fret 17 |
 
 </div>
 
-### Practice Routine for 3NPS
-1. **Isolate a Box:** Use the interactive box buttons above to hover over a single position so extraneous notes disappear.
-2. **Strict Alternate Picking:** Ensure every string shift maintains strict down-up-down-up picking without slurring.
-3. **Connect Diagonally:** Practice sliding up one fret when transitioning from string to string to chain Position 6 directly into Position 1.
+### Speed & Accuracy Practice Rules
+1. **Alternate Picking Consistency:** Maintain a strict `Down - Up - Down | Up - Down - Up` sequence across all string transitions.
+2. **Sing the Sargam:** Vocally intone each Swara as you ascend to build absolute interval recognition across the entire neck.
+3. **Chain Across the Neck:** Practice starting at **Box 1 (Fret 1)** and shifting position on each higher string until you land at the top of **Box 7 (Fret 17)** in one continuous diagonal run.
