@@ -1,4 +1,10 @@
-{{/* Self-contained Guitar Fretboard Shortcode — With Sequential Pulse Animation Support */}}
+{{/* Self-contained Guitar Fretboard Shortcode — With Interactive Speed Toggle & Play/Pause */}}
+{{ $uniqueId := printf "guitar-%d" (now.UnixNano) }}
+{{ $title := .Get "title" }}
+{{ $rawFrets := split (.Get "frets") "," }}
+{{ $animateParam := or (.Get "animate") (.Get "animation") false }}
+{{ $isAnimated := and (ne $animateParam false) (ne $animateParam "false") (ne $animateParam "") }}
+
 <style>
 .guitar-diagram {
   margin: 1.5rem 0;
@@ -6,10 +12,52 @@
   max-width: 100%;
 }
 
+.guitar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
 .guitar-title {
   font-size: 0.95rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
+}
+
+/* Interactive Controls Toolbar */
+.anim-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(125, 125, 125, 0.1);
+  padding: 3px 6px;
+  border-radius: 6px;
+  user-select: none;
+}
+
+.anim-btn {
+  background: transparent;
+  border: 1px solid rgba(125, 125, 125, 0.25);
+  color: inherit;
+  border-radius: 4px;
+  padding: 2px 7px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: monospace;
+}
+
+.anim-btn:hover {
+  background: rgba(125, 125, 125, 0.2);
+}
+
+.anim-btn.active {
+  background: #38bdf8;
+  color: #0f172a;
+  border-color: #38bdf8;
 }
 
 /* Scroll container */
@@ -210,15 +258,15 @@
   box-shadow: 0 0 0 2px var(--bg-color, #ffffff), 0 0 6px rgba(245, 158, 11, 0.4);
 }
 
-/* Sequential Note Animations */
+/* Animation Pulse Keyframe */
 @keyframes notePlayPulse {
   0%, 100% {
     transform: scale(1);
     filter: brightness(1);
   }
   15% {
-    transform: scale(1.35);
-    filter: brightness(1.5) drop-shadow(0 0 8px #f59e0b);
+    transform: scale(1.38);
+    filter: brightness(1.5) drop-shadow(0 0 9px #f59e0b);
     z-index: 10;
   }
   35% {
@@ -229,10 +277,14 @@
 
 .guitar-diagram.animated .note.has-anim {
   animation-name: notePlayPulse;
-  animation-duration: var(--anim-total-dur, 4s);
-  animation-delay: var(--note-anim-delay, 0s);
+  animation-duration: calc(var(--anim-base-dur, 6s) / var(--speed-multiplier, 1));
+  animation-delay: calc(var(--note-base-delay, 0s) / var(--speed-multiplier, 1));
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
+}
+
+.guitar-diagram.animated.paused .note.has-anim {
+  animation-play-state: paused !important;
 }
 
 /* Mobile optimizations */
@@ -257,11 +309,6 @@
   }
 }
 </style>
-
-{{ $title := .Get "title" }}
-{{ $rawFrets := split (.Get "frets") "," }}
-{{ $animateParam := or (.Get "animate") (.Get "animation") false }}
-{{ $isAnimated := and (ne $animateParam false) (ne $animateParam "false") (ne $animateParam "") }}
 
 {{/* Determine the highest fret provided */}}
 {{ $maxFret := 0 }}
@@ -328,7 +375,7 @@
   {{ end }}
 {{ end }}
 
-{{/* Parse Notes and Order Index for Sequential Animation */}}
+{{/* Base Timing: 0.65s per note for clear practice paced view */}}
 {{ $noteMap := dict }}
 {{ $rawNotes := split (.Get "notes") "," }}
 {{ $totalNotes := 0 }}
@@ -338,9 +385,8 @@
   {{ end }}
 {{ end }}
 
-{{/* Step duration per note: 0.45s; Loop includes 1s pause */}}
-{{ $stepDur := 0.45 }}
-{{ $totalDur := add (mul (float $totalNotes) $stepDur) 1.0 }}
+{{ $baseStepDur := 0.65 }}
+{{ $totalDur := add (mul (float $totalNotes) $baseStepDur) 1.2 }}
 
 {{ $noteIdx := 0 }}
 {{ range $rawNotes }}
@@ -355,7 +401,7 @@
       {{ if ge (len $parts) 4 }}
         {{ $tag = lower (trim (index $parts 3) " ") }}
       {{ end }}
-      {{ $delay := mul (float $noteIdx) $stepDur }}
+      {{ $delay := mul (float $noteIdx) $baseStepDur }}
       {{ $key := printf "%s-%s" $s $f }}
       {{ $noteMap = merge $noteMap (dict $key (dict "name" $n "tag" $tag "delay" (printf "%.2fs" $delay))) }}
       {{ $noteIdx = add $noteIdx 1 }}
@@ -375,8 +421,20 @@
 {{ $singleDots := slice "3" "5" "7" "9" "15" "17" "19" "21" }}
 {{ $doubleDots := slice "12" "24" }}
 
-<div class="guitar-diagram{{ if $isAnimated }} animated{{ end }}" style="--anim-total-dur: {{ printf "%.2fs" $totalDur }};">
-  {{ with $title }}<div class="guitar-title">{{ . }}</div>{{ end }}
+<div class="guitar-diagram{{ if $isAnimated }} animated{{ end }}" id="{{ $uniqueId }}" style="--anim-base-dur: {{ printf "%.2fs" $totalDur }}; --speed-multiplier: 1;">
+  <div class="guitar-header">
+    {{ with $title }}<div class="guitar-title">{{ . }}</div>{{ end }}
+    {{ if $isAnimated }}
+    <div class="anim-toolbar">
+      <button type="button" class="anim-btn" onclick="togglePlay('{{ $uniqueId }}', this)" title="Play / Pause">⏸</button>
+      <button type="button" class="anim-btn" onclick="setSpeed('{{ $uniqueId }}', 0.5, this)">0.5x</button>
+      <button type="button" class="anim-btn active" onclick="setSpeed('{{ $uniqueId }}', 1.0, this)">1x</button>
+      <button type="button" class="anim-btn" onclick="setSpeed('{{ $uniqueId }}', 1.5, this)">1.5x</button>
+      <button type="button" class="anim-btn" onclick="setSpeed('{{ $uniqueId }}', 2.0, this)">2x</button>
+    </div>
+    {{ end }}
+  </div>
+
   <div class="fretboard-wrapper">
     <div class="fretboard-container">
       <div class="fretboard" style="--fret-count: {{ $fretCount }};">
@@ -396,7 +454,7 @@
                 {{ if and $isMuted (eq $fNum "0") }}
                   <span class="mute-indicator">✕</span>
                 {{ else if $noteData }}
-                  <span class="note{{ with $noteData.tag }} {{ . }}{{ end }}{{ if $isAnimated }} has-anim{{ end }}"{{ if $isAnimated }} style="--note-anim-delay: {{ $noteData.delay }};"{{ end }}>{{ $noteData.name }}</span>
+                  <span class="note{{ with $noteData.tag }} {{ . }}{{ end }}{{ if $isAnimated }} has-anim{{ end }}"{{ if $isAnimated }} style="--note-base-delay: {{ $noteData.delay }};"{{ end }}>{{ $noteData.name }}</span>
                 {{ end }}
               </div>
             {{ end }}
@@ -425,3 +483,26 @@
     </div>
   </div>
 </div>
+
+{{ if $isAnimated }}
+<script>
+if (typeof setSpeed === 'undefined') {
+  window.setSpeed = function(diagramId, speed, btn) {
+    const el = document.getElementById(diagramId);
+    if (!el) return;
+    el.style.setProperty('--speed-multiplier', speed);
+    const parent = btn.closest('.anim-toolbar');
+    parent.querySelectorAll('.anim-btn').forEach(b => {
+      if (b !== parent.firstElementChild) b.classList.remove('active');
+    });
+    btn.classList.add('active');
+  };
+  window.togglePlay = function(diagramId, btn) {
+    const el = document.getElementById(diagramId);
+    if (!el) return;
+    el.classList.toggle('paused');
+    btn.textContent = el.classList.contains('paused') ? '▶' : '⏸';
+  };
+}
+</script>
+{{ end }}

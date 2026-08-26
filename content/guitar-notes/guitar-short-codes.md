@@ -191,7 +191,7 @@ Add animate="true" to any shortcode. The notes will pulse and highlight sequenti
     notes="6:7:B, 6:8:C:root, 6:10:D, 5:7:E, 5:8:F, 5:10:G, 4:7:A:start, 4:9:B, 4:10:C:root, 3:7:D, 3:9:E, 3:10:F, 2:8:G, 2:10:A:start, 1:7:B, 1:8:C:root, 1:10:D" 
 >}}
 
-Example Aminor Pentatonics and its relative Cmajor
+Example Aminor Pentatonics and its relative Cmajor :- 
 
 {{< guitar 
     title="A Minor Pentatonic — Ascending (Low A to High C)" 
