@@ -1,4 +1,4 @@
-{{/* Self-contained Guitar Fretboard Shortcode — With Modern Pill Start/Stop Badges */}}
+{{/* Self-contained Guitar Fretboard Shortcode — Zoom-In & Normal Return Animation */}}
 {{ $uniqueId := printf "guitar-%d" (now.UnixNano) }}
 {{ $title := .Get "title" }}
 {{ $rawFrets := split (.Get "frets") "," }}
@@ -233,6 +233,8 @@
   z-index: 2;
   box-shadow: 0 0 0 2px var(--bg-color, #ffffff);
   flex-shrink: 0;
+  transform: scale(1);
+  will-change: transform, filter;
 }
 
 .fret-0 .note {
@@ -257,7 +259,7 @@
   box-shadow: 0 0 0 2px var(--bg-color, #ffffff), 0 0 6px rgba(245, 158, 11, 0.4);
 }
 
-/* --- Redesigned Floating Pill Start/Stop Indicators --- */
+/* Floating Pill Start/Stop Indicators */
 .note .order-badge {
   position: absolute;
   top: -16px;
@@ -276,7 +278,6 @@
   line-height: 1;
 }
 
-/* Subtle downward pointing indicator triangle */
 .note .order-badge::after {
   content: "";
   position: absolute;
@@ -305,13 +306,12 @@
   border-color: #e11d48 transparent transparent transparent;
 }
 
-/* Pulse animation on the start badge */
 @keyframes startPulse {
   0%, 100% {
     transform: scale(1);
   }
   50% {
-    transform: scale(1.1);
+    transform: scale(1.08);
   }
 }
 
@@ -319,29 +319,36 @@
   animation: startPulse 2s ease-in-out infinite;
 }
 
-/* Note playback pulse animation */
-@keyframes notePlayStep {
-  0%, 100% {
+/* Pure Zoom-In and Smooth Return to Normal (Never Scales Below 1.0) */
+@keyframes notePlayZoomIn {
+  0% {
     transform: scale(1);
     filter: brightness(1);
+    z-index: 2;
   }
-  15% {
+  5% {
     transform: scale(1.38);
-    filter: brightness(1.6) drop-shadow(0 0 10px #38bdf8);
+    filter: brightness(1.6) drop-shadow(0 0 8px #38bdf8);
     z-index: 15;
   }
-  35% {
+  12% {
     transform: scale(1);
     filter: brightness(1);
+    z-index: 2;
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+    z-index: 2;
   }
 }
 
 .guitar-diagram.animated .note.has-anim {
-  animation-name: notePlayStep;
+  animation-name: notePlayZoomIn;
   animation-duration: calc(var(--anim-base-dur, 6s) / var(--speed-multiplier, 1));
   animation-delay: calc(var(--note-base-delay, 0s) / var(--speed-multiplier, 1));
   animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
+  animation-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .guitar-diagram.animated.paused .note.has-anim {
@@ -436,7 +443,7 @@
   {{ end }}
 {{ end }}
 
-{{/* Base Timing: 0.65s per note for paced practice */}}
+{{/* Base Timing: 0.55s per note with clean resting pause */}}
 {{ $noteMap := dict }}
 {{ $rawNotes := split (.Get "notes") "," }}
 {{ $validNotes := slice }}
@@ -448,8 +455,8 @@
 {{ end }}
 {{ $totalNotes := len $validNotes }}
 
-{{ $baseStepDur := 0.65 }}
-{{ $totalDur := add (mul (float $totalNotes) $baseStepDur) 1.2 }}
+{{ $baseStepDur := 0.55 }}
+{{ $totalDur := add (mul (float $totalNotes) $baseStepDur) 1.5 }}
 
 {{ range $idx, $entry := $validNotes }}
   {{ $parts := split $entry ":" }}
