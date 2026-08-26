@@ -1,4 +1,4 @@
-{{/* Self-contained Guitar Fretboard Shortcode — With Interactive Speed Toggle & Play/Pause */}}
+{{/* Self-contained Guitar Fretboard Shortcode — With Start/Stop Indicators & Speed Controls */}}
 {{ $uniqueId := printf "guitar-%d" (now.UnixNano) }}
 {{ $title := .Get "title" }}
 {{ $rawFrets := split (.Get "frets") "," }}
@@ -258,16 +258,40 @@
   box-shadow: 0 0 0 2px var(--bg-color, #ffffff), 0 0 6px rgba(245, 158, 11, 0.4);
 }
 
-/* Animation Pulse Keyframe */
-@keyframes notePlayPulse {
+/* Start / Stop Tooltip Pills */
+.note .order-badge {
+  position: absolute;
+  top: -12px;
+  font-size: 0.55rem;
+  font-weight: 800;
+  padding: 1px 3px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.note.is-start .order-badge {
+  background: #22c55e;
+  color: #ffffff;
+}
+
+.note.is-stop .order-badge {
+  background: #ef4444;
+  color: #ffffff;
+}
+
+/* Animation Pulse Keyframes */
+@keyframes notePlayStep {
   0%, 100% {
     transform: scale(1);
     filter: brightness(1);
   }
   15% {
-    transform: scale(1.38);
-    filter: brightness(1.5) drop-shadow(0 0 9px #f59e0b);
-    z-index: 10;
+    transform: scale(1.4);
+    filter: brightness(1.6) drop-shadow(0 0 10px #38bdf8);
+    z-index: 15;
   }
   35% {
     transform: scale(1);
@@ -275,8 +299,17 @@
   }
 }
 
+@keyframes targetPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 2px var(--bg-color, #ffffff);
+  }
+  50% {
+    box-shadow: 0 0 0 4px #22c55e, 0 0 12px rgba(34, 197, 94, 0.8);
+  }
+}
+
 .guitar-diagram.animated .note.has-anim {
-  animation-name: notePlayPulse;
+  animation-name: notePlayStep;
   animation-duration: calc(var(--anim-base-dur, 6s) / var(--speed-multiplier, 1));
   animation-delay: calc(var(--note-base-delay, 0s) / var(--speed-multiplier, 1));
   animation-iteration-count: infinite;
@@ -375,37 +408,36 @@
   {{ end }}
 {{ end }}
 
-{{/* Base Timing: 0.65s per note for clear practice paced view */}}
+{{/* Base Timing: 0.65s per note for paced practice */}}
 {{ $noteMap := dict }}
 {{ $rawNotes := split (.Get "notes") "," }}
-{{ $totalNotes := 0 }}
+{{ $validNotes := slice }}
 {{ range $rawNotes }}
-  {{ if ne (trim . " \n\r\t") "" }}
-    {{ $totalNotes = add $totalNotes 1 }}
+  {{ $e := trim . " \n\r\t" }}
+  {{ if ne $e "" }}
+    {{ $validNotes = $validNotes | append $e }}
   {{ end }}
 {{ end }}
+{{ $totalNotes := len $validNotes }}
 
 {{ $baseStepDur := 0.65 }}
 {{ $totalDur := add (mul (float $totalNotes) $baseStepDur) 1.2 }}
 
-{{ $noteIdx := 0 }}
-{{ range $rawNotes }}
-  {{ $entry := trim . " \n\r\t" }}
-  {{ if ne $entry "" }}
-    {{ $parts := split $entry ":" }}
-    {{ if ge (len $parts) 3 }}
-      {{ $s := trim (index $parts 0) " " }}
-      {{ $f := trim (index $parts 1) " " }}
-      {{ $n := trim (index $parts 2) " " }}
-      {{ $tag := "" }}
-      {{ if ge (len $parts) 4 }}
-        {{ $tag = lower (trim (index $parts 3) " ") }}
-      {{ end }}
-      {{ $delay := mul (float $noteIdx) $baseStepDur }}
-      {{ $key := printf "%s-%s" $s $f }}
-      {{ $noteMap = merge $noteMap (dict $key (dict "name" $n "tag" $tag "delay" (printf "%.2fs" $delay))) }}
-      {{ $noteIdx = add $noteIdx 1 }}
+{{ range $idx, $entry := $validNotes }}
+  {{ $parts := split $entry ":" }}
+  {{ if ge (len $parts) 3 }}
+    {{ $s := trim (index $parts 0) " " }}
+    {{ $f := trim (index $parts 1) " " }}
+    {{ $n := trim (index $parts 2) " " }}
+    {{ $tag := "" }}
+    {{ if ge (len $parts) 4 }}
+      {{ $tag = lower (trim (index $parts 3) " ") }}
     {{ end }}
+    {{ $delay := mul (float $idx) $baseStepDur }}
+    {{ $key := printf "%s-%s" $s $f }}
+    {{ $isStartNode := eq $idx 0 }}
+    {{ $isStopNode := eq $idx (sub $totalNotes 1) }}
+    {{ $noteMap = merge $noteMap (dict $key (dict "name" $n "tag" $tag "delay" (printf "%.2fs" $delay) "isStart" $isStartNode "isStop" $isStopNode)) }}
   {{ end }}
 {{ end }}
 
@@ -454,7 +486,11 @@
                 {{ if and $isMuted (eq $fNum "0") }}
                   <span class="mute-indicator">✕</span>
                 {{ else if $noteData }}
-                  <span class="note{{ with $noteData.tag }} {{ . }}{{ end }}{{ if $isAnimated }} has-anim{{ end }}"{{ if $isAnimated }} style="--note-base-delay: {{ $noteData.delay }};"{{ end }}>{{ $noteData.name }}</span>
+                  <span class="note{{ with $noteData.tag }} {{ . }}{{ end }}{{ if $noteData.isStart }} is-start{{ end }}{{ if $noteData.isStop }} is-stop{{ end }}{{ if $isAnimated }} has-anim{{ end }}"{{ if $isAnimated }} style="--note-base-delay: {{ $noteData.delay }};"{{ end }}>
+                    {{ if and $isAnimated $noteData.isStart }}<span class="order-badge">Start</span>{{ end }}
+                    {{ if and $isAnimated $noteData.isStop }}<span class="order-badge">Stop</span>{{ end }}
+                    {{ $noteData.name }}
+                  </span>
                 {{ end }}
               </div>
             {{ end }}

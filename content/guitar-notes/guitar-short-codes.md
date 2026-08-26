@@ -169,45 +169,59 @@ Enclose the whole scale pattern inside a multi-string box:
 
 ---
 
-### 6. How to Use Animation in Your Markdown:
+### 6. How to Use Interactive Scale Animation in Your Markdown
 
-Add animate="true" to any shortcode. The notes will pulse and highlight sequentially in the exact order declared inside notes="...":
+Add `animate="true"` to any shortcode. The shortcode automatically:
+* Attaches **Start** and **Stop** badges to the first and last notes in your sequence.
+* Adds an interactive toolbar to adjust practice speed (`0.5x`, `1x`, `1.5x`, `2x`) or **Pause/Play** (`⏸` / `▶`).
+* Pulses and highlights each note sequentially in the exact order declared inside `notes="..."`.
 
-```javascript
+#### Syntax Example:
+
+```html
 {{/*< guitar 
-    title="Box 1 Scale: Step-by-Step Playing Animation" 
+    title="C Major (Box 1 / E-Shape) — Step-by-Step Run" 
     frets="0,7,8,9,10" 
     animate="true" 
     box="1:6:7:10:#0ea5e9" 
-    notes="6:7:B, 6:8:C:root, 6:10:D, 5:7:E, 5:8:F, 5:10:G, 4:7:A:start, 4:9:B, 4:10:C:root, 3:7:D, 3:9:E, 3:10:F, 2:8:G, 2:10:A:start, 1:7:B, 1:8:C:root, 1:10:D" 
+    notes="6:8:C:root, 6:10:D, 5:7:E, 5:8:F, 5:10:G, 4:7:A:start, 4:9:B, 4:10:C:root, 3:7:D, 3:9:E, 3:10:F, 2:8:G, 2:10:A:start, 1:7:B, 1:8:C:root" 
 >*/}}
 ```
 
-{{< guitar 
-    title="Box 1 Scale: Step-by-Step Playing Animation" 
-    frets="0,7,8,9,10" 
-    animate="true" 
-    box="1:6:7:10:#0ea5e9" 
-    notes="6:7:B, 6:8:C:root, 6:10:D, 5:7:E, 5:8:F, 5:10:G, 4:7:A:start, 4:9:B, 4:10:C:root, 3:7:D, 3:9:E, 3:10:F, 2:8:G, 2:10:A:start, 1:7:B, 1:8:C:root, 1:10:D" 
->}}
+{{< guitar
+title="C Major (Box 1 / E-Shape) — Step-by-Step Run"
+frets="0,7,8,9,10"
+animate="true"
+box="1:6:7:10:#0ea5e9"
+notes="6:8:C:root, 6:10:D, 5:7:E, 5:8:F, 5:10:G, 4:7:A:start, 4:9:B, 4:10:C:root, 3:7:D, 3:9:E, 3:10:F, 2:8:G, 2:10:A:start, 1:7:B, 1:8:C:root"
 
-Example Aminor Pentatonics and its relative Cmajor :- 
+}}
 
-{{< guitar 
-    title="A Minor Pentatonic — Ascending (Low A to High C)" 
-    frets="0,5,6,7,8" 
-    animate="true" 
-    box="1:6:5:8:#0ea5e9" 
-    notes="6:5:A:start, 6:8:C:root, 5:5:D, 5:7:E, 4:5:G, 4:7:A:start, 3:5:C:root, 3:7:D, 2:5:E, 2:8:G, 1:5:A:start, 1:8:C:root" 
->}}
+### Pentatonic Practical Application: A Minor vs. C Major
 
-{{< guitar 
-    title="C Major Pentatonic — Descending (High C to Low C)" 
-    frets="0,5,6,7,8" 
-    animate="true" 
-    box="1:6:5:8:#10b981" 
-    notes="1:8:C:root, 1:5:A:start, 2:8:G, 2:5:E, 3:7:D, 3:5:C:root, 4:7:A:start, 4:5:G, 5:7:E, 5:5:D, 6:8:C:root, 6:5:A:start" 
->}}
+Because A Minor Pentatonic and C Major Pentatonic share the exact same 5 notes (A – C – D – E – G), the playing path determines the tonal resolution:
+
+A Minor Pentatonic (Ascending): Starts at low root A (String 6, Fret 5) and climbs to high root A (String 1, Fret 5), resolving on the natural minor center.
+
+C Major Pentatonic (Descending): Cascades backward from high root C (String 1, Fret 8) down to low root C (String 6, Fret 8), resolving on the bright major center.
+
+{{< guitar
+title="A Minor Pentatonic (Box 1) — Ascending (Low A to High A)"
+frets="0,5,6,7,8"
+animate="true"
+box="1:6:5:8:#0ea5e9"
+notes="6:5:A:start, 6:8:C:root, 5:5:D, 5:7:E, 4:5:G, 4:7:A:start, 3:5:C:root, 3:7:D, 2:5:E, 2:8:G, 1:5:A:start"
+
+}}
+
+{{< guitar
+title="C Major Pentatonic (Box 5) — Descending (High C to Low C)"
+frets="0,5,6,7,8"
+animate="true"
+box="1:6:5:8:#10b981"
+notes="1:8:C:root, 1:5:A:start, 2:8:G, 2:5:E, 3:7:D, 3:5:C:root, 4:7:A:start, 4:5:G, 5:7:E, 5:5:D, 6:8:C:root"
+
+}}
 
 ## ✍️ Best Practices for Blog Authors
 
