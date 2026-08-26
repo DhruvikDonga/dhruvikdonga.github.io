@@ -1,4 +1,4 @@
-{{/* Self-contained Guitar Fretboard Shortcode — With Start/Stop Indicators & Speed Controls */}}
+{{/* Self-contained Guitar Fretboard Shortcode — With Modern Pill Start/Stop Badges */}}
 {{ $uniqueId := printf "guitar-%d" (now.UnixNano) }}
 {{ $title := .Get "title" }}
 {{ $rawFrets := split (.Get "frets") "," }}
@@ -33,7 +33,7 @@
   gap: 0.35rem;
   background: rgba(125, 125, 125, 0.1);
   padding: 3px 6px;
-  border-radius: 6px;
+  border-radius: 999px;
   user-select: none;
 }
 
@@ -41,8 +41,8 @@
   background: transparent;
   border: 1px solid rgba(125, 125, 125, 0.25);
   color: inherit;
-  border-radius: 4px;
-  padding: 2px 7px;
+  border-radius: 999px;
+  padding: 2px 8px;
   font-size: 0.7rem;
   font-weight: 700;
   cursor: pointer;
@@ -65,7 +65,7 @@
   max-width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  padding-bottom: 6px;
+  padding-bottom: 8px;
 }
 
 .fretboard-container {
@@ -150,7 +150,7 @@
   opacity: 0.75;
 }
 
-/* Muted unplayed strings: dashed horizontal line (- - -) */
+/* Muted unplayed strings */
 .string-row.muted-string .fret::before {
   height: 0 !important;
   border-top: 1.5px dashed currentColor;
@@ -162,7 +162,7 @@
   opacity: 0.35;
 }
 
-/* Muted badge cross (✕) on string 0 */
+/* Muted cross indicator */
 .mute-indicator {
   font-size: 0.85rem;
   font-weight: 800;
@@ -187,13 +187,13 @@
   position: absolute;
   background-color: var(--box-color-bg, rgba(56, 189, 248, 0.15));
   border: 2px dashed var(--box-color, #38bdf8);
-  border-radius: 6px;
+  border-radius: 8px;
   box-sizing: border-box;
   margin: 3px 2px;
   pointer-events: none;
 }
 
-/* Fret Markers Row (Dots beneath the board) */
+/* Inlay dots */
 .inlay-row {
   grid-column: 2 / -1;
   display: grid;
@@ -235,7 +235,6 @@
   flex-shrink: 0;
 }
 
-/* Open string badge styling */
 .fret-0 .note {
   box-shadow: 0 0 0 2px #f59e0b, inset 0 0 0 2px #f59e0b;
 }
@@ -258,53 +257,82 @@
   box-shadow: 0 0 0 2px var(--bg-color, #ffffff), 0 0 6px rgba(245, 158, 11, 0.4);
 }
 
-/* Start / Stop Tooltip Pills */
+/* --- Redesigned Floating Pill Start/Stop Indicators --- */
 .note .order-badge {
   position: absolute;
-  top: -12px;
-  font-size: 0.55rem;
+  top: -16px;
+  font-size: 0.52rem;
   font-weight: 800;
-  padding: 1px 3px;
-  border-radius: 3px;
+  padding: 1.5px 6px;
+  border-radius: 999px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
   pointer-events: none;
   white-space: nowrap;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* Subtle downward pointing indicator triangle */
+.note .order-badge::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 3px 3px 0 3px;
+  border-style: solid;
 }
 
 .note.is-start .order-badge {
-  background: #22c55e;
+  background: linear-gradient(135deg, #10b981, #059669);
   color: #ffffff;
+}
+
+.note.is-start .order-badge::after {
+  border-color: #059669 transparent transparent transparent;
 }
 
 .note.is-stop .order-badge {
-  background: #ef4444;
+  background: linear-gradient(135deg, #f43f5e, #e11d48);
   color: #ffffff;
 }
 
-/* Animation Pulse Keyframes */
+.note.is-stop .order-badge::after {
+  border-color: #e11d48 transparent transparent transparent;
+}
+
+/* Pulse animation on the start badge */
+@keyframes startPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.guitar-diagram.animated .note.is-start .order-badge {
+  animation: startPulse 2s ease-in-out infinite;
+}
+
+/* Note playback pulse animation */
 @keyframes notePlayStep {
   0%, 100% {
     transform: scale(1);
     filter: brightness(1);
   }
   15% {
-    transform: scale(1.4);
+    transform: scale(1.38);
     filter: brightness(1.6) drop-shadow(0 0 10px #38bdf8);
     z-index: 15;
   }
   35% {
     transform: scale(1);
     filter: brightness(1);
-  }
-}
-
-@keyframes targetPulse {
-  0%, 100% {
-    box-shadow: 0 0 0 2px var(--bg-color, #ffffff);
-  }
-  50% {
-    box-shadow: 0 0 0 4px #22c55e, 0 0 12px rgba(34, 197, 94, 0.8);
   }
 }
 
