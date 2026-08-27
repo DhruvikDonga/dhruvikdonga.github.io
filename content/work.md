@@ -172,7 +172,8 @@ A timeline of my journey across domains, technologies, and impact-driven roles t
 
 > [Cusp Money](https://cusp.money) is a family wealth management consumer product delivered through mobile applications. It is a product venture by [Infocusp Innovations](https://infocusp.com)  
 
-* **Investment Services:** Leading development of KYC, CAN, and mandate workflows ensuring financial regulation compliance.
+* **Investment Services:** Leading development and service integrations for investment workflows, enabling users to initiate SIPs and lumpsum purchases, cancel SIPs, and manage related investment operations.
+
 * **Backend Systems:** Building scalable services enabling users to invest in financial products via mobile app.
 * **Stack:** `Go` • `MongoDB` • `Kubernetes` • `GCP` • `gRPC`
 
