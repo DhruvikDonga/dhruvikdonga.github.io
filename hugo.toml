@@ -98,10 +98,10 @@ style = "github-dark"
   weight = 2
   url = "work/"
 [[menu.main]]
-  name = "Venture"
+  name = "Products"
   pre = "rocket_launch"
   weight = 3
-  url = "venture/"
+  url = "products/"
 [[menu.main]]
   name = "Games"
   weight = 5

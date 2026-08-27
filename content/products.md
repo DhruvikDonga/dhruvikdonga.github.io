@@ -1,8 +1,8 @@
 +++
-title = "Venture"
-description = "A showcase of scalable systems and meaningful products built from my experience across domains."
+title = "Products"
+description = "A collection of products and SaaS ideas I’m building with collaborators across technology, sales, and consulting."
 date = "2023-12-25"
-aliases = ["venture", "buisness", "saas"]
+aliases = ["venture", "business", "saas"]
 author = "Dhruvik Donga"
 +++
 <style>
@@ -162,8 +162,9 @@ author = "Dhruvik Donga"
     <nav id="TableOfContents"></nav>
 </div>
 
+With my [professional experience](https://dhruvik.cc/work) across domains, I enjoy turning real-world problems into products and working with people who bring complementary skills across technology, sales, and consulting.
 
-With my [professional experience](https://dhruvik.cc/work) across domains, building systems and collaborating with like-minded people, I’ve been driven to pursue ideas that can scale into meaningful products.
+This space is where I share the SaaS products and business ideas I’m currently building, exploring, or contributing to.
 
 > To me, a venture sits at the intersection of:
 > - 🪵 A real problem
