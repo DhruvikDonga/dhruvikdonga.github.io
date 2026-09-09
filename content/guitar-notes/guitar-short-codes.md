@@ -178,7 +178,7 @@ Add `animate="true"` to any shortcode. The shortcode automatically:
 
 #### Syntax Example:
 
-```html
+```javascript
 {{/*< guitar 
     title="C Major (Box 1 / E-Shape) — Step-by-Step Run" 
     frets="0,7,8,9,10" 
