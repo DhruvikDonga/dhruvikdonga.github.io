@@ -33,69 +33,69 @@ Instead of cluttering pages with dozens of static chord boxes, this master refer
 
 ## 🔑 Diatonic Key Families: Which Chords Can Be Played Together?
 
-In songwriting and chord melody, chords are grouped into **Key Families** based on the 7 scale degrees of the Major Scale ($I - ii - iii - IV - V - vi - vii^\circ$) [cite: 14]. Chords within the same key share common scale pitches and resolve naturally without harsh dissonance [cite: 14].
+In songwriting and chord melody, chords are grouped into **Key Families** based on the 7 scale degrees of the Major Scale ($I - ii - iii - IV - V - vi - vii^\circ$) . Chords within the same key share common scale pitches and resolve naturally without harsh dissonance .
 
 ### The Major Scale Key Formula
 
 | Degree | Roman | Chord Quality | Harmonic Role | Indian Equivalent |
 | :--- | :--- | :--- | :--- | :--- |
-| **1st** | **I** | **Major / Maj7** | **Tonic (Home):** Most stable resting point | Sa (Tonic) [cite: 14] |
-| **2nd** | **ii** | **Minor / m7** | **Supertonic:** Pre-dominant transitional lift | Re [cite: 14] |
-| **3rd** | **iii** | **Minor / m7** | **Mediant:** Gentle, moody tonic substitute | Ga [cite: 14] |
-| **4th** | **IV** | **Major / Maj7** | **Subdominant:** Floating lift moving away from home | Ma [cite: 14] |
-| **5th** | **V** | **Major / Dominant 7** | **Dominant:** Highest tension wanting to resolve to I | Pa [cite: 14] |
-| **6th** | **vi** | **Minor / m7** | **Relative Minor:** Melancholic pop/ballad pivot | Dha [cite: 14] |
-| **7th** | **vii°**| **Diminished** | **Leading Tone:** Sharp upward pull resolving to I | Ni [cite: 14] |
+| **1st** | **I** | **Major / Maj7** | **Tonic (Home):** Most stable resting point | Sa (Tonic)  |
+| **2nd** | **ii** | **Minor / m7** | **Supertonic:** Pre-dominant transitional lift | Re  |
+| **3rd** | **iii** | **Minor / m7** | **Mediant:** Gentle, moody tonic substitute | Ga  |
+| **4th** | **IV** | **Major / Maj7** | **Subdominant:** Floating lift moving away from home | Ma  |
+| **5th** | **V** | **Major / Dominant 7** | **Dominant:** Highest tension wanting to resolve to I | Pa  |
+| **6th** | **vi** | **Minor / m7** | **Relative Minor:** Melancholic pop/ballad pivot | Dha  |
+| **7th** | **vii°**| **Diminished** | **Leading Tone:** Sharp upward pull resolving to I | Ni  |
 
 ---
 
 ### Popular Guitar Key Families
 
 #### 1. The E Major Key Family
-The **E Major** key family is one of the most resonant on guitar because strings 6, 2, and 1 ring open as root and fifth notes (E and B) [cite: 14].
+The **E Major** key family is one of the most resonant on guitar because strings 6, 2, and 1 ring open as root and fifth notes (E and B) .
 
-* **I (Tonic):** E Major / EMaj7 / Eadd9 [cite: 14]
-* **ii (Supertonic):** F#m / F#m7 [cite: 14]
-* **iii (Mediant):** G#m / G#m7 [cite: 14]
-* **IV (Subdominant):** A Major / AMaj7 / Asus2 [cite: 14]
-* **V (Dominant):** B Major / B7 / Bsus4 [cite: 14]
-* **vi (Relative Minor):** C#m / C#m7 [cite: 14]
-* **vii° (Leading Tone):** D#dim [cite: 14]
+* **I (Tonic):** E Major / EMaj7 / Eadd9 
+* **ii (Supertonic):** F#m / F#m7 
+* **iii (Mediant):** G#m / G#m7 
+* **IV (Subdominant):** A Major / AMaj7 / Asus2 
+* **V (Dominant):** B Major / B7 / Bsus4 
+* **vi (Relative Minor):** C#m / C#m7 
+* **vii° (Leading Tone):** D#dim 
 
 **Go-To Progression Recipes in E Major:**
-* **Acoustic Ballad / Pop (I - V - vi - IV):** `E → B → C#m → A` [cite: 14]
-* **Worship / Cinematic Ambient (I - IV - vi - V):** `E → A → C#m → B` [cite: 14]
-* **Bollywood / Sufi Melodic Lift (vi - IV - I - V):** `C#m → A → E → B` [cite: 14]
+* **Acoustic Ballad / Pop (I - V - vi - IV):** `E → B → C#m → A` 
+* **Worship / Cinematic Ambient (I - IV - vi - V):** `E → A → C#m → B` 
+* **Bollywood / Sufi Melodic Lift (vi - IV - I - V):** `C#m → A → E → B` 
 
 {{< guitar title="Core E Major Family Chords" items="I: E | frets:1,2,3 | notes:6:0:E:root,5:2:B,4:2:E:root,3:1:G#,2:0:B,1:0:E:root; IV: A | frets:1,2,3 | mute:6 | notes:5:0:A:root,4:2:E,3:2:A:root,2:2:C#,1:0:E; V: B7 | frets:1,2,3 | mute:6 | notes:5:2:B:root,4:1:D#,3:2:A,2:0:B:root,1:2:F#; vi: C#m | frets:4,5,6 | mute:6 | notes:5:4:C#:root,4:6:G#,3:6:C#:root,2:5:E,1:4:G#; ii: F#m | frets:2,3,4 | notes:6:2:F#:root,5:4:C#,4:4:F#:root,3:2:A,2:2:C#,1:2:F#:root" >}}
 
 ---
 
 #### 2. The C Major Key Family
-The definitive "white keys" baseline—has zero sharps or flats [cite: 14].
+The definitive "white keys" baseline—has zero sharps or flats .
 
-* **I (Tonic):** C Major / CMaj7 / Cadd9 [cite: 14]
-* **ii:** Dm / Dm7 [cite: 14]
-* **iii:** Em / Em7 [cite: 14]
-* **IV:** F Major / FMaj7 [cite: 14]
-* **V:** G Major / G7 / Gsus4 [cite: 14]
-* **vi:** Am / Am7 [cite: 14]
-* **vii°:** Bdim [cite: 14]
+* **I (Tonic):** C Major / CMaj7 / Cadd9 
+* **ii:** Dm / Dm7 
+* **iii:** Em / Em7 
+* **IV:** F Major / FMaj7 
+* **V:** G Major / G7 / Gsus4 
+* **vi:** Am / Am7 
+* **vii°:** Bdim 
 
 {{< guitar title="Core C Major Family Chords" items="I: C | frets:1,2,3 | mute:6 | notes:5:3:C:root,4:2:E,3:0:G,2:1:C:root,1:0:E; vi: Am | frets:1,2,3 | mute:6 | notes:5:0:A:root,4:2:E,3:2:A:root,2:1:C,1:0:E; IV: F | frets:1,2,3 | notes:6:1:F:root,5:3:C,4:3:F:root,3:2:A,2:1:C,1:1:F:root; V: G | frets:1,2,3 | notes:6:3:G:root,5:2:B,4:0:D,3:0:G:root,2:0:B,1:3:G:root; ii: Dm | frets:1,2,3 | mute:6,5 | notes:4:0:D:root,3:2:A,2:3:D:root,1:1:F" >}}
 
 ---
 
 #### 3. The G Major Key Family
-Widely favored in acoustic songwriting, country, and Bollywood rhythm tracks due to its bright open-string voicings [cite: 14].
+Widely favored in acoustic songwriting, country, and Bollywood rhythm tracks due to its bright open-string voicings .
 
-* **I (Tonic):** G Major / GMaj7 / Gadd9 [cite: 14]
-* **ii:** Am / Am7 [cite: 14]
-* **iii:** Bm / Bm7 [cite: 14]
-* **IV:** C Major / Cadd9 [cite: 14]
-* **V:** D Major / D7 / Dsus4 [cite: 14]
-* **vi:** Em / Em7 [cite: 14]
-* **vii°:** F#dim [cite: 14]
+* **I (Tonic):** G Major / GMaj7 / Gadd9 
+* **ii:** Am / Am7 
+* **iii:** Bm / Bm7 
+* **IV:** C Major / Cadd9 
+* **V:** D Major / D7 / Dsus4 
+* **vi:** Em / Em7 
+* **vii°:** F#dim 
 
 {{< guitar title="Core G Major Family Chords" items="I: G | frets:1,2,3 | notes:6:3:G:root,5:2:B,4:0:D,3:0:G:root,2:0:B,1:3:G:root; V: D | frets:1,2,3 | mute:6,5 | notes:4:0:D:root,3:2:A,2:3:D:root,1:2:F#; vi: Em | frets:1,2,3 | notes:6:0:E:root,5:2:B,4:2:E:root,3:0:G,2:0:B,1:0:E:root; IV: C | frets:1,2,3 | mute:6 | notes:5:3:C:root,4:2:E,3:0:G,2:1:C:root,1:0:E; ii: Am | frets:1,2,3 | mute:6 | notes:5:0:A:root,4:2:E,3:2:A:root,2:1:C,1:0:E" >}}
 
