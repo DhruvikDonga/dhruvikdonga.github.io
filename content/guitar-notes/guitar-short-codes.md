@@ -220,6 +220,32 @@ box="1:6:5:8:#10b981"
 notes="1:8:C:root, 1:5:A:start, 2:8:G, 2:5:E, 3:7:D, 3:5:C:root, 4:7:A:start, 4:5:G, 5:7:E, 5:5:D, 6:8:C:root"
 >}}
 
+### 7. How to Use Multi diagrams
+
+```html
+{{/*< guitar
+    title="Major Chord Family Across All Roots"
+    items="A | frets:1,2,3 | mute:6 | notes:5:0:A:root,4:2:E,3:2:A:root,2:2:C#,1:0:E;
+           B | frets:2,3,4 | mute:6 | notes:5:2:B:root,4:4:F#,3:4:B:root,2:4:D#,1:2:F#;
+           C | frets:1,2,3 | mute:6 | notes:5:3:C:root,4:2:E,3:0:G,2:1:C:root,1:0:E;
+           D | frets:1,2,3 | mute:6,5 | notes:4:0:D:root,3:2:A,2:3:D:root,1:2:F#;
+           E | frets:1,2,3 | notes:6:0:E:root,5:2:B,4:2:E:root,3:1:G#,2:0:B,1:0:E:root;
+           F | frets:1,2,3 | notes:6:1:F:root,5:3:C,4:3:F:root,3:2:A,2:1:C,1:1:F:root;
+           G | frets:1,2,3 | notes:6:3:G:root,5:2:B,4:0:D,3:0:G:root,2:0:B,1:3:G:root"
+>*/}}
+```
+
+{{< guitar
+    title="Major Chord Family Across All Roots"
+    items="A | frets:1,2,3 | mute:6 | notes:5:0:A:root,4:2:E,3:2:A:root,2:2:C#,1:0:E;
+           B | frets:2,3,4 | mute:6 | notes:5:2:B:root,4:4:F#,3:4:B:root,2:4:D#,1:2:F#;
+           C | frets:1,2,3 | mute:6 | notes:5:3:C:root,4:2:E,3:0:G,2:1:C:root,1:0:E;
+           D | frets:1,2,3 | mute:6,5 | notes:4:0:D:root,3:2:A,2:3:D:root,1:2:F#;
+           E | frets:1,2,3 | notes:6:0:E:root,5:2:B,4:2:E:root,3:1:G#,2:0:B,1:0:E:root;
+           F | frets:1,2,3 | notes:6:1:F:root,5:3:C,4:3:F:root,3:2:A,2:1:C,1:1:F:root;
+           G | frets:1,2,3 | notes:6:3:G:root,5:2:B,4:0:D,3:0:G:root,2:0:B,1:3:G:root"
+>}}
+
 ## ✍️ Best Practices for Blog Authors
 
 * **Order of Strings:** Always specify string numbers `1` (high e) through `6` (low E) correctly.
