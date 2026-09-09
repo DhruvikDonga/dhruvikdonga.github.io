@@ -15,6 +15,8 @@ Instead of cluttering pages with dozens of static chord boxes, this master refer
 
 ## 🎼 Master Harmony & Formula Reference
 
+<div class="table-responsive">
+
 | Chord Family | Formula | Swara Intervals | Tension / Sonic Quality | Typical Musical Usecase (Western & Indian) |
 | :--- | :--- | :--- | :--- | :--- |
 | **Major** | 1 - 3 - 5 | S - G3 - P | Resolved, bright, stable | Tonal home (I), folk foundations; foundation for **Bilawal That** melodies (e.g. upbeat Bollywood pop like *Dil Chahta Hai*). |
@@ -29,6 +31,7 @@ Instead of cluttering pages with dozens of static chord boxes, this master refer
 | **+ (Augmented)** | 1 - 3 - ♯5 | S - G3 - d2 | Dreamlike, unresolved, floaty | Chromatic voice-leading transitions connecting I and IV; brings otherworldly, ungrounded tension in cinematic orchestral breaks. |
 | **sus4** | 1 - 4 - 5 | S - M1 - P | Open, neutral, drone-like | Removing the third (Gandhar) mirrors the open tanpura drone (Sa-Pa), making it perfect for Indian classical backing and raga vamps. |
 
+</div>
 ---
 
 ## 🎸 Chord Families (Interactive Root Selectors)
