@@ -2,30 +2,30 @@
 authors = ["Dhruvik Donga"]
 title = "The Ultimate Guitar Chord Cheat Sheet: Master Reference Across A to G"
 date = "2026-09-09"
-description = "A definitive chord formula handbook and visual cheat sheet covering Major, Minor, add9, 6, 7, m6, m7, Maj7, Diminished, Augmented, and Sus chord shapes across A through G."
-tags = ["guitar", "music-theory", "chords", "cheat-sheet", "guides"]
+description = "A definitive chord formula handbook and visual cheat sheet covering Major, Minor, add9, 6, 7, m6, m7, Maj7, Diminished, Augmented, and Sus chord shapes across A through G with Western and Indian music references."
+tags = ["guitar", "music-theory", "chords", "cheat-sheet", "guides", "indian-music"]
 categories = ["Music", "Guides"]
 +++
 
-Whether composing rhythm tracks or analyzing jazz harmony, mastering chord construction is about seeing formulas clearly on the fretboard. This master reference breaks down chord families across all roots (**A through G**) with harmonic functions, intervals, and visual diagrams rendered using our Hugo `guitar` shortcode.
+Whether composing rhythm tracks, exploring jazz harmony, or arranging Bollywood and Indian classical melodies, mastering chord construction connects intervals directly to mood and color. This master reference breaks down chord families across all roots (**A through G**) with harmonic functions, intervals, Indian raga/swara equivalents, and visual diagrams rendered using our Hugo `guitar` shortcode.
 
 ---
 
 ## 🎼 Master Harmony & Formula Reference
 
-| Chord Family | Formula | Tension / Sonic Quality | Typical Musical Usecase |
-| :--- | :--- | :--- | :--- |
-| **Major** | 1 - 3 - 5 | Resolved, bright, stable | Tonal home (I), pop/rock anthems, folk foundations. |
-| **Minor** | 1 - ♭3 - 5 | Dark, reflective, moody | Minor keys (i), relative minors (vi, ii, iii) in ballads. |
-| **add9** | 1 - 3 - 5 - 9 | Shimmering, wide, cinematic | Adding harmonic color to acoustic pop without dominant pull. |
-| **6 (Major 6th)** | 1 - 3 - 5 - 6 | Warm, nostalgic, sweet | Jazz cadences, bossa nova, Western swing, mellow resolves. |
-| **7 (Dominant 7th)**| 1 - 3 - 5 - ♭7 | Bluesy, energetic, unresolved | Unstable tension driving resolving motion (V7 → I), blues progressions. |
-| **m6 (Minor 6th)** | 1 - ♭3 - 5 - 6 | Film-noir, brooding mystery | Dorian color chord, minor jazz turnarounds, spy themes. |
-| **m7 (Minor 7th)** | 1 - ♭3 - 5 - ♭7 | Soulful, mellow, smooth | Neo-soul, funk grooves, jazz ii7 chords. |
-| **Maj7 (Major 7th)**| 1 - 3 - 5 - 7 | Dreamy, lush, sophisticated | Neo-soul, city pop, lofi beats, modern jazz IMaj7 tonic. |
-| **dim / dim7** | 1 - ♭3 - ♭5 | Tense, unstable, suspenseful | Leading-tone resolution (e.g. Bdim → C), suspense accents. |
-| **+ (Augmented)** | 1 - 3 - ♯5 | Dreamlike, unresolved, floaty | Chromatic voice-leading transitions connecting I and IV. |
-| **sus2 / sus4** | 1 - 2 - 5 / 1 - 4 - 5 | Open, neutral, unresolved | Creating rhythmic pulse and suspension before resolving to Major. |
+| Chord Family | Formula | Swara Intervals | Tension / Sonic Quality | Typical Musical Usecase (Western & Indian) |
+| :--- | :--- | :--- | :--- | :--- |
+| **Major** | 1 - 3 - 5 | S - G3 - P | Resolved, bright, stable | Tonal home (I), folk foundations; foundation for **Bilawal That** melodies (e.g. upbeat Bollywood pop like *Dil Chahta Hai*). |
+| **Minor** | 1 - ♭3 - 5 | S - g2 - P | Dark, reflective, moody | Minor keys (i), relative minors; evokes **Asavari / Kafi That** and soulful ghazals or meditative ragas like *Darbari Kanada*. |
+| **add9** | 1 - 3 - 5 - 9 | S - R2 - G3 - P | Shimmering, wide, cinematic | Adding melodic color without dominant pull; signature lush acoustic sound in A.R. Rahman ballads and Indian fusion guitar. |
+| **6 (Major 6th)** | 1 - 3 - 5 - 6 | S - G3 - P - D2 | Warm, nostalgic, sweet | Jazz cadences, bossa nova; highlights the sweet Shuddha Dhaivat (D2) in ragas like *Bhoopali / Mohanam* for mellow resolves. |
+| **7 (Dominant 7th)**| 1 - 3 - 5 - ♭7 | S - G3 - P - n2 | Bluesy, energetic, unresolved | Unstable driving tension (V7 → I); core harmony for **Khamaj That** (e.g. semi-classical thumri, folk, and classic blues). |
+| **m6 (Minor 6th)** | 1 - ♭3 - 5 - 6 | S - g2 - P - D2 | Film-noir, brooding mystery | Dorian color chord; highlights Komal Gandhar with Shuddha Dhaivat, evoking the mysterious character of **Kafi / Kirwani That**. |
+| **m7 (Minor 7th)** | 1 - ♭3 - 5 - ♭7 | S - g2 - P - n2 | Soulful, mellow, smooth | Neo-soul, funk grooves, jazz ii7; mirrors the swara set of Raga *Bhimpalasi* and modern Sufi-rock chord beds. |
+| **Maj7 (Major 7th)**| 1 - 3 - 5 - 7 | S - G3 - P - N3 | Dreamy, lush, sophisticated | Neo-soul, lofi beats, modern jazz IMaj7; highlights the restful Shuddha Nishad (N3) found in meditative morning ragas like *Bilawal*. |
+| **dim / dim7** | 1 - ♭3 - ♭5 | S - g2 - d1 | Tense, unstable, suspenseful | Leading-tone tension (e.g. Bdim → C); creates heightened suspense, dramatic film score moments, and transition accents. |
+| **+ (Augmented)** | 1 - 3 - ♯5 | S - G3 - d2 | Dreamlike, unresolved, floaty | Chromatic voice-leading transitions connecting I and IV; brings otherworldly, ungrounded tension in cinematic orchestral breaks. |
+| **sus2 / sus4** | 1 - 2 - 5 / 1 - 4 - 5 | S - R2 - P / S - M1 - P | Open, neutral, drone-like | Removing the third (Gandhar) mirrors the open tanpura drone (Sa-Pa), making it perfect for Indian classical backing and raga vamps. |
 
 ---
 
@@ -521,8 +521,9 @@ Whether composing rhythm tracks or analyzing jazz harmony, mastering chord const
 
 ---
 
-## ⚡ Quick Application Tips
+## ⚡ Cross-Genre & Indian Classical Application Tips
 
-* **Tension Substitution:** Replace standard Minor (1 - ♭3 - 5) with **m7** or **m6** to inject neo-soul or film-noir warmth into simple chord loops.
-* **Suspended Resolution:** Play **sus4** → **Major** on beats 3 and 4 to create breathing room before song cadences.
-* **Dominant Voice Leading:** Always resolve the **7 (Dominant 7th)** down a fourth or up a fifth (A7 → D or G7 → C) to capitalize on the tritone tension between the 3rd and ♭7th.
+* **Tanpura Drone Emulation (Sus Chords):** In Indian classical accompaniment, acoustic guitars often avoid full triads. Use **sus2** (S - R2 - P) or **sus4** (S - M1 - P) to establish a neutral harmonic bed that lets the vocalist or soloist move freely across ragas like *Yaman* or *Bhairav* without pitch clash.
+* **Khamaj That & Thumri (Dominant 7th):** When accompanying folk or semi-classical thumris built on That Khamaj, use the **7th chord** (V7) to introduce Komal Nishad (n2) without sounding like western rock.
+* **Bhoopali & Mohanam Voicings (6th Chords):** Major 6th chords highlight the combination of Shuddha Gandhar (G3) and Shuddha Dhaivat (D2), providing the exact melodic flavor for pentatonic ragas like *Bhoopali* and *Deshkar*.
+* **Sufi-Rock & Ballad Beds (add9 & m7):** The signature sound in modern Bollywood/Sufi arrangements (A.R. Rahman, Pritam) relies heavily on open-string **add9** and **m7** shapes to produce an airy, acoustic resonance.
