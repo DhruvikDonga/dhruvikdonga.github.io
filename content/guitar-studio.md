@@ -81,6 +81,76 @@ author = "Dhruvik Donga"
   width: 100%;
   margin-top: 0.8rem;
 }
+.guitar-mode-toggle {
+  display: inline-flex;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--border-color, #444);
+  border-radius: 6px;
+  padding: 2px;
+}
+.guitar-toggle-btn {
+  background: transparent;
+  border: none;
+  color: #aaa;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.guitar-toggle-btn.active {
+  background: #42b983;
+  color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+.guitar-toggle-btn.active.orig {
+  background: #e67e22;
+  color: #fff;
+}
+.guitar-viz-container {
+  margin-top: 1.2rem;
+}
+.guitar-viz-card {
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid var(--border-color, #333);
+  border-radius: 6px;
+  padding: 0.6rem 0.8rem 0.5rem 0.8rem;
+}
+.guitar-viz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+.guitar-badge {
+  display: inline-block;
+  padding: 1px 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 3px;
+  margin-right: 5px;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+.badge-orig {
+  background: rgba(230, 126, 34, 0.2);
+  color: #e67e22;
+  border: 1px solid rgba(230, 126, 34, 0.4);
+}
+.badge-clean {
+  background: rgba(66, 185, 131, 0.2);
+  color: #42b983;
+  border: 1px solid rgba(66, 185, 131, 0.4);
+}
+.guitar-canvas {
+  width: 100%;
+  height: 75px;
+  display: block;
+  cursor: pointer;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.25);
+}
 </style>
 
 <div class="guitar-app">
@@ -102,7 +172,35 @@ Zero server upload. Runs 100% locally in your browser. Eliminates room air and m
 </div>
 <div id="resultArea" class="guitar-section" style="display: none;">
 <h4 style="margin: 0 0 0.5rem 0;">✨ Cleaned Audio Preview</h4>
+<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.6rem;">
+<h4 style="margin: 0;">🎧 Audio Preview & Comparison</h4>
+<div class="guitar-mode-toggle" id="modeToggle">
+<button type="button" id="btnPlayClean" class="guitar-toggle-btn active">✨ Cleaned</button>
+<button type="button" id="btnPlayOrig" class="guitar-toggle-btn">📻 Original</button>
+</div>
+</div>
 <audio id="audioPlayer" class="guitar-player" controls></audio>
+<div class="guitar-viz-container">
+<div class="guitar-viz-card">
+<div class="guitar-viz-header">
+<span style="color: #e67e22; font-weight: 600; font-size: 0.85rem;">
+<span class="guitar-badge badge-orig">BEFORE</span> Original (Raw Input with Hiss)
+</span>
+<span id="origDbStat" style="font-size: 0.78rem; color: #888;"></span>
+</div>
+<canvas id="origCanvas" class="guitar-canvas"></canvas>
+</div>
+<div class="guitar-viz-card" style="margin-top: 0.8rem;">
+<div class="guitar-viz-header">
+<span style="color: #42b983; font-weight: 600; font-size: 0.85rem;">
+<span class="guitar-badge badge-clean">AFTER</span> Cleaned (Silent Floor & Pure Tone)
+</span>
+<span id="cleanDbStat" style="font-size: 0.78rem; color: #42b983;"></span>
+</div>
+<canvas id="cleanCanvas" class="guitar-canvas"></canvas>
+</div>
+<p style="margin: 0.4rem 0 0 0; font-size: 0.78rem; color: #777; text-align: right;">💡 Click either waveform to jump playback</p>
+</div>
 <div style="margin-top: 1rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
 <a id="downloadLink" class="guitar-btn" style="text-decoration: none;" download="cleaned-guitar.wav">⬇️ Download Clean WAV</a>
 <span id="outputStats" style="font-size: 0.85rem; color: #888;"></span>
@@ -257,9 +355,18 @@ function processGuitarDSP(samples, sampleRate) {
       let smoothedGain;
       if (targetGain > prevGains[b]) {
         smoothedGain = 0.20 * prevGains[b] + 0.80 * targetGain;
+      let instantGain;
+      if (mag > effectiveNoise * 1.05) {
+        const snr = (mag - effectiveNoise) / Math.max(effectiveNoise, 1e-6);
+        instantGain = snr / (1.0 + snr);
+        instantGain = Math.pow(instantGain, 0.85);
       } else {
         smoothedGain = gammaSmooth * prevGains[b] + (1.0 - gammaSmooth) * targetGain;
+        const ratio = mag / Math.max(effectiveNoise, 1e-6);
+        instantGain = minFloor * Math.pow(Math.max(0, ratio), 2.5);
       }
+
+      const smoothedGain = gammaSmooth * prevGains[b] + (1.0 - gammaSmooth) * instantGain;
       prevGains[b] = smoothedGain;
 
       real[b] *= smoothedGain;
@@ -267,6 +374,10 @@ function processGuitarDSP(samples, sampleRate) {
       if (b > 0 && b < numBins - 1) {
         real[fftLen - b] = real[b];
         imag[fftLen - b] = -imag[b];
+      if (b > 0 && b < fftLen / 2) {
+        const mirror = fftLen - b;
+        real[mirror] = real[b];
+        imag[mirror] = -imag[b];
       }
     }
 
@@ -282,12 +393,22 @@ function processGuitarDSP(samples, sampleRate) {
   const clean = new Float32Array(samples.length);
   for (let i = 0; i < samples.length; i++) {
     clean[i] = normSum[i] > 1e-4 ? output[i] / normSum[i] : output[i];
+  const outLen = samples.length;
+  const cleaned = new Float32Array(outLen);
+  for (let i = 0; i < outLen; i++) {
+    cleaned[i] = normSum[i] > 1e-4 ? output[i] / normSum[i] : output[i];
   }
 
   const attackCoeff = Math.exp(-1.0 / (sampleRate * 0.005));
   const releaseCoeff = Math.exp(-1.0 / (sampleRate * 0.400));
   let envelope = 0;
   let expGain = 1.0;
+  // Downward Expander for absolute silence in rests
+  const windowSize = Math.floor(sampleRate * 0.02);
+  let env = 0;
+  const attack = Math.exp(-1.0 / (sampleRate * 0.008));
+  const release = Math.exp(-1.0 / (sampleRate * 0.040));
+  const threshold = 0.006;
 
   for (let i = 0; i < clean.length; i++) {
     const absIn = Math.abs(clean[i]);
@@ -295,17 +416,31 @@ function processGuitarDSP(samples, sampleRate) {
       envelope = attackCoeff * envelope + (1 - attackCoeff) * absIn;
     } else {
       envelope = releaseCoeff * envelope + (1 - releaseCoeff) * absIn;
+  for (let i = 0; i < outLen; i++) {
+    const s = Math.abs(cleaned[i]);
+    env = s > env ? attack * env + (1.0 - attack) * s : release * env + (1.0 - release) * s;
+
+    let expanderGain = 1.0;
+    if (env < threshold) {
+      const ratio = env / threshold;
+      expanderGain = Math.pow(ratio, 2.0);
     }
     const targetGain = envelope >= 0.022 ? 1.0 : Math.max(0.002, Math.exp((Math.log(Math.max(0.0001, envelope / 0.022)) / 2.302585 * 20.0) * 0.8));
     expGain += (targetGain - expGain) * 0.06;
     clean[i] *= expGain;
+    cleaned[i] *= expanderGain;
   }
 
   const boostGain = Math.pow(10, 4.5 / 20.0);
+  // Lookahead Limiter (+4.5 dB boost)
+  const lookaheadMs = 4.0;
+  const lookaheadSamples = Math.floor(sampleRate * (lookaheadMs / 1000.0));
+  const targetGain = 1.68;
   const ceiling = 0.95;
   const lookahead = Math.round(sampleRate * 0.005);
   const limAttack = Math.exp(-1.0 / (sampleRate * 0.002));
   const limRelease = Math.exp(-1.0 / (sampleRate * 0.080));
+  const releaseCoeff = Math.exp(-1.0 / (sampleRate * 0.060));
 
   const boosted = new Float32Array(clean.length);
   const reqGains = new Float32Array(clean.length);
@@ -315,16 +450,28 @@ function processGuitarDSP(samples, sampleRate) {
     const absS = Math.abs(s);
     reqGains[i] = (absS > ceiling && absS > 0.0001) ? ceiling / absS : 1.0;
   }
+  let limiterGain = 1.0;
+  const finalSamples = new Float32Array(outLen);
 
   const windowMin = new Float32Array(clean.length);
   const deq = [];
   for (let i = clean.length - 1; i >= 0; i--) {
     while (deq.length > 0 && deq[deq.length - 1].g >= reqGains[i]) {
       deq.pop();
+  for (let i = 0; i < outLen; i++) {
+    let localMax = 0;
+    const windowEnd = Math.min(outLen, i + lookaheadSamples);
+    for (let j = i; j < windowEnd; j++) {
+      const a = Math.abs(cleaned[j]) * targetGain;
+      if (a > localMax) localMax = a;
     }
     deq.push({ idx: i, g: reqGains[i] });
     if (deq[0].idx >= i + lookahead) {
       deq.shift();
+
+    let desiredGain = 1.0;
+    if (localMax > ceiling) {
+      desiredGain = ceiling / localMax;
     }
     windowMin[i] = deq[0].g;
   }
@@ -335,19 +482,27 @@ function processGuitarDSP(samples, sampleRate) {
     const target = windowMin[i];
     if (target < curGain) {
       curGain = limAttack * curGain + (1 - limAttack) * target;
+    if (desiredGain < limiterGain) {
+      limiterGain = desiredGain;
     } else {
       curGain = limRelease * curGain + (1 - limRelease) * target;
+      limiterGain = releaseCoeff * limiterGain + (1.0 - releaseCoeff) * desiredGain;
     }
     curGain = Math.min(curGain, reqGains[i]);
     finalized[i] = boosted[i] * curGain;
+
+    finalSamples[i] = Math.max(-0.98, Math.min(0.98, cleaned[i] * targetGain * limiterGain));
   }
 
   return finalized;
+  return finalSamples;
 }
 
 function encodeWav(monoSamples, sampleRate) {
   const numChannels = 2;
   const bytesPerSample = 2;
+  const bitsPerSample = 16;
+  const bytesPerSample = bitsPerSample / 8;
   const blockAlign = numChannels * bytesPerSample;
   const dataSize = monoSamples.length * blockAlign;
   const buffer = new ArrayBuffer(44 + dataSize);
@@ -356,6 +511,9 @@ function encodeWav(monoSamples, sampleRate) {
   function writeString(offset, string) {
     for (let i = 0; i < string.length; i++) {
       view.setUint8(offset + i, string.charCodeAt(i));
+  function writeString(offset, str) {
+    for (let i = 0; i < str.length; i++) {
+      view.setUint8(offset + i, str.charCodeAt(i));
     }
   }
 
@@ -386,6 +544,97 @@ function encodeWav(monoSamples, sampleRate) {
   return new Blob([buffer], { type: 'audio/wav' });
 }
 
+// Waveform downsampler and drawer
+function computeWaveformBars(samples, numBars) {
+  const bars = new Float32Array(numBars);
+  const step = samples.length / numBars;
+  for (let i = 0; i < numBars; i++) {
+    const start = Math.floor(i * step);
+    const end = Math.floor((i + 1) * step);
+    let peak = 0;
+    for (let j = start; j < end; j++) {
+      const v = Math.abs(samples[j]);
+      if (v > peak) peak = v;
+    }
+    bars[i] = Math.min(1.0, peak);
+  }
+  return bars;
+}
+
+function drawWaveform(canvas, bars, mainColor, playedColor, progressRatio) {
+  if (!canvas || !bars) return;
+  const dpr = window.devicePixelRatio || 1;
+  const width = canvas.clientWidth || 600;
+  const height = canvas.clientHeight || 75;
+
+  if (canvas.width !== Math.round(width * dpr) || canvas.height !== Math.round(height * dpr)) {
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
+  }
+
+  const ctx = canvas.getContext('2d');
+  ctx.save();
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, width, height);
+
+  const midY = height / 2;
+
+  // Zero-axis reference
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(0, midY);
+  ctx.lineTo(width, midY);
+  ctx.stroke();
+
+  const numBars = bars.length;
+  const barWidth = width / numBars;
+  const playheadX = progressRatio * width;
+  const bw = Math.max(1, barWidth - 1);
+
+  for (let i = 0; i < numBars; i++) {
+    const x = i * barWidth;
+    const peak = bars[i];
+    const h = Math.max(1.5, peak * (height * 0.44));
+
+    ctx.fillStyle = (x <= playheadX) ? playedColor : mainColor;
+    ctx.fillRect(x, midY - h, bw, h * 2);
+  }
+
+  // Playhead line
+  if (progressRatio > 0 && progressRatio < 1) {
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(playheadX, 0);
+    ctx.lineTo(playheadX, height);
+    ctx.stroke();
+
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.arc(playheadX, midY, 2.5, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  ctx.restore();
+}
+
+function estimateNoiseFloorDb(samples, sampleRate) {
+  const chunkSize = Math.floor(sampleRate * 0.1);
+  if (samples.length < chunkSize) return -90;
+  let minRms = 1.0;
+  for (let i = 0; i < samples.length - chunkSize; i += chunkSize) {
+    let sumSq = 0;
+    for (let j = 0; j < chunkSize; j++) {
+      const s = samples[i + j];
+      sumSq += s * s;
+    }
+    const rms = Math.sqrt(sumSq / chunkSize);
+    if (rms < minRms) minRms = rms;
+  }
+  return 20 * Math.log10(Math.max(minRms, 1e-6));
+}
+
 // --- Safe Initializer for DOM Elements ---
 function initGuitarStudio() {
   const el = id => document.getElementById(id);
@@ -398,11 +647,24 @@ function initGuitarStudio() {
   const renameInput = el('renameInput');
   const audioPlayer = el('audioPlayer');
   const downloadLink = el('downloadLink');
+  const origCanvas = el('origCanvas');
+  const cleanCanvas = el('cleanCanvas');
+  const btnPlayClean = el('btnPlayClean');
+  const btnPlayOrig = el('btnPlayOrig');
+  const origDbStat = el('origDbStat');
+  const cleanDbStat = el('cleanDbStat');
 
   if (!dropZone || !audioInput) return;
 
   let loadedAudioBuffer = null;
+  let originalFile = null;
   let originalFileName = "guitar-cleaned";
+  let origBars = null;
+  let cleanBars = null;
+  let origWavUrl = null;
+  let cleanWavUrl = null;
+  let currentMode = 'clean';
+  let animFrameId = null;
 
   dropZone.addEventListener('click', () => audioInput.click());
 
@@ -420,7 +682,11 @@ function initGuitarStudio() {
   });
 
   async function handleFile(file) {
+    originalFile = file;
     originalFileName = file.name.replace(/\.[^/.]+$/, "");
+    if (origWavUrl) URL.revokeObjectURL(origWavUrl);
+    origWavUrl = URL.createObjectURL(file);
+
     if (renameInput) {
       renameInput.value = `${originalFileName}-clean.wav`;
     }
@@ -442,6 +708,86 @@ function initGuitarStudio() {
       if (statusText) statusText.textContent = "Error decoding audio file: " + err.message;
     }
   }
+
+  function getProgress() {
+    if (!audioPlayer || !audioPlayer.duration) return 0;
+    return Math.max(0, Math.min(1, audioPlayer.currentTime / audioPlayer.duration));
+  }
+
+  function renderWaveforms() {
+    const prog = getProgress();
+    if (origCanvas && origBars) {
+      drawWaveform(origCanvas, origBars, 'rgba(230, 126, 34, 0.45)', '#f39c12', prog);
+    }
+    if (cleanCanvas && cleanBars) {
+      drawWaveform(cleanCanvas, cleanBars, 'rgba(66, 185, 131, 0.45)', '#42b983', prog);
+    }
+  }
+
+  function startPlaybackLoop() {
+    if (animFrameId) cancelAnimationFrame(animFrameId);
+    function loop() {
+      renderWaveforms();
+      if (!audioPlayer.paused && !audioPlayer.ended) {
+        animFrameId = requestAnimationFrame(loop);
+      }
+    }
+    animFrameId = requestAnimationFrame(loop);
+  }
+
+  function attachSeek(canvas) {
+    if (!canvas) return;
+    canvas.addEventListener('click', (e) => {
+      if (!audioPlayer || !audioPlayer.duration) return;
+      const rect = canvas.getBoundingClientRect();
+      const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      audioPlayer.currentTime = ratio * audioPlayer.duration;
+      renderWaveforms();
+    });
+  }
+
+  attachSeek(origCanvas);
+  attachSeek(cleanCanvas);
+
+  if (audioPlayer) {
+    audioPlayer.addEventListener('play', startPlaybackLoop);
+    audioPlayer.addEventListener('pause', () => {
+      if (animFrameId) cancelAnimationFrame(animFrameId);
+      renderWaveforms();
+    });
+    audioPlayer.addEventListener('ended', () => {
+      if (animFrameId) cancelAnimationFrame(animFrameId);
+      renderWaveforms();
+    });
+    audioPlayer.addEventListener('seeked', renderWaveforms);
+    audioPlayer.addEventListener('timeupdate', renderWaveforms);
+  }
+
+  window.addEventListener('resize', renderWaveforms);
+
+  function setMode(mode) {
+    if (currentMode === mode || !audioPlayer) return;
+    currentMode = mode;
+    const isPlaying = !audioPlayer.paused;
+    const curTime = audioPlayer.currentTime;
+
+    if (mode === 'clean') {
+      audioPlayer.src = cleanWavUrl;
+      if (btnPlayClean) btnPlayClean.classList.add('active');
+      if (btnPlayOrig) btnPlayOrig.classList.remove('active', 'orig');
+    } else {
+      audioPlayer.src = origWavUrl;
+      if (btnPlayOrig) btnPlayOrig.classList.add('active', 'orig');
+      if (btnPlayClean) btnPlayClean.classList.remove('active');
+    }
+
+    audioPlayer.currentTime = curTime;
+    if (isPlaying) audioPlayer.play().catch(() => {});
+    renderWaveforms();
+  }
+
+  if (btnPlayClean) btnPlayClean.addEventListener('click', () => setMode('clean'));
+  if (btnPlayOrig) btnPlayOrig.addEventListener('click', () => setMode('orig'));
 
   if (processBtn) {
     processBtn.addEventListener('click', () => {
@@ -467,8 +813,28 @@ function initGuitarStudio() {
           const wavUrl = URL.createObjectURL(wavBlob);
 
           if (audioPlayer) audioPlayer.src = wavUrl;
+          if (cleanWavUrl) URL.revokeObjectURL(cleanWavUrl);
+          cleanWavUrl = URL.createObjectURL(wavBlob);
+
+          // Compute waveform bars & noise stats
+          const numBars = 220;
+          origBars = computeWaveformBars(mono, numBars);
+          cleanBars = computeWaveformBars(cleanSamples, numBars);
+
+          const origDb = estimateNoiseFloorDb(mono, loadedAudioBuffer.sampleRate);
+          const cleanDb = estimateNoiseFloorDb(cleanSamples, loadedAudioBuffer.sampleRate);
+
+          if (origDbStat) origDbStat.textContent = `Hiss Floor: ~${Math.round(origDb)} dBFS (Detected)`;
+          if (cleanDbStat) cleanDbStat.textContent = `Hiss Floor: ~${Math.round(cleanDb)} dBFS (Silent -${Math.max(1, Math.round(origDb - cleanDb))} dB)`;
+
+          currentMode = 'clean';
+          if (btnPlayClean) btnPlayClean.classList.add('active');
+          if (btnPlayOrig) btnPlayOrig.classList.remove('active', 'orig');
+
+          if (audioPlayer) audioPlayer.src = cleanWavUrl;
           if (downloadLink) {
             downloadLink.href = wavUrl;
+            downloadLink.href = cleanWavUrl;
             const renameVal = (renameInput && renameInput.value.trim()) || `${originalFileName}-clean.wav`;
             const finalName = renameVal.endsWith('.wav') ? renameVal : `${renameVal}.wav`;
             downloadLink.download = finalName;
@@ -476,6 +842,8 @@ function initGuitarStudio() {
 
           if (statusText) statusText.textContent = "Audio cleaned successfully! 🎉";
           if (resultArea) resultArea.style.display = "block";
+
+          requestAnimationFrame(renderWaveforms);
         } catch (err) {
           if (statusText) statusText.textContent = "Processing error: " + err.message;
         } finally {
