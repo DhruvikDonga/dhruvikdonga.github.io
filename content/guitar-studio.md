@@ -2,122 +2,112 @@
 title = "Guitar Denoise Studio"
 description = "Browser-based client-side acoustic guitar noise remover and audio enhancer"
 date = "2026-11-04"
-aliases = ["guitar-cleaner", "guitar-studio", "denoise"]
+aliases = ["guitar-cleaner", "guitar-studio", "denoise", "pedal"]
 author = "Dhruvik Donga"
 +++
 
 <style>
-  .guitar-app {
-    font-family: inherit;
-    max-width: 680px;
-    margin: 2rem auto;
-    padding: 1.5rem;
-    border: 1px solid var(--border-color, #444);
-    border-radius: 8px;
-    background-color: var(--bg-color, #1e1e1e);
-    color: var(--text-color, #ddd);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  }
-  .guitar-dropzone {
-    border: 2px dashed var(--border-color, #666);
-    border-radius: 6px;
-    padding: 2.5rem 1.5rem;
-    text-align: center;
-    cursor: pointer;
-    transition: border-color 0.2s, background-color 0.2s;
-  }
-  .guitar-dropzone:hover, .guitar-dropzone.dragover {
-    border-color: #42b983;
-    background-color: rgba(66, 185, 131, 0.05);
-  }
-  .guitar-dropzone input {
-    display: none;
-  }
-  .guitar-btn {
-    background-color: #42b983;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 0.6rem 1.2rem;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: opacity 0.2s;
-    display: inline-block;
-    margin-top: 0.5rem;
-  }
-  .guitar-btn:hover {
-    opacity: 0.88;
-  }
-  .guitar-btn:disabled {
-    background-color: #555;
-    cursor: not-allowed;
-    opacity: 0.6;
-  }
-  .guitar-section {
-    margin-top: 1.5rem;
-    padding-top: 1.2rem;
-    border-top: 1px solid var(--border-color, #333);
-  }
-  .guitar-input-field {
-    width: 100%;
-    padding: 0.5rem;
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid var(--border-color, #555);
-    border-radius: 4px;
-    color: inherit;
-    font-family: inherit;
-    box-sizing: border-box;
-    margin-top: 0.3rem;
-  }
-  .guitar-status {
-    margin-top: 0.8rem;
-    font-size: 0.95rem;
-    color: #42b983;
-    font-weight: 500;
-  }
-  .guitar-player {
-    width: 100%;
-    margin-top: 0.8rem;
-  }
+.guitar-app {
+  font-family: inherit;
+  max-width: 680px;
+  margin: 1.5rem auto;
+  padding: 1.5rem;
+  border: 1px solid var(--border-color, #444);
+  border-radius: 8px;
+  background-color: var(--bg-color, #1e1e1e);
+  color: var(--text-color, #ddd);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.guitar-dropzone {
+  border: 2px dashed var(--border-color, #666);
+  border-radius: 6px;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+.guitar-dropzone:hover, .guitar-dropzone.dragover {
+  border-color: #42b983;
+  background-color: rgba(66, 185, 131, 0.05);
+}
+.guitar-dropzone input {
+  display: none;
+}
+.guitar-btn {
+  background-color: #42b983;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+.guitar-btn:hover {
+  opacity: 0.88;
+}
+.guitar-btn:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.guitar-section {
+  margin-top: 1.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--border-color, #333);
+}
+.guitar-input-field {
+  width: 100%;
+  padding: 0.6rem;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--border-color, #555);
+  border-radius: 4px;
+  color: inherit;
+  font-family: inherit;
+  font-size: 1rem;
+  box-sizing: border-box;
+  margin-top: 0.3rem;
+}
+.guitar-status {
+  margin-top: 0.8rem;
+  font-size: 0.95rem;
+  color: #42b983;
+  font-weight: 500;
+}
+.guitar-player {
+  width: 100%;
+  margin-top: 0.8rem;
+}
 </style>
 
 <div class="guitar-app">
-  <p style="margin-top: 0; color: #888; font-size: 0.95rem;">
-    Zero server upload. Runs 100% locally in your browser. Eliminates room air and mic static while keeping your natural acoustic guitar tone.
-  </p>
-
-  <!-- Upload Zone -->
-  <div class="guitar-dropzone" id="dropZone" onclick="document.getElementById('audioInput').click()">
-    <span style="font-size: 2.5rem;">🎸</span>
-    <p style="margin: 0.5rem 0 0 0; font-weight: 600;">Click to upload or drag & drop guitar audio</p>
-    <p style="margin: 0.2rem 0 0 0; font-size: 0.85rem; color: #888;">MP3, WAV, M4A, AAC, FLAC supported</p>
-    <input type="file" id="audioInput" accept="audio/*" />
-  </div>
-
-  <!-- Processing & Renaming Area -->
-  <div id="actionArea" class="guitar-section" style="display: none;">
-    <p style="margin: 0 0 0.5rem 0; font-size: 0.9rem;" id="fileInfo"></p>
-    
-    <label style="font-size: 0.88rem; font-weight: 600;">Custom Output Filename:</label>
-    <input type="text" id="renameInput" class="guitar-input-field" placeholder="cleaned-guitar.wav" />
-
-    <button id="processBtn" class="guitar-btn" style="margin-top: 1rem;">Clean Audio Now</button>
-    <div id="statusText" class="guitar-status"></div>
-  </div>
-
-  <!-- Player & Download Area -->
-  <div id="resultArea" class="guitar-section" style="display: none;">
-    <h4 style="margin: 0 0 0.5rem 0;">✨ Cleaned Audio Preview</h4>
-    <audio id="audioPlayer" class="guitar-player" controls></audio>
-    
-    <div style="margin-top: 1rem; display: flex; gap: 1rem; align-items: center;">
-      <a id="downloadLink" class="guitar-btn" style="text-decoration: none;" download="cleaned-guitar.wav">
-        ⬇️ Download Clean WAV
-      </a>
-      <span id="outputStats" style="font-size: 0.85rem; color: #888;"></span>
-    </div>
-  </div>
+<p style="margin-top: 0; color: #888; font-size: 0.95rem;">
+Zero server upload. Runs 100% locally in your browser. Eliminates room air and mic static while keeping your natural acoustic guitar tone.
+</p>
+<div class="guitar-dropzone" id="dropZone">
+<span style="font-size: 2.5rem;">🎸</span>
+<p style="margin: 0.5rem 0 0 0; font-weight: 600;">Click to upload or drag & drop guitar audio</p>
+<p style="margin: 0.2rem 0 0 0; font-size: 0.85rem; color: #888;">MP3, WAV, M4A, AAC, FLAC supported</p>
+<input type="file" id="audioInput" accept="audio/*" />
+</div>
+<div id="actionArea" class="guitar-section" style="display: none;">
+<p style="margin: 0 0 0.5rem 0; font-size: 0.9rem;" id="fileInfo"></p>
+<label for="renameInput" style="font-size: 0.88rem; font-weight: 600; display: block;">Custom Output Filename:</label>
+<input type="text" id="renameInput" class="guitar-input-field" value="cleaned-guitar.wav" placeholder="cleaned-guitar.wav" />
+<button id="processBtn" class="guitar-btn" style="margin-top: 1rem;">Clean Audio Now</button>
+<div id="statusText" class="guitar-status"></div>
+</div>
+<div id="resultArea" class="guitar-section" style="display: none;">
+<h4 style="margin: 0 0 0.5rem 0;">✨ Cleaned Audio Preview</h4>
+<audio id="audioPlayer" class="guitar-player" controls></audio>
+<div style="margin-top: 1rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+<a id="downloadLink" class="guitar-btn" style="text-decoration: none;" download="cleaned-guitar.wav">⬇️ Download Clean WAV</a>
+<span id="outputStats" style="font-size: 0.85rem; color: #888;"></span>
+</div>
+</div>
 </div>
 
 <script>
@@ -179,7 +169,7 @@ class RealFFT {
   }
 }
 
-function processGuitarDSP(samples, sampleRate, progressCb) {
+function processGuitarDSP(samples, sampleRate) {
   const fftLen = 2048;
   const hopLen = 512;
   const numBins = fftLen / 2 + 1;
@@ -193,7 +183,6 @@ function processGuitarDSP(samples, sampleRate, progressCb) {
 
   const numFrames = Math.floor((samples.length - fftLen) / hopLen);
   const frameEnergies = [];
-
   const real = new Float32Array(fftLen);
   const imag = new Float32Array(fftLen);
 
@@ -224,7 +213,6 @@ function processGuitarDSP(samples, sampleRate, progressCb) {
     }
   }
 
-  // 3-bin triangular smoothing
   const noiseProfile = new Float32Array(numBins);
   for (let b = 0; b < numBins; b++) {
     const left = b > 0 ? rawNoiseProfile[b - 1] : rawNoiseProfile[b];
@@ -233,7 +221,6 @@ function processGuitarDSP(samples, sampleRate, progressCb) {
     noiseProfile[b] = 0.25 * left + 0.5 * center + 0.25 * right;
   }
 
-  // Frequency-dependent over-subtraction curve
   const alphaCurve = new Float32Array(numBins);
   for (let b = 0; b < numBins; b++) {
     const freq = b * binHz;
@@ -246,10 +233,9 @@ function processGuitarDSP(samples, sampleRate, progressCb) {
 
   const output = new Float32Array(samples.length + fftLen);
   const normSum = new Float32Array(samples.length + fftLen);
-
   const prevGains = new Float32Array(numBins).fill(1.0);
   const gammaSmooth = 0.70;
-  const minFloor = 0.001; // -60 dB noise suppression
+  const minFloor = 0.001;
 
   for (let f = 0; f < numFrames; f++) {
     const start = f * hopLen;
@@ -298,7 +284,6 @@ function processGuitarDSP(samples, sampleRate, progressCb) {
     clean[i] = normSum[i] > 1e-4 ? output[i] / normSum[i] : output[i];
   }
 
-  // Smooth downward expander
   const attackCoeff = Math.exp(-1.0 / (sampleRate * 0.005));
   const releaseCoeff = Math.exp(-1.0 / (sampleRate * 0.400));
   let envelope = 0;
@@ -316,7 +301,6 @@ function processGuitarDSP(samples, sampleRate, progressCb) {
     clean[i] *= expGain;
   }
 
-  // Lookahead Limiter (+4.5 dB clean volume boost)
   const boostGain = Math.pow(10, 4.5 / 20.0);
   const ceiling = 0.95;
   const lookahead = Math.round(sampleRate * 0.005);
@@ -361,9 +345,8 @@ function processGuitarDSP(samples, sampleRate, progressCb) {
   return finalized;
 }
 
-// Convert Float32Array to 16-bit stereo WAV Blob
 function encodeWav(monoSamples, sampleRate) {
-  const numChannels = 2; // Stereo
+  const numChannels = 2;
   const bytesPerSample = 2;
   const blockAlign = numChannels * bytesPerSample;
   const dataSize = monoSamples.length * blockAlign;
@@ -380,13 +363,13 @@ function encodeWav(monoSamples, sampleRate) {
   view.setUint32(4, 36 + dataSize, true);
   writeString(8, 'WAVE');
   writeString(12, 'fmt ');
-  view.setUint32(16, 16, true); // Subchunk1Size
-  view.setUint16(20, 1, true);  // PCM format
+  view.setUint32(16, 16, true);
+  view.setUint16(20, 1, true);
   view.setUint16(22, numChannels, true);
   view.setUint32(24, sampleRate, true);
   view.setUint32(28, sampleRate * blockAlign, true);
   view.setUint16(32, blockAlign, true);
-  view.setUint16(34, 16, true); // bitsPerSample
+  view.setUint16(34, 16, true);
   writeString(36, 'data');
   view.setUint32(40, dataSize, true);
 
@@ -395,99 +378,126 @@ function encodeWav(monoSamples, sampleRate) {
     const s = Math.max(-1, Math.min(1, monoSamples[i]));
     const val = s < 0 ? s * 0x8000 : s * 0x7FFF;
     const sampleInt16 = Math.round(val);
-    view.setInt16(offset, sampleInt16, true);       // Left
-    view.setInt16(offset + 2, sampleInt16, true);   // Right
+    view.setInt16(offset, sampleInt16, true);
+    view.setInt16(offset + 2, sampleInt16, true);
     offset += 4;
   }
 
   return new Blob([buffer], { type: 'audio/wav' });
 }
 
-// --- UI Interaction Logic ---
-let loadedAudioBuffer = null;
-let originalFileName = "guitar-cleaned";
+// --- Safe Initializer for DOM Elements ---
+function initGuitarStudio() {
+  const el = id => document.getElementById(id);
+  const dropZone = el('dropZone');
+  const audioInput = el('audioInput');
+  const actionArea = el('actionArea');
+  const resultArea = el('resultArea');
+  const processBtn = el('processBtn');
+  const statusText = el('statusText');
+  const renameInput = el('renameInput');
+  const audioPlayer = el('audioPlayer');
+  const downloadLink = el('downloadLink');
 
-const dropZone = document.getElementById('dropZone');
-const audioInput = document.getElementById('audioInput');
-const actionArea = document.getElementById('actionArea');
-const resultArea = document.getElementById('resultArea');
-const processBtn = document.getElementById('processBtn');
-const statusText = document.getElementById('statusText');
-const renameInput = document.getElementById('renameInput');
-const audioPlayer = document.getElementById('audioPlayer');
-const downloadLink = document.getElementById('downloadLink');
+  if (!dropZone || !audioInput) return;
 
-['dragenter', 'dragover'].forEach(name => {
-  dropZone.addEventListener(name, (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
-});
-['dragleave', 'drop'].forEach(name => {
-  dropZone.addEventListener(name, (e) => { e.preventDefault(); dropZone.classList.remove('dragover'); });
-});
-dropZone.addEventListener('drop', (e) => {
-  if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
-});
-audioInput.addEventListener('change', (e) => {
-  if (e.target.files.length) handleFile(e.target.files[0]);
-});
+  let loadedAudioBuffer = null;
+  let originalFileName = "guitar-cleaned";
 
-async function handleFile(file) {
-  originalFileName = file.name.replace(/\.[^/.]+$/, "");
-  renameInput.value = `${originalFileName}-clean.wav`;
-  statusText.textContent = "Decoding audio...";
-  actionArea.style.display = "block";
-  resultArea.style.display = "none";
+  dropZone.addEventListener('click', () => audioInput.click());
 
-  const arrayBuffer = await file.arrayBuffer();
-  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  loadedAudioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
+  ['dragenter', 'dragover'].forEach(name => {
+    dropZone.addEventListener(name, (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
+  });
+  ['dragleave', 'drop'].forEach(name => {
+    dropZone.addEventListener(name, (e) => { e.preventDefault(); dropZone.classList.remove('dragover'); });
+  });
+  dropZone.addEventListener('drop', (e) => {
+    if (e.dataTransfer && e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+  });
+  audioInput.addEventListener('change', (e) => {
+    if (e.target.files && e.target.files.length) handleFile(e.target.files[0]);
+  });
 
-  const durationSec = loadedAudioBuffer.duration.toFixed(1);
-  document.getElementById('fileInfo').textContent = `📁 ${file.name} (${durationSec}s, ${loadedAudioBuffer.sampleRate} Hz)`;
-  statusText.textContent = "Ready to process.";
-  processBtn.disabled = false;
+  async function handleFile(file) {
+    originalFileName = file.name.replace(/\.[^/.]+$/, "");
+    if (renameInput) {
+      renameInput.value = `${originalFileName}-clean.wav`;
+    }
+    if (statusText) statusText.textContent = "Decoding audio...";
+    if (actionArea) actionArea.style.display = "block";
+    if (resultArea) resultArea.style.display = "none";
+
+    try {
+      const arrayBuffer = await file.arrayBuffer();
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      loadedAudioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
+
+      const durationSec = loadedAudioBuffer.duration.toFixed(1);
+      const infoEl = el('fileInfo');
+      if (infoEl) infoEl.textContent = `📁 ${file.name} (${durationSec}s, ${loadedAudioBuffer.sampleRate} Hz)`;
+      if (statusText) statusText.textContent = "Ready to clean.";
+      if (processBtn) processBtn.disabled = false;
+    } catch (err) {
+      if (statusText) statusText.textContent = "Error decoding audio file: " + err.message;
+    }
+  }
+
+  if (processBtn) {
+    processBtn.addEventListener('click', () => {
+      if (!loadedAudioBuffer) return;
+      processBtn.disabled = true;
+      if (statusText) statusText.textContent = "Cleaning air & static... (~1-2s)";
+
+      setTimeout(() => {
+        try {
+          const numChannels = loadedAudioBuffer.numberOfChannels;
+          const length = loadedAudioBuffer.length;
+          const mono = new Float32Array(length);
+          if (numChannels >= 2) {
+            const ch0 = loadedAudioBuffer.getChannelData(0);
+            const ch1 = loadedAudioBuffer.getChannelData(1);
+            for (let i = 0; i < length; i++) mono[i] = (ch0[i] + ch1[i]) * 0.5;
+          } else {
+            mono.set(loadedAudioBuffer.getChannelData(0));
+          }
+
+          const cleanSamples = processGuitarDSP(mono, loadedAudioBuffer.sampleRate);
+          const wavBlob = encodeWav(cleanSamples, loadedAudioBuffer.sampleRate);
+          const wavUrl = URL.createObjectURL(wavBlob);
+
+          if (audioPlayer) audioPlayer.src = wavUrl;
+          if (downloadLink) {
+            downloadLink.href = wavUrl;
+            const renameVal = (renameInput && renameInput.value.trim()) || `${originalFileName}-clean.wav`;
+            const finalName = renameVal.endsWith('.wav') ? renameVal : `${renameVal}.wav`;
+            downloadLink.download = finalName;
+          }
+
+          if (statusText) statusText.textContent = "Audio cleaned successfully! 🎉";
+          if (resultArea) resultArea.style.display = "block";
+        } catch (err) {
+          if (statusText) statusText.textContent = "Processing error: " + err.message;
+        } finally {
+          processBtn.disabled = false;
+        }
+      }, 50);
+    });
+  }
+
+  if (renameInput) {
+    renameInput.addEventListener('input', () => {
+      if (downloadLink) {
+        const renameVal = renameInput.value.trim() || `${originalFileName}-clean.wav`;
+        downloadLink.download = renameVal.endsWith('.wav') ? renameVal : `${renameVal}.wav`;
+      }
+    });
+  }
 }
 
-processBtn.addEventListener('click', () => {
-  if (!loadedAudioBuffer) return;
-  processBtn.disabled = true;
-  statusText.textContent = "Cleaning air & static... (taking ~1-2 seconds)";
-
-  setTimeout(() => {
-    // Mix to mono
-    const numChannels = loadedAudioBuffer.numberOfChannels;
-    const length = loadedAudioBuffer.length;
-    const mono = new Float32Array(length);
-    if (numChannels >= 2) {
-      const ch0 = loadedAudioBuffer.getChannelData(0);
-      const ch1 = loadedAudioBuffer.getChannelData(1);
-      for (let i = 0; i < length; i++) mono[i] = (ch0[i] + ch1[i]) * 0.5;
-    } else {
-      mono.set(loadedAudioBuffer.getChannelData(0));
-    }
-
-    // Run DSP
-    const cleanSamples = processGuitarDSP(mono, loadedAudioBuffer.sampleRate);
-    const wavBlob = encodeWav(cleanSamples, loadedAudioBuffer.sampleRate);
-    const wavUrl = URL.createObjectURL(wavBlob);
-
-    audioPlayer.src = wavUrl;
-    downloadLink.href = wavUrl;
-    
-    // Update filename based on user rename input
-    const chosenName = renameInput.value.trim() || `${originalFileName}-clean.wav`;
-    const finalDownloadName = chosenName.endsWith('.wav') ? chosenName : `${chosenName}.wav`;
-    downloadLink.download = finalDownloadName;
-
-    statusText.textContent = "Processing complete! 🎉";
-    resultArea.style.display = "block";
-    processBtn.disabled = false;
-  }, 50);
-});
-
-renameInput.addEventListener('input', () => {
-  const chosenName = renameInput.value.trim() || `${originalFileName}-clean.wav`;
-  const finalDownloadName = chosenName.endsWith('.wav') ? chosenName : `${chosenName}.wav`;
-  downloadLink.download = finalDownloadName;
-});
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initGuitarStudio);
+} else {
+  initGuitarStudio();
+}
 </script>
-
