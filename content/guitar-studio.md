@@ -11,12 +11,6 @@ author = "Dhruvik Donga"
   font-family: inherit;
   max-width: 680px;
   margin: 1.5rem auto;
-  padding: 1.5rem;
-  border: 1px solid var(--border-color, #444);
-  border-radius: 8px;
-  background-color: var(--bg-color, #1e1e1e);
-  color: var(--text-color, #ddd);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   padding: 1.6rem;
   border: 1px solid var(--border-color, #2a2d36);
   border-radius: 12px;
@@ -25,21 +19,15 @@ author = "Dhruvik Donga"
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
 }
 .guitar-dropzone {
-  border: 2px dashed var(--border-color, #666);
-  border-radius: 6px;
-  padding: 2.5rem 1.5rem;
   border: 2px dashed #3a3f4d;
   border-radius: 8px;
   padding: 2.2rem 1.5rem;
   text-align: center;
   cursor: pointer;
-  transition: border-color 0.2s, background-color 0.2s;
   background: rgba(255, 255, 255, 0.02);
   transition: border-color 0.2s, background-color 0.2s, transform 0.15s ease;
 }
 .guitar-dropzone:hover, .guitar-dropzone.dragover {
-  border-color: #42b983;
-  background-color: rgba(66, 185, 131, 0.05);
   border-color: #10b981;
   background-color: rgba(16, 185, 129, 0.05);
   transform: translateY(-1px);
@@ -48,35 +36,27 @@ author = "Dhruvik Donga"
   display: none;
 }
 .guitar-btn {
-  background-color: #42b983;
   background: linear-gradient(135deg, #10b981, #059669);
   color: #fff;
   border: none;
-  border-radius: 5px;
-  padding: 0.6rem 1.2rem;
-  font-size: 1rem;
   border-radius: 6px;
   padding: 0.65rem 1.3rem;
   font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
-  transition: opacity 0.2s;
   transition: all 0.2s ease;
   display: inline-block;
   margin-top: 0.5rem;
   box-shadow: 0 3px 12px rgba(16, 185, 129, 0.25);
 }
 .guitar-btn:hover {
-  opacity: 0.88;
   opacity: 0.95;
   box-shadow: 0 5px 16px rgba(16, 185, 129, 0.38);
   transform: translateY(-1px);
 }
 .guitar-btn:disabled {
-  background-color: #555;
   background: #333842;
   cursor: not-allowed;
-  opacity: 0.6;
   opacity: 0.55;
   box-shadow: none;
   transform: none;
@@ -106,26 +86,18 @@ author = "Dhruvik Donga"
 .guitar-section {
   margin-top: 1.5rem;
   padding-top: 1.2rem;
-  border-top: 1px solid var(--border-color, #333);
   border-top: 1px solid var(--border-color, #262933);
 }
 .guitar-input-field {
   width: 100%;
-  padding: 0.6rem;
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid var(--border-color, #555);
-  border-radius: 4px;
-  color: inherit;
   padding: 0.65rem 0.8rem;
   background: #0f1013;
   border: 1px solid #333844;
   border-radius: 6px;
   color: #f1f5f9;
   font-family: inherit;
-  font-size: 1rem;
   font-size: 0.95rem;
   box-sizing: border-box;
-  margin-top: 0.3rem;
   margin-top: 0.4rem;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
@@ -136,8 +108,6 @@ author = "Dhruvik Donga"
 }
 .guitar-status {
   margin-top: 0.8rem;
-  font-size: 0.95rem;
-  color: #42b983;
   font-size: 0.92rem;
   color: #34d399;
   font-weight: 500;
@@ -150,18 +120,14 @@ author = "Dhruvik Donga"
 }
 .guitar-mode-toggle {
   display: inline-flex;
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid var(--border-color, #444);
   background: #0f1013;
   border: 1px solid #2e323d;
   border-radius: 6px;
-  padding: 2px;
   padding: 3px;
 }
 .guitar-toggle-btn {
   background: transparent;
   border: none;
-  color: #aaa;
   color: #94a3b8;
   padding: 0.35rem 0.85rem;
   font-size: 0.85rem;
@@ -171,28 +137,21 @@ author = "Dhruvik Donga"
   transition: all 0.15s ease;
 }
 .guitar-toggle-btn.active {
-  background: #42b983;
   background: #10b981;
   color: #fff;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
 }
 .guitar-toggle-btn.active.orig {
-  background: #e67e22;
   background: #f59e0b;
   color: #fff;
 }
 .guitar-viz-container {
-  margin-top: 1.2rem;
   margin-top: 1rem;
 }
 .guitar-viz-card {
-  background: rgba(0, 0, 0, 0.28);
-  border: 1px solid var(--border-color, #333);
   background: #0d0e11;
   border: 1px solid #23262f;
   border-radius: 6px;
-  padding: 0.6rem 0.8rem 0.5rem 0.8rem;
   padding: 0.65rem 0.85rem 0.5rem 0.85rem;
 }
 .guitar-viz-header {
@@ -212,17 +171,11 @@ author = "Dhruvik Donga"
   vertical-align: middle;
 }
 .badge-orig {
-  background: rgba(230, 126, 34, 0.2);
-  color: #e67e22;
-  border: 1px solid rgba(230, 126, 34, 0.4);
   background: rgba(245, 158, 11, 0.18);
   color: #fbbf24;
   border: 1px solid rgba(245, 158, 11, 0.35);
 }
 .badge-clean {
-  background: rgba(66, 185, 131, 0.2);
-  color: #42b983;
-  border: 1px solid rgba(66, 185, 131, 0.4);
   background: rgba(16, 185, 129, 0.18);
   color: #34d399;
   border: 1px solid rgba(16, 185, 129, 0.35);
@@ -233,7 +186,6 @@ author = "Dhruvik Donga"
   display: block;
   cursor: pointer;
   border-radius: 4px;
-  background: rgba(0, 0, 0, 0.25);
   background: #090a0c;
 }
 .guitar-demo-accordion {
@@ -281,15 +233,11 @@ author = "Dhruvik Donga"
 </style>
 
 <div class="guitar-app">
-<p style="margin-top: 0; color: #888; font-size: 0.95rem;">
 <p style="margin-top: 0; color: #94a3b8; font-size: 0.92rem; line-height: 1.5;">
 Zero server upload. Runs 100% locally in your browser. Eliminates room air and mic static while keeping your natural acoustic guitar tone.
 </p>
 
 <div class="guitar-dropzone" id="dropZone">
-<span style="font-size: 2.5rem;">🎸</span>
-<p style="margin: 0.5rem 0 0 0; font-weight: 600;">Click to upload or drag & drop guitar audio</p>
-<p style="margin: 0.2rem 0 0 0; font-size: 0.85rem; color: #888;">MP3, WAV, M4A, AAC, FLAC supported</p>
 <span style="font-size: 2.4rem;">🎸</span>
 <p style="margin: 0.5rem 0 0 0; font-weight: 600; font-size: 1rem;">Click to upload or drag & drop guitar audio</p>
 <p style="margin: 0.25rem 0 0 0; font-size: 0.82rem; color: #8492a6;">MP3, WAV, M4A, AAC, FLAC supported</p>
@@ -347,7 +295,6 @@ Recorded with an acoustic guitar in a standard home room. Notice how the fuzzy r
 
 <div id="resultArea" class="guitar-section" style="display: none;">
 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.6rem;">
-<h4 style="margin: 0;">🎧 Audio Preview & Comparison</h4>
 <h4 style="margin: 0; font-size: 1.05rem;">🎧 Audio Preview & Comparison</h4>
 <div class="guitar-mode-toggle" id="modeToggle">
 <button type="button" id="btnPlayClean" class="guitar-toggle-btn active">✨ Cleaned</button>
@@ -358,32 +305,24 @@ Recorded with an acoustic guitar in a standard home room. Notice how the fuzzy r
 <div class="guitar-viz-container">
 <div class="guitar-viz-card">
 <div class="guitar-viz-header">
-<span style="color: #e67e22; font-weight: 600; font-size: 0.85rem;">
 <span style="color: #f59e0b; font-weight: 600; font-size: 0.85rem;">
 <span class="guitar-badge badge-orig">BEFORE</span> Original (Raw Input with Hiss)
 </span>
-<span id="origDbStat" style="font-size: 0.78rem; color: #888;"></span>
 <span id="origDbStat" style="font-size: 0.78rem; color: #94a3b8;"></span>
 </div>
 <canvas id="origCanvas" class="guitar-canvas"></canvas>
 </div>
 <div class="guitar-viz-card" style="margin-top: 0.8rem;">
 <div class="guitar-viz-header">
-<span style="color: #42b983; font-weight: 600; font-size: 0.85rem;">
 <span style="color: #10b981; font-weight: 600; font-size: 0.85rem;">
 <span class="guitar-badge badge-clean">AFTER</span> Cleaned (Silent Floor & Pure Tone)
 </span>
-<span id="cleanDbStat" style="font-size: 0.78rem; color: #42b983;"></span>
 <span id="cleanDbStat" style="font-size: 0.78rem; color: #34d399;"></span>
 </div>
 <canvas id="cleanCanvas" class="guitar-canvas"></canvas>
 </div>
-<p style="margin: 0.4rem 0 0 0; font-size: 0.78rem; color: #777; text-align: right;">💡 Click either waveform to jump playback</p>
 <p style="margin: 0.4rem 0 0 0; font-size: 0.78rem; color: #64748b; text-align: right;">💡 Click either waveform to jump playback</p>
 </div>
-<div style="margin-top: 1rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
-<a id="downloadLink" class="guitar-btn" style="text-decoration: none;" download="cleaned-guitar.wav">⬇️ Download Clean WAV</a>
-<span id="outputStats" style="font-size: 0.85rem; color: #888;"></span>
 <div style="margin-top: 1.2rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
 <a id="downloadLink" class="guitar-btn-download" download="cleaned-guitar.wav">⬇️ Download Clean WAV</a>
 <span id="outputStats" style="font-size: 0.85rem; color: #94a3b8;"></span>
@@ -575,7 +514,6 @@ function processGuitarDSP(samples, sampleRate) {
   }
 
   // Downward Expander for absolute silence in rests
-  const windowSize = Math.floor(sampleRate * 0.02);
   let env = 0;
   const attack = Math.exp(-1.0 / (sampleRate * 0.008));
   const release = Math.exp(-1.0 / (sampleRate * 0.040));
@@ -671,10 +609,10 @@ function encodeWav(monoSamples, sampleRate) {
 }
 
 // Waveform downsampler and drawer
-function computeWaveformBars(samples, numBars) {
-  const bars = new Float32Array(numBars);
-  const step = samples.length / numBars;
-  for (let i = 0; i < numBars; i++) {
+function computeWaveformBars(samples, barCount) {
+  const bars = new Float32Array(barCount);
+  const step = samples.length / barCount;
+  for (let i = 0; i < barCount; i++) {
     const start = Math.floor(i * step);
     const end = Math.floor((i + 1) * step);
     let peak = 0;
@@ -713,12 +651,12 @@ function drawWaveform(canvas, bars, mainColor, playedColor, progressRatio) {
   ctx.lineTo(width, midY);
   ctx.stroke();
 
-  const numBars = bars.length;
-  const barWidth = width / numBars;
+  const barCount = bars.length;
+  const barWidth = width / barCount;
   const playheadX = progressRatio * width;
   const bw = Math.max(1, barWidth - 1);
 
-  for (let i = 0; i < numBars; i++) {
+  for (let i = 0; i < barCount; i++) {
     const x = i * barWidth;
     const peak = bars[i];
     const h = Math.max(1.5, peak * (height * 0.44));
@@ -946,11 +884,9 @@ function initGuitarStudio() {
   function renderWaveforms() {
     const prog = getProgress();
     if (origCanvas && origBars) {
-      drawWaveform(origCanvas, origBars, 'rgba(230, 126, 34, 0.45)', '#f39c12', prog);
       drawWaveform(origCanvas, origBars, 'rgba(245, 158, 11, 0.45)', '#f59e0b', prog);
     }
     if (cleanCanvas && cleanBars) {
-      drawWaveform(cleanCanvas, cleanBars, 'rgba(66, 185, 131, 0.45)', '#42b983', prog);
       drawWaveform(cleanCanvas, cleanBars, 'rgba(16, 185, 129, 0.45)', '#10b981', prog);
     }
   }
@@ -994,7 +930,6 @@ function initGuitarStudio() {
     audioPlayer.addEventListener('timeupdate', renderWaveforms);
   }
 
-  window.addEventListener('resize', renderWaveforms);
   window.addEventListener('resize', () => {
     renderWaveforms();
     if (demoAccordion && demoAccordion.open) renderDemoWaveforms();
@@ -1050,16 +985,12 @@ function initGuitarStudio() {
           cleanWavUrl = URL.createObjectURL(wavBlob);
 
           // Compute waveform bars & noise stats
-          const numBars = 220;
-          const numBars = 200;
-          origBars = computeWaveformBars(mono, numBars);
-          cleanBars = computeWaveformBars(cleanSamples, numBars);
+          origBars = computeWaveformBars(mono, 200);
+          cleanBars = computeWaveformBars(cleanSamples, 200);
 
           const origDb = estimateNoiseFloorDb(mono, loadedAudioBuffer.sampleRate);
           const cleanDb = estimateNoiseFloorDb(cleanSamples, loadedAudioBuffer.sampleRate);
 
-          if (origDbStat) origDbStat.textContent = `Hiss Floor: ~${Math.round(origDb)} dBFS (Detected)`;
-          if (cleanDbStat) cleanDbStat.textContent = `Hiss Floor: ~${Math.round(cleanDb)} dBFS (Silent -${Math.max(1, Math.round(origDb - cleanDb))} dB)`;
           if (origDbStat) origDbStat.textContent = `Floor: ~${Math.round(origDb)} dBFS`;
           if (cleanDbStat) cleanDbStat.textContent = `Floor: ~${Math.round(cleanDb)} dBFS (Silent -${Math.max(1, Math.round(origDb - cleanDb))} dB)`;
 
