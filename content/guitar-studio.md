@@ -171,7 +171,6 @@ Zero server upload. Runs 100% locally in your browser. Eliminates room air and m
 <div id="statusText" class="guitar-status"></div>
 </div>
 <div id="resultArea" class="guitar-section" style="display: none;">
-<h4 style="margin: 0 0 0.5rem 0;">✨ Cleaned Audio Preview</h4>
 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.6rem;">
 <h4 style="margin: 0;">🎧 Audio Preview & Comparison</h4>
 <div class="guitar-mode-toggle" id="modeToggle">
@@ -209,6 +208,8 @@ Zero server upload. Runs 100% locally in your browser. Eliminates room air and m
 </div>
 
 <script>
+(function() {
+'use strict';
 // --- Professional In-Browser DSP Engine ---
 class RealFFT {
   constructor(size) {
@@ -346,22 +347,13 @@ function processGuitarDSP(samples, sampleRate) {
     for (let b = 0; b < numBins; b++) {
       const mag = Math.hypot(real[b], imag[b]);
       const effectiveNoise = noiseProfile[b] * alphaCurve[b];
-      const snr = mag / Math.max(1e-7, effectiveNoise);
-      const snrDb = 20.0 * Math.log10(Math.max(1e-4, snr));
 
-      const rawGain = 1.0 / (1.0 + Math.exp(-0.75 * (snrDb - 4.0)));
-      const targetGain = Math.max(minFloor, rawGain);
-
-      let smoothedGain;
-      if (targetGain > prevGains[b]) {
-        smoothedGain = 0.20 * prevGains[b] + 0.80 * targetGain;
       let instantGain;
       if (mag > effectiveNoise * 1.05) {
         const snr = (mag - effectiveNoise) / Math.max(effectiveNoise, 1e-6);
         instantGain = snr / (1.0 + snr);
         instantGain = Math.pow(instantGain, 0.85);
       } else {
-        smoothedGain = gammaSmooth * prevGains[b] + (1.0 - gammaSmooth) * targetGain;
         const ratio = mag / Math.max(effectiveNoise, 1e-6);
         instantGain = minFloor * Math.pow(Math.max(0, ratio), 2.5);
       }
@@ -371,9 +363,6 @@ function processGuitarDSP(samples, sampleRate) {
 
       real[b] *= smoothedGain;
       imag[b] *= smoothedGain;
-      if (b > 0 && b < numBins - 1) {
-        real[fftLen - b] = real[b];
-        imag[fftLen - b] = -imag[b];
       if (b > 0 && b < fftLen / 2) {
         const mirror = fftLen - b;
         real[mirror] = real[b];
@@ -390,19 +379,12 @@ function processGuitarDSP(samples, sampleRate) {
     }
   }
 
-  const clean = new Float32Array(samples.length);
-  for (let i = 0; i < samples.length; i++) {
-    clean[i] = normSum[i] > 1e-4 ? output[i] / normSum[i] : output[i];
   const outLen = samples.length;
   const cleaned = new Float32Array(outLen);
   for (let i = 0; i < outLen; i++) {
     cleaned[i] = normSum[i] > 1e-4 ? output[i] / normSum[i] : output[i];
   }
 
-  const attackCoeff = Math.exp(-1.0 / (sampleRate * 0.005));
-  const releaseCoeff = Math.exp(-1.0 / (sampleRate * 0.400));
-  let envelope = 0;
-  let expGain = 1.0;
   // Downward Expander for absolute silence in rests
   const windowSize = Math.floor(sampleRate * 0.02);
   let env = 0;
@@ -410,12 +392,6 @@ function processGuitarDSP(samples, sampleRate) {
   const release = Math.exp(-1.0 / (sampleRate * 0.040));
   const threshold = 0.006;
 
-  for (let i = 0; i < clean.length; i++) {
-    const absIn = Math.abs(clean[i]);
-    if (absIn > envelope) {
-      envelope = attackCoeff * envelope + (1 - attackCoeff) * absIn;
-    } else {
-      envelope = releaseCoeff * envelope + (1 - releaseCoeff) * absIn;
   for (let i = 0; i < outLen; i++) {
     const s = Math.abs(cleaned[i]);
     env = s > env ? attack * env + (1.0 - attack) * s : release * env + (1.0 - release) * s;
@@ -425,39 +401,19 @@ function processGuitarDSP(samples, sampleRate) {
       const ratio = env / threshold;
       expanderGain = Math.pow(ratio, 2.0);
     }
-    const targetGain = envelope >= 0.022 ? 1.0 : Math.max(0.002, Math.exp((Math.log(Math.max(0.0001, envelope / 0.022)) / 2.302585 * 20.0) * 0.8));
-    expGain += (targetGain - expGain) * 0.06;
-    clean[i] *= expGain;
     cleaned[i] *= expanderGain;
   }
 
-  const boostGain = Math.pow(10, 4.5 / 20.0);
   // Lookahead Limiter (+4.5 dB boost)
   const lookaheadMs = 4.0;
   const lookaheadSamples = Math.floor(sampleRate * (lookaheadMs / 1000.0));
   const targetGain = 1.68;
   const ceiling = 0.95;
-  const lookahead = Math.round(sampleRate * 0.005);
-  const limAttack = Math.exp(-1.0 / (sampleRate * 0.002));
-  const limRelease = Math.exp(-1.0 / (sampleRate * 0.080));
   const releaseCoeff = Math.exp(-1.0 / (sampleRate * 0.060));
 
-  const boosted = new Float32Array(clean.length);
-  const reqGains = new Float32Array(clean.length);
-  for (let i = 0; i < clean.length; i++) {
-    const s = clean[i] * boostGain;
-    boosted[i] = s;
-    const absS = Math.abs(s);
-    reqGains[i] = (absS > ceiling && absS > 0.0001) ? ceiling / absS : 1.0;
-  }
   let limiterGain = 1.0;
   const finalSamples = new Float32Array(outLen);
 
-  const windowMin = new Float32Array(clean.length);
-  const deq = [];
-  for (let i = clean.length - 1; i >= 0; i--) {
-    while (deq.length > 0 && deq[deq.length - 1].g >= reqGains[i]) {
-      deq.pop();
   for (let i = 0; i < outLen; i++) {
     let localMax = 0;
     const windowEnd = Math.min(outLen, i + lookaheadSamples);
@@ -465,42 +421,26 @@ function processGuitarDSP(samples, sampleRate) {
       const a = Math.abs(cleaned[j]) * targetGain;
       if (a > localMax) localMax = a;
     }
-    deq.push({ idx: i, g: reqGains[i] });
-    if (deq[0].idx >= i + lookahead) {
-      deq.shift();
 
     let desiredGain = 1.0;
     if (localMax > ceiling) {
       desiredGain = ceiling / localMax;
     }
-    windowMin[i] = deq[0].g;
-  }
 
-  let curGain = 1.0;
-  const finalized = new Float32Array(clean.length);
-  for (let i = 0; i < clean.length; i++) {
-    const target = windowMin[i];
-    if (target < curGain) {
-      curGain = limAttack * curGain + (1 - limAttack) * target;
     if (desiredGain < limiterGain) {
       limiterGain = desiredGain;
     } else {
-      curGain = limRelease * curGain + (1 - limRelease) * target;
       limiterGain = releaseCoeff * limiterGain + (1.0 - releaseCoeff) * desiredGain;
     }
-    curGain = Math.min(curGain, reqGains[i]);
-    finalized[i] = boosted[i] * curGain;
 
     finalSamples[i] = Math.max(-0.98, Math.min(0.98, cleaned[i] * targetGain * limiterGain));
   }
 
-  return finalized;
   return finalSamples;
 }
 
 function encodeWav(monoSamples, sampleRate) {
   const numChannels = 2;
-  const bytesPerSample = 2;
   const bitsPerSample = 16;
   const bytesPerSample = bitsPerSample / 8;
   const blockAlign = numChannels * bytesPerSample;
@@ -508,9 +448,6 @@ function encodeWav(monoSamples, sampleRate) {
   const buffer = new ArrayBuffer(44 + dataSize);
   const view = new DataView(buffer);
 
-  function writeString(offset, string) {
-    for (let i = 0; i < string.length; i++) {
-      view.setUint8(offset + i, string.charCodeAt(i));
   function writeString(offset, str) {
     for (let i = 0; i < str.length; i++) {
       view.setUint8(offset + i, str.charCodeAt(i));
@@ -810,9 +747,7 @@ function initGuitarStudio() {
 
           const cleanSamples = processGuitarDSP(mono, loadedAudioBuffer.sampleRate);
           const wavBlob = encodeWav(cleanSamples, loadedAudioBuffer.sampleRate);
-          const wavUrl = URL.createObjectURL(wavBlob);
 
-          if (audioPlayer) audioPlayer.src = wavUrl;
           if (cleanWavUrl) URL.revokeObjectURL(cleanWavUrl);
           cleanWavUrl = URL.createObjectURL(wavBlob);
 
@@ -833,7 +768,6 @@ function initGuitarStudio() {
 
           if (audioPlayer) audioPlayer.src = cleanWavUrl;
           if (downloadLink) {
-            downloadLink.href = wavUrl;
             downloadLink.href = cleanWavUrl;
             const renameVal = (renameInput && renameInput.value.trim()) || `${originalFileName}-clean.wav`;
             const finalName = renameVal.endsWith('.wav') ? renameVal : `${renameVal}.wav`;
@@ -868,4 +802,5 @@ if (document.readyState === 'loading') {
 } else {
   initGuitarStudio();
 }
+})();
 </script>
