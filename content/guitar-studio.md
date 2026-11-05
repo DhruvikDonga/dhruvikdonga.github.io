@@ -1,6 +1,6 @@
 +++
 title = "Acoustic Guitar & Vocal Studio – Free In-Browser Denoise, Mixer & Cutter"
-description = "Free client-side acoustic guitar and vocal background noise remover, snippet cutter, and 5-track audio mixer. Clean room air and mic hiss, balance stereo pan, and export WhatsApp-friendly MP3s directly in your browser."
+description = "Free client-side acoustic guitar and vocal background noise remover, anti-click snippet cutter, and 5-track audio mixer with customizable MP3 bitrates. Clean room air and mic hiss, balance stereo pan, and export WhatsApp-friendly MP3s directly in your browser."
 date = "2026-11-05"
 aliases = ["guitar-cleaner", "guitar-studio", "vocal-cleaner", "mixer", "pedal"]
 author = "Dhruvik Donga"
@@ -103,6 +103,10 @@ categories = ["Audio Engineering", "Projects"]
 .guitar-app.maximized .guitar-badge {
   font-size: 0.8rem !important;
   padding: 3px 8px !important;
+}
+.guitar-app.maximized .guitar-select {
+  font-size: 0.95rem !important;
+  padding: 0.55rem 0.9rem !important;
 }
 .studio-tabs {
   display: flex;
@@ -258,6 +262,23 @@ categories = ["Audio Engineering", "Projects"]
 .guitar-input-field:focus {
   border-color: #10b981;
   outline: none;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
+}
+.guitar-select {
+  padding: 0.45rem 0.7rem;
+  background: #0f1013;
+  border: 1px solid #333844;
+  border-radius: 6px;
+  color: #f1f5f9;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+.guitar-select:focus {
+  border-color: #10b981;
   box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
 }
 .guitar-status {
@@ -534,8 +555,8 @@ Most "free" online audio tools are frustrating: they force account registrations
 This studio solves that with a fast, private, and browser-native tool for musicians:
 - **🔒 100% Client-Side & Private**: Your audio never touches a server. Everything runs directly on your device using the Web Audio API.
 - **🎸 Dedicated Acoustic & Vocal DSP**: Separate spectral subtraction algorithms tailored for acoustic guitar (preserving natural wood resonance and string brightness) and vocals (80 Hz low-rumble filter + lyric formant preservation).
-- **🎛️ 5-Track Pocket Mixer**: Layer guitar takes and vocal tracks, balance stereo pan, set starting delays, and cut or duplicate lead/vocal snippets.
-- **📱 WhatsApp-Friendly MP3 Exports**: Encodes high-quality 192 kbps MP3s in seconds (~1.5 MB instead of 18 MB) for instant mobile sharing.
+- **🎛️ 5-Track Pocket Mixer**: Layer guitar takes and vocal tracks, balance stereo pan, set starting delays, and cut/duplicate snippets with smooth anti-click crossfades.
+- **📱 WhatsApp-Friendly MP3 Exports & Bitrate Selection**: Choose your preferred bitrate (128, 192, 256, or 320 kbps) to balance file size (~0.9 MB to ~2.4 MB/min) and studio fidelity for instant mobile sharing. Automatically remembers your favorite cleaning settings across visits.
 - **⛶ Responsive & Fullscreen**: Use it on your phone after a jam session or expand to full-screen DAW mode on desktop.
 
 ---
@@ -664,7 +685,16 @@ Recorded with an acoustic guitar in a standard home room. Notice how the fuzzy r
 
 <!-- Download and Send to Mixer -->
 <div style="margin-top: 1.2rem; display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
-<button type="button" id="btnDownloadMp3" class="guitar-btn-download-mp3">⬇️ Download MP3 (~1.5MB WhatsApp)</button>
+<div style="display: inline-flex; align-items: center; gap: 0.4rem;">
+<label for="cleanerMp3Bitrate" style="font-size: 0.82rem; color: #94a3b8; font-weight: 600;">MP3 Quality:</label>
+<select id="cleanerMp3Bitrate" class="guitar-select">
+<option value="128">128 kbps (Compact ~0.9MB/min)</option>
+<option value="192" selected>192 kbps (Standard ~1.4MB/min)</option>
+<option value="256">256 kbps (High ~1.9MB/min)</option>
+<option value="320">320 kbps (Ultra ~2.4MB/min)</option>
+</select>
+</div>
+<button type="button" id="btnDownloadMp3" class="guitar-btn-download-mp3">⬇️ Download MP3</button>
 <button type="button" id="btnDownloadWav" class="guitar-btn-download-wav">⬇️ Lossless WAV</button>
 <button type="button" id="btnSendToMixer" class="guitar-btn-secondary" style="border-color: #10b981; color: #34d399;">➕ Send to 5-Track Mixer</button>
 </div>
@@ -687,8 +717,17 @@ Combine your cleaned guitar and friend's vocal tracks. Cut snippets, duplicate/c
 </div>
 <div style="display: flex; align-items: center; gap: 0.8rem;">
 <label style="font-size: 0.82rem; font-weight: 600; color: #94a3b8;">Master Vol:</label>
-<input type="range" id="mixerMasterVolume" min="0" max="1.5" step="0.05" value="1.0" style="width: 100px; accent-color: #10b981;" />
+<input type="range" id="mixerMasterVolume" min="0" max="1.5" step="0.05" value="1.0" style="width: 90px; accent-color: #10b981;" />
 <span id="mixerMasterVolVal" style="font-size: 0.82rem; color: #34d399;">100%</span>
+</div>
+<div style="display: flex; align-items: center; gap: 0.4rem;">
+<label for="mixerMp3Bitrate" style="font-size: 0.82rem; color: #94a3b8; font-weight: 600;">MP3 Quality:</label>
+<select id="mixerMp3Bitrate" class="guitar-select">
+<option value="128">128 kbps (~0.9MB/m)</option>
+<option value="192" selected>192 kbps (~1.4MB/m)</option>
+<option value="256">256 kbps (~1.9MB/m)</option>
+<option value="320">320 kbps (~2.4MB/m)</option>
+</select>
 </div>
 <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
 <button type="button" id="btnMixerAddTrack" class="guitar-btn-secondary" style="border-color: #3b82f6; color: #60a5fa;">➕ Add Audio File</button>
@@ -722,6 +761,40 @@ function formatTimeExact(sec) {
   const s = Math.floor(sec % 60);
   const ms = Math.floor((sec % 1) * 10);
   return `${m}:${s < 10 ? '0' : ''}${s}.${ms}`;
+}
+
+// --- Smooth Anti-Click Crossfading (Half-Hann Window) ---
+function applyCrossfadeWindow(floatArray, sampleRate, fadeMs = 15) {
+  const fadeSamples = Math.min(Math.floor(sampleRate * (fadeMs / 1000)), Math.floor(floatArray.length / 2));
+  if (fadeSamples <= 0) return floatArray;
+  // Fade in S-curve
+  for (let i = 0; i < fadeSamples; i++) {
+    const factor = 0.5 * (1 - Math.cos((Math.PI * i) / fadeSamples));
+    floatArray[i] *= factor;
+  }
+  // Fade out S-curve
+  const len = floatArray.length;
+  for (let i = 0; i < fadeSamples; i++) {
+    const factor = 0.5 * (1 - Math.cos((Math.PI * (fadeSamples - 1 - i)) / fadeSamples));
+    floatArray[len - fadeSamples + i] *= factor;
+  }
+  return floatArray;
+}
+
+// --- Persistence Helpers (localStorage) ---
+function saveSetting(key, val) {
+  try {
+    localStorage.setItem(key, String(val));
+  } catch (e) {}
+}
+
+function loadSetting(key, defVal) {
+  try {
+    const val = localStorage.getItem(key);
+    return val !== null ? val : defVal;
+  } catch (e) {
+    return defVal;
+  }
 }
 
 // --- Dynamic LAME.js MP3 Encoder Loader ---
@@ -1304,24 +1377,54 @@ function initGuitarStudio() {
   const btnDownloadWav = el('btnDownloadWav');
   const btnSendToMixer = el('btnSendToMixer');
   const exportStatus = el('exportStatus');
+  const cleanerMp3Bitrate = el('cleanerMp3Bitrate');
+  const mixerMp3Bitrate = el('mixerMp3Bitrate');
 
   let currentTargetMode = 'guitar';
-  if (btnModeGuitar) {
-    btnModeGuitar.addEventListener('click', () => {
-      currentTargetMode = 'guitar';
-      btnModeGuitar.classList.add('active');
-      btnModeVocal.classList.remove('active');
+
+  function setTargetMode(mode) {
+    currentTargetMode = mode;
+    saveSetting('ag_cleaner_mode', mode);
+    if (mode === 'vocal') {
+      if (btnModeVocal) btnModeVocal.classList.add('active');
+      if (btnModeGuitar) btnModeGuitar.classList.remove('active');
+      if (targetModeDesc) targetModeDesc.textContent = '🎙️ Vocal Mode: Applies 80Hz rumble cut, protects vocal vowel formants, smooth release to keep natural breath decays.';
+    } else {
+      if (btnModeGuitar) btnModeGuitar.classList.add('active');
+      if (btnModeVocal) btnModeVocal.classList.remove('active');
       if (targetModeDesc) targetModeDesc.textContent = '🎸 Guitar Mode: Preserves warm wooden resonance and pick brightness while eliminating background static.';
-    });
+    }
+  }
+
+  if (btnModeGuitar) {
+    btnModeGuitar.addEventListener('click', () => setTargetMode('guitar'));
   }
   if (btnModeVocal) {
-    btnModeVocal.addEventListener('click', () => {
-      currentTargetMode = 'vocal';
-      btnModeVocal.classList.add('active');
-      btnModeGuitar.classList.remove('active');
-      if (targetModeDesc) targetModeDesc.textContent = '🎙️ Vocal Mode: Applies 80Hz rumble cut, protects vocal vowel formants, smooth release to keep natural breath decays.';
-    });
+    btnModeVocal.addEventListener('click', () => setTargetMode('vocal'));
   }
+
+  // Restore saved cleaning mode
+  const savedCleaningMode = loadSetting('ag_cleaner_mode', 'guitar');
+  if (savedCleaningMode === 'vocal') {
+    setTargetMode('vocal');
+  }
+
+  // Synchronize and restore MP3 Bitrate setting
+  function syncMp3Bitrate(kbps) {
+    saveSetting('ag_mp3_bitrate', kbps);
+    if (cleanerMp3Bitrate && cleanerMp3Bitrate.value !== kbps) cleanerMp3Bitrate.value = kbps;
+    if (mixerMp3Bitrate && mixerMp3Bitrate.value !== kbps) mixerMp3Bitrate.value = kbps;
+  }
+
+  if (cleanerMp3Bitrate) {
+    cleanerMp3Bitrate.addEventListener('change', (e) => syncMp3Bitrate(e.target.value));
+  }
+  if (mixerMp3Bitrate) {
+    mixerMp3Bitrate.addEventListener('change', (e) => syncMp3Bitrate(e.target.value));
+  }
+
+  const savedBitrate = loadSetting('ag_mp3_bitrate', '192');
+  syncMp3Bitrate(savedBitrate);
 
   // Demo Section
   const demoAccordion = el('demoAccordion');
@@ -1671,14 +1774,15 @@ function initGuitarStudio() {
   if (btnDownloadMp3) {
     btnDownloadMp3.addEventListener('click', async () => {
       if (!cleanSamplesCache) return;
-      if (exportStatus) exportStatus.textContent = "Encoding compressed MP3 for WhatsApp... (~1s)";
+      const kbps = parseInt((cleanerMp3Bitrate && cleanerMp3Bitrate.value) || '192', 10);
+      if (exportStatus) exportStatus.textContent = `Encoding ${kbps} kbps MP3 for WhatsApp... (~1s)`;
       btnDownloadMp3.disabled = true;
       try {
-        const mp3Blob = await encodeMp3(cleanSamplesCache, cleanSamplesCache, cleanSampleRate, 192);
+        const mp3Blob = await encodeMp3(cleanSamplesCache, cleanSamplesCache, cleanSampleRate, kbps);
         const baseName = (renameInput && renameInput.value.trim().replace(/\.[^/.]+$/, "")) || originalFileName;
         downloadBlob(mp3Blob, `${baseName}.mp3`);
         const mbSize = (mp3Blob.size / (1024 * 1024)).toFixed(1);
-        if (exportStatus) exportStatus.textContent = `MP3 Ready! (${mbSize} MB - Perfect for WhatsApp) 🎉`;
+        if (exportStatus) exportStatus.textContent = `MP3 Ready! (${mbSize} MB @ ${kbps} kbps - Perfect for WhatsApp) 🎉`;
       } catch (err) {
         if (exportStatus) exportStatus.textContent = "MP3 encoding failed: " + err.message;
       } finally {
@@ -1875,7 +1979,20 @@ function initGuitarStudio() {
       src.buffer = track.buffer;
 
       const gain = mixerAudioCtx.createGain();
-      gain.gain.value = track.volume;
+      const targetVol = track.volume;
+      const when = mixerStartTime + startDelayInCtx;
+      const grainOffset = track.trimStart + offsetInSnippet;
+
+      // Anti-click crossfade envelope (12ms smooth ramp-in and ramp-out)
+      const fadeSec = 0.012;
+      const effectiveFade = Math.min(fadeSec, Math.max(0.001, durationToPlay / 2));
+      gain.gain.setValueAtTime(0, when);
+      gain.gain.linearRampToValueAtTime(targetVol, when + effectiveFade);
+      const stopTime = when + durationToPlay;
+      if (stopTime - effectiveFade > when + effectiveFade) {
+        gain.gain.setValueAtTime(targetVol, stopTime - effectiveFade);
+      }
+      gain.gain.linearRampToValueAtTime(0, stopTime);
 
       const panner = mixerAudioCtx.createStereoPanner ? mixerAudioCtx.createStereoPanner() : null;
       if (panner) panner.pan.value = track.pan;
@@ -1886,8 +2003,6 @@ function initGuitarStudio() {
         src.connect(gain).connect(masterGainNode);
       }
 
-      const when = mixerStartTime + startDelayInCtx;
-      const grainOffset = track.trimStart + offsetInSnippet;
       src.start(when, grainOffset, durationToPlay);
       activeSources.push(src);
     });
@@ -1916,8 +2031,13 @@ function initGuitarStudio() {
   if (btnMixerStop) btnMixerStop.addEventListener('click', stopMixerPlayback);
 
   if (mixerMasterVolume) {
+    const savedMasterVol = loadSetting('ag_mixer_master_vol', '1.0');
+    mixerMasterVolume.value = savedMasterVol;
+    if (mixerMasterVolVal) mixerMasterVolVal.textContent = `${Math.round(parseFloat(savedMasterVol) * 100)}%`;
+
     mixerMasterVolume.addEventListener('input', () => {
       if (mixerMasterVolVal) mixerMasterVolVal.textContent = `${Math.round(mixerMasterVolume.value * 100)}%`;
+      saveSetting('ag_mixer_master_vol', mixerMasterVolume.value);
     });
   }
 
@@ -2152,7 +2272,9 @@ function initGuitarStudio() {
 
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         const croppedBuffer = audioCtx.createBuffer(1, numSamples, sr);
-        const monoData = track.buffer.getChannelData(0).subarray(startSample, endSample);
+        // Copy audio slice and apply smooth 15ms anti-click crossfade at boundaries
+        const monoData = track.buffer.getChannelData(0).slice(startSample, endSample);
+        applyCrossfadeWindow(monoData, sr, 15);
         croppedBuffer.getChannelData(0).set(monoData);
 
         track.buffer = croppedBuffer;
@@ -2207,7 +2329,18 @@ function initGuitarStudio() {
       src.buffer = track.buffer;
 
       const gain = offlineCtx.createGain();
-      gain.gain.value = track.volume;
+      const targetVol = track.volume;
+
+      // Anti-click crossfade envelope (12ms smooth ramp-in and ramp-out)
+      const fadeSec = 0.012;
+      const effectiveFade = Math.min(fadeSec, Math.max(0.001, dur / 2));
+      gain.gain.setValueAtTime(0, track.offset);
+      gain.gain.linearRampToValueAtTime(targetVol, track.offset + effectiveFade);
+      const stopTime = track.offset + dur;
+      if (stopTime - effectiveFade > track.offset + effectiveFade) {
+        gain.gain.setValueAtTime(targetVol, stopTime - effectiveFade);
+      }
+      gain.gain.linearRampToValueAtTime(0, stopTime);
 
       const panner = offlineCtx.createStereoPanner ? offlineCtx.createStereoPanner() : null;
       if (panner) panner.pan.value = track.pan;
@@ -2228,18 +2361,19 @@ function initGuitarStudio() {
   if (btnExportMixMp3) {
     btnExportMixMp3.addEventListener('click', async () => {
       try {
-        if (mixerExportStatus) mixerExportStatus.textContent = "Rendering multi-track mix and encoding MP3 for WhatsApp... (~2s)";
+        const kbps = parseInt((mixerMp3Bitrate && mixerMp3Bitrate.value) || '192', 10);
+        if (mixerExportStatus) mixerExportStatus.textContent = `Rendering multi-track mix and encoding ${kbps} kbps MP3... (~2s)`;
         btnExportMixMp3.disabled = true;
 
         const renderedBuffer = await renderMixToBuffer();
         const leftChannel = renderedBuffer.getChannelData(0);
         const rightChannel = renderedBuffer.getChannelData(1);
 
-        const mp3Blob = await encodeMp3(leftChannel, rightChannel, renderedBuffer.sampleRate, 192);
+        const mp3Blob = await encodeMp3(leftChannel, rightChannel, renderedBuffer.sampleRate, kbps);
         downloadBlob(mp3Blob, "mixed-song.mp3");
 
         const mbSize = (mp3Blob.size / (1024 * 1024)).toFixed(1);
-        if (mixerExportStatus) mixerExportStatus.textContent = `Mix Exported! (${mbSize} MB MP3 - Ready to send on WhatsApp) 🎉`;
+        if (mixerExportStatus) mixerExportStatus.textContent = `Mix Exported! (${mbSize} MB @ ${kbps} kbps - Ready for WhatsApp) 🎉`;
       } catch (err) {
         if (mixerExportStatus) mixerExportStatus.textContent = "Mix export error: " + err.message;
       } finally {
