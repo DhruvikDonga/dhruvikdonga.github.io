@@ -1,9 +1,11 @@
 +++
-title = "Acoustic Guitar & Vocal Studio"
-description = "Browser-based client-side guitar & vocal denoiser, snippet cutter, and 5-track audio mixer with WhatsApp-friendly MP3 export"
+title = "Acoustic Guitar & Vocal Studio – Free In-Browser Denoise, Mixer & Cutter"
+description = "Free client-side acoustic guitar and vocal background noise remover, snippet cutter, and 5-track audio mixer. Clean room air and mic hiss, balance stereo pan, and export WhatsApp-friendly MP3s directly in your browser."
 date = "2026-11-05"
 aliases = ["guitar-cleaner", "guitar-studio", "vocal-cleaner", "mixer", "pedal"]
 author = "Dhruvik Donga"
+tags = ["audio", "guitar", "vocal", "dsp", "web-audio", "noise-reduction", "music-production"]
+categories = ["Audio Engineering", "Projects"]
 +++
 
 <style>
@@ -32,14 +34,75 @@ author = "Dhruvik Donga"
   z-index: 999999 !important;
   overflow-y: auto !important;
   box-sizing: border-box !important;
-  padding: 1.5rem 2.5rem !important;
+  padding: 2rem 3.5rem !important;
   border: none !important;
+  font-size: 1.05rem !important;
+}
+.guitar-app.maximized .studio-tab-btn {
+  font-size: 1.15rem !important;
+  padding: 0.8rem 1.4rem !important;
+}
+.guitar-app.maximized .guitar-dropzone {
+  padding: 3.5rem 2rem !important;
+}
+.guitar-app.maximized .guitar-dropzone span {
+  font-size: 3.2rem !important;
+}
+.guitar-app.maximized .guitar-dropzone p:first-of-type {
+  font-size: 1.25rem !important;
+}
+.guitar-app.maximized .guitar-btn,
+.guitar-app.maximized .guitar-btn-download-mp3,
+.guitar-app.maximized .guitar-btn-download-wav,
+.guitar-app.maximized .guitar-btn-secondary {
+  font-size: 1.05rem !important;
+  padding: 0.75rem 1.5rem !important;
 }
 .guitar-app.maximized .guitar-canvas {
-  height: 130px !important;
+  height: 155px !important;
 }
 .guitar-app.maximized .mixer-canvas {
-  height: 95px !important;
+  height: 100px !important;
+}
+.guitar-app.maximized .mixer-track-card {
+  padding: 1.4rem !important;
+  margin-bottom: 1.4rem !important;
+}
+.guitar-app.maximized .mixer-track-name-input {
+  font-size: 1.15rem !important;
+  width: 320px !important;
+}
+.guitar-app.maximized .mixer-btn-tag {
+  font-size: 0.92rem !important;
+  padding: 0.35rem 0.8rem !important;
+}
+.guitar-app.maximized .guitar-time-badge,
+.guitar-app.maximized .mixer-timecode {
+  font-size: 1.15rem !important;
+  padding: 0.4rem 0.9rem !important;
+}
+.guitar-app.maximized .guitar-input-field {
+  font-size: 1.05rem !important;
+  padding: 0.8rem 1rem !important;
+}
+.guitar-app.maximized .mixer-controls-grid {
+  gap: 1rem !important;
+  padding: 1rem !important;
+}
+.guitar-app.maximized .mixer-control-group label {
+  font-size: 0.88rem !important;
+}
+.guitar-app.maximized .mixer-control-group input[type="number"] {
+  font-size: 0.95rem !important;
+  padding: 0.4rem 0.6rem !important;
+}
+.guitar-app.maximized .guitar-toggle-btn {
+  font-size: 0.95rem !important;
+  padding: 0.45rem 1.1rem !important;
+}
+.guitar-app.maximized .guitar-badge {
+  font-size: 0.8rem !important;
+  padding: 3px 8px !important;
 }
 .studio-tabs {
   display: flex;
@@ -461,6 +524,21 @@ author = "Dhruvik Donga"
   cursor: pointer;
 }
 </style>
+
+### 🎵 Why I Built This
+
+I built this studio because I frequently record acoustic guitar melodies and song ideas at home, and collaborate with friends singing over phone recordings.
+
+Most "free" online audio tools are frustrating: they force account registrations, show ads, upload your private voice notes to third-party cloud servers, or export massive 18 MB uncompressed WAV files that fail to send on WhatsApp. Furthermore, generic speech denoisers often strip out acoustic guitar overtones, leaving instruments sounding muffled and bass-heavy.
+
+This studio solves that with a fast, private, and browser-native tool for musicians:
+- **🔒 100% Client-Side & Private**: Your audio never touches a server. Everything runs directly on your device using the Web Audio API.
+- **🎸 Dedicated Acoustic & Vocal DSP**: Separate spectral subtraction algorithms tailored for acoustic guitar (preserving natural wood resonance and string brightness) and vocals (80 Hz low-rumble filter + lyric formant preservation).
+- **🎛️ 5-Track Pocket Mixer**: Layer guitar takes and vocal tracks, balance stereo pan, set starting delays, and cut or duplicate lead/vocal snippets.
+- **📱 WhatsApp-Friendly MP3 Exports**: Encodes high-quality 192 kbps MP3s in seconds (~1.5 MB instead of 18 MB) for instant mobile sharing.
+- **⛶ Responsive & Fullscreen**: Use it on your phone after a jam session or expand to full-screen DAW mode on desktop.
+
+---
 
 <div class="guitar-app" id="guitarApp">
 <div class="studio-tabs" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
