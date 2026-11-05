@@ -18,6 +18,28 @@ author = "Dhruvik Donga"
   background-color: var(--bg-color, #16171b);
   color: var(--text-color, #e2e8f0);
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+  transition: all 0.2s ease;
+}
+.guitar-app.maximized {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  height: 100vh !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  z-index: 999999 !important;
+  overflow-y: auto !important;
+  box-sizing: border-box !important;
+  padding: 1.5rem 2.5rem !important;
+  border: none !important;
+}
+.guitar-app.maximized .guitar-canvas {
+  height: 130px !important;
+}
+.guitar-app.maximized .mixer-canvas {
+  height: 95px !important;
 }
 .studio-tabs {
   display: flex;
@@ -440,10 +462,15 @@ author = "Dhruvik Donga"
 }
 </style>
 
-<div class="guitar-app">
-<div class="studio-tabs">
+<div class="guitar-app" id="guitarApp">
+<div class="studio-tabs" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+<div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
 <button type="button" id="tabBtnCleaner" class="studio-tab-btn active">🧹 Audio Cleaner (Guitar & Vocal)</button>
 <button type="button" id="tabBtnMixer" class="studio-tab-btn">🎛️ 5-Track Mixer & Cutter (<span id="trackCountBadge">0/5</span>)</button>
+</div>
+<button type="button" id="btnToggleFullscreen" class="guitar-btn-secondary" style="padding: 0.35rem 0.8rem; font-size: 0.82rem; margin-bottom: 0.2rem;" title="Expand studio to occupy 100% width and height of page">
+<span id="fullscreenIcon">⛶</span> <span id="fullscreenText">Maximize Studio</span>
+</button>
 </div>
 
 <!-- ================= TAB 1: AUDIO CLEANER ================= -->
@@ -1145,6 +1172,36 @@ function initGuitarStudio() {
 
   if (tabBtnCleaner) tabBtnCleaner.addEventListener('click', () => switchTab('cleaner'));
   if (tabBtnMixer) tabBtnMixer.addEventListener('click', () => switchTab('mixer'));
+
+  // Fullscreen / Maximize Studio Logic
+  const guitarApp = el('guitarApp');
+  const btnToggleFullscreen = el('btnToggleFullscreen');
+  const fullscreenIcon = el('fullscreenIcon');
+  const fullscreenText = el('fullscreenText');
+
+  function toggleFullscreen() {
+    if (!guitarApp) return;
+    const isMax = guitarApp.classList.toggle('maximized');
+    if (fullscreenIcon) fullscreenIcon.textContent = isMax ? '⤢' : '⛶';
+    if (fullscreenText) fullscreenText.textContent = isMax ? 'Restore Size' : 'Maximize Studio';
+    setTimeout(() => {
+      renderWaveforms();
+      if (demoAccordion && demoAccordion.open) renderDemoWaveforms();
+      if (mixerTracks.length > 0) {
+        mixerTracks.forEach(t => renderTrackWaveform(t));
+      }
+    }, 60);
+  }
+
+  if (btnToggleFullscreen) {
+    btnToggleFullscreen.addEventListener('click', toggleFullscreen);
+  }
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && guitarApp && guitarApp.classList.contains('maximized')) {
+      toggleFullscreen();
+    }
+  });
 
   // Cleaner Elements
   const dropZone = el('dropZone');
