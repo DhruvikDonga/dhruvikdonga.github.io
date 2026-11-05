@@ -9,9 +9,10 @@ author = "Dhruvik Donga"
 <style>
 .guitar-app {
   font-family: inherit;
-  max-width: 720px;
+  max-width: 960px;
+  width: 95%;
   margin: 1.5rem auto;
-  padding: 1.6rem;
+  padding: 1.8rem;
   border: 1px solid var(--border-color, #2a2d36);
   border-radius: 12px;
   background-color: var(--bg-color, #16171b);
@@ -49,7 +50,7 @@ author = "Dhruvik Donga"
 .guitar-dropzone {
   border: 2px dashed #3a3f4d;
   border-radius: 8px;
-  padding: 2.2rem 1.5rem;
+  padding: 2.4rem 1.5rem;
   text-align: center;
   cursor: pointer;
   background: rgba(255, 255, 255, 0.02);
@@ -213,6 +214,20 @@ author = "Dhruvik Donga"
   background: #f59e0b;
   color: #fff;
 }
+.guitar-time-badge {
+  font-family: monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #34d399;
+  background: #0f1013;
+  padding: 0.3rem 0.65rem;
+  border-radius: 4px;
+  border: 1px solid #282c37;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  white-space: nowrap;
+}
 .guitar-viz-container {
   margin-top: 1rem;
 }
@@ -220,7 +235,7 @@ author = "Dhruvik Donga"
   background: #0d0e11;
   border: 1px solid #23262f;
   border-radius: 6px;
-  padding: 0.65rem 0.85rem 0.5rem 0.85rem;
+  padding: 0.75rem 0.9rem 0.6rem 0.9rem;
 }
 .guitar-viz-header {
   display: flex;
@@ -250,7 +265,7 @@ author = "Dhruvik Donga"
 }
 .guitar-canvas {
   width: 100%;
-  height: 75px;
+  height: 85px;
   display: block;
   cursor: pointer;
   border-radius: 4px;
@@ -326,7 +341,7 @@ author = "Dhruvik Donga"
   background: #1a1c22;
   border: 1px solid #2a2e3a;
   border-radius: 8px;
-  padding: 1rem;
+  padding: 1.1rem;
   margin-bottom: 1rem;
   transition: border-color 0.2s;
 }
@@ -349,7 +364,7 @@ author = "Dhruvik Donga"
   font-size: 0.95rem;
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
-  width: 220px;
+  width: 240px;
 }
 .mixer-track-name-input:focus {
   background: #0f1013;
@@ -383,7 +398,7 @@ author = "Dhruvik Donga"
 }
 .mixer-canvas {
   width: 100%;
-  height: 52px;
+  height: 68px;
   display: block;
   background: #090a0c;
   border-radius: 4px;
@@ -391,11 +406,11 @@ author = "Dhruvik Donga"
 }
 .mixer-controls-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-  gap: 0.6rem;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.7rem;
   margin-top: 0.8rem;
   background: #14151a;
-  padding: 0.7rem;
+  padding: 0.75rem;
   border-radius: 6px;
   border: 1px solid #232630;
 }
@@ -408,6 +423,8 @@ author = "Dhruvik Donga"
   font-size: 0.75rem;
   font-weight: 600;
   color: #94a3b8;
+  display: flex;
+  justify-content: space-between;
 }
 .mixer-control-group input[type="number"] {
   background: #090a0c;
@@ -465,9 +482,12 @@ Recorded with an acoustic guitar in a standard home room. Notice how the fuzzy r
 </p>
 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.6rem;">
 <span style="font-size: 0.85rem; font-weight: 600; color: #cbd5e1;">A/B Demo Comparison:</span>
+<div style="display: flex; align-items: center; gap: 0.6rem;">
+<span id="demoTimeBadge" class="guitar-time-badge">⏱️ 0:00.0 / 1:00.7</span>
 <div class="guitar-mode-toggle" id="demoModeToggle">
 <button type="button" id="btnDemoClean" class="guitar-toggle-btn active">✨ Cleaned Melody</button>
 <button type="button" id="btnDemoOrig" class="guitar-toggle-btn">📻 Raw (With Hiss)</button>
+</div>
 </div>
 </div>
 <audio id="demoAudioPlayer" class="guitar-player" controls preload="none"></audio>
@@ -490,7 +510,7 @@ Recorded with an acoustic guitar in a standard home room. Notice how the fuzzy r
 </div>
 <canvas id="demoCleanCanvas" class="guitar-canvas"></canvas>
 </div>
-<p style="margin: 0.4rem 0 0 0; font-size: 0.78rem; color: #64748b; text-align: right;">💡 Click either waveform to seek demo playback</p>
+<p style="margin: 0.4rem 0 0 0; font-size: 0.78rem; color: #64748b; text-align: right;">💡 Move mouse across waveform to preview exact time. Click to jump playback.</p>
 </div>
 </div>
 </details>
@@ -506,9 +526,12 @@ Recorded with an acoustic guitar in a standard home room. Notice how the fuzzy r
 <div id="resultArea" class="guitar-section" style="display: none;">
 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.6rem;">
 <h4 style="margin: 0; font-size: 1.05rem;">🎧 Audio Preview & Comparison</h4>
+<div style="display: flex; align-items: center; gap: 0.6rem;">
+<span id="cleanerTimeBadge" class="guitar-time-badge">⏱️ 0:00.0 / 0:00.0</span>
 <div class="guitar-mode-toggle" id="modeToggle">
 <button type="button" id="btnPlayClean" class="guitar-toggle-btn active">✨ Cleaned</button>
 <button type="button" id="btnPlayOrig" class="guitar-toggle-btn">📻 Original</button>
+</div>
 </div>
 </div>
 <audio id="audioPlayer" class="guitar-player" controls></audio>
@@ -531,7 +554,7 @@ Recorded with an acoustic guitar in a standard home room. Notice how the fuzzy r
 </div>
 <canvas id="cleanCanvas" class="guitar-canvas"></canvas>
 </div>
-<p style="margin: 0.4rem 0 0 0; font-size: 0.78rem; color: #64748b; text-align: right;">💡 Click either waveform to jump playback</p>
+<p style="margin: 0.4rem 0 0 0; font-size: 0.78rem; color: #64748b; text-align: right;">💡 Move mouse across waveform to see time. Click to jump playback.</p>
 </div>
 
 <!-- Download and Send to Mixer -->
@@ -555,7 +578,7 @@ Combine your cleaned guitar and friend's vocal tracks. Cut snippets, duplicate/c
 <div style="display: flex; align-items: center; gap: 0.6rem;">
 <button type="button" id="btnMixerPlay" class="guitar-btn" style="margin: 0; padding: 0.5rem 1rem;">▶ Play Mix</button>
 <button type="button" id="btnMixerStop" class="guitar-btn-secondary" style="margin: 0; padding: 0.5rem 0.8rem;">⏹ Stop</button>
-<span id="mixerTimecode" class="mixer-timecode">00:00 / 00:00</span>
+<span id="mixerTimecode" class="mixer-timecode">00:00.0 / 00:00.0</span>
 </div>
 <div style="display: flex; align-items: center; gap: 0.8rem;">
 <label style="font-size: 0.82rem; font-weight: 600; color: #94a3b8;">Master Vol:</label>
@@ -588,6 +611,14 @@ Combine your cleaned guitar and friend's vocal tracks. Cut snippets, duplicate/c
 (function() {
 'use strict';
 
+function formatTimeExact(sec) {
+  if (isNaN(sec) || sec < 0) sec = 0;
+  const m = Math.floor(sec / 60);
+  const s = Math.floor(sec % 60);
+  const ms = Math.floor((sec % 1) * 10);
+  return `${m}:${s < 10 ? '0' : ''}${s}.${ms}`;
+}
+
 // --- Dynamic LAME.js MP3 Encoder Loader ---
 let lameJsPromise = null;
 function loadLameJs() {
@@ -608,7 +639,6 @@ function loadLameJs() {
   });
   return lameJsPromise;
 }
-// Pre-load in background for instant exports
 setTimeout(loadLameJs, 1500);
 
 async function encodeMp3(leftChannel, rightChannel, sampleRate, kbps = 192) {
@@ -969,11 +999,11 @@ function computeWaveformBars(samples, barCount) {
   return bars;
 }
 
-function drawWaveform(canvas, bars, mainColor, playedColor, progressRatio, trimRatioStart = 0, trimRatioEnd = 1) {
+function drawWaveform(canvas, bars, mainColor, playedColor, progressRatio, trimRatioStart = 0, trimRatioEnd = 1, hoverRatio = -1, totalDuration = 0) {
   if (!canvas || !bars) return;
   const dpr = window.devicePixelRatio || 1;
-  const width = canvas.clientWidth || 600;
-  const height = canvas.clientHeight || 75;
+  const width = canvas.clientWidth || 800;
+  const height = canvas.clientHeight || 85;
 
   if (canvas.width !== Math.round(width * dpr) || canvas.height !== Math.round(height * dpr)) {
     canvas.width = Math.round(width * dpr);
@@ -1018,7 +1048,7 @@ function drawWaveform(canvas, bars, mainColor, playedColor, progressRatio, trimR
     ctx.fillRect(x, midY - h, bw, h * 2);
   }
 
-  // Playhead line
+  // Playhead line & time tag
   if (progressRatio > 0 && progressRatio < 1) {
     ctx.strokeStyle = '#ffffff';
     ctx.lineWidth = 1.5;
@@ -1031,6 +1061,41 @@ function drawWaveform(canvas, bars, mainColor, playedColor, progressRatio, trimR
     ctx.beginPath();
     ctx.arc(playheadX, midY, 2.5, 0, Math.PI * 2);
     ctx.fill();
+
+    if (totalDuration > 0) {
+      const curSec = progressRatio * totalDuration;
+      const timeStr = formatTimeExact(curSec);
+      ctx.font = 'bold 10px monospace';
+      const tw = ctx.measureText(timeStr).width;
+      const pillX = Math.max(tw / 2 + 4, Math.min(width - tw / 2 - 4, playheadX));
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.9)';
+      ctx.fillRect(pillX - tw / 2 - 4, 3, tw + 8, 14);
+      ctx.fillStyle = '#34d399';
+      ctx.fillText(timeStr, pillX - tw / 2, 14);
+    }
+  }
+
+  // Hover cursor line & time tooltip
+  if (hoverRatio >= 0 && hoverRatio <= 1 && totalDuration > 0) {
+    const hx = hoverRatio * width;
+    ctx.strokeStyle = 'rgba(56, 189, 248, 0.8)';
+    ctx.setLineDash([3, 3]);
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(hx, 0);
+    ctx.lineTo(hx, height);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    const hoverSec = hoverRatio * totalDuration;
+    const hoverStr = formatTimeExact(hoverSec);
+    ctx.font = 'bold 10px monospace';
+    const tw = ctx.measureText(hoverStr).width;
+    const pillX = Math.max(tw / 2 + 4, Math.min(width - tw / 2 - 4, hx));
+    ctx.fillStyle = '#0284c7';
+    ctx.fillRect(pillX - tw / 2 - 4, height - 16, tw + 8, 14);
+    ctx.fillStyle = '#ffffff';
+    ctx.fillText(hoverStr, pillX - tw / 2, height - 5);
   }
 
   ctx.restore();
@@ -1096,6 +1161,7 @@ function initGuitarStudio() {
   const btnPlayOrig = el('btnPlayOrig');
   const origDbStat = el('origDbStat');
   const cleanDbStat = el('cleanDbStat');
+  const cleanerTimeBadge = el('cleanerTimeBadge');
   const btnModeGuitar = el('btnModeGuitar');
   const btnModeVocal = el('btnModeVocal');
   const targetModeDesc = el('targetModeDesc');
@@ -1104,7 +1170,7 @@ function initGuitarStudio() {
   const btnSendToMixer = el('btnSendToMixer');
   const exportStatus = el('exportStatus');
 
-  let currentTargetMode = 'guitar'; // 'guitar' or 'vocal'
+  let currentTargetMode = 'guitar';
   if (btnModeGuitar) {
     btnModeGuitar.addEventListener('click', () => {
       currentTargetMode = 'guitar';
@@ -1129,6 +1195,7 @@ function initGuitarStudio() {
   const demoCleanCanvas = el('demoCleanCanvas');
   const btnDemoClean = el('btnDemoClean');
   const btnDemoOrig = el('btnDemoOrig');
+  const demoTimeBadge = el('demoTimeBadge');
 
   let loadedAudioBuffer = null;
   let originalFileName = "cleaned-track";
@@ -1141,11 +1208,15 @@ function initGuitarStudio() {
   let currentMode = 'clean';
   let animFrameId = null;
 
+  let cleanerHoverRatio = -1;
+  let demoHoverRatio = -1;
+
   // Demo state
   const DEMO_CLEAN_URL = "/audio/guitar_natural_pure.mp3";
   const DEMO_ORIG_URL = "/audio/guitar_raw.mp3";
   let demoMode = 'clean';
   let demoAnimFrameId = null;
+  const demoDuration = 60.7;
 
   function getDemoProgress() {
     if (!demoAudioPlayer || !demoAudioPlayer.duration) return 0;
@@ -1154,11 +1225,16 @@ function initGuitarStudio() {
 
   function renderDemoWaveforms() {
     const prog = getDemoProgress();
+    const curTime = demoAudioPlayer ? demoAudioPlayer.currentTime : 0;
+    const dur = demoAudioPlayer && demoAudioPlayer.duration ? demoAudioPlayer.duration : demoDuration;
+    if (demoTimeBadge) {
+      demoTimeBadge.textContent = `⏱️ ${formatTimeExact(curTime)} / ${formatTimeExact(dur)}`;
+    }
     if (demoOrigCanvas) {
-      drawWaveform(demoOrigCanvas, DEMO_RAW_BARS, 'rgba(245, 158, 11, 0.45)', '#f59e0b', prog);
+      drawWaveform(demoOrigCanvas, DEMO_RAW_BARS, 'rgba(245, 158, 11, 0.45)', '#f59e0b', prog, 0, 1, demoHoverRatio, dur);
     }
     if (demoCleanCanvas) {
-      drawWaveform(demoCleanCanvas, DEMO_CLEAN_BARS, 'rgba(16, 185, 129, 0.45)', '#10b981', prog);
+      drawWaveform(demoCleanCanvas, DEMO_CLEAN_BARS, 'rgba(16, 185, 129, 0.45)', '#10b981', prog, 0, 1, demoHoverRatio, dur);
     }
   }
 
@@ -1173,19 +1249,28 @@ function initGuitarStudio() {
     demoAnimFrameId = requestAnimationFrame(loop);
   }
 
-  function attachDemoSeek(canvas) {
+  function attachDemoListeners(canvas) {
     if (!canvas || !demoAudioPlayer) return;
     canvas.addEventListener('click', (e) => {
-      if (!demoAudioPlayer.duration) return;
+      const dur = demoAudioPlayer.duration || demoDuration;
       const rect = canvas.getBoundingClientRect();
       const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-      demoAudioPlayer.currentTime = ratio * demoAudioPlayer.duration;
+      demoAudioPlayer.currentTime = ratio * dur;
+      renderDemoWaveforms();
+    });
+    canvas.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      demoHoverRatio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      renderDemoWaveforms();
+    });
+    canvas.addEventListener('mouseleave', () => {
+      demoHoverRatio = -1;
       renderDemoWaveforms();
     });
   }
 
-  attachDemoSeek(demoOrigCanvas);
-  attachDemoSeek(demoCleanCanvas);
+  attachDemoListeners(demoOrigCanvas);
+  attachDemoListeners(demoCleanCanvas);
 
   if (demoAudioPlayer) {
     demoAudioPlayer.src = DEMO_CLEAN_URL;
@@ -1286,11 +1371,18 @@ function initGuitarStudio() {
 
   function renderWaveforms() {
     const prog = getProgress();
+    const curTime = audioPlayer ? audioPlayer.currentTime : 0;
+    const dur = audioPlayer && audioPlayer.duration ? audioPlayer.duration : (loadedAudioBuffer ? loadedAudioBuffer.duration : 0);
+
+    if (cleanerTimeBadge) {
+      cleanerTimeBadge.textContent = `⏱️ ${formatTimeExact(curTime)} / ${formatTimeExact(dur)}`;
+    }
+
     if (origCanvas && origBars) {
-      drawWaveform(origCanvas, origBars, 'rgba(245, 158, 11, 0.45)', '#f59e0b', prog);
+      drawWaveform(origCanvas, origBars, 'rgba(245, 158, 11, 0.45)', '#f59e0b', prog, 0, 1, cleanerHoverRatio, dur);
     }
     if (cleanCanvas && cleanBars) {
-      drawWaveform(cleanCanvas, cleanBars, 'rgba(16, 185, 129, 0.45)', '#10b981', prog);
+      drawWaveform(cleanCanvas, cleanBars, 'rgba(16, 185, 129, 0.45)', '#10b981', prog, 0, 1, cleanerHoverRatio, dur);
     }
   }
 
@@ -1305,7 +1397,7 @@ function initGuitarStudio() {
     animFrameId = requestAnimationFrame(loop);
   }
 
-  function attachSeek(canvas) {
+  function attachCleanerSeek(canvas) {
     if (!canvas) return;
     canvas.addEventListener('click', (e) => {
       if (!audioPlayer || !audioPlayer.duration) return;
@@ -1314,10 +1406,19 @@ function initGuitarStudio() {
       audioPlayer.currentTime = ratio * audioPlayer.duration;
       renderWaveforms();
     });
+    canvas.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      cleanerHoverRatio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      renderWaveforms();
+    });
+    canvas.addEventListener('mouseleave', () => {
+      cleanerHoverRatio = -1;
+      renderWaveforms();
+    });
   }
 
-  attachSeek(origCanvas);
-  attachSeek(cleanCanvas);
+  attachCleanerSeek(origCanvas);
+  attachCleanerSeek(cleanCanvas);
 
   if (audioPlayer) {
     audioPlayer.addEventListener('play', startPlaybackLoop);
@@ -1465,7 +1566,7 @@ function initGuitarStudio() {
 
   // ================= 5-TRACK MIXER ENGINE =================
   const MAX_TRACKS = 5;
-  const mixerTracks = []; // { id, name, buffer, volume, pan, muted, solo, trimStart, trimEnd, offset, bars }
+  const mixerTracks = []; // { id, name, buffer, volume, pan, muted, solo, trimStart, trimEnd, offset, bars, hoverRatio }
   let nextTrackId = 1;
   let mixerAudioCtx = null;
   let activeSources = [];
@@ -1503,12 +1604,6 @@ function initGuitarStudio() {
     return maxEnd;
   }
 
-  function formatTime(sec) {
-    const m = Math.floor(sec / 60);
-    const s = Math.floor(sec % 60);
-    return `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
-  }
-
   function addTrackToMixerFromData(monoSamples, sampleRate, name) {
     if (mixerTracks.length >= MAX_TRACKS) {
       alert("Mixer limit reached: Maximum 5 tracks supported.");
@@ -1519,7 +1614,7 @@ function initGuitarStudio() {
     buffer.getChannelData(0).set(monoSamples);
 
     const dur = buffer.duration;
-    const bars = computeWaveformBars(monoSamples, 160);
+    const bars = computeWaveformBars(monoSamples, 180);
 
     const track = {
       id: nextTrackId++,
@@ -1532,7 +1627,8 @@ function initGuitarStudio() {
       trimStart: 0,
       trimEnd: dur,
       offset: 0,
-      bars
+      bars,
+      hoverRatio: -1
     };
     mixerTracks.push(track);
     updateTrackBadge();
@@ -1624,7 +1720,6 @@ function initGuitarStudio() {
       const trackStart = track.offset;
       const trackEnd = track.offset + dur;
 
-      // Check if track falls within playback window
       if (trackEnd <= mixerPauseOffset) return;
 
       let startDelayInCtx = 0;
@@ -1693,21 +1788,37 @@ function initGuitarStudio() {
 
   function updateMixerPlayhead(curTime) {
     const totalDur = getMixerTotalDuration();
-    if (mixerTimecode) mixerTimecode.textContent = `${formatTime(curTime)} / ${formatTime(totalDur)}`;
+    if (mixerTimecode) mixerTimecode.textContent = `${formatTimeExact(curTime)} / ${formatTimeExact(totalDur)}`;
 
     mixerTracks.forEach(track => {
       const canvas = document.getElementById(`trackCanvas_${track.id}`);
+      const timeBadge = document.getElementById(`trackTimeBadge_${track.id}`);
       if (!canvas) return;
+
       const dur = track.buffer.duration;
       const trimStartRatio = track.trimStart / dur;
       const trimEndRatio = track.trimEnd / dur;
 
       let trackLocalTime = curTime - track.offset;
       let prog = (track.trimStart + trackLocalTime) / dur;
-      if (curTime < track.offset || trackLocalTime > (track.trimEnd - track.trimStart)) {
+      let displayTime = 0;
+
+      if (curTime < track.offset) {
         prog = -1;
+        displayTime = 0;
+      } else if (trackLocalTime > (track.trimEnd - track.trimStart)) {
+        prog = -1;
+        displayTime = track.trimEnd - track.trimStart;
+      } else {
+        displayTime = trackLocalTime;
       }
-      drawWaveform(canvas, track.bars, 'rgba(16, 185, 129, 0.45)', '#10b981', prog, trimStartRatio, trimEndRatio);
+
+      if (timeBadge) {
+        const snippetDur = track.trimEnd - track.trimStart;
+        timeBadge.textContent = `⏱️ ${formatTimeExact(displayTime)} / ${formatTimeExact(snippetDur)}`;
+      }
+
+      drawWaveform(canvas, track.bars, 'rgba(16, 185, 129, 0.45)', '#10b981', prog, trimStartRatio, trimEndRatio, track.hoverRatio, dur);
     });
   }
 
@@ -1717,21 +1828,22 @@ function initGuitarStudio() {
     const cards = mixerTracksList.querySelectorAll('.mixer-track-card');
     cards.forEach(c => c.remove());
 
-    mixerTracks.forEach((track, idx) => {
+    mixerTracks.forEach((track) => {
       const card = document.createElement('div');
       card.className = 'mixer-track-card';
       card.id = `trackCard_${track.id}`;
 
-      const totalDur = track.buffer.duration.toFixed(1);
+      const totalDur = track.buffer.duration;
+      const snippetDur = track.trimEnd - track.trimStart;
       const isMuted = track.muted;
       const isSolo = track.solo;
 
       card.innerHTML = `
         <div class="mixer-track-header">
-          <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
             <span style="font-size: 1.1rem;">🎵</span>
             <input type="text" class="mixer-track-name-input" id="nameInput_${track.id}" value="${track.name}" title="Click to rename" />
-            <span style="font-size: 0.75rem; color: #8492a6;">(${totalDur}s)</span>
+            <span class="guitar-time-badge" style="font-size: 0.75rem; padding: 0.2rem 0.5rem;" id="trackTimeBadge_${track.id}">⏱️ 0:00.0 / ${formatTimeExact(snippetDur)}</span>
           </div>
           <div style="display: flex; align-items: center; gap: 0.4rem;">
             <button type="button" class="mixer-btn-tag ${isMuted ? 'active-mute' : ''}" id="muteBtn_${track.id}">M</button>
@@ -1745,16 +1857,16 @@ function initGuitarStudio() {
 
         <div class="mixer-controls-grid">
           <div class="mixer-control-group">
-            <label>Start Delay (s):</label>
+            <label>Start Delay (s): <span id="offsetTime_${track.id}" style="color: #38bdf8; font-family: monospace;">(${formatTimeExact(track.offset)})</span></label>
             <input type="number" id="offsetInput_${track.id}" min="0" max="600" step="0.1" value="${track.offset.toFixed(1)}" />
           </div>
           <div class="mixer-control-group">
-            <label>Trim In (s):</label>
-            <input type="number" id="trimStartInput_${track.id}" min="0" max="${totalDur}" step="0.1" value="${track.trimStart.toFixed(1)}" />
+            <label>Trim In (s): <span id="trimInTime_${track.id}" style="color: #34d399; font-family: monospace;">(${formatTimeExact(track.trimStart)})</span></label>
+            <input type="number" id="trimStartInput_${track.id}" min="0" max="${totalDur.toFixed(1)}" step="0.1" value="${track.trimStart.toFixed(1)}" />
           </div>
           <div class="mixer-control-group">
-            <label>Trim Out (s):</label>
-            <input type="number" id="trimEndInput_${track.id}" min="0" max="${totalDur}" step="0.1" value="${track.trimEnd.toFixed(1)}" />
+            <label>Trim Out (s): <span id="trimOutTime_${track.id}" style="color: #34d399; font-family: monospace;">(${formatTimeExact(track.trimEnd)})</span></label>
+            <input type="number" id="trimEndInput_${track.id}" min="0" max="${totalDur.toFixed(1)}" step="0.1" value="${track.trimEnd.toFixed(1)}" />
           </div>
           <div class="mixer-control-group">
             <label>Volume: <span id="volVal_${track.id}">${Math.round(track.volume * 100)}%</span></label>
@@ -1804,7 +1916,6 @@ function initGuitarStudio() {
           alert("Maximum 5 tracks reached. Delete a track to duplicate.");
           return;
         }
-        // Clone track snippet
         const clone = {
           id: nextTrackId++,
           name: `${track.name} (Copy)`,
@@ -1815,8 +1926,9 @@ function initGuitarStudio() {
           solo: false,
           trimStart: track.trimStart,
           trimEnd: track.trimEnd,
-          offset: track.offset + (track.trimEnd - track.trimStart), // place right after!
-          bars: track.bars
+          offset: track.offset + (track.trimEnd - track.trimStart),
+          bars: track.bars,
+          hoverRatio: -1
         };
         mixerTracks.push(clone);
         updateTrackBadge();
@@ -1824,19 +1936,29 @@ function initGuitarStudio() {
       });
 
       const offsetIn = card.querySelector(`#offsetInput_${track.id}`);
-      offsetIn.addEventListener('change', (e) => {
+      const offsetTime = card.querySelector(`#offsetTime_${track.id}`);
+      offsetIn.addEventListener('input', (e) => {
         track.offset = Math.max(0, parseFloat(e.target.value) || 0);
+        if (offsetTime) offsetTime.textContent = `(${formatTimeExact(track.offset)})`;
         updateMixerPlayhead(0);
       });
 
       const trimStartIn = card.querySelector(`#trimStartInput_${track.id}`);
       const trimEndIn = card.querySelector(`#trimEndInput_${track.id}`);
-      trimStartIn.addEventListener('change', (e) => {
+      const trimInTime = card.querySelector(`#trimInTime_${track.id}`);
+      const trimOutTime = card.querySelector(`#trimOutTime_${track.id}`);
+      const timeBadge = card.querySelector(`#trackTimeBadge_${track.id}`);
+
+      trimStartIn.addEventListener('input', (e) => {
         track.trimStart = Math.max(0, Math.min(track.trimEnd - 0.1, parseFloat(e.target.value) || 0));
+        if (trimInTime) trimInTime.textContent = `(${formatTimeExact(track.trimStart)})`;
+        if (timeBadge) timeBadge.textContent = `⏱️ 0:00.0 / ${formatTimeExact(track.trimEnd - track.trimStart)}`;
         renderTrackWaveform(track);
       });
-      trimEndIn.addEventListener('change', (e) => {
+      trimEndIn.addEventListener('input', (e) => {
         track.trimEnd = Math.max(track.trimStart + 0.1, Math.min(track.buffer.duration, parseFloat(e.target.value) || track.buffer.duration));
+        if (trimOutTime) trimOutTime.textContent = `(${formatTimeExact(track.trimEnd)})`;
+        if (timeBadge) timeBadge.textContent = `⏱️ 0:00.0 / ${formatTimeExact(track.trimEnd - track.trimStart)}`;
         renderTrackWaveform(track);
       });
 
@@ -1852,6 +1974,32 @@ function initGuitarStudio() {
       panSlider.addEventListener('input', (e) => {
         track.pan = parseFloat(e.target.value);
         panVal.textContent = track.pan === 0 ? 'C' : (track.pan < 0 ? 'L' + Math.abs(track.pan).toFixed(1) : 'R' + track.pan.toFixed(1));
+      });
+
+      const trackCanvas = card.querySelector(`#trackCanvas_${track.id}`);
+      trackCanvas.addEventListener('mousemove', (e) => {
+        const rect = trackCanvas.getBoundingClientRect();
+        track.hoverRatio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+        renderTrackWaveform(track);
+      });
+      trackCanvas.addEventListener('mouseleave', () => {
+        track.hoverRatio = -1;
+        renderTrackWaveform(track);
+      });
+      trackCanvas.addEventListener('click', (e) => {
+        const rect = trackCanvas.getBoundingClientRect();
+        const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+        const clickedTimeInTrack = ratio * track.buffer.duration;
+        const targetMixerTime = track.offset + Math.max(0, clickedTimeInTrack - track.trimStart);
+
+        if (isMixerPlaying) {
+          pauseMixerPlayback();
+          mixerPauseOffset = targetMixerTime;
+          startMixerPlayback();
+        } else {
+          mixerPauseOffset = targetMixerTime;
+          updateMixerPlayhead(targetMixerTime);
+        }
       });
 
       // Crop snippet permanently
@@ -1875,7 +2023,7 @@ function initGuitarStudio() {
         track.buffer = croppedBuffer;
         track.trimStart = 0;
         track.trimEnd = dur;
-        track.bars = computeWaveformBars(monoData, 160);
+        track.bars = computeWaveformBars(monoData, 180);
         renderAllMixerTracks();
       });
 
@@ -1892,7 +2040,7 @@ function initGuitarStudio() {
     const dur = track.buffer.duration;
     const trimStartRatio = track.trimStart / dur;
     const trimEndRatio = track.trimEnd / dur;
-    drawWaveform(canvas, track.bars, 'rgba(16, 185, 129, 0.45)', '#10b981', -1, trimStartRatio, trimEndRatio);
+    drawWaveform(canvas, track.bars, 'rgba(16, 185, 129, 0.45)', '#10b981', -1, trimStartRatio, trimEndRatio, track.hoverRatio, dur);
   }
 
   // Offline Audio Context Multi-Track Rendering
