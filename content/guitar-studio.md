@@ -1,6 +1,6 @@
 +++
 title = "Acoustic Guitar & Vocal Studio – Free In-Browser Denoise, Mixer & Cutter"
-description = "Free client-side acoustic guitar and vocal background noise remover, anti-click snippet cutter, and 5-track audio mixer with customizable MP3 bitrates. Clean room air and mic hiss, balance stereo pan, and export WhatsApp-friendly MP3s directly in your browser."
+description = "Free client-side acoustic guitar and vocal background noise remover, central multi-track timeline arrangement, and 5-track audio mixer with customizable MP3 bitrates. Clean room air and mic hiss, visually align recordings on a timeline, and export WhatsApp-friendly MP3s directly in your browser."
 date = "2026-11-05"
 aliases = ["guitar-cleaner", "guitar-studio", "vocal-cleaner", "mixer", "pedal"]
 author = "Dhruvik Donga"
@@ -107,6 +107,15 @@ categories = ["Audio Engineering", "Projects"]
 .guitar-app.maximized .guitar-select {
   font-size: 0.95rem !important;
   padding: 0.55rem 0.9rem !important;
+}
+.guitar-app.maximized .mixer-timeline-card {
+  margin-bottom: 1.5rem !important;
+}
+.guitar-app.maximized .timeline-lane {
+  height: 48px !important;
+}
+.guitar-app.maximized .timeline-clip {
+  font-size: 0.88rem !important;
 }
 .studio-tabs {
   display: flex;
@@ -544,6 +553,205 @@ categories = ["Audio Engineering", "Projects"]
   accent-color: #10b981;
   cursor: pointer;
 }
+/* Central Arrangement Timeline */
+.mixer-timeline-card {
+  background: #111216;
+  border: 1px solid #2a2e3a;
+  border-radius: 8px;
+  margin-bottom: 1.2rem;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  transition: border-color 0.2s;
+}
+.mixer-timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  padding: 0.75rem 1rem;
+  background: #171920;
+  border-bottom: 1px solid #262933;
+}
+.mixer-timeline-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+.mixer-timeline-scroll-wrap {
+  width: 100%;
+  overflow-x: auto;
+  background: #090a0e;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  scrollbar-width: thin;
+  scrollbar-color: #3b82f6 #090a0e;
+}
+.mixer-timeline-scroll-wrap::-webkit-scrollbar {
+  height: 6px;
+}
+.mixer-timeline-scroll-wrap::-webkit-scrollbar-thumb {
+  background: #2b3140;
+  border-radius: 3px;
+}
+.mixer-timeline-inner {
+  position: relative;
+  min-width: 100%;
+}
+.mixer-timeline-ruler {
+  height: 28px;
+  background: #13141a;
+  border-bottom: 1px solid #252834;
+  position: relative;
+  cursor: pointer;
+}
+.timeline-ruler-canvas {
+  width: 100%;
+  height: 28px;
+  display: block;
+}
+.mixer-timeline-playhead {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #10b981;
+  z-index: 30;
+  pointer-events: none;
+  transform: translateX(-1px);
+}
+.playhead-handle {
+  position: absolute;
+  top: 0;
+  left: -7px;
+  width: 16px;
+  height: 16px;
+  background: #10b981;
+  color: #000;
+  font-size: 10px;
+  line-height: 14px;
+  text-align: center;
+  border-radius: 2px;
+  cursor: ew-resize;
+  pointer-events: auto;
+  font-weight: bold;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+.mixer-timeline-lanes {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px 0;
+  min-height: 60px;
+  position: relative;
+}
+.timeline-lane {
+  height: 40px;
+  position: relative;
+  background: rgba(255, 255, 255, 0.015);
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+.timeline-clip {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #065f46 0%, #047857 100%);
+  border: 1px solid #10b981;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: grab;
+  box-sizing: border-box;
+  overflow: hidden;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.15s, border-color 0.15s;
+}
+.timeline-clip:hover {
+  border-color: #34d399;
+  box-shadow: 0 2px 10px rgba(16, 185, 129, 0.35);
+}
+.timeline-clip.dragging {
+  cursor: grabbing;
+  opacity: 0.92;
+  border-color: #f59e0b;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.45);
+  z-index: 25;
+}
+.timeline-clip.vocal-clip {
+  background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 100%);
+  border-color: #3b82f6;
+}
+.timeline-clip.vocal-clip:hover {
+  border-color: #60a5fa;
+  box-shadow: 0 2px 10px rgba(59, 130, 246, 0.35);
+}
+.clip-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  background: rgba(255, 255, 255, 0.25);
+  cursor: ew-resize;
+  opacity: 0;
+  transition: opacity 0.15s, background 0.15s;
+}
+.timeline-clip:hover .clip-handle {
+  opacity: 1;
+}
+.clip-handle:hover {
+  background: #fff;
+}
+.clip-handle-left {
+  left: 0;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.clip-handle-right {
+  right: 0;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.clip-label {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  pointer-events: none;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.clip-time {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-family: monospace;
+  margin-left: auto;
+  pointer-events: none;
+}
+.mixer-timeline-footer {
+  padding: 0.45rem 0.9rem;
+  background: #14151b;
+  border-top: 1px solid #20232c;
+  font-size: 0.76rem;
+  color: #8492a6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.mixer-track-card.highlight-card {
+  border-color: #10b981 !important;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3) !important;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
 </style>
 
 ### 🎵 Why I Built This
@@ -555,7 +763,7 @@ Most "free" online audio tools are frustrating: they force account registrations
 This studio solves that with a fast, private, and browser-native tool for musicians:
 - **🔒 100% Client-Side & Private**: Your audio never touches a server. Everything runs directly on your device using the Web Audio API.
 - **🎸 Dedicated Acoustic & Vocal DSP**: Separate spectral subtraction algorithms tailored for acoustic guitar (preserving natural wood resonance and string brightness) and vocals (80 Hz low-rumble filter + lyric formant preservation).
-- **🎛️ 5-Track Pocket Mixer**: Layer guitar takes and vocal tracks, balance stereo pan, set starting delays, and cut/duplicate snippets with smooth anti-click crossfades.
+- **🎛️ 5-Track Pocket Mixer & Central Timeline**: Visual multi-track arrangement bar with an interactive master time ruler. Drag and slide recordings horizontally to align timing and delays, adjust trim edges, and scrub playback across all tracks simultaneously with smooth anti-click crossfades.
 - **📱 WhatsApp-Friendly MP3 Exports & Bitrate Selection**: Choose your preferred bitrate (128, 192, 256, or 320 kbps) to balance file size (~0.9 MB to ~2.4 MB/min) and studio fidelity for instant mobile sharing. Automatically remembers your favorite cleaning settings across visits.
 - **⛶ Responsive & Fullscreen**: Use it on your phone after a jam session or expand to full-screen DAW mode on desktop.
 
@@ -737,6 +945,40 @@ Combine your cleaned guitar and friend's vocal tracks. Cut snippets, duplicate/c
 </div>
 </div>
 <div id="mixerExportStatus" style="font-size: 0.85rem; color: #34d399; margin-bottom: 0.8rem;"></div>
+
+<!-- Central Arrangement Timeline Bar -->
+<div class="mixer-timeline-card" id="mixerTimelineCard">
+<div class="mixer-timeline-header">
+<div style="display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
+<span style="font-size: 0.95rem; font-weight: 700; color: #f1f5f9; display: flex; align-items: center; gap: 0.35rem;">
+⏱️ Central Timeline & Arrangement
+</span>
+<span class="guitar-badge badge-clean" id="timelineDurationBadge">0:00.0 Total</span>
+<span style="font-size: 0.76rem; color: #94a3b8;">Drag clips horizontally to shift timing / delay</span>
+</div>
+<div class="mixer-timeline-controls">
+<button type="button" class="mixer-btn-tag" id="btnTimelineZoomOut" title="Zoom out timeline">🔍−</button>
+<button type="button" class="mixer-btn-tag" id="btnTimelineZoomIn" title="Zoom in timeline">🔍+</button>
+<button type="button" class="mixer-btn-tag" id="btnTimelineFit" title="Fit all tracks to view">Fit View</button>
+<button type="button" class="mixer-btn-tag" id="btnTimelineAddTrack" style="background: #1e3a8a; color: #93c5fd; border-color: #3b82f6;">➕ Add Recording</button>
+</div>
+</div>
+<div class="mixer-timeline-scroll-wrap" id="timelineScrollWrap">
+<div class="mixer-timeline-inner" id="timelineInner">
+<div class="mixer-timeline-ruler" id="timelineRuler">
+<canvas id="timelineRulerCanvas" class="timeline-ruler-canvas"></canvas>
+</div>
+<div class="mixer-timeline-playhead" id="timelinePlayhead" style="left: 0px;">
+<div class="playhead-handle" id="timelinePlayheadHandle" title="Drag playhead to scrub">▼</div>
+</div>
+<div class="mixer-timeline-lanes" id="timelineLanes"></div>
+</div>
+</div>
+<div class="mixer-timeline-footer">
+<span>💡 <b>Tip:</b> Click/drag the ruler to jump playback. Drag track clips left/right to adjust starting delay. Drag clip ends to trim.</span>
+<span id="timelineCurTimeStat" style="font-family: monospace; color: #34d399;">Playhead: 0:00.0</span>
+</div>
+</div>
 
 <!-- Track List Container -->
 <div id="mixerTracksList">
@@ -1312,12 +1554,14 @@ function initGuitarStudio() {
       tabBtnMixer.classList.remove('active');
       tabContentCleaner.style.display = 'block';
       tabContentMixer.style.display = 'none';
+      renderWaveforms();
     } else {
       tabBtnMixer.classList.add('active');
       tabBtnCleaner.classList.remove('active');
       tabContentMixer.style.display = 'block';
       tabContentCleaner.style.display = 'none';
       renderAllMixerTracks();
+      setTimeout(renderCentralTimeline, 30);
     }
   }
 
@@ -1341,6 +1585,7 @@ function initGuitarStudio() {
       if (mixerTracks.length > 0) {
         mixerTracks.forEach(t => renderTrackWaveform(t));
       }
+      renderCentralTimeline();
     }, 60);
   }
 
@@ -1827,6 +2072,393 @@ function initGuitarStudio() {
   const btnExportMixWav = el('btnExportMixWav');
   const mixerExportStatus = el('mixerExportStatus');
 
+  // Central Arrangement Timeline Elements & State
+  const mixerTimelineCard = el('mixerTimelineCard');
+  const timelineScrollWrap = el('timelineScrollWrap');
+  const timelineInner = el('timelineInner');
+  const timelineRuler = el('timelineRuler');
+  const timelineRulerCanvas = el('timelineRulerCanvas');
+  const timelinePlayhead = el('timelinePlayhead');
+  const timelineLanes = el('timelineLanes');
+  const timelineDurationBadge = el('timelineDurationBadge');
+  const timelineCurTimeStat = el('timelineCurTimeStat');
+  const btnTimelineZoomIn = el('btnTimelineZoomIn');
+  const btnTimelineZoomOut = el('btnTimelineZoomOut');
+  const btnTimelineFit = el('btnTimelineFit');
+  const btnTimelineAddTrack = el('btnTimelineAddTrack');
+
+  let timelineZoomLevel = 1.0;
+  let isTimelineFitView = true;
+  let currentTimelineTime = 0;
+
+  function getTimelinePixelsPerSecond() {
+    const totalDur = getMixerTotalDuration();
+    const wrapWidth = (timelineScrollWrap && timelineScrollWrap.clientWidth) || 800;
+    const viewDur = Math.max(12, totalDur + 3);
+    if (isTimelineFitView) {
+      return wrapWidth / viewDur;
+    }
+    return (wrapWidth / viewDur) * timelineZoomLevel;
+  }
+
+  function updateTimelinePlayhead(curTime) {
+    currentTimelineTime = curTime;
+    if (timelinePlayhead) {
+      const pps = getTimelinePixelsPerSecond();
+      const x = curTime * pps;
+      timelinePlayhead.style.left = `${x}px`;
+      if (timelineCurTimeStat) {
+        timelineCurTimeStat.textContent = `Playhead: ${formatTimeExact(curTime)}`;
+      }
+      if (isMixerPlaying && timelineScrollWrap) {
+        const scrollLeft = timelineScrollWrap.scrollLeft;
+        const wrapWidth = timelineScrollWrap.clientWidth;
+        if (x > scrollLeft + wrapWidth - 40 || x < scrollLeft) {
+          timelineScrollWrap.scrollLeft = Math.max(0, x - 60);
+        }
+      }
+    }
+  }
+
+  function renderCentralTimeline() {
+    if (!timelineScrollWrap || !timelineInner || !timelineRulerCanvas || !timelineLanes) return;
+    const totalDur = getMixerTotalDuration();
+    if (timelineDurationBadge) timelineDurationBadge.textContent = `${formatTimeExact(totalDur)} Total`;
+
+    if (mixerTracks.length === 0) {
+      timelineLanes.innerHTML = `
+        <div style="text-align: center; padding: 1.5rem; color: #64748b; font-size: 0.85rem;">
+          No recordings arranged yet. Add tracks below or click "Add Recording" to align timing on the timeline.
+        </div>
+      `;
+      if (timelinePlayhead) timelinePlayhead.style.left = '0px';
+      return;
+    }
+
+    const pps = getTimelinePixelsPerSecond();
+    const viewDur = Math.max(12, totalDur + 3);
+    const wrapWidth = timelineScrollWrap.clientWidth || 800;
+    const targetWidth = isTimelineFitView ? wrapWidth : Math.max(wrapWidth, viewDur * pps);
+    timelineInner.style.width = targetWidth + 'px';
+
+    // Draw Time Ruler Canvas
+    const dpr = window.devicePixelRatio || 1;
+    timelineRulerCanvas.width = targetWidth * dpr;
+    timelineRulerCanvas.height = 28 * dpr;
+    timelineRulerCanvas.style.width = targetWidth + 'px';
+    timelineRulerCanvas.style.height = '28px';
+
+    const ctx = timelineRulerCanvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+    ctx.clearRect(0, 0, targetWidth, 28);
+
+    ctx.strokeStyle = '#2d3342';
+    ctx.fillStyle = '#94a3b8';
+    ctx.font = '10px -apple-system, BlinkMacSystemFont, monospace';
+
+    let majorStep = 5;
+    if (pps > 45) majorStep = 1;
+    else if (pps > 20) majorStep = 2;
+    else if (pps < 10) majorStep = 10;
+
+    for (let s = 0; s <= viewDur + majorStep; s += (majorStep / 5)) {
+      const x = s * pps;
+      if (x > targetWidth) break;
+      const isMajor = Math.abs(Math.round(s) - s) < 0.01 && (Math.round(s) % majorStep === 0);
+      ctx.beginPath();
+      ctx.moveTo(x, isMajor ? 12 : 20);
+      ctx.lineTo(x, 28);
+      ctx.stroke();
+
+      if (isMajor) {
+        ctx.fillText(formatTimeExact(s), x + 4, 11);
+      }
+    }
+
+    updateTimelinePlayhead(currentTimelineTime);
+
+    // Render Track Lanes
+    timelineLanes.innerHTML = '';
+    mixerTracks.forEach((track) => {
+      const lane = document.createElement('div');
+      lane.className = 'timeline-lane';
+      lane.id = `timelineLane_${track.id}`;
+
+      const isVocal = track.name.toLowerCase().includes('vocal') || track.name.includes('🎙️');
+      const clip = document.createElement('div');
+      clip.className = `timeline-clip ${isVocal ? 'vocal-clip' : ''}`;
+      clip.id = `timelineClip_${track.id}`;
+
+      const clipLeft = track.offset * pps;
+      const activeDur = Math.max(0.1, track.trimEnd - track.trimStart);
+      const clipWidth = Math.max(16, activeDur * pps);
+
+      clip.style.left = `${clipLeft}px`;
+      clip.style.width = `${clipWidth}px`;
+
+      const trackIcon = isVocal ? '🎙️' : '🎸';
+      clip.innerHTML = `
+        <div class="clip-handle clip-handle-left" title="Drag to adjust Trim In"></div>
+        <div class="clip-label">
+          <span>${trackIcon}</span>
+          <span style="font-weight: 600;">${track.name}</span>
+        </div>
+        <div class="clip-time">${formatTimeExact(track.offset)} (+${formatTimeExact(activeDur)})</div>
+        <div class="clip-handle clip-handle-right" title="Drag to adjust Trim Out"></div>
+      `;
+
+      setupClipDrag(clip, track);
+      lane.appendChild(clip);
+      timelineLanes.appendChild(lane);
+    });
+  }
+
+  function setupClipDrag(clipEl, track) {
+    let isDragging = false;
+    let dragType = 'move';
+    let startX = 0;
+    let initialOffset = 0;
+    let initialTrimStart = 0;
+    let initialTrimEnd = 0;
+    let hasMoved = false;
+
+    function onStart(clientX, target) {
+      if (target.classList.contains('clip-handle-left')) {
+        dragType = 'trim-left';
+      } else if (target.classList.contains('clip-handle-right')) {
+        dragType = 'trim-right';
+      } else {
+        dragType = 'move';
+      }
+      isDragging = true;
+      hasMoved = false;
+      startX = clientX;
+      initialOffset = track.offset;
+      initialTrimStart = track.trimStart;
+      initialTrimEnd = track.trimEnd;
+      clipEl.classList.add('dragging');
+    }
+
+    function onMove(clientX) {
+      if (!isDragging) return;
+      const deltaX = clientX - startX;
+      if (Math.abs(deltaX) > 2) hasMoved = true;
+      const pps = getTimelinePixelsPerSecond();
+      const deltaSec = deltaX / pps;
+
+      if (dragType === 'move') {
+        let newOffset = Math.max(0, initialOffset + deltaSec);
+        newOffset = Math.round(newOffset * 10) / 10;
+        track.offset = newOffset;
+
+        const offsetInput = document.getElementById(`offsetInput_${track.id}`);
+        const offsetTime = document.getElementById(`offsetTime_${track.id}`);
+        if (offsetInput) offsetInput.value = newOffset.toFixed(1);
+        if (offsetTime) offsetTime.textContent = `(${formatTimeExact(newOffset)})`;
+      } else if (dragType === 'trim-left') {
+        let newTrimStart = Math.max(0, Math.min(track.trimEnd - 0.2, initialTrimStart + deltaSec));
+        newTrimStart = Math.round(newTrimStart * 10) / 10;
+        track.trimStart = newTrimStart;
+
+        const trimStartIn = document.getElementById(`trimStartInput_${track.id}`);
+        const trimInTime = document.getElementById(`trimInTime_${track.id}`);
+        if (trimStartIn) trimStartIn.value = newTrimStart.toFixed(1);
+        if (trimInTime) trimInTime.textContent = `(${formatTimeExact(newTrimStart)})`;
+        renderTrackWaveform(track);
+      } else if (dragType === 'trim-right') {
+        let newTrimEnd = Math.max(track.trimStart + 0.2, Math.min(track.buffer.duration, initialTrimEnd + deltaSec));
+        newTrimEnd = Math.round(newTrimEnd * 10) / 10;
+        track.trimEnd = newTrimEnd;
+
+        const trimEndIn = document.getElementById(`trimEndInput_${track.id}`);
+        const trimOutTime = document.getElementById(`trimOutTime_${track.id}`);
+        if (trimEndIn) trimEndIn.value = newTrimEnd.toFixed(1);
+        if (trimOutTime) trimOutTime.textContent = `(${formatTimeExact(newTrimEnd)})`;
+        renderTrackWaveform(track);
+      }
+
+      const newPps = getTimelinePixelsPerSecond();
+      const clipLeft = track.offset * newPps;
+      const activeDur = Math.max(0.1, track.trimEnd - track.trimStart);
+      const clipWidth = Math.max(16, activeDur * newPps);
+      clipEl.style.left = `${clipLeft}px`;
+      clipEl.style.width = `${clipWidth}px`;
+
+      const clipTimeEl = clipEl.querySelector('.clip-time');
+      if (clipTimeEl) clipTimeEl.textContent = `${formatTimeExact(track.offset)} (+${formatTimeExact(activeDur)})`;
+
+      const totalDur = getMixerTotalDuration();
+      if (timelineDurationBadge) timelineDurationBadge.textContent = `${formatTimeExact(totalDur)} Total`;
+      if (mixerTimecode) mixerTimecode.textContent = `${formatTimeExact(currentTimelineTime)} / ${formatTimeExact(totalDur)}`;
+    }
+
+    function onEnd() {
+      if (!isDragging) return;
+      isDragging = false;
+      clipEl.classList.remove('dragging');
+      if (!hasMoved) {
+        const card = document.getElementById(`trackCard_${track.id}`);
+        if (card) {
+          card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          card.classList.add('highlight-card');
+          setTimeout(() => card.classList.remove('highlight-card'), 1200);
+        }
+      } else {
+        renderCentralTimeline();
+        updateMixerPlayhead(currentTimelineTime);
+      }
+    }
+
+    clipEl.addEventListener('mousedown', (e) => {
+      onStart(e.clientX, e.target);
+      const moveHandler = (ev) => onMove(ev.clientX);
+      const upHandler = () => {
+        window.removeEventListener('mousemove', moveHandler);
+        window.removeEventListener('mouseup', upHandler);
+        onEnd();
+      };
+      window.addEventListener('mousemove', moveHandler);
+      window.addEventListener('mouseup', upHandler);
+      e.stopPropagation();
+      e.preventDefault();
+    });
+
+    clipEl.addEventListener('touchstart', (e) => {
+      if (!e.touches || !e.touches[0]) return;
+      onStart(e.touches[0].clientX, e.target);
+      const moveHandler = (ev) => {
+        if (ev.touches && ev.touches[0]) onMove(ev.touches[0].clientX);
+      };
+      const upHandler = () => {
+        window.removeEventListener('touchmove', moveHandler);
+        window.removeEventListener('touchend', upHandler);
+        onEnd();
+      };
+      window.addEventListener('touchmove', moveHandler, { passive: false });
+      window.addEventListener('touchend', upHandler);
+      e.stopPropagation();
+    }, { passive: false });
+  }
+
+  function setupTimelineRulerScrub() {
+    if (!timelineRuler) return;
+    let isScrubbing = false;
+
+    function doScrub(clientX) {
+      const rect = timelineInner.getBoundingClientRect();
+      const x = Math.max(0, clientX - rect.left);
+      const pps = getTimelinePixelsPerSecond();
+      const totalDur = getMixerTotalDuration();
+      const targetTime = Math.max(0, Math.min(totalDur, x / pps));
+
+      if (isMixerPlaying) {
+        pauseMixerPlayback();
+        mixerPauseOffset = targetTime;
+        startMixerPlayback();
+      } else {
+        mixerPauseOffset = targetTime;
+        updateMixerPlayhead(targetTime);
+      }
+    }
+
+    timelineRuler.addEventListener('mousedown', (e) => {
+      isScrubbing = true;
+      doScrub(e.clientX);
+      const onMove = (ev) => { if (isScrubbing) doScrub(ev.clientX); };
+      const onUp = () => {
+        isScrubbing = false;
+        window.removeEventListener('mousemove', onMove);
+        window.removeEventListener('mouseup', onUp);
+      };
+      window.addEventListener('mousemove', onMove);
+      window.addEventListener('mouseup', onUp);
+      e.preventDefault();
+    });
+
+    timelineRuler.addEventListener('touchstart', (e) => {
+      if (!e.touches || !e.touches[0]) return;
+      isScrubbing = true;
+      doScrub(e.touches[0].clientX);
+      const onTouchMove = (ev) => {
+        if (isScrubbing && ev.touches && ev.touches[0]) doScrub(ev.touches[0].clientX);
+      };
+      const onTouchEnd = () => {
+        isScrubbing = false;
+        window.removeEventListener('touchmove', onTouchMove);
+        window.removeEventListener('touchend', onTouchEnd);
+      };
+      window.addEventListener('touchmove', onTouchMove, { passive: false });
+      window.addEventListener('touchend', onTouchEnd);
+    }, { passive: false });
+  }
+  setupTimelineRulerScrub();
+
+  // Zoom & Fit Controls
+  if (btnTimelineZoomIn) {
+    btnTimelineZoomIn.addEventListener('click', () => {
+      isTimelineFitView = false;
+      timelineZoomLevel = Math.min(5.0, timelineZoomLevel * 1.35);
+      renderCentralTimeline();
+    });
+  }
+  if (btnTimelineZoomOut) {
+    btnTimelineZoomOut.addEventListener('click', () => {
+      timelineZoomLevel = Math.max(0.5, timelineZoomLevel / 1.35);
+      renderCentralTimeline();
+    });
+  }
+  if (btnTimelineFit) {
+    btnTimelineFit.addEventListener('click', () => {
+      isTimelineFitView = true;
+      timelineZoomLevel = 1.0;
+      renderCentralTimeline();
+    });
+  }
+  if (btnTimelineAddTrack) {
+    btnTimelineAddTrack.addEventListener('click', () => {
+      if (mixerFileInput) mixerFileInput.click();
+    });
+  }
+
+  // Timeline Container File Drag & Drop
+  if (mixerTimelineCard) {
+    mixerTimelineCard.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      mixerTimelineCard.style.borderColor = '#10b981';
+    });
+    mixerTimelineCard.addEventListener('dragleave', () => {
+      mixerTimelineCard.style.borderColor = '#2a2e3a';
+    });
+    mixerTimelineCard.addEventListener('drop', (e) => {
+      e.preventDefault();
+      mixerTimelineCard.style.borderColor = '#2a2e3a';
+      if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+        loadMixerFile(e.dataTransfer.files[0]);
+      }
+    });
+  }
+
+  async function loadMixerFile(file) {
+    if (!file) return;
+    try {
+      const arrayBuffer = await file.arrayBuffer();
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const decoded = await audioCtx.decodeAudioData(arrayBuffer);
+      const mono = new Float32Array(decoded.length);
+      if (decoded.numberOfChannels >= 2) {
+        const ch0 = decoded.getChannelData(0);
+        const ch1 = decoded.getChannelData(1);
+        for (let i = 0; i < decoded.length; i++) mono[i] = (ch0[i] + ch1[i]) * 0.5;
+      } else {
+        mono.set(decoded.getChannelData(0));
+      }
+      const base = file.name.replace(/\.[^/.]+$/, "");
+      addTrackToMixerFromData(mono, decoded.sampleRate, base);
+    } catch (err) {
+      alert("Error loading track audio: " + err.message);
+    }
+  }
+
   function updateTrackBadge() {
     if (trackCountBadge) trackCountBadge.textContent = `${mixerTracks.length}/${MAX_TRACKS}`;
     if (btnMixerAddTrack) btnMixerAddTrack.style.display = mixerTracks.length >= MAX_TRACKS ? 'none' : 'inline-flex';
@@ -1872,30 +2504,14 @@ function initGuitarStudio() {
     mixerTracks.push(track);
     updateTrackBadge();
     renderAllMixerTracks();
+    renderCentralTimeline();
   }
 
   if (btnMixerAddTrack && mixerFileInput) {
     btnMixerAddTrack.addEventListener('click', () => mixerFileInput.click());
     mixerFileInput.addEventListener('change', async (e) => {
       if (e.target.files && e.target.files.length) {
-        const file = e.target.files[0];
-        try {
-          const arrayBuffer = await file.arrayBuffer();
-          const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-          const decoded = await audioCtx.decodeAudioData(arrayBuffer);
-          const mono = new Float32Array(decoded.length);
-          if (decoded.numberOfChannels >= 2) {
-            const ch0 = decoded.getChannelData(0);
-            const ch1 = decoded.getChannelData(1);
-            for (let i = 0; i < decoded.length; i++) mono[i] = (ch0[i] + ch1[i]) * 0.5;
-          } else {
-            mono.set(decoded.getChannelData(0));
-          }
-          const base = file.name.replace(/\.[^/.]+$/, "");
-          addTrackToMixerFromData(mono, decoded.sampleRate, base);
-        } catch (err) {
-          alert("Error loading track audio: " + err.message);
-        }
+        await loadMixerFile(e.target.files[0]);
       }
       mixerFileInput.value = "";
     });
@@ -2075,6 +2691,7 @@ function initGuitarStudio() {
 
       drawWaveform(canvas, track.bars, 'rgba(16, 185, 129, 0.45)', '#10b981', prog, trimStartRatio, trimEndRatio, track.hoverRatio, dur);
     });
+    updateTimelinePlayhead(curTime);
   }
 
   // Render Track List UI
@@ -2141,7 +2758,11 @@ function initGuitarStudio() {
 
       // Event Listeners for Track Controls
       const nameIn = card.querySelector(`#nameInput_${track.id}`);
-      nameIn.addEventListener('input', (e) => { track.name = e.target.value; });
+      nameIn.addEventListener('input', (e) => {
+        track.name = e.target.value;
+        const timelineClipLabel = document.querySelector(`#timelineClip_${track.id} .clip-label span:last-child`);
+        if (timelineClipLabel) timelineClipLabel.textContent = track.name;
+      });
 
       const muteBtn = card.querySelector(`#muteBtn_${track.id}`);
       muteBtn.addEventListener('click', () => {
@@ -2196,6 +2817,7 @@ function initGuitarStudio() {
         track.offset = Math.max(0, parseFloat(e.target.value) || 0);
         if (offsetTime) offsetTime.textContent = `(${formatTimeExact(track.offset)})`;
         updateMixerPlayhead(0);
+        renderCentralTimeline();
       });
 
       const trimStartIn = card.querySelector(`#trimStartInput_${track.id}`);
@@ -2209,12 +2831,14 @@ function initGuitarStudio() {
         if (trimInTime) trimInTime.textContent = `(${formatTimeExact(track.trimStart)})`;
         if (timeBadge) timeBadge.textContent = `⏱️ 0:00.0 / ${formatTimeExact(track.trimEnd - track.trimStart)}`;
         renderTrackWaveform(track);
+        renderCentralTimeline();
       });
       trimEndIn.addEventListener('input', (e) => {
         track.trimEnd = Math.max(track.trimStart + 0.1, Math.min(track.buffer.duration, parseFloat(e.target.value) || track.buffer.duration));
         if (trimOutTime) trimOutTime.textContent = `(${formatTimeExact(track.trimEnd)})`;
         if (timeBadge) timeBadge.textContent = `⏱️ 0:00.0 / ${formatTimeExact(track.trimEnd - track.trimStart)}`;
         renderTrackWaveform(track);
+        renderCentralTimeline();
       });
 
       const volSlider = card.querySelector(`#volSlider_${track.id}`);
@@ -2289,6 +2913,7 @@ function initGuitarStudio() {
 
     updateTrackBadge();
     updateMixerPlayhead(0);
+    renderCentralTimeline();
   }
 
   function renderTrackWaveform(track) {
@@ -2411,6 +3036,7 @@ function initGuitarStudio() {
     if (mixerTracks.length > 0) {
       mixerTracks.forEach(t => renderTrackWaveform(t));
     }
+    renderCentralTimeline();
   });
 }
 
